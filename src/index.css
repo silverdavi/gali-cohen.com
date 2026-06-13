@@ -696,6 +696,47 @@ body { hyphens: none; }
 
 .breath-note { color: var(--mute); font-size: var(--fs-ui); max-width: 44ch; margin: var(--s-3) auto 0; }
 
+/* --- Breath: night theme (breathDark flag) -----------------------------------
+   The one dark moment on the page. The section sinks into deep moss so the warm
+   breathing sun becomes the only light source — a held breath in the dark. Light
+   text, warmed rings, a vignette to pull the eye to centre. Reversible: drop the
+   breathDark flag and the section returns to the pale-paper version above. */
+.breath-night {
+  background:
+    radial-gradient(55% 45% at 50% 40%, rgba(201, 154, 63, 0.1), transparent 62%),
+    radial-gradient(120% 100% at 50% 42%, #243a25 0%, #182416 48%, #0d1410 100%);
+  border-top: 1px solid rgba(247, 246, 236, 0.08);
+  color: var(--paper);
+}
+/* a soft vignette so the edges fall away into the dark */
+.breath-night::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(70% 60% at 50% 44%, transparent 52%, rgba(8, 12, 8, 0.55) 100%);
+  z-index: 0;
+}
+.breath { position: relative; }
+.breath-night .container { position: relative; z-index: 1; }
+.breath-night .section-label { color: #a9cdb1; }
+.breath-night .section-title { color: var(--paper); }
+.breath-night .breath-note { color: rgba(247, 246, 236, 0.6); }
+/* warm the rings and glow against the dark; the core is already sand→accent */
+.breath-night .breath-ring { border-color: rgba(176, 205, 182, 0.32); }
+.breath-night .breath-target { border-color: rgba(201, 154, 63, 0.6); }
+.breath-night .breath-glow { background: radial-gradient(circle, rgba(201, 154, 63, 0.34), transparent 70%); }
+.breath-night .breath-rays {
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(201, 154, 63, 0.26) 0deg 9deg,
+    transparent 9deg 30deg
+  );
+}
+.breath-night .breath-ripple { border-color: rgba(201, 154, 63, 0.55); }
+.breath-night .breath-ripple.p2 { border-color: rgba(176, 205, 182, 0.5); }
+.breath-night .breath-words { color: var(--paper); text-shadow: 0 1px 16px rgba(8, 12, 8, 0.6); }
+
 /* --- Practices -------------------------------------------------------------- */
 .practices-list { margin-top: var(--header-gap); }
 .practice {
@@ -874,7 +915,13 @@ body { hyphens: none; }
 .word figcaption { font-size: var(--fs-meta); color: var(--mute); letter-spacing: 0.03em; }
 
 /* --- Contact --------------------------------------------------------------------- */
-.contact { text-align: center; padding: var(--section-y) 0; } /* symmetric, like every section */
+.contact {
+  text-align: center;
+  padding: var(--section-y) 0;          /* symmetric, like every section */
+  position: relative;
+  /* a faint sunrise glow centred on the closing line, so the page ends warm */
+  background: radial-gradient(58% 72% at 50% 32%, rgba(201, 154, 63, 0.08), transparent 68%);
+}
 .contact-medallion {
   width: 120px;
   height: 120px;

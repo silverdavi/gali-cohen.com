@@ -5,7 +5,7 @@ import { features } from '../features';
 export function Breath() {
   const { breath } = content;
   return (
-    <section className="section breath" id="breath">
+    <section className={`section breath${features.breathDark ? ' breath-night' : ''}`} id="breath">
       <div className="container">
         <Reveal>
           <p className="section-label">{breath.label}</p>
