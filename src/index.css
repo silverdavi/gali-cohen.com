@@ -1265,28 +1265,21 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   overflow: visible;
 }
 
-/* The quirky flat zodiac roundel: a warm parchment "tarot" tile floating on the
-   dark moss. Rounded square (not a hard circle) so the gold ring is never
-   clipped; a hairline gold edge + soft shadow lift it off the night sky. */
+/* The quirky flat zodiac roundel — background keyed to transparent, so the
+   gold-ringed medallion floats directly on the dark moss. drop-shadow (not
+   box-shadow) hugs the actual circular silhouette rather than a square box. */
 .astro-medallion {
   display: block;
   width: clamp(168px, 21vw, 232px);
   height: auto;
   aspect-ratio: 1;
   margin: 0 auto var(--s-4);
-  border-radius: 18px;
-  box-shadow:
-    0 1px 0 rgba(245, 240, 222, 0.18) inset,
-    0 18px 40px -22px rgba(0, 0, 0, 0.7);
-  outline: 1px solid rgba(199, 154, 75, 0.45);
-  outline-offset: -1px;
-  transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease;
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.5));
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), filter .5s ease;
 }
 .astro-plate:hover .astro-medallion {
   transform: translateY(-4px) rotate(-1deg);
-  box-shadow:
-    0 1px 0 rgba(245, 240, 222, 0.22) inset,
-    0 26px 52px -22px rgba(0, 0, 0, 0.78);
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.6));
 }
 @media (prefers-reduced-motion: reduce) {
   .astro-medallion { transition: none; }

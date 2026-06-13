@@ -50,7 +50,7 @@ All copy lives in per-language YAML — never hard-coded in components:
 
 Every optional dynamic behavior is gated in `src/features.ts` so anything can be disabled without touching component code — e.g. `breathDark`, `ambientLight`, `grain`, `kineticType`, `navWaves`, `photoHover`, `natureLife` (the bird), `astrology` / `astroMotion`, `zodiacMedallions`, and the commerce sections `showPricing` / `showEvents` / `showStore`. All respect `prefers-reduced-motion`. Flags can be overridden per-visit via the URL query string for testing.
 
-The astrology section shows the **sun-sign season** and a **find-your-sign** reveal using a set of quirky flat "vintage-tarot" zodiac roundels (`public/photos/zodiac/*.webp`, ~40 KB each, generated then curated). Setting `zodiacMedallions: false` falls back to the hand-authored gold line-art constellations. The moon is always a live SVG drawn to tonight's real phase (same math as the nav-bar moon glyph).
+The astrology section shows the **sun-sign season** and a **find-your-sign** reveal using a set of quirky flat "vintage-tarot" zodiac roundels (`public/photos/zodiac/*.webp`, ~45 KB each, generated then curated). Their backgrounds are keyed to transparent (border flood-fill, so the gold ring + figures survive) so each medallion floats on the dark moss rather than sitting in a cream tile. Setting `zodiacMedallions: false` falls back to the hand-authored gold line-art constellations. The moon is always a live SVG drawn to tonight's real phase (same math as the nav-bar moon glyph).
 
 ## Content editing (CMS)
 
