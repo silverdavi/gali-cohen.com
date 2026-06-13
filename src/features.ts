@@ -13,6 +13,7 @@ export type FeatureKey =
   | 'heroSunRays'       // an SVG ray crown radiates behind the hero arch (idle spin + scroll turn)
   | 'photoHover'        // photographs warm and lift on hover (develop effect)
   | 'figureSway'        // the dance figures sway gently in place
+  | 'natureLife'        // an ambient bird occasionally flies in, perches on a growing branch, then leaves
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
@@ -46,6 +47,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   heroSunRays: true,
   photoHover: true,
   figureSway: true,
+  natureLife: true,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,

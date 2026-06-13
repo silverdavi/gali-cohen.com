@@ -256,6 +256,52 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   .ambient-blob { animation: none; }
 }
 
+/* --- Nature layer: an ambient bird that flies in, perches on a branch the
+   page grows to receive it, then leaves. Above the content, below the nav and
+   grain, never catching clicks. Fully removed under reduced motion (the
+   component renders nothing). --------------------------------------------- */
+.nature { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+
+/* the branch reaches out from the nearest edge; clip-path reveals it from the
+   root toward the tip, so it appears to grow to meet the bird, then recede. */
+.nature-branch {
+  position: fixed;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nature-branch.left { left: 0; }
+.nature-branch.right { right: 0; transform: scaleX(-1); }
+.nature-branch.out { clip-path: inset(0 0 0 0); }
+.nature-branch svg { display: block; overflow: visible; }
+.nature-twig { stroke: #6b552f; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.nature-twig.stem { stroke-width: 3.4; }
+.nature-twig.sprig { stroke-width: 1.8; }
+.nature-leaf { fill: var(--accent); opacity: 0.92; }
+
+/* the bird — framer drives the flight transform on .nature-bird; the bob and
+   the facing/wing transforms live on separate children so nothing fights. */
+.nature-bird {
+  position: fixed;
+  top: 0; left: 0;
+  margin-left: -22px;
+  margin-top: -15px;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.nature-bird-bob.perch { animation: bird-bob 2.6s ease-in-out infinite; }
+@keyframes bird-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+.nature-bird-svg { display: block; overflow: visible; }
+.nature-bird-svg.face-left { transform: scaleX(-1); }
+.nb-fill { fill: var(--ink); }
+.nb-beak { fill: var(--ochre); }
+.nb-legs line { stroke: var(--ink); stroke-width: 1.3; stroke-linecap: round; opacity: 0; transition: opacity 0.3s ease; }
+.nature-bird-svg.perched .nb-legs line { opacity: 0.9; }
+.nb-wing { transform-box: fill-box; transform-origin: 32% 80%; }
+.nature-bird-svg.flying .nb-wing { animation: wing-flap 0.24s ease-in-out infinite; }
+.nature-bird-svg.perched .nb-wing { transform: rotate(7deg); }
+@keyframes wing-flap { 0%, 100% { transform: rotate(-26deg); } 50% { transform: rotate(34deg); } }
+
 /* --- Scroll progress: a thread of daylight with a sun at its edge --------- */
 .progress-track {
   position: fixed;

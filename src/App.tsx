@@ -1,6 +1,8 @@
 import { Progress } from './components/Progress';
 import { CursorRipple } from './components/CursorRipple';
 import { Ambient } from './components/Ambient';
+import { NatureScene } from './components/NatureScene';
+import { features } from './features';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
 import { Breath } from './components/Breath';
@@ -18,6 +20,7 @@ export default function App() {
   return (
     <>
       <Ambient />
+      {features.natureLife && <NatureScene />}
       <Progress />
       <CursorRipple />
       <Nav />
