@@ -5,8 +5,11 @@ import { features } from '../features';
 
 export function Breath() {
   const { breath } = content;
+  const organicEdge = features.breathDark && features.breathOrganicEdge;
   return (
     <section className={`section breath${features.breathDark ? ' breath-night' : ''}`} id="breath">
+      {organicEdge && <div className="breath-veil top" aria-hidden />}
+      {organicEdge && <div className="breath-veil bottom" aria-hidden />}
       <div className="container">
         <Reveal>
           <p className="section-label">{breath.label}</p>

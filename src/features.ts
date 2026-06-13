@@ -20,6 +20,7 @@ export type FeatureKey =
   | 'progressSun'       // a small sun rides the scroll-progress thread
   | 'breathStage'       // the breathing circle animates (vs. a still sun)
   | 'breathDark'        // the breath section sinks into a deep moss night
+  | 'breathOrganicEdge' // dark breath dissolves into the paper via a grainy, undulating veil
   | 'danceScrollTurn'   // the dance circle turns as you scroll through it
   | 'danceJoinHover'    // a tenth dancer joins the ring on hover
   | 'bandParallax'      // the photo band drifts at a softer pace
@@ -43,6 +44,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   progressSun: true,
   breathStage: true,
   breathDark: true,
+  breathOrganicEdge: true,
   danceScrollTurn: true,
   danceJoinHover: true,
   bandParallax: true,

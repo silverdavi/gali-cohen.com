@@ -876,7 +876,43 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   z-index: 0;
 }
 .breath { position: relative; }
-.breath-night .container { position: relative; z-index: 1; }
+.breath-night .container { position: relative; z-index: 2; }
+
+/* --- Organic edge: dissolve the dark block into the paper -------------------
+   A hard rectangle of night against pale paper reads as "pasted in". Instead of
+   a flat linear fade (which bands and still looks like a ruled edge), each edge
+   gets a paper "veil": three offset radial pools of paper dip into the dark at
+   *different* depths so the frontier undulates, and a localized grain layer
+   (::after, masked to the mid-band) dithers the dissolve into a soft, misty
+   transition. The very top stays solid paper so it joins the section above with
+   no seam. Mirrored to the bottom with scaleY(-1). Reversible via the flag. */
+.breath-veil {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(120px, 18vh, 220px);
+  z-index: 1;            /* above the dark bg + vignette, below the content */
+  pointer-events: none;
+  background: var(--paper);
+  /* The frontier is carved by a turbulence luminance mask: a solid paper cap at
+     the seam (white), then a vertical envelope multiplied by fractal noise, so
+     the paper breaks into soft fingers and the dark reaches up between them —
+     a cloudy, undulating dissolve rather than a ruled gradient. One self-
+     contained SVG (no mask-composite) keeps it portable. */
+  -webkit-mask-image: var(--veil-mask);
+  mask-image: var(--veil-mask);
+  -webkit-mask-size: 600px 100%;
+  mask-size: 600px 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  mask-mode: luminance;
+  -webkit-mask-mode: luminance;
+}
+:root {
+  --veil-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='220' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.03 0.012' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='4.5' intercept='-1.75'/%3E%3CfeFuncG type='linear' slope='4.5' intercept='-1.75'/%3E%3CfeFuncB type='linear' slope='4.5' intercept='-1.75'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3ClinearGradient id='env' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='0.12' stop-color='%23fff'/%3E%3Cstop offset='0.95' stop-color='%23000'/%3E%3C/linearGradient%3E%3ClinearGradient id='cap' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.1' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.28' stop-color='%23fff' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cmask id='nm'%3E%3Crect width='600' height='220' filter='url(%23t)'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='600' height='220' fill='url(%23env)' mask='url(%23nm)'/%3E%3Crect width='600' height='220' fill='url(%23cap)'/%3E%3C/svg%3E");
+}
+.breath-veil.top { top: -1px; }
+.breath-veil.bottom { bottom: -1px; transform: scaleY(-1); }
 .breath-night .section-label { color: #a9cdb1; }
 .breath-night .section-title { color: var(--paper); }
 .breath-night .breath-note { color: rgba(247, 246, 236, 0.6); }
