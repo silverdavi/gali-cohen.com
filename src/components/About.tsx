@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal';
+import { SectionHead } from './SectionHead';
 import { content } from '../content';
 
 export function About() {
@@ -6,10 +7,7 @@ export function About() {
   return (
     <section className="section" id="about">
       <div className="container">
-        <Reveal>
-          <p className="section-label">{aboutSection.label}</p>
-          <h2 className="section-title">{aboutSection.title}</h2>
-        </Reveal>
+        <SectionHead index="03" label={aboutSection.label} title={aboutSection.title} />
         <div className="about-grid">
           <Reveal delay={0.06} className="col-main">
             <div className="about-text">

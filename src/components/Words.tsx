@@ -1,14 +1,13 @@
 import { Reveal } from './Reveal';
+import { SectionHead } from './SectionHead';
 import { content } from '../content';
 
 export function Words() {
   const { wordsSection } = content;
   return (
-    <section className="section">
+    <section className="section" id="words">
       <div className="container">
-        <Reveal>
-          <p className="section-label">{wordsSection.label}</p>
-        </Reveal>
+        <SectionHead label={wordsSection.label} />
         <div className="words-grid">
           {wordsSection.items.map((w, i) => (
             <Reveal key={w.name} delay={i * 0.08} className="col-half">

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Reveal } from './Reveal';
+import { SectionHead } from './SectionHead';
 import { content } from '../content';
 import { features } from '../features';
 
@@ -40,10 +41,7 @@ export function Circle() {
   return (
     <section className="section" id="circle" ref={ref}>
       <div className="container">
-        <Reveal>
-          <p className="section-label">{circle.label}</p>
-          <h2 className="section-title">{circle.title}</h2>
-        </Reveal>
+        <SectionHead index="02" label={circle.label} title={circle.title} />
         <div className="circle-grid">
           {/* col-main first in the DOM so grid auto-placement keeps both columns
               on row 1 (a col-side-first order wraps the text to a second row) */}

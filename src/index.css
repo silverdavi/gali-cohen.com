@@ -74,7 +74,9 @@
   --fs-lead:    clamp(20px, 2.4vw, 26px);   /* standfirst & pull-quotes         */
   --fs-h3:      clamp(22px, 2.2vw, 26px);   /* practice titles                  */
   --fs-h2:      clamp(33px, 5vw, 54px);     /* section titles & contact line    */
-  --fs-display: clamp(56px, 11vw, 128px);   /* hero name                        */
+  --fs-display: clamp(44px, 10.5vw, 128px); /* hero name (min sized so the
+                                               longest name still wraps on a
+                                               360px phone without overflow)    */
 
   /* LINE HEIGHT — tightens as type grows; prose stays open for reading.        */
   --lh-display: 1.0;
@@ -111,8 +113,8 @@
   --gutter:     clamp(20px, 3vw, 40px);
   --full:       clamp(640px, 100svh, 960px);
 
-  --maxw: 1020px;
-  --pad: 40px;
+  --maxw: 1100px;
+  --pad: 48px;
 
   --breath: 11s; /* one full breath cycle */
 }
@@ -126,6 +128,10 @@ html {
   scroll-snap-type: y proximity;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* clip (not hidden) so a stray-wide child can never add a horizontal
+     scrollbar or shift the RTL layout — and without creating a scroll
+     container that would break scroll-snap. Measured at the document root. */
+  overflow-x: clip;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -137,6 +143,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   font-weight: 400;
+  overflow-x: clip; /* guard: no element may introduce a horizontal scrollbar */
 }
 
 ::selection { background: rgba(62, 107, 82, 0.18); }
@@ -240,16 +247,24 @@ body { hyphens: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 70;
+  padding-block: var(--s-5);
+  transition: background .4s ease, border-color .4s ease,
+              backdrop-filter .4s ease, padding-block .4s ease, transform .45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  border-bottom: 1px solid transparent;
+}
+/* the bar's content rides the SAME max-width + gutter as every section, so the
+   brand sits exactly above the page's start edge and the CTA above its end edge */
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--s-5) var(--pad);
-  transition: background .4s ease, border-color .4s ease,
-              backdrop-filter .4s ease, padding .4s ease, transform .45s cubic-bezier(0.22, 0.61, 0.36, 1);
-  border-bottom: 1px solid transparent;
+  gap: var(--s-5);
 }
 .nav.scrolled {
-  padding: var(--s-3) var(--pad);
+  padding-block: var(--s-3);
   background: rgba(247, 246, 236, 0.82);
   backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--rule);
@@ -264,6 +279,7 @@ body { hyphens: none; }
   align-items: center;
   gap: 10px;
   color: var(--ink);
+  flex: none;
 }
 .nav-sun {
   width: 26px;
@@ -280,38 +296,63 @@ body { hyphens: none; }
   letter-spacing: -0.01em;
   color: var(--ink);
 }
-.nav-links { display: flex; align-items: center; gap: var(--s-5); }
-.nav-links a:not(.nav-cta) {
+
+/* THE INDEX — numbered links centred in the bar, with a sun marker that slides
+   to the section you're in (scroll-spy). The novelty: the nav reports where you
+   are, and the numbers match the section headers below. */
+.nav-index {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-6);
+}
+.nav-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--mute);
+  transition: color .25s ease;
+}
+.nav-num {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  transition: color .25s ease;
+}
+.nav-label {
   font-size: var(--fs-meta);
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--mute);
-  transition: color .2s ease;
-  position: relative;
+  letter-spacing: 0.03em;
 }
-/* a hairline that grows from the start edge on hover (RTL-aware) */
-.nav-links a:not(.nav-cta)::after {
-  content: '';
+.nav-item:hover { color: var(--ink); }
+.nav-item:hover .nav-num { color: var(--accent); }
+.nav-item.is-active { color: var(--ink); }
+.nav-item.is-active .nav-num { color: var(--accent); }
+/* the sliding sun: a small ochre dot centred under the active item */
+.nav-marker {
   position: absolute;
-  bottom: -4px;
-  inset-inline-start: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  bottom: -10px;
+  left: 0;
+  width: 6px; height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--ochre);
+  box-shadow: 0 0 8px rgba(201, 154, 63, 0.7);
+  opacity: 0;
+  transition: transform .42s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .3s ease;
 }
-[dir='rtl'] .nav-links a:not(.nav-cta)::after { transform-origin: right; }
-.nav-links a:not(.nav-cta):hover { color: var(--ink); }
-.nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
-@media (prefers-reduced-motion: reduce) {
-  .nav-links a:not(.nav-cta)::after { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .nav-marker { transition: opacity .2s ease; } }
+
 .nav-cta {
+  flex: none;
   border: 1px solid rgba(62, 107, 82, 0.4);
   border-radius: 999px;
   padding: 7px 16px;
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--accent) !important;
   transition: background .2s ease, color .2s ease, transform .2s ease;
 }
@@ -493,6 +534,9 @@ body { hyphens: none; }
    signal rather than decoration. Uppercase + wide tracking because small caps
    need air; the [dir=rtl] block zeroes the tracking for Hebrew. */
 .section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
   font-size: var(--fs-eyebrow);
   font-weight: 600;
   text-transform: uppercase;
@@ -500,6 +544,23 @@ body { hyphens: none; }
   color: var(--accent);
   margin: 0 0 var(--s-3);
 }
+/* the section number — same figures as the nav index, tying header to nav */
+.section-index {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+/* a short hairline between number and label — the "planned" tell */
+.section-rule {
+  width: 28px;
+  height: 1px;
+  background: var(--rule);
+  flex: none;
+}
+.section-label-text { display: inline-block; }
 .section-title {
   font-family: var(--display);
   font-weight: 400;
@@ -1016,4 +1077,9 @@ body { hyphens: none; }
   .practice { gap: var(--s-3); padding: var(--s-6) 0; }
   .practice-photo { aspect-ratio: auto; height: 200px; border-radius: 16px; order: -1; }
   .hide-sm { display: none; }
+  /* the numbered index collapses on phones; brand + CTA carry the bar */
+  .nav-index { display: none; }
+  /* the dance circle is rotated up to 45°, so its bounding box is side×√2.
+     Shrink it on phones so even the rotated AABB stays inside the column. */
+  .dance { width: 200px; height: 200px; }
 }

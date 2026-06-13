@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal';
+import { SectionHead } from './SectionHead';
 import { content } from '../content';
 import { features } from '../features';
 
@@ -7,11 +8,12 @@ export function Practices() {
   return (
     <section className="section" id="practices">
       <div className="container">
-        <Reveal>
-          <p className="section-label">{practicesSection.label}</p>
-          <h2 className="section-title">{practicesSection.title}</h2>
-          <p className="section-sub">{practicesSection.sub}</p>
-        </Reveal>
+        <SectionHead
+          index="01"
+          label={practicesSection.label}
+          title={practicesSection.title}
+          sub={practicesSection.sub}
+        />
         <div className="practices-list">
           {practices.map((p, i) => (
             // rows breathe in from alternating sides, like a slow sway
