@@ -22,8 +22,8 @@ export function Practices() {
               x={features.swayReveal ? (i % 2 === 0 ? -28 : 28) : 0}
             >
               <article className="practice">
-                <div className="practice-meta">{p.note}</div>
                 <div className="practice-main">
+                  <p className="practice-meta">{p.note}</p>
                   <h3 className="practice-title">{p.title}</h3>
                   <p className="practice-body">{p.body}</p>
                 </div>

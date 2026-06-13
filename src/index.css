@@ -475,9 +475,12 @@ body { hyphens: none; }
 [dir='rtl'] .hero-kicker,
 [dir='rtl'] .section-label,
 [dir='rtl'] .hero-scroll,
+[dir='rtl'] .practice-meta,
 [dir='rtl'] .fact-label { letter-spacing: 0.02em; }
 [dir='rtl'] .hero-name { letter-spacing: 0; line-height: 1.04; }
-[dir='rtl'] .hero-hebrew { letter-spacing: 0.01em; }
+/* The romanized name is dir=ltr for correct Latin shaping, but must still
+   sit on the page's start edge (right) so it lines up under the Hebrew name. */
+[dir='rtl'] .hero-hebrew { letter-spacing: 0.01em; text-align: right; }
 [dir='rtl'] .section-title { letter-spacing: 0; line-height: 1.22; }
 [dir='rtl'] .hero-lead { line-height: 1.55; }
 [dir='rtl'] .word blockquote { line-height: 1.6; }
@@ -701,17 +704,18 @@ body { hyphens: none; }
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--gutter);
   align-items: center;
-  padding: var(--s-6) 0;
+  padding: var(--s-7) 0;
   border-top: 1px solid var(--rule);
 }
-.practice-meta  { grid-column: 1 / 3; }   /* cols 1–2 */
-.practice-main  { grid-column: 3 / 10; }  /* cols 3–9, aligned with col-main edge below */
-.practice-photo { grid-column: 10 / 13; } /* cols 10–12 */
+/* Content first (reads from the start edge), generous arch photo opposite it.
+   meta sits as an eyebrow above the title so nothing wraps in a thin column. */
+.practice-main  { grid-column: 1 / 7; }   /* cols 1–6: text fills its half */
+.practice-photo { grid-column: 7 / 13; }  /* cols 7–12: photo fills the other */
 .practice-photo {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 5 / 4;
   object-fit: cover;
-  border-radius: 120px 120px 14px 14px; /* echo the hero arch */
+  border-radius: 130px 130px 16px 16px; /* echo the hero arch */
   border: 1px solid var(--rule);
   filter: saturate(0.92);
   transition: filter .3s ease, transform .3s ease;
@@ -720,14 +724,20 @@ body { hyphens: none; }
 .practice:last-child { border-bottom: 1px solid var(--rule); }
 .practice { transition: background .25s ease; }
 .practice:hover { background: linear-gradient(90deg, transparent, rgba(201, 154, 63, 0.06) 30%, transparent); }
-.practice-meta { color: var(--faint); font-size: var(--fs-meta); letter-spacing: 0.04em; padding-top: 6px; }
+.practice-meta {
+  color: var(--accent);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 var(--s-3);
+}
 .practice-title {
   font-family: var(--serif);
   font-size: var(--fs-h3);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
-  margin: 0 0 var(--s-2);
+  margin: 0 0 var(--s-3);
 }
 .practice-body { margin: 0; max-width: var(--measure-body); }
 
@@ -840,7 +850,10 @@ body { hyphens: none; }
   margin-top: var(--header-gap);
 }
 .word {
-  padding: 4px 2px;
+  /* a hairline anchors each quote to a shared top line, so the pair reads as a
+     deliberate two-cell row rather than two quotes floating in space */
+  border-top: 1px solid var(--rule);
+  padding: var(--s-6) 2px 4px;
   transition: transform .35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .word:hover { transform: translateY(-3px); }

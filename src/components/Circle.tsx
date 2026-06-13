@@ -45,6 +45,11 @@ export function Circle() {
           <h2 className="section-title">{circle.title}</h2>
         </Reveal>
         <div className="circle-grid">
+          {/* col-main first in the DOM so grid auto-placement keeps both columns
+              on row 1 (a col-side-first order wraps the text to a second row) */}
+          <Reveal delay={0.1} className="col-main">
+            <p className="section-sub">{circle.body}</p>
+          </Reveal>
           <Reveal y={28} className="col-side">
             <motion.div style={scrollTurn ? { rotate } : undefined} className="dance-wrap">
               <svg className={`dance${features.danceJoinHover ? ' can-join' : ''}`} viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
@@ -60,9 +65,6 @@ export function Circle() {
               </svg>
             </motion.div>
             <p className="circle-caption">{circle.caption}</p>
-          </Reveal>
-          <Reveal delay={0.1} className="col-main">
-            <p className="section-sub">{circle.body}</p>
           </Reveal>
         </div>
       </div>
