@@ -1,11 +1,13 @@
 /* =============================================================================
    galigeulacohen.com — modern 70s: cream paper, forest-sage accent, arch & sun
-   motifs, breath-paced motion. Bellefair (display, He+En) + Fraunces / Frank
-   Ruhl Libre (serif text) + Inter / Assistant (body).
+   motifs, breath-paced motion.
+
+   Type system, three families, each covering Hebrew + Latin:
+     Bellefair        — display (hero, section titles, breath words). One weight.
+     Frank Ruhl Libre — serif accents (lead, quotes, practice titles).
+     Assistant        — body and UI.
    ============================================================================= */
 
-/* Bellefair: tall elegant serif, drawn for Hebrew and Latin together.
-   Single weight (400), so display styles never synthesize bold. */
 @font-face {
   font-family: 'Bellefair';
   font-weight: 400;
@@ -21,26 +23,25 @@
   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 @font-face {
-  font-family: 'Fraunces';
-  font-weight: 300 700;
+  font-family: 'Frank Ruhl Libre';
+  font-weight: 300 900;
   font-display: swap;
-  src: url('/fonts/fraunces.woff2') format('woff2');
+  src: url('/fonts/frank-ruhl-libre-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
 }
-@font-face {
-  font-family: 'Inter';
-  font-weight: 300 700;
-  font-display: swap;
-  src: url('/fonts/inter.woff2') format('woff2');
-}
-/* Hebrew faces, scoped by unicode-range: Hebrew glyphs fall through the Latin
-   fonts to these. Frank Ruhl Libre = the classic Israeli print serif (display);
-   Assistant = clean Hebrew sans (body/UI). Variable-weight Hebrew subsets. */
 @font-face {
   font-family: 'Frank Ruhl Libre';
   font-weight: 300 900;
   font-display: swap;
   src: url('/fonts/frank-ruhl-libre-hebrew.woff2') format('woff2');
   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Assistant';
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/assistant-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
 }
 @font-face {
   font-family: 'Assistant';
@@ -66,9 +67,9 @@
   --paper:  #F7F6EC;
   --paper-2:#EDEDDD;
 
-  --sans:    'Inter', 'Assistant', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --serif:   'Fraunces', 'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
-  --display: 'Bellefair', 'Fraunces', 'Frank Ruhl Libre', Georgia, serif;
+  --sans:    'Assistant', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --serif:   'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
+  --display: 'Bellefair', 'Frank Ruhl Libre', Georgia, serif;
 
   --maxw: 1020px;
   --pad: 40px;
@@ -203,7 +204,7 @@ img { display: block; max-width: 100%; }
   margin: 0 0 10px;
 }
 .hero-hebrew {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(19px, 2.4vw, 24px);
   font-weight: 400;
   color: var(--faint);
