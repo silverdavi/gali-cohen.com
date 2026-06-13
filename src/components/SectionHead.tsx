@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal';
+import { KineticText } from './KineticText';
 
 type Props = {
   /** zero-padded section number, e.g. "01". Omit for unnumbered moments. */
@@ -10,19 +11,24 @@ type Props = {
 
 // The one header used by every section, so the eyebrow / title / standfirst
 // rhythm is identical everywhere by construction (not re-typed per section).
-// The index number ties each section to its entry in the nav index.
+// The index number ties each section to its entry in the nav index. The title
+// is kinetic (word-by-word rise) so the eye lands on it as the section opens.
 export function SectionHead({ index, label, title, sub }: Props) {
   return (
-    <Reveal>
-      <header className="section-head">
+    <header className="section-head">
+      <Reveal>
         <p className="section-label">
           {index && <span className="section-index">{index}</span>}
           {index && <span className="section-rule" aria-hidden />}
           <span className="section-label-text">{label}</span>
         </p>
-        {title && <h2 className="section-title">{title}</h2>}
-        {sub && <p className="section-sub">{sub}</p>}
-      </header>
-    </Reveal>
+      </Reveal>
+      {title && <KineticText as="h2" className="section-title" text={title} />}
+      {sub && (
+        <Reveal delay={0.12}>
+          <p className="section-sub">{sub}</p>
+        </Reveal>
+      )}
+    </header>
   );
 }

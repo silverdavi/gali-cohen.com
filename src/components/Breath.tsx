@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal';
+import { KineticText } from './KineticText';
 import { content } from '../content';
 import { features } from '../features';
 
@@ -9,8 +10,8 @@ export function Breath() {
       <div className="container">
         <Reveal>
           <p className="section-label">{breath.label}</p>
-          <h2 className="section-title">{breath.title}</h2>
         </Reveal>
+        <KineticText as="h2" className="section-title" text={breath.title} />
         <div className={`breath-stage${features.breathStage ? '' : ' still'}`} role="img" aria-label={breath.note}>
           <div className="breath-rays" />
           <div className="breath-target" />

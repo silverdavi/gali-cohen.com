@@ -8,6 +8,7 @@
 //   ?ff=magneticCta:1                   -> force one on
 
 export type FeatureKey =
+  | 'kineticType'       // headings rise word-by-word from a mask when revealed
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
@@ -30,6 +31,7 @@ export type FeatureKey =
   | 'timeOfDaySun';     // hero warmth shifts with the visitor's local clock
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
+  kineticType: true,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,

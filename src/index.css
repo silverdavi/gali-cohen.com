@@ -596,6 +596,32 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 [dir='rtl'] .contact-line { letter-spacing: 0; }
 [dir='rtl'] .progress { transform-origin: 100% 50%; }
 
+/* --- Kinetic type: word-by-word rise from a mask --------------------------
+   Each word sits in an overflow-clipped box and lifts into place on a stagger
+   when the heading scrolls into view. Words stay inline-block so the line still
+   wraps; the clip box gets a little vertical breathing room (padding + negative
+   margin) so Hebrew/Latin descenders are never shaved. */
+.kin-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+.kin-wi {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  transition:
+    transform .82s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity .82s ease;
+  transition-delay: calc(var(--ki, 0) * var(--kstep, 58ms));
+}
+.kin.kin-in .kin-wi { transform: translateY(0); opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .kin-wi { transform: none; opacity: 1; transition: none; }
+}
+
 /* --- Sections shared ------------------------------------------------------- */
 .section { padding: var(--section-y) 0; border-top: 1px solid var(--rule); }
 /* Eyebrow: the one recurring "tag" above every title. Always the accent — it is
@@ -661,6 +687,8 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 .breath .container { width: 100%; }
 .breath .section-title { margin-bottom: 0; }
+/* the breath header is centred, so its flex eyebrow must centre too */
+.breath .section-label { justify-content: center; }
 /* breath & contact are the only centred sections: centring is reserved for the
    two meditative/ceremonial moments; every reading section stays start-aligned
    so the page keeps one strong text edge. */

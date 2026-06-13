@@ -1,5 +1,6 @@
 import { Reveal } from './Reveal';
 import { HeroArch } from './HeroArch';
+import { KineticText } from './KineticText';
 import { content, lang } from '../content';
 
 export function Hero() {
@@ -15,9 +16,7 @@ export function Hero() {
           <Reveal>
             <p className="hero-kicker">{profile.kicker}</p>
           </Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="hero-name">{profile.name}</h1>
-          </Reveal>
+          <KineticText as="h1" className="hero-name" text={profile.name} stagger={90} />
           <Reveal delay={0.14}>
             <p className="hero-hebrew" lang={altLang} dir={altDir}>{profile.hebrewName}</p>
           </Reveal>
