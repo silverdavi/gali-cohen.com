@@ -1,0 +1,177 @@
+# Decap CMS configuration for galigeulacohen.com
+# -----------------------------------------------------------------------------
+# Editing locally (no login, recommended for quick edits):
+#   1. npm run dev
+#   2. in a second terminal: npx decap-server
+#   3. open http://localhost:5173/admin/  -> "Work with local repository"
+#   Saves write straight to the YAML files; commit + push to publish.
+#
+# Editing live at galigeulacohen.com/admin (GitHub login):
+#   Requires a tiny OAuth helper — see CMS-SETUP.md — then uncomment `base_url`
+#   below and point it at the deployed helper.
+
+backend:
+  name: github
+  repo: silverdavi/gali-cohen.com
+  branch: main
+  # base_url: https://YOUR-OAUTH-HELPER.workers.dev   # set after CMS-SETUP.md
+
+# Lets you edit on localhost with `npx decap-server`, no auth needed.
+local_backend: true
+
+media_folder: "public/photos"
+public_folder: "/photos"
+
+locale: he
+
+# Edits go straight to main and trigger a deploy (no PR/editorial workflow).
+# publish_mode is intentionally omitted = "simple".
+
+collections:
+  - name: activities
+    label: "פעילויות · Activities"
+    delete: false
+    files:
+      - name: activities
+        label: "Activities"
+        file: "src/content/activities.yaml"
+        fields:
+          - label: "Heading"
+            name: heading
+            widget: object
+            fields:
+              - { label: "Label (HE)", name: labelHe, widget: string }
+              - { label: "Label (EN)", name: labelEn, widget: string }
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+          - label: "Items"
+            name: items
+            widget: list
+            summary: "{{fields.titleHe}}"
+            fields:
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Note (HE)", name: noteHe, widget: string }
+              - { label: "Note (EN)", name: noteEn, widget: string }
+              - { label: "Body (HE)", name: bodyHe, widget: text }
+              - { label: "Body (EN)", name: bodyEn, widget: text }
+              - { label: "Photo", name: photo, widget: image }
+              - { label: "Photo alt (HE)", name: photoAltHe, widget: string }
+              - { label: "Photo alt (EN)", name: photoAltEn, widget: string }
+
+  - name: pricing
+    label: "תעריפים · Pricing"
+    delete: false
+    files:
+      - name: pricing
+        label: "Pricing"
+        file: "src/content/pricing.yaml"
+        fields:
+          - label: "Heading"
+            name: heading
+            widget: object
+            fields:
+              - { label: "Label (HE)", name: labelHe, widget: string }
+              - { label: "Label (EN)", name: labelEn, widget: string }
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Button label (HE)", name: ctaHe, widget: string }
+              - { label: "Button label (EN)", name: ctaEn, widget: string }
+          - label: "Items"
+            name: items
+            widget: list
+            summary: "{{fields.titleHe}} — {{fields.price}}"
+            fields:
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Price (e.g. ₪360)", name: price, widget: string }
+              - { label: "Unit (HE)", name: unitHe, widget: string }
+              - { label: "Unit (EN)", name: unitEn, widget: string }
+              - { label: "Note (HE)", name: noteHe, widget: text }
+              - { label: "Note (EN)", name: noteEn, widget: text }
+              - { label: "Featured (highlight this card)", name: featured, widget: boolean, default: false }
+              - label: "Checkout / booking link"
+                name: ctaUrl
+                widget: string
+                required: false
+                hint: "Stripe Payment Link or booking URL. Leave empty to fall back to WhatsApp."
+
+  - name: events
+    label: "מפגשים · Events"
+    delete: false
+    files:
+      - name: events
+        label: "Events"
+        file: "src/content/events.yaml"
+        fields:
+          - label: "Heading"
+            name: heading
+            widget: object
+            fields:
+              - { label: "Label (HE)", name: labelHe, widget: string }
+              - { label: "Label (EN)", name: labelEn, widget: string }
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Button label (HE)", name: ctaHe, widget: string }
+              - { label: "Button label (EN)", name: ctaEn, widget: string }
+          - label: "Items"
+            name: items
+            widget: list
+            summary: "{{fields.date}} — {{fields.titleHe}}"
+            fields:
+              - { label: "Date", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "Time (e.g. 19:30)", name: time, widget: string, required: false }
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Location (HE)", name: locationHe, widget: string }
+              - { label: "Location (EN)", name: locationEn, widget: string }
+              - { label: "Description (HE)", name: descHe, widget: text }
+              - { label: "Description (EN)", name: descEn, widget: text }
+              - label: "Sign-up link"
+                name: signupUrl
+                widget: string
+                required: false
+                hint: "Registration URL. Leave empty to fall back to WhatsApp."
+
+  - name: store
+    label: "חנות · Shop"
+    delete: false
+    files:
+      - name: store
+        label: "Shop"
+        file: "src/content/store.yaml"
+        fields:
+          - label: "Heading"
+            name: heading
+            widget: object
+            fields:
+              - { label: "Label (HE)", name: labelHe, widget: string }
+              - { label: "Label (EN)", name: labelEn, widget: string }
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Button label (HE)", name: ctaHe, widget: string }
+              - { label: "Button label (EN)", name: ctaEn, widget: string }
+          - label: "Items"
+            name: items
+            widget: list
+            summary: "{{fields.titleHe}} — {{fields.price}}"
+            fields:
+              - { label: "Title (HE)", name: titleHe, widget: string }
+              - { label: "Title (EN)", name: titleEn, widget: string }
+              - { label: "Price (e.g. ₪90)", name: price, widget: string }
+              - { label: "Image", name: image, widget: image }
+              - { label: "Description (HE)", name: descHe, widget: text }
+              - { label: "Description (EN)", name: descEn, widget: text }
+              - label: "Buy link"
+                name: buyUrl
+                widget: string
+                required: false
+                hint: "Stripe Payment Link (recommended). Leave empty to fall back to WhatsApp."
