@@ -2,38 +2,27 @@
    galigeulacohen.com — modern 70s: cream paper, forest-sage accent, arch & sun
    motifs, breath-paced motion.
 
-   Type system, three families, each covering Hebrew + Latin:
-     Bellefair        — display (hero, section titles, breath words). One weight.
-     Frank Ruhl Libre — serif accents (lead, quotes, practice titles).
-     Assistant        — body and UI.
+   Type system, two families, each covering Hebrew + Latin:
+     Suez One  — display: a warm slab serif (hero name, section + practice
+                 titles, nav wordmark, breath words). One weight by design.
+     Assistant — everything else: lead, body, quotes, UI. Hierarchy from
+                 size and weight, not a third typeface.
    ============================================================================= */
 
+/* Display: Suez One — a warm slab serif with strong Hebrew, modern and
+   uncommon. One weight (400) by design; it carries the name and titles. */
 @font-face {
-  font-family: 'Bellefair';
+  font-family: 'Suez One';
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/bellefair-latin.woff2') format('woff2');
+  src: url('/fonts/suez-one-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
 }
 @font-face {
-  font-family: 'Bellefair';
+  font-family: 'Suez One';
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/bellefair-hebrew.woff2') format('woff2');
-  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
-}
-@font-face {
-  font-family: 'Frank Ruhl Libre';
-  font-weight: 300 900;
-  font-display: swap;
-  src: url('/fonts/frank-ruhl-libre-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
-}
-@font-face {
-  font-family: 'Frank Ruhl Libre';
-  font-weight: 300 900;
-  font-display: swap;
-  src: url('/fonts/frank-ruhl-libre-hebrew.woff2') format('woff2');
+  src: url('/fonts/suez-one-hebrew.woff2') format('woff2');
   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 @font-face {
@@ -68,8 +57,7 @@
   --paper-2:#EDEDDD;
 
   --sans:    'Assistant', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --serif:   'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
-  --display: 'Bellefair', 'Frank Ruhl Libre', Georgia, serif;
+  --display: 'Suez One', Georgia, 'Times New Roman', serif;
 
   /* TYPE SCALE -----------------------------------------------------------------
      Two intentional scales, never mixed:
@@ -267,8 +255,8 @@ body { hyphens: none; }
   border-bottom: 1px solid var(--rule);
 }
 .nav-name {
-  font-family: var(--serif);
-  font-weight: 600;
+  font-family: var(--display);
+  font-weight: 400;
   font-size: var(--fs-body); /* wordmark sits at body cap-height, not shouting */
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -343,7 +331,7 @@ body { hyphens: none; }
 }
 .hero-name {
   font-family: var(--display);
-  font-weight: 400;               /* Bellefair ships one weight; 400 is it */
+  font-weight: 400;               /* Suez One ships one weight; 400 is it */
   font-size: var(--fs-display);
   line-height: var(--lh-display); /* 1.0 so the two stacked name-lines lock up */
   letter-spacing: -0.01em;        /* large Latin display wants a hair tighter */
@@ -365,10 +353,10 @@ body { hyphens: none; }
   margin: 0 0 var(--s-5);
 }
 .hero-lead {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: var(--fs-lead);
   line-height: var(--lh-lead);
-  font-weight: 420;
+  font-weight: 400;
   color: var(--body);
   max-width: var(--measure-lead); /* ~34ch: a lead should break in 2–3 short lines */
   margin: 0 0 var(--s-7);
@@ -470,7 +458,7 @@ body { hyphens: none; }
 
 /* --- RTL (Hebrew) refinements ----------------------------------------------
    Hebrew has no uppercase and tracking hurts its letterforms: zero out the
-   wide letter-spacing used on Latin labels, and let Frank Ruhl breathe with
+   wide letter-spacing used on Latin labels, and give the slab display
    slightly taller leading. */
 [dir='rtl'] .hero-kicker,
 [dir='rtl'] .section-label,
@@ -732,10 +720,10 @@ body { hyphens: none; }
   margin: 0 0 var(--s-3);
 }
 .practice-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: var(--fs-h3);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 400;
+  letter-spacing: 0;
   color: var(--ink);
   margin: 0 0 var(--s-3);
 }
@@ -858,12 +846,12 @@ body { hyphens: none; }
 }
 .word:hover { transform: translateY(-3px); }
 .word blockquote {
-  font-family: var(--serif);
-  font-size: var(--fs-lead);   /* a quote is a pull-quote: lead scale, serif voice */
+  font-family: var(--sans);
+  font-size: var(--fs-lead);   /* a quote is a pull-quote: lead scale, quiet sans voice */
   line-height: var(--lh-lead);
   color: var(--ink);
   margin: 0 0 var(--s-3);
-  font-weight: 400;
+  font-weight: 300;            /* light keeps the quote soft against the slab titles */
 }
 .word blockquote::before,
 .word blockquote::after { transition: color .35s ease; }
