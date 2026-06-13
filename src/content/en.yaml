@@ -1,0 +1,122 @@
+# gali-cohen — English content. PLACEHOLDER copy; swap with Gali's real words.
+meta:
+  title: Gali Geula Cohen — Breath, Movement, Presence
+  description: >-
+    Gali Geula Cohen — holistic and emotional therapist in Tel Aviv.
+    Breathwork, movement, meditation circles, and couples journeys.
+
+nav:
+  practices: Practices
+  circles: Circles
+  about: About
+  cta: Say hello
+
+profile:
+  name: Gali Geula Cohen
+  hebrewName: גלי גאולה כהן
+  kicker: Breath · Movement · Presence
+  role: Holistic & emotional therapist · Yoga teacher · Tel Aviv
+  lead: >-
+    I hold space for people coming back to their bodies, through breath,
+    movement, and honest attention.
+  email: hello@galigeulacohen.com
+  instagram: https://www.instagram.com/
+  whatsapp: https://wa.me/972500000000
+
+hero:
+  ctaPrimary: Book a session
+  ctaSecondary: What I offer
+  scroll: Scroll
+
+breath:
+  label: A small practice
+  title: Stay here for one breath
+  wordIn: breathe in
+  wordOut: breathe out
+  note: >-
+    The circle moves at the pace of a slow breath. Follow it once before you
+    keep scrolling — that’s the whole practice.
+
+practicesSection:
+  label: Practices
+  title: Ways to work together
+  sub: >-
+    Every journey starts with a conversation. These are the shapes the work
+    usually takes.
+
+practices:
+  - title: Breathwork
+    note: One-on-one · 75 minutes
+    body: >-
+      Guided conscious breathing that lets the body finish what the mind keeps
+      postponing. We slow down, listen, and let the breath do the talking.
+  - title: Movement & dance
+    note: Open sessions · weekly
+    body: >-
+      Free movement with no steps to learn and nobody watching. Music, floor,
+      bare feet. The body remembers how — it always has.
+  - title: Couples journeys
+    note: Private workshops · by invitation
+    body: >-
+      A guided journey for two people who want to meet again — communication,
+      touch, and presence, built gradually and held with care.
+  - title: Meditation circles
+    note: Small groups · new moon
+    body: >-
+      Sitting together in a circle, doing very little, very deliberately.
+      Silence with company is a different silence.
+
+circle:
+  label: Together
+  title: The circle
+  body: >-
+    Most of my group work happens in a circle. Not a metaphor — an actual
+    circle of people, sitting or moving, where nobody is in front and nobody
+    is behind. Things said in a circle land differently.
+  caption: Women’s circles · movement journeys · holiday gatherings
+  alt: A circle of dancing figures, slowly turning
+
+aboutSection:
+  label: About
+  title: The long way back to the body
+  paragraphs:
+    - >-
+      I came to this work the long way — through psychology and sociology at
+      university, through years of teaching yoga and training bodies, and
+      through my own winding road back to mine.
+    - >-
+      Today I accompany individuals and couples in emotional and body-based
+      processes from my clinic in Tel Aviv, and hold workshops and circles
+      around the country. An eternal student, as my teachers like to remind me.
+  facts:
+    - label: Practice
+      value: Holistic, emotional & body-based therapy
+    - label: Training
+      value: B.A. Psychology & Sociology · certified yoga teacher
+    - label: Where
+      value: Tel Aviv clinic · workshops countrywide
+    - label: Languages
+      value: Hebrew · English
+
+wordsSection:
+  label: Words from the room
+  items:
+    - quote: >-
+        I arrived holding my breath without knowing it. I left breathing. It
+        sounds small written down. It was not small.
+      name: N., breathwork journey
+    - quote: >-
+        Gali holds a room the way you hold a sleeping child: completely, and
+        without making a thing of it.
+      name: A. & D., couples workshop
+
+contact:
+  line: Come as you are.
+  sub: >-
+    Write me and we’ll find the door that fits — a session, a circle, or just
+    a conversation.
+  whatsapp: WhatsApp
+  instagram: Instagram
+
+footer:
+  place: Tel Aviv

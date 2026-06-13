@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { profile } from '../data/content';
+import { content } from '../content';
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -12,12 +12,12 @@ export function Nav() {
 
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
-      <a href="#top" className="nav-name">{profile.name}</a>
+      <a href="#top" className="nav-name">{content.profile.name}</a>
       <div className="nav-links">
-        <a className="hide-sm" href="#practices">Practices</a>
-        <a className="hide-sm" href="#circle">Circles</a>
-        <a className="hide-sm" href="#about">About</a>
-        <a className="nav-cta" href="#contact">Say hello</a>
+        <a className="hide-sm" href="#practices">{content.nav.practices}</a>
+        <a className="hide-sm" href="#circle">{content.nav.circles}</a>
+        <a className="hide-sm" href="#about">{content.nav.about}</a>
+        <a className="nav-cta" href="#contact">{content.nav.cta}</a>
       </div>
     </nav>
   );

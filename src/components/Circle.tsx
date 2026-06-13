@@ -1,5 +1,5 @@
 import { Reveal } from './Reveal';
-import { circle } from '../data/content';
+import { content } from '../content';
 
 const FIGURES = 9;
 
@@ -21,17 +21,18 @@ function Figure({ angle }: { angle: number }) {
 }
 
 export function Circle() {
+  const { circle } = content;
   return (
     <section className="section" id="circle">
       <div className="container">
         <Reveal>
-          <p className="section-label">Together</p>
+          <p className="section-label">{circle.label}</p>
           <h2 className="section-title">{circle.title}</h2>
         </Reveal>
         <div className="circle-grid">
           <Reveal y={28}>
             <div>
-              <svg className="dance" viewBox="0 0 280 280" role="img" aria-label="A circle of dancing figures, slowly turning">
+              <svg className="dance" viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
                 <circle cx="140" cy="140" r="64" fill="none" stroke="#E8DFCB" strokeWidth="1.5" strokeDasharray="3 7" />
                 <g className="turning">
                   {Array.from({ length: FIGURES }, (_, i) => (

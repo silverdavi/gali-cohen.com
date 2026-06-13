@@ -6,7 +6,15 @@ Built per `friends/guides/` (design-principles, anti-ai-slop, website-playbook).
 
 ## Stack
 
-Vite + React 19 + TypeScript, plain CSS custom properties in `src/index.css`, Framer Motion for reveals only. Content lives in `src/data/content.ts`.
+Vite + React 19 + TypeScript, plain CSS custom properties in `src/index.css`, Framer Motion for reveals only.
+
+## Content & languages
+
+All copy lives in per-language YAML files — never in components:
+
+- `src/content/en.yaml` — English (active dev language)
+- `src/content/he.yaml` — Hebrew (will become the default once the copy is approved)
+- `src/content/index.ts` — typed loader; flip `DEFAULT_LANG` to `'he'` to switch. It also sets `<html lang dir>`, so Hebrew renders RTL automatically.
 
 ```bash
 npm install

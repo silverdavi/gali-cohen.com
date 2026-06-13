@@ -1,16 +1,15 @@
 import { Reveal } from './Reveal';
-import { practices } from '../data/content';
+import { content } from '../content';
 
 export function Practices() {
+  const { practicesSection, practices } = content;
   return (
     <section className="section" id="practices">
       <div className="container">
         <Reveal>
-          <p className="section-label">Practices</p>
-          <h2 className="section-title">Ways to work together</h2>
-          <p className="section-sub">
-            Every journey starts with a conversation. These are the shapes the work usually takes.
-          </p>
+          <p className="section-label">{practicesSection.label}</p>
+          <h2 className="section-title">{practicesSection.title}</h2>
+          <p className="section-sub">{practicesSection.sub}</p>
         </Reveal>
         <div className="practices-list">
           {practices.map((p, i) => (

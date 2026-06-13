@@ -1,8 +1,13 @@
 import { Reveal } from './Reveal';
 import { ArchSun } from './ArchSun';
-import { profile } from '../data/content';
+import { content, lang } from '../content';
 
 export function Hero() {
+  const { profile, hero } = content;
+  // The secondary name renders in the other script: Hebrew on the English
+  // site, Latin on the Hebrew site.
+  const altLang = lang === 'he' ? 'en' : 'he';
+  const altDir = lang === 'he' ? 'ltr' : 'rtl';
   return (
     <header className="hero container" id="top">
       <div className="hero-grid">
@@ -11,10 +16,10 @@ export function Hero() {
             <p className="hero-kicker">{profile.kicker}</p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="hero-name">Gali Geula Cohen</h1>
+            <h1 className="hero-name">{profile.name}</h1>
           </Reveal>
           <Reveal delay={0.14}>
-            <p className="hero-hebrew" lang="he" dir="rtl">{profile.hebrewName}</p>
+            <p className="hero-hebrew" lang={altLang} dir={altDir}>{profile.hebrewName}</p>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="hero-role">{profile.role}</p>
@@ -24,8 +29,8 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.32}>
             <div className="hero-ctas">
-              <a className="btn btn-primary" href="#contact">Book a session</a>
-              <a className="btn btn-ghost" href="#practices">What I offer</a>
+              <a className="btn btn-primary" href="#contact">{hero.ctaPrimary}</a>
+              <a className="btn btn-ghost" href="#practices">{hero.ctaSecondary}</a>
             </div>
           </Reveal>
         </div>
@@ -33,7 +38,7 @@ export function Hero() {
           <ArchSun />
         </Reveal>
       </div>
-      <a className="hero-scroll" href="#breath">Scroll</a>
+      <a className="hero-scroll" href="#breath">{hero.scroll}</a>
     </header>
   );
 }
