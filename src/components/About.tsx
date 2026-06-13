@@ -19,13 +19,16 @@ export function About() {
             </div>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="about-facts">
-              {aboutSection.facts.map((f) => (
-                <div className="fact" key={f.label}>
-                  <span className="fact-label">{f.label}</span>
-                  <span className="fact-value">{f.value}</span>
-                </div>
-              ))}
+            <div>
+              <img className="about-photo" src={aboutSection.photo} alt={aboutSection.photoAlt} loading="lazy" />
+              <div className="about-facts">
+                {aboutSection.facts.map((f) => (
+                  <div className="fact" key={f.label}>
+                    <span className="fact-label">{f.label}</span>
+                    <span className="fact-value">{f.value}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>

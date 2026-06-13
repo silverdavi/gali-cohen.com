@@ -20,6 +20,7 @@ export function Practices() {
                   <h3 className="practice-title">{p.title}</h3>
                   <p className="practice-body">{p.body}</p>
                 </div>
+                <img className="practice-photo" src={p.photo} alt={p.photoAlt} loading="lazy" />
               </article>
             </Reveal>
           ))}

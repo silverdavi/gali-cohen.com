@@ -22,11 +22,14 @@ export type Content = {
   hero: { ctaPrimary: string; ctaSecondary: string; scroll: string };
   breath: { label: string; title: string; wordIn: string; wordOut: string; note: string };
   practicesSection: { label: string; title: string; sub: string };
-  practices: { title: string; note: string; body: string }[];
+  practices: { title: string; note: string; body: string; photo: string; photoAlt: string }[];
   circle: { label: string; title: string; body: string; caption: string; alt: string };
+  band: { photo: string; caption: string; alt: string };
   aboutSection: {
     label: string;
     title: string;
+    photo: string;
+    photoAlt: string;
     paragraphs: string[];
     facts: { label: string; value: string }[];
   };

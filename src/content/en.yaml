@@ -47,21 +47,29 @@ practicesSection:
 practices:
   - title: Breathwork
     note: One-on-one · 75 minutes
+    photo: /photos/breath.jpg
+    photoAlt: A woman breathing slowly at a bright window, seen from behind
     body: >-
       Guided conscious breathing that lets the body finish what the mind keeps
       postponing. We slow down, listen, and let the breath do the talking.
   - title: Movement & dance
     note: Open sessions · weekly
+    photo: /photos/dance-circle.jpg
+    photoAlt: A circle of women dancing barefoot on a beach at dusk
     body: >-
       Free movement with no steps to learn and nobody watching. Music, floor,
       bare feet. The body remembers how — it always has.
   - title: Couples journeys
     note: Private workshops · by invitation
+    photo: /photos/hands.jpg
+    photoAlt: Two pairs of hands gently held together on green linen
     body: >-
       A guided journey for two people who want to meet again — communication,
       touch, and presence, built gradually and held with care.
   - title: Meditation circles
     note: Small groups · new moon
+    photo: /photos/meditation.jpg
+    photoAlt: A small meditation circle seated around candles and a singing bowl
     body: >-
       Sitting together in a circle, doing very little, very deliberately.
       Silence with company is a different silence.
@@ -76,9 +84,16 @@ circle:
   caption: Women’s circles · movement journeys · holiday gatherings
   alt: A circle of dancing figures, slowly turning
 
+band:
+  photo: /photos/dance-circle.jpg
+  caption: Placeholder photography, to be replaced with Gali’s own
+  alt: A circle of women holding hands on a beach at dusk, sea behind them
+
 aboutSection:
   label: About
   title: The long way back to the body
+  photo: /photos/studio.jpg
+  photoAlt: "The studio: floor mattress, cushions, plants, soft light"
   paragraphs:
     - >-
       I came to this work the long way — through psychology and sociology at
