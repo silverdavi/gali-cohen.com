@@ -112,15 +112,30 @@ img { display: block; max-width: 100%; }
   padding-right: var(--pad);
 }
 
-/* --- Scroll progress ------------------------------------------------------ */
-.progress {
+/* --- Scroll progress: a thread of daylight with a sun at its edge --------- */
+.progress-track {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--accent);
-  transform-origin: 0 50%;
+  height: 0;
   z-index: 80;
+  pointer-events: none;
 }
+.progress {
+  height: 2px;
+  background: linear-gradient(90deg, var(--ochre), var(--accent));
+  transform-origin: 0 50%;
+}
+[dir='rtl'] .progress { background: linear-gradient(-90deg, var(--ochre), var(--accent)); }
+.progress-sun {
+  position: absolute;
+  top: -3px;
+  width: 8px; height: 8px;
+  margin-inline-start: -4px;
+  border-radius: 50%;
+  background: var(--ochre);
+  box-shadow: 0 0 8px rgba(201, 154, 63, 0.8);
+}
+@media (prefers-reduced-motion: reduce) { .progress-sun { display: none; } }
 
 /* --- Nav ------------------------------------------------------------------ */
 .nav {
@@ -567,12 +582,13 @@ img { display: block; max-width: 100%; }
 }
 
 /* --- Photo band ---------------------------------------------------------------- */
-.band { position: relative; }
+.band { position: relative; overflow: hidden; }
 .band img {
   width: 100%;
   height: clamp(320px, 52vh, 540px);
   object-fit: cover;
   filter: saturate(0.95);
+  will-change: transform;
 }
 .band-caption {
   position: absolute;

@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Reveal } from './Reveal';
 import { content } from '../content';
 
@@ -22,8 +24,18 @@ function Figure({ angle }: { angle: number }) {
 
 export function Circle() {
   const { circle } = content;
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  // The dancers turn with you: scrolling through the section adds a slow
+  // quarter-turn on top of the circle's own spin.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const rotate = useTransform(scrollYProgress, [0, 1], [-45, 45]);
+
   return (
-    <section className="section" id="circle">
+    <section className="section" id="circle" ref={ref}>
       <div className="container">
         <Reveal>
           <p className="section-label">{circle.label}</p>
@@ -31,7 +43,7 @@ export function Circle() {
         </Reveal>
         <div className="circle-grid">
           <Reveal y={28}>
-            <div>
+            <motion.div style={reduce ? undefined : { rotate }} className="dance-wrap">
               <svg className="dance" viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
                 <circle cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
                 <g className="turning">
@@ -41,8 +53,8 @@ export function Circle() {
                 </g>
                 <circle cx="140" cy="140" r="5" fill="var(--ochre)" />
               </svg>
-              <p className="circle-caption">{circle.caption}</p>
-            </div>
+            </motion.div>
+            <p className="circle-caption">{circle.caption}</p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="section-sub">{circle.body}</p>

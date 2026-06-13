@@ -13,7 +13,8 @@ export function Practices() {
         </Reveal>
         <div className="practices-list">
           {practices.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.05}>
+            // rows breathe in from alternating sides, like a slow sway
+            <Reveal key={p.title} delay={i * 0.05} y={14} x={i % 2 === 0 ? -28 : 28}>
               <article className="practice">
                 <div className="practice-meta">{p.note}</div>
                 <div>
