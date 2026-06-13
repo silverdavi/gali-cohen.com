@@ -3,12 +3,13 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { Reveal } from './Reveal';
 import { content } from '../content';
 
-const FIGURES = 9;
+const SLOTS = 10;
+const FIGURES = 9; // one slot kept open for the dancer who joins on hover
 
 // One dancing figure: head + open-armed body, drawn pointing outward from center.
-function Figure({ angle }: { angle: number }) {
+function Figure({ angle, className }: { angle: number; className?: string }) {
   return (
-    <g transform={`rotate(${angle} 140 140) translate(140 38)`}>
+    <g className={className} transform={`rotate(${angle} 140 140) translate(140 38)`}>
       <circle cx="0" cy="0" r="7" fill="var(--accent)" />
       {/* body */}
       <path d="M0 7 V 34" stroke="var(--ink)" strokeWidth="3.4" strokeLinecap="round" />
@@ -45,13 +46,15 @@ export function Circle() {
           <Reveal y={28}>
             <motion.div style={reduce ? undefined : { rotate }} className="dance-wrap">
               <svg className="dance" viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
-                <circle cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
+                <circle className="dance-ring" cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
                 <g className="turning">
                   {Array.from({ length: FIGURES }, (_, i) => (
-                    <Figure key={i} angle={(360 / FIGURES) * i} />
+                    <Figure key={i} angle={(360 / SLOTS) * i} />
                   ))}
+                  {/* the open slot; a tenth dancer joins on hover */}
+                  <Figure className="joiner" angle={(360 / SLOTS) * FIGURES} />
                 </g>
-                <circle cx="140" cy="140" r="5" fill="var(--ochre)" />
+                <circle className="dance-heart" cx="140" cy="140" r="5" fill="var(--ochre)" />
               </svg>
             </motion.div>
             <p className="circle-caption">{circle.caption}</p>

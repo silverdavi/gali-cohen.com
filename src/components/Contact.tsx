@@ -8,6 +8,9 @@ export function Contact() {
       <section className="section contact" id="contact">
         <div className="container">
           <Reveal>
+            <div className="contact-medallion" aria-hidden>
+              <img src="/photos/bowl.jpg" alt="" loading="lazy" />
+            </div>
             <h2 className="contact-line">{contact.line}</h2>
             <p className="contact-sub">{contact.sub}</p>
             <a className="btn btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>

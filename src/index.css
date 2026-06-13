@@ -167,14 +167,33 @@ img { display: block; max-width: 100%; }
 }
 .nav.scrolled .nav-name { opacity: 1; transform: none; pointer-events: auto; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
-.nav-links a {
+.nav-links a:not(.nav-cta) {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--mute);
   transition: color .2s ease;
+  position: relative;
 }
-.nav-links a:hover { color: var(--ink); }
+/* a hairline that grows from the start edge on hover (RTL-aware) */
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+[dir='rtl'] .nav-links a:not(.nav-cta)::after { transform-origin: right; }
+.nav-links a:not(.nav-cta):hover { color: var(--ink); }
+.nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a:not(.nav-cta)::after { transition: none; }
+}
 .nav-cta {
   border: 1px solid rgba(62, 107, 82, 0.4);
   border-radius: 999px;
@@ -270,6 +289,8 @@ img { display: block; max-width: 100%; }
   overflow: hidden;
 }
 .arch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.arch { cursor: pointer; outline: none; }
+.arch:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
 
 /* slow sun rise inside the arch */
 @keyframes sun-rise {
@@ -280,6 +301,35 @@ img { display: block; max-width: 100%; }
   animation: sun-rise calc(var(--breath) * 2) ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) { .arch .sun-group { animation: none; } }
+
+/* --- Sun bloom on hover/focus -----------------------------------------------
+   The arcs swell from their own centers, and the ray crown unfurls as one group
+   scaling out from the sun center (170,250 in viewBox units). */
+.arch .ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.arch .sun-rays {
+  transform-box: view-box;
+  transform-origin: 170px 250px;
+  opacity: 0;
+  transform: scale(0.55) rotate(-12deg); /* tucked toward the sun, hidden by the disc */
+  transition: opacity .5s ease, transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.arch:hover .sun-rays,
+.arch:focus-visible .sun-rays { opacity: 0.75; transform: scale(1) rotate(0deg); }
+.arch:hover .r-out,
+.arch:focus-visible .r-out { transform: scale(1.05); }
+.arch:hover .r-mid,
+.arch:focus-visible .r-mid { transform: scale(1.08); }
+.arch:hover .r-in,
+.arch:focus-visible .r-in { transform: scale(1.12); }
+.arch:hover .r-core,
+.arch:focus-visible .r-core { transform: scale(1.18); }
+@media (prefers-reduced-motion: reduce) {
+  .arch .ring, .arch .sun-rays { transition: none; }
+}
 
 /* birds drift gently across the arch sky */
 @keyframes bird-drift {
@@ -571,8 +621,24 @@ img { display: block; max-width: 100%; }
 .dance .turning {
   transform-origin: 50% 50%;
   animation: turn 60s linear infinite;
+  transition: animation-duration .4s ease;
 }
-@media (prefers-reduced-motion: reduce) { .dance .turning { animation: none; } }
+.dance:hover .turning { animation-duration: 26s; } /* quicken when you lean in */
+.dance-ring {
+  transition: stroke .4s ease, stroke-width .4s ease;
+}
+.dance:hover .dance-ring { stroke: var(--accent); stroke-width: 2; }
+.dance-heart { transition: r .4s ease, fill .4s ease; }
+.dance:hover .dance-heart { r: 7; fill: var(--accent); }
+/* the tenth dancer: waiting, then joining when you hover the circle */
+.dance .joiner { opacity: 0; transition: opacity .5s ease; }
+.dance .joiner circle { fill: var(--ochre); }
+.dance:hover .joiner { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .dance .turning { animation: none; }
+  .dance:hover .turning { animation: none; }
+  .dance .joiner { opacity: 1; } /* show the full circle, no hover dependency */
+}
 .circle-caption {
   font-size: 13px;
   color: var(--faint);
@@ -643,6 +709,11 @@ img { display: block; max-width: 100%; }
   gap: 56px;
   margin-top: 48px;
 }
+.word {
+  padding: 4px 2px;
+  transition: transform .35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.word:hover { transform: translateY(-3px); }
 .word blockquote {
   font-family: var(--serif);
   font-size: 20px;
@@ -651,12 +722,39 @@ img { display: block; max-width: 100%; }
   margin: 0 0 14px;
   font-weight: 400;
 }
+.word blockquote::before,
+.word blockquote::after { transition: color .35s ease; }
+.word:hover blockquote::before,
+.word:hover blockquote::after { color: var(--ochre); }
+@media (prefers-reduced-motion: reduce) { .word { transition: none; } }
 .word blockquote::before { content: '\201C'; color: var(--accent); }
 .word blockquote::after  { content: '\201D'; color: var(--accent); }
 .word figcaption { font-size: 13.5px; color: var(--mute); letter-spacing: 0.03em; }
 
 /* --- Contact --------------------------------------------------------------------- */
 .contact { text-align: center; padding: 120px 0 96px; }
+.contact-medallion {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: 0 6px 30px rgba(31, 36, 25, 0.12);
+}
+.contact-medallion img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: medallion-turn 80s linear infinite;
+  transition: transform .8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@keyframes medallion-turn { to { transform: rotate(360deg); } }
+.contact-medallion:hover img { animation-play-state: paused; transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .contact-medallion img { animation: none; }
+  .contact-medallion:hover img { transform: none; }
+}
 .contact-line {
   font-family: var(--display);
   font-weight: 400;
