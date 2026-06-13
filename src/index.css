@@ -15,6 +15,23 @@
   font-display: swap;
   src: url('/fonts/inter.woff2') format('woff2');
 }
+/* Hebrew faces, scoped by unicode-range: Hebrew glyphs fall through the Latin
+   fonts to these. Frank Ruhl Libre = the classic Israeli print serif (display);
+   Assistant = clean Hebrew sans (body/UI). Variable-weight Hebrew subsets. */
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/frank-ruhl-libre-hebrew.woff2') format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Assistant';
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/assistant-hebrew.woff2') format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
 
 :root {
   --ink:    #2A1F14;
@@ -30,8 +47,8 @@
   --paper:  #FAF5EC;
   --paper-2:#F3EBDC;
 
-  --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', 'Assistant', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Fraunces', 'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
 
   --maxw: 1020px;
   --pad: 40px;
@@ -221,6 +238,16 @@ img { display: block; max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .arch .sun-group { animation: none; } }
 
+/* birds drift gently across the arch sky */
+@keyframes bird-drift {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(26px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+.arch .bird { animation: bird-drift 26s ease-in-out infinite; }
+.arch .bird.b2 { animation-duration: 34s; animation-delay: -12s; }
+@media (prefers-reduced-motion: reduce) { .arch .bird { animation: none; } }
+
 .hero-scroll {
   position: absolute;
   bottom: 28px;
@@ -231,6 +258,22 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+
+/* --- RTL (Hebrew) refinements ----------------------------------------------
+   Hebrew has no uppercase and tracking hurts its letterforms: zero out the
+   wide letter-spacing used on Latin labels, and let Frank Ruhl breathe with
+   slightly taller leading. */
+[dir='rtl'] .hero-kicker,
+[dir='rtl'] .section-label,
+[dir='rtl'] .hero-scroll,
+[dir='rtl'] .fact-label { letter-spacing: 0.02em; }
+[dir='rtl'] .hero-name { letter-spacing: 0; line-height: 1.08; }
+[dir='rtl'] .hero-hebrew { letter-spacing: 0.01em; }
+[dir='rtl'] .section-title { letter-spacing: 0; line-height: 1.22; }
+[dir='rtl'] .hero-lead { line-height: 1.55; }
+[dir='rtl'] .word blockquote { line-height: 1.6; }
+[dir='rtl'] .contact-line { letter-spacing: 0; }
+[dir='rtl'] .progress { transform-origin: 100% 50%; }
 
 /* --- Sections shared ------------------------------------------------------- */
 .section { padding: 96px 0; border-top: 1px solid var(--rule); }
@@ -258,22 +301,75 @@ img { display: block; max-width: 100%; }
 .breath .section-label { color: var(--accent); }
 .breath-stage {
   position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 48px auto 22px;
+  width: 300px;
+  height: 300px;
+  margin: 44px auto 22px;
   display: grid;
   place-items: center;
 }
+.breath-rays,
 .breath-ring,
-.breath-core {
+.breath-ripple,
+.breath-core,
+.breath-glow {
   position: absolute;
   border-radius: 50%;
 }
+
+/* soft rotating sun-rays halo behind everything */
+.breath-rays {
+  width: 290px; height: 290px;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(217, 164, 65, 0.16) 0deg 9deg,
+    transparent 9deg 30deg
+  );
+  -webkit-mask-image: radial-gradient(circle, transparent 30%, #000 46%, transparent 70%);
+  mask-image: radial-gradient(circle, transparent 30%, #000 46%, transparent 70%);
+  animation:
+    rays-turn 90s linear infinite,
+    breathe var(--breath) ease-in-out infinite;
+}
+@keyframes rays-turn { to { rotate: 360deg; } }
+
+/* warm glow that swells with the inhale */
+.breath-glow {
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(192, 90, 46, 0.32), transparent 70%);
+  filter: blur(14px);
+  animation: breathe-glow var(--breath) ease-in-out infinite;
+}
+@keyframes breathe-glow {
+  0%   { transform: scale(1);    opacity: .45; }
+  40%  { transform: scale(1.65); opacity: .9;  }
+  50%  { transform: scale(1.65); opacity: .9;  }
+  95%  { transform: scale(1);    opacity: .45; }
+  100% { transform: scale(1);    opacity: .45; }
+}
+
 .breath-core {
   width: 130px; height: 130px;
   background: radial-gradient(circle at 50% 42%, var(--sand), var(--accent) 86%);
   animation: breathe var(--breath) ease-in-out infinite;
 }
+/* a second skin on the core that warms toward ochre at the top of the inhale */
+.breath-core::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 60%, var(--ochre), var(--accent-deep) 92%);
+  opacity: 0;
+  animation: core-warm var(--breath) ease-in-out infinite;
+}
+@keyframes core-warm {
+  0%   { opacity: 0; }
+  40%  { opacity: .55; }
+  50%  { opacity: .55; }
+  95%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 .breath-ring {
   border: 1px solid rgba(192, 90, 46, 0.35);
   animation: breathe var(--breath) ease-in-out infinite;
@@ -281,6 +377,21 @@ img { display: block; max-width: 100%; }
 .breath-ring.r1 { width: 170px; height: 170px; animation-delay: calc(var(--breath) * -0.04); }
 .breath-ring.r2 { width: 210px; height: 210px; opacity: .6; animation-delay: calc(var(--breath) * -0.08); }
 .breath-ring.r3 { width: 250px; height: 250px; opacity: .3; animation-delay: calc(var(--breath) * -0.12); }
+
+/* ripples released at the top of the inhale, drifting out as you exhale */
+.breath-ripple {
+  width: 130px; height: 130px;
+  border: 1.5px solid rgba(192, 90, 46, 0.5);
+  opacity: 0;
+  animation: ripple var(--breath) ease-out infinite;
+}
+.breath-ripple.p2 { animation-delay: calc(var(--breath) * 0.06); border-color: rgba(217, 164, 65, 0.5); }
+@keyframes ripple {
+  0%, 38% { transform: scale(1.0); opacity: 0; }
+  44%     { transform: scale(1.22); opacity: .55; }
+  90%     { transform: scale(2.15); opacity: 0; }
+  100%    { transform: scale(2.15); opacity: 0; }
+}
 
 /* 11s cycle: in 0–40%, hold 40–50%, out 50–95%, rest */
 @keyframes breathe {
@@ -314,7 +425,8 @@ img { display: block; max-width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .breath-core, .breath-ring { animation: none; }
+  .breath-core, .breath-core::after, .breath-ring, .breath-rays, .breath-glow { animation: none; }
+  .breath-ripple { display: none; }
   .breath-words span { animation: none; }
   .breath-words .in { opacity: 1; }
 }
@@ -331,6 +443,8 @@ img { display: block; max-width: 100%; }
   border-top: 1px solid var(--rule);
 }
 .practice:last-child { border-bottom: 1px solid var(--rule); }
+.practice { transition: background .25s ease; }
+.practice:hover { background: linear-gradient(90deg, transparent, rgba(217, 164, 65, 0.06) 30%, transparent); }
 .practice-meta { color: var(--faint); font-size: 13.5px; letter-spacing: 0.04em; padding-top: 6px; }
 .practice-title {
   font-family: var(--serif);

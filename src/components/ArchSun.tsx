@@ -14,9 +14,12 @@ export function ArchSun() {
         {/* layered hills */}
         <path d="M-20 360 Q 90 300 200 356 T 380 350 V 440 H -20 Z" fill="#9C4523" opacity="0.85" />
         <path d="M-20 392 Q 120 338 240 392 T 380 386 V 440 H -20 Z" fill="#2A1F14" opacity="0.85" />
-        {/* a thin flying bird */}
-        <path d="M96 120 q 10 -9 20 0 q 10 -9 20 0" stroke="#2A1F14" strokeWidth="2.4" strokeLinecap="round" opacity="0.6" />
-        <path d="M140 88 q 8 -7 16 0 q 8 -7 16 0" stroke="#2A1F14" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+        {/* thin flying birds, drifting slowly across the arch */}
+        <g className="bird b1">
+          <path d="M96 120 q 10 -9 20 0 q 10 -9 20 0" stroke="#2A1F14" strokeWidth="2.4" strokeLinecap="round" opacity="0.6" />
+        </g>
+        <g className="bird b2">
+          <path d="M140 88 q 8 -7 16 0 q 8 -7 16 0" stroke="#2A1F14" strokeWidth="2" strokeLinecap="round" opacity="0.4" /></g>
       </svg>
     </div>
   );

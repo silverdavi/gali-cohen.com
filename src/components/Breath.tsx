@@ -11,9 +11,13 @@ export function Breath() {
           <h2 className="section-title">{breath.title}</h2>
         </Reveal>
         <div className="breath-stage" role="img" aria-label={breath.note}>
+          <div className="breath-rays" />
           <div className="breath-ring r3" />
           <div className="breath-ring r2" />
           <div className="breath-ring r1" />
+          <div className="breath-ripple" />
+          <div className="breath-ripple p2" />
+          <div className="breath-glow" />
           <div className="breath-core" />
         </div>
         <div className="breath-words" aria-hidden>
