@@ -12,9 +12,9 @@ Vite + React 19 + TypeScript, plain CSS custom properties in `src/index.css`, Fr
 
 All copy lives in per-language YAML files — never in components:
 
-- `src/content/en.yaml` — English (active dev language)
-- `src/content/he.yaml` — Hebrew (will become the default once the copy is approved)
-- `src/content/index.ts` — typed loader; flip `DEFAULT_LANG` to `'he'` to switch. It also sets `<html lang dir>`, so Hebrew renders RTL automatically.
+- `src/content/he.yaml` — Hebrew (the default language)
+- `src/content/en.yaml` — English (kept for a future language switch)
+- `src/content/index.ts` — typed loader; `DEFAULT_LANG` picks the language and `main.tsx` sets `<html lang dir>`, so the direction follows automatically. The static `index.html` meta is Hebrew to match.
 
 ```bash
 npm install

@@ -40,7 +40,7 @@ const CONTENT: Record<Lang, Content> = {
   he: he as Content,
 };
 
-export const DEFAULT_LANG: Lang = 'en'; // -> 'he' once Hebrew copy is approved
+export const DEFAULT_LANG: Lang = 'he'; // Hebrew is the default; 'en' kept for a future language switch
 export const DIR: Record<Lang, 'ltr' | 'rtl'> = { en: 'ltr', he: 'rtl' };
 
 export const lang: Lang = DEFAULT_LANG;
