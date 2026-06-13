@@ -93,8 +93,8 @@ band:
 aboutSection:
   label: אודות
   title: הדרך הארוכה חזרה אל הגוף
-  photo: /photos/studio.jpg
-  photoAlt: "הסטודיו: מזרן רצפה, כריות, צמחים ואור רך"
+  photo: /photos/portrait.jpg
+  photoAlt: גלי יושבת מול חלון קשת בסטודיו, צילום פלייסהולדר
   paragraphs:
     - >-
       הגעתי לעבודה הזאת בדרך הארוכה: דרך פסיכולוגיה וסוציולוגיה
