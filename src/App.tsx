@@ -13,6 +13,7 @@ import { About } from './components/About';
 import { Pricing } from './components/Pricing';
 import { Events } from './components/Events';
 import { Store } from './components/Store';
+import { Astro } from './components/Astro';
 import { Words } from './components/Words';
 import { Contact } from './components/Contact';
 
@@ -35,6 +36,7 @@ export default function App() {
         <Events />
         <Store />
         <Words />
+        {features.astrology && <Astro />}
         <Contact />
       </main>
     </>

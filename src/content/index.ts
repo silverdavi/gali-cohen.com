@@ -32,6 +32,25 @@ export type Content = {
     facts: { label: string; value: string }[];
   };
   wordsSection: { label: string; items: { quote: string; name: string }[] };
+  astro: {
+    label: string;
+    title: string;
+    sub: string;
+    sunLabel: string;
+    moonLabel: string;
+    litWord: string;
+    findTitle: string;
+    findSub: string;
+    monthLabel: string;
+    dayLabel: string;
+    reveal: string;
+    yourSign: string;
+    again: string;
+    moonPhases: {
+      new: string; waxingCrescent: string; firstQuarter: string; waxingGibbous: string;
+      full: string; waningGibbous: string; lastQuarter: string; waningCrescent: string;
+    };
+  };
   contact: { line: string; sub: string; whatsapp: string; instagram: string };
   footer: { place: string };
 };

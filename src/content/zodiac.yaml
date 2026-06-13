@@ -1,0 +1,96 @@
+# Zodiac sign copy — both languages per record (like the CMS collections).
+# Date ranges and constellation geometry are NOT here; those live in
+# src/lib/astro.ts (they're computation/data, not translatable copy).
+# symbol: the astrological glyph (Unicode). element keys map to astro.elements.
+signs:
+  aries:
+    symbol: "♈"
+    nameHe: "טלה"
+    nameEn: "Aries"
+    element: fire
+    traitHe: "הניצוץ הראשון — מתחיל לפני שכולם מוכנים."
+    traitEn: "The first spark — begins before the others are ready."
+  taurus:
+    symbol: "♉"
+    nameHe: "שור"
+    nameEn: "Taurus"
+    element: earth
+    traitHe: "מושרש ולא נחפז; סומך על מה שהחושים יודעים."
+    traitEn: "Rooted and unhurried; trusts what the senses know."
+  gemini:
+    symbol: "♊"
+    nameHe: "תאומים"
+    nameEn: "Gemini"
+    element: air
+    traitHe: "שתי נפשות, סקרנות בלי סוף, אור חם וזריז."
+    traitEn: "Two minds, endless curiosity, a quick warm light."
+  cancer:
+    symbol: "♋"
+    nameHe: "סרטן"
+    nameEn: "Cancer"
+    element: water
+    traitHe: "לב של גאות ושפל; שומר קרוב את מי שהוא אוהב."
+    traitEn: "A tidal heart; keeps the people it loves close."
+  leo:
+    symbol: "♌"
+    nameHe: "אריה"
+    nameEn: "Leo"
+    element: fire
+    traitHe: "נדיבות חמה שרוצה שיראו אותה."
+    traitEn: "Warm-blooded generosity that wants to be seen."
+  virgo:
+    symbol: "♍"
+    nameHe: "בתולה"
+    nameEn: "Virgo"
+    element: earth
+    traitHe: "מסירות שקטה לעשות נכון את הדברים הקטנים."
+    traitEn: "A quiet devotion to getting the small things right."
+  libra:
+    symbol: "♎"
+    nameHe: "מאזניים"
+    nameEn: "Libra"
+    element: air
+    traitHe: "מחפש תמיד את האיזון שבין אני לבינך."
+    traitEn: "Forever seeking the balance between you and me."
+  scorpio:
+    symbol: "♏"
+    nameHe: "עקרב"
+    nameEn: "Scorpio"
+    element: water
+    traitHe: "מים שקטים, זרם עמוק; מרגיש הכול עד הסוף."
+    traitEn: "Still water, deep current; feels everything fully."
+  sagittarius:
+    symbol: "♐"
+    nameHe: "קשת"
+    nameEn: "Sagittarius"
+    element: fire
+    traitHe: "חץ אל האופק, תמיד עוד מסע אחד."
+    traitEn: "An arrow toward the horizon, always one more journey."
+  capricorn:
+    symbol: "♑"
+    nameHe: "גדי"
+    nameEn: "Capricorn"
+    element: earth
+    traitHe: "מטפס סבלני; בונה דברים שנשארים."
+    traitEn: "A patient climber; builds things that last."
+  aquarius:
+    symbol: "♒"
+    nameHe: "דלי"
+    nameEn: "Aquarius"
+    element: air
+    traitHe: "מוזג את העתיד קצת לפני הזמן."
+    traitEn: "Pours the future out a little ahead of time."
+  pisces:
+    symbol: "♓"
+    nameHe: "דגים"
+    nameEn: "Pisces"
+    element: water
+    traitHe: "חולם עם הגאות; חדיר לכל האוקיינוס."
+    traitEn: "Dreams with the tide; porous to the whole ocean."
+
+# element labels, resolved by the active language in zodiac.ts
+elements:
+  fire: { he: "אש", en: "Fire" }
+  earth: { he: "אדמה", en: "Earth" }
+  air: { he: "אוויר", en: "Air" }
+  water: { he: "מים", en: "Water" }

@@ -93,6 +93,32 @@ wordsSection:
         without making a thing of it.
       name: A. & D., couples workshop
 
+astro:
+  label: Under the same sky
+  title: Where the sky is tonight
+  sub: >-
+    A small ritual of looking up. Where the sun and moon stand right now —
+    and the constellation you were born beneath.
+  sunLabel: The sun is in
+  moonLabel: The moon
+  litWord: lit
+  findTitle: Find your sign
+  findSub: Enter the day you were born — the year doesn’t matter here.
+  monthLabel: Month
+  dayLabel: Day
+  reveal: Reveal
+  yourSign: You were born under
+  again: Change date
+  moonPhases:
+    new: New moon
+    waxingCrescent: Waxing crescent
+    firstQuarter: First quarter
+    waxingGibbous: Waxing gibbous
+    full: Full moon
+    waningGibbous: Waning gibbous
+    lastQuarter: Last quarter
+    waningCrescent: Waning crescent
+
 contact:
   line: Come as you are.
   sub: >-

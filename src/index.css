@@ -1108,6 +1108,209 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .breath-night .breath-ripple.p2 { border-color: rgba(176, 205, 182, 0.5); }
 .breath-night .breath-words { color: var(--paper); text-shadow: 0 1px 16px rgba(8, 12, 8, 0.6); }
 
+/* --- Astrology: the sky right now ------------------------------------------
+   A second, quieter dark moment near the foot of the page. Deep moss night with
+   a generated star-field backdrop, gold line-art constellations, a real-phase
+   moon, and a "find your sign" reveal. Rhymes with the breath night and uses the
+   same organic veil to dissolve into the paper above and below. Flag: astrology
+   (whole section) + astroMotion (draw-in + twinkle). */
+.astro {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--paper);
+  background:
+    radial-gradient(64% 52% at 50% 26%, rgba(201, 154, 63, 0.12), transparent 60%),
+    radial-gradient(130% 100% at 50% 50%, #21331f 0%, #16221a 52%, #0b110d 100%);
+}
+.astro-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('/photos/nightsky.jpg') center / cover no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.astro .container { position: relative; z-index: 2; }
+.astro .section-label { color: #a9cdb1; }
+.astro .section-title { color: var(--paper); }
+.astro .section-sub { color: rgba(247, 246, 236, 0.66); }
+
+/* organic top/bottom dissolve into the paper — same mask as the breath night */
+.astro-veil {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(180px, 30vh, 360px);
+  z-index: 1;
+  pointer-events: none;
+  background: var(--paper);
+  -webkit-mask-image: var(--veil-mask);
+  mask-image: var(--veil-mask);
+  -webkit-mask-size: 1300px 100%;
+  mask-size: 1300px 100%;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  mask-mode: luminance;
+  -webkit-mask-mode: luminance;
+}
+.astro-veil.top { top: -1px; }
+.astro-veil.bottom { bottom: -1px; transform: scaleY(-1); }
+
+.astro-now {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  margin-top: var(--header-gap);
+  align-items: start;
+}
+.astro-plate { text-align: center; padding: var(--s-4) var(--s-3); }
+.astro-eyebrow {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a9cdb1;
+  margin: 0 0 var(--s-2);
+}
+.astro-sign {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: 1.1;
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+}
+.astro-glyph { color: var(--ochre); font-size: 0.78em; font-variant-emoji: text; }
+.astro-meta {
+  font-size: var(--fs-meta);
+  color: rgba(247, 246, 236, 0.6);
+  letter-spacing: 0.04em;
+  margin: var(--s-2) 0 0;
+}
+.astro-trait {
+  font-size: var(--fs-ui);
+  line-height: 1.5;
+  color: rgba(247, 246, 236, 0.82);
+  max-width: 32ch;
+  margin: var(--s-3) auto 0;
+}
+
+/* constellation line-art */
+.cst {
+  display: block;
+  width: clamp(118px, 15vw, 162px);
+  aspect-ratio: 1;
+  height: auto;
+  margin: 0 auto var(--s-4);
+  color: var(--ochre);
+  overflow: visible;
+}
+.cst-lines line {
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0.5;
+  vector-effect: non-scaling-stroke;
+}
+.cst-stars circle {
+  fill: var(--sand);
+  filter: drop-shadow(0 0 2.5px rgba(201, 154, 63, 0.85));
+}
+.cst.draw .cst-lines line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cst-draw 1s ease forwards;
+}
+.cst.draw .cst-stars circle { animation: cst-twinkle 4.5s ease-in-out infinite; }
+@keyframes cst-draw { to { stroke-dashoffset: 0; } }
+@keyframes cst-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* the moon, real phase */
+.moon { display: block; margin: 0 auto var(--s-4); filter: drop-shadow(0 0 9px rgba(243, 231, 196, 0.14)); }
+.moon-shadow { fill: #1a241b; }
+.moon-lit { fill: #f3e7c4; filter: drop-shadow(0 0 6px rgba(243, 231, 196, 0.35)); }
+.moon-rim { fill: none; stroke: rgba(247, 246, 236, 0.18); stroke-width: 1; }
+
+/* find your sign */
+.astro-find-wrap { margin-top: var(--s-8); }
+.astro-find {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid rgba(247, 246, 236, 0.14);
+  border-radius: 3px;
+  padding: var(--s-7) var(--s-6);
+  background: rgba(8, 12, 8, 0.28);
+  backdrop-filter: blur(2px);
+}
+.astro-find-title { font-family: var(--display); font-weight: 400; font-size: var(--fs-h3); margin: 0; }
+.astro-find-sub { font-size: var(--fs-ui); color: rgba(247, 246, 236, 0.66); margin: var(--s-2) 0 var(--s-5); }
+.astro-fields {
+  display: flex;
+  gap: var(--s-3);
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.astro-field { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-1); text-align: start; }
+.astro-field-label {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247, 246, 236, 0.55);
+}
+.astro-field select {
+  font-family: var(--sans);
+  font-size: var(--fs-ui);
+  color: var(--paper);
+  background: rgba(247, 246, 236, 0.06);
+  border: 1px solid rgba(247, 246, 236, 0.22);
+  border-radius: 3px;
+  padding: 10px 14px;
+  min-width: 132px;
+  min-height: 44px;
+  appearance: none;
+  cursor: pointer;
+}
+.astro-field select:focus-visible { outline: 2px solid var(--ochre); outline-offset: 2px; }
+.astro-find option { color: #1f2419; }
+.astro-reveal,
+.astro-again {
+  font-family: var(--sans);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  padding: 12px 24px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.astro-reveal {
+  color: #14210f;
+  background: var(--ochre);
+  border: none;
+}
+.astro-reveal:hover { background: #d8ab53; transform: translateY(-1px); }
+.astro-result { text-align: center; }
+.astro-again {
+  margin-top: var(--s-4);
+  color: var(--paper);
+  background: transparent;
+  border: 1px solid rgba(247, 246, 236, 0.3);
+}
+.astro-again:hover { background: rgba(247, 246, 236, 0.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cst.draw .cst-lines line { animation: none; stroke-dashoffset: 0; }
+  .cst.draw .cst-stars circle { animation: none; }
+}
+@media (max-width: 640px) {
+  .astro-now { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
 /* --- Practices -------------------------------------------------------------- */
 .practices-list { margin-top: var(--header-gap); }
 .practice {

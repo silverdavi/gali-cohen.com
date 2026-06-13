@@ -14,6 +14,8 @@ export type FeatureKey =
   | 'photoHover'        // photographs warm and lift on hover (develop effect)
   | 'figureSway'        // the dance figures sway gently in place
   | 'natureLife'        // an ambient bird occasionally flies in, perches on a growing branch, then leaves
+  | 'astrology'         // render the celestial "sky right now" + find-your-sign section
+  | 'astroMotion'       // constellations draw themselves in + stars twinkle
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
@@ -48,6 +50,8 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   photoHover: true,
   figureSway: true,
   natureLife: true,
+  astrology: true,
+  astroMotion: true,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,

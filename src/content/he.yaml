@@ -94,6 +94,32 @@ wordsSection:
         מזה עניין.
       name: א. וד., סדנה זוגית
 
+astro:
+  label: תחת אותם שמיים
+  title: איפה השמיים הלילה
+  sub: >-
+    טקס קטן של הבטה למעלה. איפה השמש והירח נמצאים עכשיו —
+    והמזל שתחתיו נולדתם.
+  sunLabel: השמש במזל
+  moonLabel: הירח
+  litWord: מואר
+  findTitle: מצאו את המזל שלכם
+  findSub: הזינו את היום שבו נולדתם — השנה לא משנה כאן.
+  monthLabel: חודש
+  dayLabel: יום
+  reveal: גלו
+  yourSign: נולדתם תחת מזל
+  again: שינוי תאריך
+  moonPhases:
+    new: ירח חדש
+    waxingCrescent: מגל מתמלא
+    firstQuarter: רבע ראשון
+    waxingGibbous: גיבן מתמלא
+    full: ירח מלא
+    waningGibbous: גיבן מתמעט
+    lastQuarter: רבע אחרון
+    waningCrescent: מגל מתמעט
+
 contact:
   line: בואו כמו שאתם.
   sub: >-
