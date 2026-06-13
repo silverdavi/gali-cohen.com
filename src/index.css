@@ -187,6 +187,75 @@ body { hyphens: none; }
 .col-side { grid-column: 8 / 13; }
 .col-half { grid-column: span 6; }
 
+/* --- Ambient light field + grain ------------------------------------------
+   A slow warm light field drifts behind the page (above the paper, below the
+   text) so the surface reads as lit, not printed. Three sun-coloured blobs on
+   long offset loops give a gentle wave-of-light shimmer. A static film grain
+   sits over everything for tactile, printed-paper texture. Both decorative. */
+main { position: relative; z-index: 1; } /* content rides above the light field */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  will-change: transform;
+}
+/* warm ochre light, top-start; drifts on the longest loop */
+.ambient-blob.b1 {
+  width: 62vw; height: 62vw;
+  inset-block-start: -16vw; inset-inline-start: -12vw;
+  background: radial-gradient(circle at 50% 50%, rgba(201, 154, 63, 0.18), transparent 64%);
+  animation: drift-1 58s ease-in-out infinite alternate;
+}
+/* sage light, bottom-end */
+.ambient-blob.b2 {
+  width: 54vw; height: 54vw;
+  inset-block-end: -18vw; inset-inline-end: -14vw;
+  background: radial-gradient(circle at 50% 50%, rgba(62, 107, 82, 0.16), transparent 66%);
+  animation: drift-2 74s ease-in-out infinite alternate;
+}
+/* pale sand light, drifting through the middle */
+.ambient-blob.b3 {
+  width: 46vw; height: 46vw;
+  inset-block-start: 32%; inset-inline-start: 38%;
+  background: radial-gradient(circle at 50% 50%, rgba(224, 202, 150, 0.16), transparent 68%);
+  animation: drift-3 66s ease-in-out infinite alternate;
+}
+@keyframes drift-1 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(7vw, 5vw, 0) scale(1.12); }
+}
+@keyframes drift-2 {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to   { transform: translate3d(-6vw, -7vw, 0) scale(1); }
+}
+@keyframes drift-3 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(-8vw, 6vw, 0) scale(1.15); }
+}
+/* film grain: a tiled fractal-noise tile, soft-light so it textures without
+   darkening the warm paper. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob { animation: none; }
+}
+
 /* --- Scroll progress: a thread of daylight with a sun at its edge --------- */
 .progress-track {
   position: fixed;

@@ -8,6 +8,8 @@
 //   ?ff=magneticCta:1                   -> force one on
 
 export type FeatureKey =
+  | 'ambientLight'      // slow warm light field drifting behind the page
+  | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
   | 'heroSunRise'       // the sun behind the hero arch breathes
   | 'navHideOnScroll'   // nav hides on scroll-down, returns on scroll-up
@@ -28,6 +30,8 @@ export type FeatureKey =
   | 'timeOfDaySun';     // hero warmth shifts with the visitor's local clock
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
+  ambientLight: true,
+  grain: true,
   heroPhotoDrift: true,
   heroSunRise: true,
   navHideOnScroll: true,

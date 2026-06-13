@@ -1,5 +1,6 @@
 import { Progress } from './components/Progress';
 import { CursorRipple } from './components/CursorRipple';
+import { Ambient } from './components/Ambient';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
 import { Breath } from './components/Breath';
@@ -13,6 +14,7 @@ import { Contact } from './components/Contact';
 export default function App() {
   return (
     <>
+      <Ambient />
       <Progress />
       <CursorRipple />
       <Nav />
