@@ -920,10 +920,20 @@ body { hyphens: none; }
   border-top: 1px solid var(--rule);
   padding: var(--s-5) var(--pad);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
   font-size: var(--fs-meta);
   color: var(--faint);
+}
+/* build stamp: quiet, monospaced, ltr even in RTL so the hash reads correctly */
+.footer-build {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 /* --- Responsive --------------------------------------------------------------------- */
