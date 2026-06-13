@@ -1,4 +1,4 @@
-# gali-cohen.com
+# galigeulacohen.com
 
 Personal site for Gali Geula Cohen — holistic & emotional therapist, Tel Aviv. Modern-70s spiritual look: warm cream paper, terracotta accent, arch-sun hero, a breathing circle, and a slowly turning dance circle. All copy is placeholder until Gali supplies her own words.
 
@@ -16,4 +16,4 @@ npm run build   # -> dist/
 
 ## Deploy
 
-GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `gali-cohen.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account.
+GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `galigeulacohen.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account.

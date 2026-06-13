@@ -1,4 +1,4 @@
-// Single source of content for gali-cohen.com.
+// Single source of content for galigeulacohen.com.
 // Everything here is PLACEHOLDER copy — swap with Gali's real words before launch.
 
 export const profile = {
@@ -7,7 +7,7 @@ export const profile = {
   kicker: 'Breath · Movement · Presence',
   role: 'Holistic & emotional therapist · Yoga teacher · Tel Aviv',
   lead: 'I hold space for people coming back to their bodies, through breath, movement, and honest attention.',
-  email: 'hello@gali-cohen.com',
+  email: 'hello@galigeulacohen.com',
   instagram: 'https://www.instagram.com/',
   whatsapp: 'https://wa.me/972500000000',
 };
