@@ -71,6 +71,34 @@
   --serif:   'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
   --display: 'Bellefair', 'Frank Ruhl Libre', Georgia, serif;
 
+  /* TYPE SCALE -----------------------------------------------------------------
+     Two intentional scales, never mixed:
+     1. Display scale — modular, ratio ~1.27 (a perfect-fourth feel) from a 17px
+        body. Fluid via clamp() so it tracks the viewport. Used for editorial
+        voice: hero, section titles, leads, pull-quotes. These set the rhythm.
+     2. Functional scale — fixed 12/13/14. Labels, captions and UI read as
+        "interface", so they sit OUTSIDE the modular ratio and never scale; that
+        keeps them quiet and predictable next to the fluid display type.        */
+  --fs-eyebrow: 12px;                   /* section labels & kickers (the tag)   */
+  --fs-meta:    13px;                   /* captions, notes, fact labels         */
+  --fs-ui:      14px;                   /* links, buttons, secondary lines      */
+  --fs-body:    17px;                   /* running prose                        */
+  --fs-lead:    clamp(20px, 2.4vw, 26px);   /* standfirst & pull-quotes         */
+  --fs-h3:      clamp(22px, 2.2vw, 26px);   /* practice titles                  */
+  --fs-h2:      clamp(33px, 5vw, 54px);     /* section titles & contact line    */
+  --fs-display: clamp(56px, 11vw, 128px);   /* hero name                        */
+
+  /* LINE HEIGHT — tightens as type grows; prose stays open for reading.        */
+  --lh-display: 1.0;
+  --lh-title:   1.1;
+  --lh-lead:    1.45;
+  --lh-body:    1.65;
+
+  /* MEASURE — line-length caps (ch) so no line runs past comfortable reading.  */
+  --measure-body: 62ch;
+  --measure-sub:  58ch;
+  --measure-lead: 34ch;
+
   --maxw: 1020px;
   --pad: 40px;
 
@@ -94,8 +122,8 @@ body {
   background: var(--paper);
   color: var(--body);
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   font-weight: 400;
 }
 
@@ -103,6 +131,17 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 img { display: block; max-width: 100%; }
+
+/* LINE BREAKING — nothing left to the browser's default greedy wrap.
+   · Headings get `balance`: lines are evened out, so a title never drops a
+     single stranded word onto the last line.
+   · Prose gets `pretty`: the last line keeps at least two words (no orphans).
+   · We never hyphenate — Hebrew should not break mid-word, and justified rags
+     read better than hyphen soup in both scripts.                              */
+.hero-name, .hero-hebrew, .section-title, .contact-line, .practice-title,
+.breath .section-title { text-wrap: balance; }
+p, blockquote, figcaption, .section-sub, .hero-lead { text-wrap: pretty; }
+body { hyphens: none; }
 
 .container {
   width: 100%;
@@ -206,7 +245,7 @@ img { display: block; max-width: 100%; }
 .nav-name {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 17px;
+  font-size: var(--fs-body); /* wordmark sits at body cap-height, not shouting */
   letter-spacing: -0.01em;
   color: var(--ink);
   opacity: 0;
@@ -217,7 +256,7 @@ img { display: block; max-width: 100%; }
 .nav.scrolled .nav-name { opacity: 1; transform: none; pointer-events: auto; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a:not(.nav-cta) {
-  font-size: 13px;
+  font-size: var(--fs-meta);
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--mute);
@@ -271,43 +310,43 @@ img { display: block; max-width: 100%; }
 }
 .hero-grid > .hero-art .arch { margin-inline: auto; }
 .hero-kicker {
-  font-size: 12.5px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent);
+  color: var(--accent);           /* eyebrow = the single text accent */
   margin: 0 0 22px;
 }
 .hero-name {
   font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(60px, 11.5vw, 132px);
-  line-height: 0.98;
-  letter-spacing: -0.01em;
+  font-weight: 400;               /* Bellefair ships one weight; 400 is it */
+  font-size: var(--fs-display);
+  line-height: var(--lh-display); /* 1.0 so the two stacked name-lines lock up */
+  letter-spacing: -0.01em;        /* large Latin display wants a hair tighter */
   color: var(--ink);
   margin: 0 0 10px;
 }
 .hero-hebrew {
   font-family: var(--display);
-  font-size: clamp(19px, 2.4vw, 24px);
+  font-size: clamp(19px, 2.4vw, 22px); /* the romanized name: below the lead, a quiet echo */
   font-weight: 400;
   color: var(--faint);
   letter-spacing: 0.08em;
   margin: 0 0 26px;
 }
 .hero-role {
-  font-size: 15px;
+  font-size: var(--fs-ui);
   font-weight: 500;
   color: var(--mute);
   margin: 0 0 26px;
 }
 .hero-lead {
   font-family: var(--serif);
-  font-size: clamp(20px, 2.8vw, 27px);
-  line-height: 1.42;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
   font-weight: 420;
   color: var(--body);
-  max-width: 30ch;
+  max-width: var(--measure-lead); /* ~34ch: a lead should break in 2–3 short lines */
   margin: 0 0 38px;
 }
 .hero-ctas { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
@@ -317,7 +356,7 @@ img { display: block; max-width: 100%; }
   gap: 8px;
   border-radius: 999px;
   padding: 12px 26px;
-  font-size: 14px;
+  font-size: var(--fs-ui);
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
@@ -400,7 +439,7 @@ img { display: block; max-width: 100%; }
   left: 50%;
   transform: translateX(-50%);
   color: var(--faint);
-  font-size: 12px;
+  font-size: var(--fs-eyebrow);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -423,24 +462,30 @@ img { display: block; max-width: 100%; }
 
 /* --- Sections shared ------------------------------------------------------- */
 .section { padding: 96px 0; border-top: 1px solid var(--rule); }
+/* Eyebrow: the one recurring "tag" above every title. Always the accent — it is
+   the single place the sage colour appears in text, so it reads as a consistent
+   signal rather than decoration. Uppercase + wide tracking because small caps
+   need air; the [dir=rtl] block zeroes the tracking for Hebrew. */
 .section-label {
-  font-size: 12px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--mute);
+  color: var(--accent);
   margin: 0 0 14px;
 }
 .section-title {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(36px, 5.4vw, 58px);
+  font-size: var(--fs-h2);
   letter-spacing: -0.01em;
-  line-height: 1.08;
+  line-height: var(--lh-title);
   color: var(--ink);
   margin: 0 0 18px;
 }
-.section-sub { max-width: 56ch; color: var(--body); margin: 0; }
+/* Standfirst: introductory prose, so it keeps body colour and size for
+   legibility (muting reading text would hurt it); only the measure is capped. */
+.section-sub { max-width: var(--measure-sub); color: var(--body); margin: 0; }
 
 /* --- Breath section ----------------------------------------------------------
    The centerpiece. Fills the viewport and snaps into place; everything inside
@@ -459,8 +504,10 @@ img { display: block; max-width: 100%; }
   background: var(--paper-2);
 }
 .breath .container { width: 100%; }
-.breath .section-label { color: var(--accent); }
 .breath .section-title { margin-bottom: 0; }
+/* breath & contact are the only centred sections: centring is reserved for the
+   two meditative/ceremonial moments; every reading section stays start-aligned
+   so the page keeps one strong text edge. */
 .breath-stage {
   --stage: clamp(280px, min(76vw, 54svh), 480px);
   position: relative;
@@ -621,7 +668,7 @@ img { display: block; max-width: 100%; }
   .breath-words .in { opacity: 1; }
 }
 
-.breath-note { color: var(--mute); font-size: 14px; max-width: 44ch; margin: 10px auto 0; }
+.breath-note { color: var(--mute); font-size: var(--fs-ui); max-width: 44ch; margin: 10px auto 0; }
 
 /* --- Practices -------------------------------------------------------------- */
 .practices-list { margin-top: 56px; }
@@ -649,16 +696,16 @@ img { display: block; max-width: 100%; }
 .practice:last-child { border-bottom: 1px solid var(--rule); }
 .practice { transition: background .25s ease; }
 .practice:hover { background: linear-gradient(90deg, transparent, rgba(201, 154, 63, 0.06) 30%, transparent); }
-.practice-meta { color: var(--faint); font-size: 13.5px; letter-spacing: 0.04em; padding-top: 6px; }
+.practice-meta { color: var(--faint); font-size: var(--fs-meta); letter-spacing: 0.04em; padding-top: 6px; }
 .practice-title {
   font-family: var(--serif);
-  font-size: 25px;
+  font-size: var(--fs-h3);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 8px;
 }
-.practice-body { margin: 0; max-width: 56ch; }
+.practice-body { margin: 0; max-width: var(--measure-body); }
 
 /* --- Circle section ---------------------------------------------------------- */
 .circle-grid {
@@ -696,11 +743,11 @@ img { display: block; max-width: 100%; }
   .dance.can-join .joiner { opacity: 1; } /* show the full circle, no hover dependency */
 }
 .circle-caption {
-  font-size: 13px;
+  font-size: var(--fs-meta);
   color: var(--faint);
   letter-spacing: 0.06em;
   margin-top: 14px;
-  text-align: center;
+  text-align: center; /* labels the circular motif, which is itself centred */
 }
 
 /* --- Photo band ---------------------------------------------------------------- */
@@ -719,7 +766,7 @@ img { display: block; max-width: 100%; }
   inset-inline-end: 0;
   text-align: center;
   color: rgba(247, 246, 236, 0.92);
-  font-size: 13px;
+  font-size: var(--fs-meta);
   letter-spacing: 0.08em;
   text-shadow: 0 1px 12px rgba(31, 36, 25, 0.55);
 }
@@ -741,7 +788,7 @@ img { display: block; max-width: 100%; }
   align-items: start;
   margin-top: 40px;
 }
-.about-text p { margin: 0 0 18px; max-width: 58ch; }
+.about-text p { margin: 0 0 18px; max-width: var(--measure-body); }
 .about-facts { border-top: 1px solid var(--rule); }
 .fact {
   display: flex;
@@ -750,14 +797,16 @@ img { display: block; max-width: 100%; }
   padding: 14px 0;
   border-bottom: 1px solid var(--rule);
 }
+/* Fact label: an eyebrow-sized micro-label, but kept FAINT (not accent) because
+   it is tertiary metadata inside a list — the value is what should read first. */
 .fact-label {
-  font-size: 11.5px;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--faint);
 }
-.fact-value { font-size: 14.5px; color: var(--body); }
+.fact-value { font-size: var(--fs-ui); color: var(--body); }
 
 /* --- Words (quotes) ------------------------------------------------------------ */
 .words-grid {
@@ -773,8 +822,8 @@ img { display: block; max-width: 100%; }
 .word:hover { transform: translateY(-3px); }
 .word blockquote {
   font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: var(--fs-lead);   /* a quote is a pull-quote: lead scale, serif voice */
+  line-height: var(--lh-lead);
   color: var(--ink);
   margin: 0 0 14px;
   font-weight: 400;
@@ -786,7 +835,7 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .word { transition: none; } }
 .word blockquote::before { content: '\201C'; color: var(--accent); }
 .word blockquote::after  { content: '\201D'; color: var(--accent); }
-.word figcaption { font-size: 13.5px; color: var(--mute); letter-spacing: 0.03em; }
+.word figcaption { font-size: var(--fs-meta); color: var(--mute); letter-spacing: 0.03em; }
 
 /* --- Contact --------------------------------------------------------------------- */
 .contact { text-align: center; padding: 120px 0 96px; }
@@ -825,12 +874,14 @@ img { display: block; max-width: 100%; }
 .contact-line {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(36px, 5.8vw, 60px);
+  font-size: var(--fs-h2);     /* the closing line is a section title, sized as one */
   letter-spacing: -0.015em;
   color: var(--ink);
   margin: 0 0 16px;
 }
-.contact-sub { color: var(--mute); max-width: 44ch; margin: 0 auto 36px; }
+/* contact-sub: centred + a touch narrower (42ch) than a standfirst — a centred
+   line reads best short. Mute, because the email button below it is the focus. */
+.contact-sub { color: var(--mute); font-size: var(--fs-body); max-width: 42ch; margin: 0 auto 36px; }
 .contact-links {
   display: flex;
   justify-content: center;
@@ -838,7 +889,7 @@ img { display: block; max-width: 100%; }
   flex-wrap: wrap;
   margin-top: 28px;
 }
-.contact-links a { font-size: 14px; color: var(--mute); transition: color .2s ease; }
+.contact-links a { font-size: var(--fs-ui); color: var(--mute); transition: color .2s ease; }
 .contact-links a:hover { color: var(--accent); }
 
 .footer {
@@ -847,7 +898,7 @@ img { display: block; max-width: 100%; }
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  font-size: 12.5px;
+  font-size: var(--fs-meta);
   color: var(--faint);
 }
 
