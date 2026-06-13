@@ -32,10 +32,11 @@ breath:
   label: A small practice
   title: Stay here for one breath
   wordIn: breathe in
+  wordHold: hold
   wordOut: breathe out
   note: >-
     The circle moves at the pace of a slow breath. Follow it once before you
-    keep scrolling — that’s the whole practice.
+    keep scrolling. That’s the whole practice.
 
 practicesSection:
   label: Practices

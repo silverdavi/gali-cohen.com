@@ -20,7 +20,7 @@ export type Content = {
     whatsapp: string;
   };
   hero: { ctaPrimary: string; ctaSecondary: string; scroll: string };
-  breath: { label: string; title: string; wordIn: string; wordOut: string; note: string };
+  breath: { label: string; title: string; wordIn: string; wordHold: string; wordOut: string; note: string };
   practicesSection: { label: string; title: string; sub: string };
   practices: { title: string; note: string; body: string; photo: string; photoAlt: string }[];
   circle: { label: string; title: string; body: string; caption: string; alt: string };

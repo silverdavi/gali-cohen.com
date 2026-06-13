@@ -78,7 +78,14 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+html {
+  scroll-behavior: smooth;
+  /* gentle snap: only the breath section opts in, and proximity keeps normal
+     scrolling free elsewhere */
+  scroll-snap-type: y proximity;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -316,18 +323,36 @@ img { display: block; max-width: 100%; }
 }
 .section-sub { max-width: 56ch; color: var(--body); margin: 0; }
 
-/* --- Breath section --------------------------------------------------------- */
-.breath { text-align: center; background: var(--paper-2); }
+/* --- Breath section ----------------------------------------------------------
+   The centerpiece. Fills the viewport and snaps into place; everything inside
+   the stage is sized in % of --stage so it scales from phones to desktops.
+   Cycle (11s): in 0-40%, hold 40-50%, out 50-95%, rest. */
+.breath {
+  /* fill the viewport on real screens, capped so absurdly tall viewports
+     (and full-page screenshots) stay sane */
+  min-height: clamp(560px, 100svh, 980px);
+  padding: clamp(28px, 5svh, 64px) 0; /* override .section padding so 100svh fits */
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  text-align: center;
+  background: var(--paper-2);
+}
+.breath .container { width: 100%; }
 .breath .section-label { color: var(--accent); }
+.breath .section-title { margin-bottom: 0; }
 .breath-stage {
+  --stage: clamp(280px, min(76vw, 54svh), 480px);
   position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 44px auto 22px;
+  width: var(--stage);
+  height: var(--stage);
+  margin: clamp(20px, 4svh, 44px) auto 6px;
   display: grid;
   place-items: center;
 }
 .breath-rays,
+.breath-target,
 .breath-ring,
 .breath-ripple,
 .breath-core,
@@ -338,7 +363,7 @@ img { display: block; max-width: 100%; }
 
 /* soft rotating sun-rays halo behind everything */
 .breath-rays {
-  width: 290px; height: 290px;
+  width: 97%; height: 97%;
   background: repeating-conic-gradient(
     from 0deg,
     rgba(201, 154, 63, 0.16) 0deg 9deg,
@@ -352,9 +377,25 @@ img { display: block; max-width: 100%; }
 }
 @keyframes rays-turn { to { rotate: 360deg; } }
 
+/* dashed target ring: where the core lands at the top of the inhale.
+   It exhales against the core (shrinks slightly as the core grows),
+   so the eye always has a destination. */
+.breath-target {
+  width: 56%; height: 56%;
+  border: 1.5px dashed rgba(62, 107, 82, 0.45);
+  animation: target-settle var(--breath) ease-in-out infinite;
+}
+@keyframes target-settle {
+  0%   { transform: scale(1);    opacity: .5; }
+  40%  { transform: scale(0.97); opacity: 1;  }
+  50%  { transform: scale(0.97); opacity: 1;  }
+  95%  { transform: scale(1);    opacity: .5; }
+  100% { transform: scale(1);    opacity: .5; }
+}
+
 /* warm glow that swells with the inhale */
 .breath-glow {
-  width: 150px; height: 150px;
+  width: 50%; height: 50%;
   background: radial-gradient(circle, rgba(62, 107, 82, 0.32), transparent 70%);
   filter: blur(14px);
   animation: breathe-glow var(--breath) ease-in-out infinite;
@@ -368,7 +409,7 @@ img { display: block; max-width: 100%; }
 }
 
 .breath-core {
-  width: 130px; height: 130px;
+  width: 44%; height: 44%;
   background: radial-gradient(circle at 50% 42%, var(--sand), var(--accent) 86%);
   animation: breathe var(--breath) ease-in-out infinite;
 }
@@ -394,13 +435,13 @@ img { display: block; max-width: 100%; }
   border: 1px solid rgba(62, 107, 82, 0.35);
   animation: breathe var(--breath) ease-in-out infinite;
 }
-.breath-ring.r1 { width: 170px; height: 170px; animation-delay: calc(var(--breath) * -0.04); }
-.breath-ring.r2 { width: 210px; height: 210px; opacity: .6; animation-delay: calc(var(--breath) * -0.08); }
-.breath-ring.r3 { width: 250px; height: 250px; opacity: .3; animation-delay: calc(var(--breath) * -0.12); }
+.breath-ring.r1 { width: 57%; height: 57%; animation-delay: calc(var(--breath) * -0.04); }
+.breath-ring.r2 { width: 70%; height: 70%; opacity: .6; animation-delay: calc(var(--breath) * -0.08); }
+.breath-ring.r3 { width: 83%; height: 83%; opacity: .3; animation-delay: calc(var(--breath) * -0.12); }
 
 /* ripples released at the top of the inhale, drifting out as you exhale */
 .breath-ripple {
-  width: 130px; height: 130px;
+  width: 44%; height: 44%;
   border: 1.5px solid rgba(62, 107, 82, 0.5);
   opacity: 0;
   animation: ripple var(--breath) ease-out infinite;
@@ -413,45 +454,55 @@ img { display: block; max-width: 100%; }
   100%    { transform: scale(2.15); opacity: 0; }
 }
 
-/* 11s cycle: in 0–40%, hold 40–50%, out 50–95%, rest */
 @keyframes breathe {
   0%   { transform: scale(1); }
-  40%  { transform: scale(1.22); }
-  50%  { transform: scale(1.22); }
+  40%  { transform: scale(1.28); }
+  50%  { transform: scale(1.28); }
   95%  { transform: scale(1); }
   100% { transform: scale(1); }
 }
 
+/* phase words live inside the circle: in / hold / out, synced to the cycle */
 .breath-words {
-  position: relative;
-  height: 24px;
-  font-family: var(--serif);
-  font-size: 18px;
-  color: var(--mute);
-  font-style: italic;
+  position: absolute;
+  inset: 0;
+  font-family: var(--display);
+  font-size: clamp(17px, calc(var(--stage) * 0.062), 27px);
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-shadow: 0 1px 10px rgba(31, 36, 25, 0.25);
+  pointer-events: none;
+  z-index: 2;
 }
 .breath-words span {
   position: absolute;
-  left: 0; right: 0;
+  inset: 0;
+  display: grid;
+  place-items: center;
   opacity: 0;
 }
-.breath-words .in  { animation: word-in var(--breath) ease-in-out infinite; }
-.breath-words .out { animation: word-out var(--breath) ease-in-out infinite; }
+.breath-words .in   { animation: word-in var(--breath) ease-in-out infinite; }
+.breath-words .hold { animation: word-hold var(--breath) ease-in-out infinite; }
+.breath-words .out  { animation: word-out var(--breath) ease-in-out infinite; }
 @keyframes word-in {
-  0% { opacity: 0; } 6% { opacity: 1; } 42% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; }
+  0% { opacity: 0; } 6% { opacity: 1; } 36% { opacity: 1; } 41% { opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes word-hold {
+  0%, 41% { opacity: 0; } 44% { opacity: 1; } 48% { opacity: 1; } 52% { opacity: 0; } 100% { opacity: 0; }
 }
 @keyframes word-out {
-  0% { opacity: 0; } 50% { opacity: 0; } 56% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; }
+  0%, 52% { opacity: 0; } 58% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .breath-core, .breath-core::after, .breath-ring, .breath-rays, .breath-glow { animation: none; }
+  .breath-core, .breath-core::after, .breath-ring, .breath-rays, .breath-glow, .breath-target { animation: none; }
   .breath-ripple { display: none; }
-  .breath-words span { animation: none; }
+  /* match the .breath-words .in/.hold/.out specificity, or animation wins */
+  .breath-words .in, .breath-words .hold, .breath-words .out { animation: none; }
   .breath-words .in { opacity: 1; }
 }
 
-.breath-note { color: var(--mute); font-size: 14px; max-width: 44ch; margin: 18px auto 0; }
+.breath-note { color: var(--mute); font-size: 14px; max-width: 44ch; margin: 10px auto 0; }
 
 /* --- Practices -------------------------------------------------------------- */
 .practices-list { margin-top: 56px; }

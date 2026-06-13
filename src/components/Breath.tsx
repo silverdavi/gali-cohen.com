@@ -12,6 +12,7 @@ export function Breath() {
         </Reveal>
         <div className="breath-stage" role="img" aria-label={breath.note}>
           <div className="breath-rays" />
+          <div className="breath-target" />
           <div className="breath-ring r3" />
           <div className="breath-ring r2" />
           <div className="breath-ring r1" />
@@ -19,10 +20,11 @@ export function Breath() {
           <div className="breath-ripple p2" />
           <div className="breath-glow" />
           <div className="breath-core" />
-        </div>
-        <div className="breath-words" aria-hidden>
-          <span className="in">{breath.wordIn}</span>
-          <span className="out">{breath.wordOut}</span>
+          <div className="breath-words" aria-hidden>
+            <span className="in">{breath.wordIn}</span>
+            <span className="hold">{breath.wordHold}</span>
+            <span className="out">{breath.wordOut}</span>
+          </div>
         </div>
         <Reveal>
           <p className="breath-note">{breath.note}</p>
