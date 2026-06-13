@@ -1,5 +1,5 @@
 import { Reveal } from './Reveal';
-import { ArchSun } from './ArchSun';
+import { HeroArch } from './HeroArch';
 import { content, lang } from '../content';
 
 export function Hero() {
@@ -35,7 +35,7 @@ export function Hero() {
           </Reveal>
         </div>
         <Reveal delay={0.2} y={28} className="col-side hero-art">
-          <ArchSun />
+          <HeroArch />
         </Reveal>
       </div>
       <a className="hero-scroll" href="#breath">{hero.scroll}</a>

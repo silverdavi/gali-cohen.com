@@ -19,7 +19,7 @@ export type Content = {
     instagram: string;
     whatsapp: string;
   };
-  hero: { ctaPrimary: string; ctaSecondary: string; scroll: string };
+  hero: { ctaPrimary: string; ctaSecondary: string; scroll: string; photoAlt: string };
   breath: { label: string; title: string; wordIn: string; wordHold: string; wordOut: string; note: string };
   practicesSection: { label: string; title: string; sub: string };
   practices: { title: string; note: string; body: string; photo: string; photoAlt: string }[];

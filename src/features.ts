@@ -8,6 +8,9 @@
 //   ?ff=magneticCta:1                   -> force one on
 
 export type FeatureKey =
+  | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
+  | 'heroSunRise'       // the sun behind the hero arch breathes
+  | 'navHideOnScroll'   // nav hides on scroll-down, returns on scroll-up
   | 'scrollSunset'      // hero sun sets behind the swell as you scroll past
   | 'pointerTiltArch'   // arch tilts slightly toward the cursor
   | 'sunBloomHover'     // sun ray-crown unfurls on arch hover/focus
@@ -24,6 +27,9 @@ export type FeatureKey =
   | 'timeOfDaySun';     // hero warmth shifts with the visitor's local clock
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
+  heroPhotoDrift: true,
+  heroSunRise: true,
+  navHideOnScroll: true,
   scrollSunset: true,
   pointerTiltArch: true,
   sunBloomHover: true,

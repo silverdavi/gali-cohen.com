@@ -229,13 +229,11 @@ body { hyphens: none; }
 
 /* --- Time of day: hero sky warmth shifts with the local clock --------------
    Only the arch background (the "sky") changes; the palette stays put. */
-.arch {
-  transition: background 1.2s ease;
-}
-[data-daypart='dawn'] .arch { background: linear-gradient(180deg, #F2ECDC, #EDE7D2); }
-[data-daypart='day']  .arch { background: var(--paper-2); }
-[data-daypart='dusk'] .arch { background: linear-gradient(180deg, #EFE6D6, #E7D9C4); }
-[data-daypart='night'] .arch { background: linear-gradient(180deg, #E4E3D6, #DCDDD0); }
+/* the sun behind the hero arch warms or cools with the visitor's local clock */
+.hero-sun { transition: filter 1.2s ease; }
+[data-daypart='dawn']  .hero-sun { filter: saturate(1.05) brightness(1.02); }
+[data-daypart='dusk']  .hero-sun { filter: hue-rotate(-10deg) saturate(1.18) brightness(0.98); }
+[data-daypart='night'] .hero-sun { filter: saturate(0.72) brightness(0.9); }
 
 /* --- Nav ------------------------------------------------------------------ */
 .nav {
@@ -245,27 +243,43 @@ body { hyphens: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--s-4) var(--pad);
-  transition: background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+  padding: var(--s-5) var(--pad);
+  transition: background .4s ease, border-color .4s ease,
+              backdrop-filter .4s ease, padding .4s ease, transform .45s cubic-bezier(0.22, 0.61, 0.36, 1);
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(247, 246, 236, 0.85);
-  backdrop-filter: saturate(140%) blur(10px);
+  padding: var(--s-3) var(--pad);
+  background: rgba(247, 246, 236, 0.82);
+  backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--rule);
 }
+/* slides up and out of the way on scroll-down; springs back on scroll-up */
+.nav.hidden { transform: translateY(-110%); }
+@media (prefers-reduced-motion: reduce) { .nav.hidden { transform: none; } }
+
+/* brand: the sun glyph + the name, always present */
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+.nav-sun {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  transition: transform .5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nav-brand:hover .nav-sun { transform: rotate(40deg); }
+@media (prefers-reduced-motion: reduce) { .nav-brand:hover .nav-sun { transform: none; } }
 .nav-name {
   font-family: var(--display);
   font-weight: 400;
   font-size: var(--fs-body); /* wordmark sits at body cap-height, not shouting */
   letter-spacing: -0.01em;
   color: var(--ink);
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity .35s ease, transform .35s ease;
-  pointer-events: none;
 }
-.nav.scrolled .nav-name { opacity: 1; transform: none; pointer-events: auto; }
 .nav-links { display: flex; align-items: center; gap: var(--s-5); }
 .nav-links a:not(.nav-cta) {
   font-size: var(--fs-meta);
@@ -320,7 +334,6 @@ body { hyphens: none; }
   column-gap: var(--gutter);
   align-items: center;
 }
-.hero-grid > .hero-art .arch { margin-inline: auto; }
 .hero-kicker {
   font-size: var(--fs-eyebrow);
   font-weight: 600;
@@ -378,72 +391,70 @@ body { hyphens: none; }
 .btn-ghost { border: 1px solid var(--rule); color: var(--body); }
 .btn-ghost:hover { border-color: var(--faint); color: var(--ink); transform: translateY(-1px); }
 
-/* The arch-sun: stacked 70s arcs inside an arch window */
-.arch {
+/* --- Hero photo: a real image framed in the arch motif, with a 70s sun
+   rising behind it. This is the hero's main visual. ------------------------ */
+.hero-photo {
   position: relative;
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 340 / 430;
-  border-radius: 170px 170px 14px 14px;
-  background: var(--paper-2);
-  border: 1px solid var(--rule);
+  max-width: 440px;
+  margin-inline: auto;
+  aspect-ratio: 5 / 6;
+  isolation: isolate;
+}
+/* the sun: a warm disc behind the arch, its crown peeking over the top */
+.hero-sun {
+  position: absolute;
+  top: -14%;
+  left: 50%;
+  width: 82%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 46%,
+    var(--sand) 0%, var(--ochre) 56%, rgba(201, 154, 63, 0) 71%);
+  z-index: 0;
+}
+.hero-sun.rise { animation: hero-sun-breathe 9s ease-in-out infinite alternate; }
+/* the arch frame holds the photograph */
+.hero-photo-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 220px 220px 18px 18px;
   overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: 0 34px 64px -36px rgba(31, 36, 25, 0.5);
 }
-.arch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.arch { cursor: pointer; outline: none; }
-.arch:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
-
-/* slow sun rise inside the arch */
-@keyframes sun-rise {
-  from { transform: translateY(14px); }
-  to   { transform: translateY(-6px); }
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 36%;
+  filter: saturate(0.96);
+  transform: scale(1.03);          /* a touch of headroom for the drift */
 }
-.arch .sun-group {
-  animation: sun-rise calc(var(--breath) * 2) ease-in-out infinite alternate;
+.hero-photo-img.drift { animation: hero-kenburns 30s ease-in-out infinite alternate; }
+/* a thin inner arch ring echoes the old sun outlines */
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  z-index: 2;
+  border-radius: 212px 212px 12px 12px;
+  border: 1px solid rgba(247, 246, 236, 0.4);
+  pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .arch .sun-group { animation: none; } }
-
-/* --- Sun bloom on hover/focus -----------------------------------------------
-   The arcs swell from their own centers, and the ray crown unfurls as one group
-   scaling out from the sun center (170,250 in viewBox units). */
-.arch .ring {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform .6s cubic-bezier(0.22, 0.61, 0.36, 1);
+@keyframes hero-kenburns {
+  from { transform: scale(1.03); }
+  to   { transform: scale(1.1) translate(-1%, -2%); }
 }
-.arch .sun-rays {
-  transform-box: view-box;
-  transform-origin: 170px 250px;
-  opacity: 0;
-  transform: scale(0.55) rotate(-12deg); /* tucked toward the sun, hidden by the disc */
-  transition: opacity .5s ease, transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+@keyframes hero-sun-breathe {
+  from { transform: translateX(-50%) scale(0.97); opacity: 0.85; }
+  to   { transform: translateX(-50%) scale(1.05); opacity: 1; }
 }
-.arch.bloom:hover .sun-rays,
-.arch.bloom:focus-visible .sun-rays { opacity: 0.75; transform: scale(1) rotate(0deg); }
-.arch.bloom:hover .r-out,
-.arch.bloom:focus-visible .r-out { transform: scale(1.05); }
-.arch.bloom:hover .r-mid,
-.arch.bloom:focus-visible .r-mid { transform: scale(1.08); }
-.arch.bloom:hover .r-in,
-.arch.bloom:focus-visible .r-in { transform: scale(1.12); }
-.arch.bloom:hover .r-core,
-.arch.bloom:focus-visible .r-core { transform: scale(1.18); }
-/* pointer tilt needs perspective on the arch frame */
-.arch { perspective: 900px; }
-.arch svg { transform-style: preserve-3d; }
 @media (prefers-reduced-motion: reduce) {
-  .arch .ring, .arch .sun-rays { transition: none; }
+  .hero-photo-img.drift, .hero-sun.rise { animation: none; }
 }
-
-/* birds drift gently across the arch sky */
-@keyframes bird-drift {
-  0%   { transform: translate(0, 0); }
-  50%  { transform: translate(26px, -8px); }
-  100% { transform: translate(0, 0); }
-}
-.arch .bird { animation: bird-drift 26s ease-in-out infinite; }
-.arch .bird.b2 { animation-duration: 34s; animation-delay: -12s; }
-@media (prefers-reduced-motion: reduce) { .arch .bird { animation: none; } }
 
 .hero-scroll {
   position: absolute;
@@ -952,7 +963,9 @@ body { hyphens: none; }
   .practice-meta,
   .practice-main,
   .practice-photo { grid-column: 1 / -1; }
-  .arch { max-width: 260px; margin: 0 auto; }
+  /* mobile hero opens with the photo, then the name and the rest */
+  .hero-art { order: -1; }
+  .hero-photo { max-width: 320px; }
   .practice { gap: var(--s-3); padding: var(--s-6) 0; }
   .practice-photo { aspect-ratio: auto; height: 200px; border-radius: 16px; order: -1; }
   .hide-sm { display: none; }
