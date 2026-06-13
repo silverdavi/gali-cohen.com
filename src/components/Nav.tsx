@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { content } from '../content';
 import { pricing, events, store } from '../content/collections';
 import { features } from '../features';
+import { moonPhase, moonLitPath } from '../lib/astro';
 
 // A small concentric-ring sun, the site's motif shrunk to a brand glyph.
 function SunMark() {
@@ -12,6 +13,25 @@ function SunMark() {
       <circle cx="16" cy="16" r="6" fill="var(--accent)" opacity="0.9" />
       <circle cx="16" cy="16" r="3" fill="var(--paper)" />
     </svg>
+  );
+}
+
+// A quiet quirk: a tiny moon in the bar drawn to tonight's *actual* phase
+// (same math as the astrology section). It links down to that section, so the
+// sun brand on one side and the live moon on the other bracket the bar.
+function NavMoon() {
+  const moon = moonPhase();
+  const size = 22;
+  const c = size / 2;
+  const R = c - 1.5;
+  const label = `${content.astro.moonLabel} · ${content.astro.moonPhases[moon.name]}`;
+  return (
+    <a className="nav-moon" href="#astro" aria-label={label} title={label}>
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} aria-hidden focusable="false">
+        <circle className="nav-moon-disc" cx={c} cy={c} r={R} />
+        <path className="nav-moon-lit" d={moonLitPath(R, moon.phase)} transform={`translate(${c} ${c})`} />
+      </svg>
+    </a>
   );
 }
 
@@ -104,7 +124,10 @@ export function Nav() {
           ))}
         </div>
 
-        <a className="nav-cta" href="#contact">{content.nav.cta}</a>
+        <div className="nav-right">
+          {features.astrology && <NavMoon />}
+          <a className="nav-cta" href="#contact">{content.nav.cta}</a>
+        </div>
       </div>
     </nav>
   );
