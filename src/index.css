@@ -1215,4 +1215,31 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   /* the dance circle is rotated up to 45°, so its bounding box is side×√2.
      Shrink it on phones so even the rotated AABB stays inside the column. */
   .dance { width: 200px; height: 200px; }
+
+  /* Touch targets: a coarse pointer needs ≥44px. Give the bar a little less
+     vertical padding (so it isn't huge) but grow the brand + CTA tap areas. */
+  .nav { padding-block: var(--s-4); }
+  .nav-brand { min-height: 44px; }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 18px;
+  }
+
+  /* BREATH, the mobile hero: the circle should own the screen. Drop the section
+     to a slim padding and let the stage grow to most of the viewport so the
+     breath is the captivating, full-bleed moment it deserves to be on a phone. */
+  .breath { padding-block: var(--s-6); }
+  .breath-stage {
+    --stage: clamp(280px, min(86vw, 60svh), 560px);
+    margin-block: clamp(24px, 6svh, 56px);
+  }
+  /* phase words a touch larger relative to the bigger circle */
+  .breath-words { font-size: clamp(19px, calc(var(--stage) * 0.07), 30px); }
+}
+
+/* tiny phones: reclaim a few px of width on each side */
+@media (max-width: 380px) {
+  :root { --pad: 20px; }
 }
