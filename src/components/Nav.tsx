@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { content } from '../content';
+import { pricing, events, store } from '../content/collections';
 import { features } from '../features';
 
 // A small concentric-ring sun, the site's motif shrunk to a brand glyph.
@@ -20,11 +21,22 @@ export function Nav() {
   const [active, setActive] = useState<string>('');
   const lastY = useRef(0);
 
-  // The page index: the same numbers appear in each section header.
+  // The page index: the same numbers appear in each section header. The
+  // commerce sections only appear if their flag is on and they have content,
+  // so the index always matches what's actually on the page.
   const items = [
     { id: 'practices', num: '01', label: content.nav.practices },
     { id: 'circle', num: '02', label: content.nav.circles },
     { id: 'about', num: '03', label: content.nav.about },
+    ...(features.showPricing && pricing.items.length
+      ? [{ id: 'pricing', num: '04', label: content.nav.pricing }]
+      : []),
+    ...(features.showEvents && events.items.length
+      ? [{ id: 'events', num: '05', label: content.nav.events }]
+      : []),
+    ...(features.showStore && store.items.length
+      ? [{ id: 'shop', num: '06', label: content.nav.shop }]
+      : []),
   ];
 
   useEffect(() => {

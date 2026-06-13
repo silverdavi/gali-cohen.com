@@ -8,6 +8,9 @@ import { Practices } from './components/Practices';
 import { Circle } from './components/Circle';
 import { Band } from './components/Band';
 import { About } from './components/About';
+import { Pricing } from './components/Pricing';
+import { Events } from './components/Events';
+import { Store } from './components/Store';
 import { Words } from './components/Words';
 import { Contact } from './components/Contact';
 
@@ -25,6 +28,9 @@ export default function App() {
         <Circle />
         <Band />
         <About />
+        <Pricing />
+        <Events />
+        <Store />
         <Words />
         <Contact />
       </main>

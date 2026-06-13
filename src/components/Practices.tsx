@@ -1,21 +1,21 @@
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
-import { content } from '../content';
+import { activities } from '../content/collections';
 import { features } from '../features';
 
 export function Practices() {
-  const { practicesSection, practices } = content;
+  const { heading, items } = activities;
   return (
     <section className="section" id="practices">
       <div className="container">
         <SectionHead
           index="01"
-          label={practicesSection.label}
-          title={practicesSection.title}
-          sub={practicesSection.sub}
+          label={heading.label}
+          title={heading.title}
+          sub={heading.sub}
         />
         <div className="practices-list">
-          {practices.map((p, i) => (
+          {items.map((p, i) => (
             // rows breathe in from alternating sides, like a slow sway
             <Reveal
               key={p.title}

@@ -9,6 +9,9 @@ nav:
   practices: Practices
   circles: Circles
   about: About
+  pricing: Pricing
+  events: Events
+  shop: Shop
   cta: Say hello
 
 profile:
@@ -38,43 +41,6 @@ breath:
   note: >-
     The circle moves at the pace of a slow breath. Follow it once before you
     keep scrolling. That’s the whole practice.
-
-practicesSection:
-  label: Practices
-  title: Ways to work together
-  sub: >-
-    Every journey starts with a conversation. These are the shapes the work
-    usually takes.
-
-practices:
-  - title: Breathwork
-    note: One-on-one · 75 minutes
-    photo: /photos/breath.jpg
-    photoAlt: A woman breathing slowly at a bright window, seen from behind
-    body: >-
-      Guided conscious breathing that lets the body finish what the mind keeps
-      postponing. We slow down, listen, and let the breath do the talking.
-  - title: Movement & dance
-    note: Open sessions · weekly
-    photo: /photos/feet.jpg
-    photoAlt: Bare feet mid-movement on a wooden floor, a hem swirling
-    body: >-
-      Free movement with no steps to learn and nobody watching. Music, floor,
-      bare feet. The body remembers how — it always has.
-  - title: Couples journeys
-    note: Private workshops · by invitation
-    photo: /photos/hands.jpg
-    photoAlt: Two pairs of hands gently held together on green linen
-    body: >-
-      A guided journey for two people who want to meet again — communication,
-      touch, and presence, built gradually and held with care.
-  - title: Meditation circles
-    note: Small groups · new moon
-    photo: /photos/meditation.jpg
-    photoAlt: A small meditation circle seated around candles and a singing bowl
-    body: >-
-      Sitting together in a circle, doing very little, very deliberately.
-      Silence with company is a different silence.
 
 circle:
   label: Together
