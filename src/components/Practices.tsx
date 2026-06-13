@@ -23,7 +23,7 @@ export function Practices() {
             >
               <article className="practice">
                 <div className="practice-meta">{p.note}</div>
-                <div>
+                <div className="practice-main">
                   <h3 className="practice-title">{p.title}</h3>
                   <p className="practice-body">{p.body}</p>
                 </div>

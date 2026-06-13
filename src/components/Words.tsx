@@ -11,7 +11,7 @@ export function Words() {
         </Reveal>
         <div className="words-grid">
           {wordsSection.items.map((w, i) => (
-            <Reveal key={w.name} delay={i * 0.08}>
+            <Reveal key={w.name} delay={i * 0.08} className="col-half">
               <figure className="word">
                 <blockquote>{w.quote}</blockquote>
                 <figcaption>{w.name}</figcaption>

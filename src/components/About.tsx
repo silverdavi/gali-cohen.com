@@ -11,14 +11,14 @@ export function About() {
           <h2 className="section-title">{aboutSection.title}</h2>
         </Reveal>
         <div className="about-grid">
-          <Reveal delay={0.06}>
+          <Reveal delay={0.06} className="col-main">
             <div className="about-text">
               {aboutSection.paragraphs.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.12}>
+          <Reveal delay={0.12} className="col-side">
             <div>
               <img className="about-photo" src={aboutSection.photo} alt={aboutSection.photoAlt} loading="lazy" />
               <div className="about-facts">

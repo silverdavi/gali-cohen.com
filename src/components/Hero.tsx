@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <header className="hero container" id="top">
       <div className="hero-grid">
-        <div>
+        <div className="col-main">
           <Reveal>
             <p className="hero-kicker">{profile.kicker}</p>
           </Reveal>
@@ -34,7 +34,7 @@ export function Hero() {
             </div>
           </Reveal>
         </div>
-        <Reveal delay={0.2} y={28}>
+        <Reveal delay={0.2} y={28} className="col-side hero-art">
           <ArchSun />
         </Reveal>
       </div>

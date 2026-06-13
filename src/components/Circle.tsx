@@ -45,7 +45,7 @@ export function Circle() {
           <h2 className="section-title">{circle.title}</h2>
         </Reveal>
         <div className="circle-grid">
-          <Reveal y={28}>
+          <Reveal y={28} className="col-side">
             <motion.div style={scrollTurn ? { rotate } : undefined} className="dance-wrap">
               <svg className={`dance${features.danceJoinHover ? ' can-join' : ''}`} viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
                 <circle className="dance-ring" cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
@@ -61,7 +61,7 @@ export function Circle() {
             </motion.div>
             <p className="circle-caption">{circle.caption}</p>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="col-main">
             <p className="section-sub">{circle.body}</p>
           </Reveal>
         </div>
