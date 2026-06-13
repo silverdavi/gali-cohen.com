@@ -8,7 +8,7 @@ export type Lang = 'en' | 'he';
 
 export type Content = {
   meta: { title: string; description: string };
-  nav: { practices: string; circles: string; about: string; pricing: string; events: string; shop: string; cta: string };
+  nav: { practices: string; circles: string; about: string; pricing: string; events: string; shop: string; cta: string; skip: string };
   profile: {
     name: string;
     hebrewName: string;

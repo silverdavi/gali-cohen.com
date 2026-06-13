@@ -16,16 +16,18 @@ import { Store } from './components/Store';
 import { Astro } from './components/Astro';
 import { Words } from './components/Words';
 import { Contact } from './components/Contact';
+import { content } from './content';
 
 export default function App() {
   return (
     <>
+      <a className="skip-link" href="#main">{content.nav.skip}</a>
       <Ambient />
       {features.natureLife && <NatureScene />}
       <Progress />
       <CursorRipple />
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <Breath />
         <Practices />

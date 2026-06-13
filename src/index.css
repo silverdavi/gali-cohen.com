@@ -357,6 +357,29 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 [data-daypart='dusk']  .hero-sun { filter: hue-rotate(-10deg) saturate(1.18) brightness(0.98); }
 [data-daypart='night'] .hero-sun { filter: saturate(0.72) brightness(0.9); }
 
+/* --- Skip link (keyboard / a11y) ----------------------------------------- */
+/* Hidden until focused, then drops into the top-start corner so keyboard and
+   screen-reader users can jump past the fixed nav straight to the content. */
+.skip-link {
+  position: fixed;
+  top: var(--s-3);
+  inset-inline-start: var(--s-3);
+  z-index: 200;
+  transform: translateY(-160%);
+  padding: var(--s-3) var(--s-4);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 6px;
+  font: 600 0.95rem/1 var(--font-ui, inherit);
+  text-decoration: none;
+  transition: transform .2s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--ochre);
+  outline-offset: 2px;
+}
+
 /* --- Nav ------------------------------------------------------------------ */
 .nav {
   position: fixed;
