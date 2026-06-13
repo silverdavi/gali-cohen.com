@@ -1026,7 +1026,6 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   background:
     radial-gradient(55% 45% at 50% 40%, rgba(201, 154, 63, 0.1), transparent 62%),
     radial-gradient(120% 100% at 50% 42%, #243a25 0%, #182416 48%, #0d1410 100%);
-  border-top: 1px solid rgba(247, 246, 236, 0.08);
   color: var(--paper);
 }
 /* a soft vignette so the edges fall away into the dark */
@@ -1053,7 +1052,7 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   position: absolute;
   left: 0;
   right: 0;
-  height: clamp(170px, 26vh, 320px);
+  height: clamp(260px, 44vh, 500px);
   z-index: 1;            /* above the dark bg + vignette, below the content */
   pointer-events: none;
   background: var(--paper);
@@ -1064,15 +1063,19 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
      contained SVG (no mask-composite) keeps it portable. */
   -webkit-mask-image: var(--veil-mask);
   mask-image: var(--veil-mask);
-  -webkit-mask-size: 900px 100%;
-  mask-size: 900px 100%;
+  -webkit-mask-size: 1300px 100%;
+  mask-size: 1300px 100%;
   -webkit-mask-repeat: repeat-x;
   mask-repeat: repeat-x;
   mask-mode: luminance;
   -webkit-mask-mode: luminance;
 }
 :root {
-  --veil-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='320' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='t' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.05' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.55' intercept='0.42'/%3E%3CfeFuncG type='linear' slope='0.55' intercept='0.42'/%3E%3CfeFuncB type='linear' slope='0.55' intercept='0.42'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3ClinearGradient id='env' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='0.2' stop-color='%23fff'/%3E%3Cstop offset='0.94' stop-color='%23000'/%3E%3Cstop offset='1' stop-color='%23000'/%3E%3C/linearGradient%3E%3ClinearGradient id='cap' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.16' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.4' stop-color='%23fff' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cmask id='nm'%3E%3Crect width='900' height='320' filter='url(%23t)'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='900' height='320' fill='url(%23env)' mask='url(%23nm)'/%3E%3Crect width='900' height='320' fill='url(%23cap)'/%3E%3C/svg%3E");
+  /* Long, soft, vertically-fingered dissolve. The envelope fades over almost the
+     whole height (no short band → no "slice"); the turbulence is floored bright
+     so the frontier is a misty edge, not high-contrast rorschach voids; a tiny
+     solid cap at the very top keeps the seam pure paper. */
+  --veil-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1300' height='500' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='t' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.02' numOctaves='4' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.8' intercept='0.28'/%3E%3CfeFuncG type='linear' slope='0.8' intercept='0.28'/%3E%3CfeFuncB type='linear' slope='0.8' intercept='0.28'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3ClinearGradient id='env' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='0.04' stop-color='%23fff'/%3E%3Cstop offset='1' stop-color='%23000'/%3E%3C/linearGradient%3E%3ClinearGradient id='cap' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.025' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='0.12' stop-color='%23fff' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cmask id='nm'%3E%3Crect width='1300' height='500' filter='url(%23t)'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='1300' height='500' fill='url(%23env)' mask='url(%23nm)'/%3E%3Crect width='1300' height='500' fill='url(%23cap)'/%3E%3C/svg%3E");
 }
 .breath-veil.top { top: -1px; }
 .breath-veil.bottom { bottom: -1px; transform: scaleY(-1); }
