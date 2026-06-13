@@ -137,6 +137,38 @@ img { display: block; max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .progress-sun { display: none; } }
 
+/* --- Cursor ripple --------------------------------------------------------- */
+.ripple-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cursor-ripple {
+  position: absolute;
+  width: 14px; height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(62, 107, 82, 0.5);
+  transform: scale(0);
+  animation: cursor-ripple 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes cursor-ripple {
+  0%   { transform: scale(0);  opacity: 0.8; }
+  100% { transform: scale(7);  opacity: 0;   }
+}
+
+/* --- Time of day: hero sky warmth shifts with the local clock --------------
+   Only the arch background (the "sky") changes; the palette stays put. */
+.arch {
+  transition: background 1.2s ease;
+}
+[data-daypart='dawn'] .arch { background: linear-gradient(180deg, #F2ECDC, #EDE7D2); }
+[data-daypart='day']  .arch { background: var(--paper-2); }
+[data-daypart='dusk'] .arch { background: linear-gradient(180deg, #EFE6D6, #E7D9C4); }
+[data-daypart='night'] .arch { background: linear-gradient(180deg, #E4E3D6, #DCDDD0); }
+
 /* --- Nav ------------------------------------------------------------------ */
 .nav {
   position: fixed;
@@ -317,16 +349,19 @@ img { display: block; max-width: 100%; }
   transform: scale(0.55) rotate(-12deg); /* tucked toward the sun, hidden by the disc */
   transition: opacity .5s ease, transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-.arch:hover .sun-rays,
-.arch:focus-visible .sun-rays { opacity: 0.75; transform: scale(1) rotate(0deg); }
-.arch:hover .r-out,
-.arch:focus-visible .r-out { transform: scale(1.05); }
-.arch:hover .r-mid,
-.arch:focus-visible .r-mid { transform: scale(1.08); }
-.arch:hover .r-in,
-.arch:focus-visible .r-in { transform: scale(1.12); }
-.arch:hover .r-core,
-.arch:focus-visible .r-core { transform: scale(1.18); }
+.arch.bloom:hover .sun-rays,
+.arch.bloom:focus-visible .sun-rays { opacity: 0.75; transform: scale(1) rotate(0deg); }
+.arch.bloom:hover .r-out,
+.arch.bloom:focus-visible .r-out { transform: scale(1.05); }
+.arch.bloom:hover .r-mid,
+.arch.bloom:focus-visible .r-mid { transform: scale(1.08); }
+.arch.bloom:hover .r-in,
+.arch.bloom:focus-visible .r-in { transform: scale(1.12); }
+.arch.bloom:hover .r-core,
+.arch.bloom:focus-visible .r-core { transform: scale(1.18); }
+/* pointer tilt needs perspective on the arch frame */
+.arch { perspective: 900px; }
+.arch svg { transform-style: preserve-3d; }
 @media (prefers-reduced-motion: reduce) {
   .arch .ring, .arch .sun-rays { transition: none; }
 }
@@ -633,11 +668,11 @@ img { display: block; max-width: 100%; }
 /* the tenth dancer: waiting, then joining when you hover the circle */
 .dance .joiner { opacity: 0; transition: opacity .5s ease; }
 .dance .joiner circle { fill: var(--ochre); }
-.dance:hover .joiner { opacity: 1; }
+.dance.can-join:hover .joiner { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .dance .turning { animation: none; }
   .dance:hover .turning { animation: none; }
-  .dance .joiner { opacity: 1; } /* show the full circle, no hover dependency */
+  .dance.can-join .joiner { opacity: 1; } /* show the full circle, no hover dependency */
 }
 .circle-caption {
   font-size: 13px;
@@ -746,11 +781,21 @@ img { display: block; max-width: 100%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: medallion-turn 80s linear infinite;
   transition: transform .8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+.contact-medallion.spin img { animation: medallion-turn 80s linear infinite; }
 @keyframes medallion-turn { to { transform: rotate(360deg); } }
 .contact-medallion:hover img { animation-play-state: paused; transform: scale(1.08); }
+/* magnetic CTA drifts smoothly back to rest */
+.btn-primary { transition: transform .25s cubic-bezier(0.22, 0.61, 0.36, 1), background .2s ease, color .2s ease; }
+
+/* breathStage flag off: the circle holds a single calm pose, no cycle */
+.breath-stage.still *,
+.breath-stage.still { animation: none !important; }
+.breath-stage.still .breath-ripple,
+.breath-stage.still .breath-target,
+.breath-stage.still .breath-words { opacity: 0; }
+.breath-stage.still .breath-words .in { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .contact-medallion img { animation: none; }
   .contact-medallion:hover img { transform: none; }

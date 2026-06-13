@@ -1,5 +1,6 @@
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { dir } from '../content';
+import { features } from '../features';
 
 // A thin thread across the top of the page that fills as you scroll, with a
 // small sun riding its leading edge: the day passing over the page.
@@ -13,10 +14,12 @@ export function Progress() {
   return (
     <div className="progress-track" aria-hidden>
       <motion.div className="progress" style={{ scaleX }} />
-      <motion.div
-        className="progress-sun"
-        style={dir === 'rtl' ? { right: sunPos } : { left: sunPos }}
-      />
+      {features.progressSun && (
+        <motion.div
+          className="progress-sun"
+          style={dir === 'rtl' ? { right: sunPos } : { left: sunPos }}
+        />
+      )}
     </div>
   );
 }

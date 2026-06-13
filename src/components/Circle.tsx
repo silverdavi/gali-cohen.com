@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Reveal } from './Reveal';
 import { content } from '../content';
+import { features } from '../features';
 
 const SLOTS = 10;
 const FIGURES = 9; // one slot kept open for the dancer who joins on hover
@@ -34,6 +35,7 @@ export function Circle() {
     offset: ['start end', 'end start'],
   });
   const rotate = useTransform(scrollYProgress, [0, 1], [-45, 45]);
+  const scrollTurn = features.danceScrollTurn && !reduce;
 
   return (
     <section className="section" id="circle" ref={ref}>
@@ -44,8 +46,8 @@ export function Circle() {
         </Reveal>
         <div className="circle-grid">
           <Reveal y={28}>
-            <motion.div style={reduce ? undefined : { rotate }} className="dance-wrap">
-              <svg className="dance" viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
+            <motion.div style={scrollTurn ? { rotate } : undefined} className="dance-wrap">
+              <svg className={`dance${features.danceJoinHover ? ' can-join' : ''}`} viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
                 <circle className="dance-ring" cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
                 <g className="turning">
                   {Array.from({ length: FIGURES }, (_, i) => (

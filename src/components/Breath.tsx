@@ -1,5 +1,6 @@
 import { Reveal } from './Reveal';
 import { content } from '../content';
+import { features } from '../features';
 
 export function Breath() {
   const { breath } = content;
@@ -10,7 +11,7 @@ export function Breath() {
           <p className="section-label">{breath.label}</p>
           <h2 className="section-title">{breath.title}</h2>
         </Reveal>
-        <div className="breath-stage" role="img" aria-label={breath.note}>
+        <div className={`breath-stage${features.breathStage ? '' : ' still'}`} role="img" aria-label={breath.note}>
           <div className="breath-rays" />
           <div className="breath-target" />
           <div className="breath-ring r3" />
