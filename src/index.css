@@ -99,6 +99,30 @@
   --measure-sub:  58ch;
   --measure-lead: 34ch;
 
+  /* SPACING SCALE --------------------------------------------------------------
+     One 4px-based scale. Every padding / margin / gap picks a step — no
+     free-hand values. This is what makes the rhythm read as planned, not random. */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 40px;
+  --s-8: 56px;
+  --s-9: 72px;
+
+  /* VERTICAL RHYTHM (fluid, derived) -------------------------------------------
+     The page's three big gaps, defined ONCE so every section breathes the same.
+       --section-y : top & bottom padding of every section
+       --header-gap: a section's header (label/title/sub) → its content block
+       --gutter    : the 12-column gap
+       --full      : the height of the two full-viewport moments (hero, breath)  */
+  --section-y:  clamp(72px, 8vw, 112px);
+  --header-gap: clamp(36px, 4.5vw, 56px);
+  --gutter:     clamp(20px, 3vw, 40px);
+  --full:       clamp(640px, 100svh, 960px);
+
   --maxw: 1020px;
   --pad: 40px;
 
@@ -161,7 +185,7 @@ body { hyphens: none; }
 .grid12 {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
+  column-gap: var(--gutter);
   align-items: start;
 }
 .col-main { grid-column: 1 / 8; }
@@ -233,7 +257,7 @@ body { hyphens: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px var(--pad);
+  padding: var(--s-4) var(--pad);
   transition: background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
   border-bottom: 1px solid transparent;
 }
@@ -254,7 +278,7 @@ body { hyphens: none; }
   pointer-events: none;
 }
 .nav.scrolled .nav-name { opacity: 1; transform: none; pointer-events: auto; }
-.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links { display: flex; align-items: center; gap: var(--s-5); }
 .nav-links a:not(.nav-cta) {
   font-size: var(--fs-meta);
   font-weight: 500;
@@ -293,19 +317,19 @@ body { hyphens: none; }
 
 /* --- Hero ------------------------------------------------------------------ */
 .hero {
-  min-height: clamp(620px, 100svh, 920px);
+  min-height: var(--full); /* full-viewport moment #1 (breath is #2), same height */
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding-top: 96px;
-  padding-bottom: 64px;
+  padding-top: calc(var(--section-y) + var(--s-6)); /* clears the fixed nav */
+  padding-bottom: var(--section-y);
   overflow: hidden;
 }
 .hero-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
+  column-gap: var(--gutter);
   align-items: center;
 }
 .hero-grid > .hero-art .arch { margin-inline: auto; }
@@ -315,7 +339,7 @@ body { hyphens: none; }
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--accent);           /* eyebrow = the single text accent */
-  margin: 0 0 22px;
+  margin: 0 0 var(--s-5);
 }
 .hero-name {
   font-family: var(--display);
@@ -324,7 +348,7 @@ body { hyphens: none; }
   line-height: var(--lh-display); /* 1.0 so the two stacked name-lines lock up */
   letter-spacing: -0.01em;        /* large Latin display wants a hair tighter */
   color: var(--ink);
-  margin: 0 0 10px;
+  margin: 0 0 var(--s-2);         /* tight: the romanized name is a sub-line of this */
 }
 .hero-hebrew {
   font-family: var(--display);
@@ -332,13 +356,13 @@ body { hyphens: none; }
   font-weight: 400;
   color: var(--faint);
   letter-spacing: 0.08em;
-  margin: 0 0 26px;
+  margin: 0 0 var(--s-5);
 }
 .hero-role {
   font-size: var(--fs-ui);
   font-weight: 500;
   color: var(--mute);
-  margin: 0 0 26px;
+  margin: 0 0 var(--s-5);
 }
 .hero-lead {
   font-family: var(--serif);
@@ -347,9 +371,9 @@ body { hyphens: none; }
   font-weight: 420;
   color: var(--body);
   max-width: var(--measure-lead); /* ~34ch: a lead should break in 2–3 short lines */
-  margin: 0 0 38px;
+  margin: 0 0 var(--s-7);
 }
-.hero-ctas { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.hero-ctas { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
 .btn {
   display: inline-flex;
   align-items: center;
@@ -461,7 +485,7 @@ body { hyphens: none; }
 [dir='rtl'] .progress { transform-origin: 100% 50%; }
 
 /* --- Sections shared ------------------------------------------------------- */
-.section { padding: 96px 0; border-top: 1px solid var(--rule); }
+.section { padding: var(--section-y) 0; border-top: 1px solid var(--rule); }
 /* Eyebrow: the one recurring "tag" above every title. Always the accent — it is
    the single place the sage colour appears in text, so it reads as a consistent
    signal rather than decoration. Uppercase + wide tracking because small caps
@@ -472,7 +496,7 @@ body { hyphens: none; }
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--accent);
-  margin: 0 0 14px;
+  margin: 0 0 var(--s-3);
 }
 .section-title {
   font-family: var(--display);
@@ -481,7 +505,7 @@ body { hyphens: none; }
   letter-spacing: -0.01em;
   line-height: var(--lh-title);
   color: var(--ink);
-  margin: 0 0 18px;
+  margin: 0 0 var(--s-4);
 }
 /* Standfirst: introductory prose, so it keeps body colour and size for
    legibility (muting reading text would hurt it); only the measure is capped. */
@@ -492,10 +516,10 @@ body { hyphens: none; }
    the stage is sized in % of --stage so it scales from phones to desktops.
    Cycle (11s): in 0-40%, hold 40-50%, out 50-95%, rest. */
 .breath {
-  /* fill the viewport on real screens, capped so absurdly tall viewports
-     (and full-page screenshots) stay sane */
-  min-height: clamp(560px, 100svh, 980px);
-  padding: clamp(28px, 5svh, 64px) 0; /* override .section padding so 100svh fits */
+  /* full-viewport moment #2, same height as the hero (capped for sane
+     rendering in absurdly tall viewports / full-page screenshots) */
+  min-height: var(--full);
+  padding: var(--section-y) 0; /* override .section padding; flex-centres within */
   display: flex;
   align-items: center;
   scroll-snap-align: start;
@@ -668,16 +692,16 @@ body { hyphens: none; }
   .breath-words .in { opacity: 1; }
 }
 
-.breath-note { color: var(--mute); font-size: var(--fs-ui); max-width: 44ch; margin: 10px auto 0; }
+.breath-note { color: var(--mute); font-size: var(--fs-ui); max-width: 44ch; margin: var(--s-3) auto 0; }
 
 /* --- Practices -------------------------------------------------------------- */
-.practices-list { margin-top: 56px; }
+.practices-list { margin-top: var(--header-gap); }
 .practice {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
+  column-gap: var(--gutter);
   align-items: center;
-  padding: 30px 0;
+  padding: var(--s-6) 0;
   border-top: 1px solid var(--rule);
 }
 .practice-meta  { grid-column: 1 / 3; }   /* cols 1–2 */
@@ -703,7 +727,7 @@ body { hyphens: none; }
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
-  margin: 0 0 8px;
+  margin: 0 0 var(--s-2);
 }
 .practice-body { margin: 0; max-width: var(--measure-body); }
 
@@ -711,9 +735,9 @@ body { hyphens: none; }
 .circle-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
+  column-gap: var(--gutter);
   align-items: center;
-  margin-top: 24px;
+  margin-top: var(--header-gap);
 }
 .dance {
   width: 280px;
@@ -746,7 +770,7 @@ body { hyphens: none; }
   font-size: var(--fs-meta);
   color: var(--faint);
   letter-spacing: 0.06em;
-  margin-top: 14px;
+  margin-top: var(--s-3);
   text-align: center; /* labels the circular motif, which is itself centred */
 }
 
@@ -784,17 +808,17 @@ body { hyphens: none; }
 .about-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
+  column-gap: var(--gutter);
   align-items: start;
-  margin-top: 40px;
+  margin-top: var(--header-gap);
 }
-.about-text p { margin: 0 0 18px; max-width: var(--measure-body); }
+.about-text p { margin: 0 0 var(--s-4); max-width: var(--measure-body); }
 .about-facts { border-top: 1px solid var(--rule); }
 .fact {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 14px 0;
+  padding: var(--s-3) 0;
   border-bottom: 1px solid var(--rule);
 }
 /* Fact label: an eyebrow-sized micro-label, but kept FAINT (not accent) because
@@ -812,8 +836,8 @@ body { hyphens: none; }
 .words-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(20px, 3vw, 40px);
-  margin-top: 48px;
+  column-gap: var(--gutter);
+  margin-top: var(--header-gap);
 }
 .word {
   padding: 4px 2px;
@@ -825,7 +849,7 @@ body { hyphens: none; }
   font-size: var(--fs-lead);   /* a quote is a pull-quote: lead scale, serif voice */
   line-height: var(--lh-lead);
   color: var(--ink);
-  margin: 0 0 14px;
+  margin: 0 0 var(--s-3);
   font-weight: 400;
 }
 .word blockquote::before,
@@ -838,11 +862,11 @@ body { hyphens: none; }
 .word figcaption { font-size: var(--fs-meta); color: var(--mute); letter-spacing: 0.03em; }
 
 /* --- Contact --------------------------------------------------------------------- */
-.contact { text-align: center; padding: 120px 0 96px; }
+.contact { text-align: center; padding: var(--section-y) 0; } /* symmetric, like every section */
 .contact-medallion {
   width: 120px;
   height: 120px;
-  margin: 0 auto 32px;
+  margin: 0 auto var(--s-6);
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--rule);
@@ -877,27 +901,27 @@ body { hyphens: none; }
   font-size: var(--fs-h2);     /* the closing line is a section title, sized as one */
   letter-spacing: -0.015em;
   color: var(--ink);
-  margin: 0 0 16px;
+  margin: 0 0 var(--s-4);
 }
 /* contact-sub: centred + a touch narrower (42ch) than a standfirst — a centred
    line reads best short. Mute, because the email button below it is the focus. */
-.contact-sub { color: var(--mute); font-size: var(--fs-body); max-width: 42ch; margin: 0 auto 36px; }
+.contact-sub { color: var(--mute); font-size: var(--fs-body); max-width: 42ch; margin: 0 auto var(--s-7); }
 .contact-links {
   display: flex;
   justify-content: center;
-  gap: 22px;
+  gap: var(--s-5);
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: var(--s-6);
 }
 .contact-links a { font-size: var(--fs-ui); color: var(--mute); transition: color .2s ease; }
 .contact-links a:hover { color: var(--accent); }
 
 .footer {
   border-top: 1px solid var(--rule);
-  padding: 26px var(--pad);
+  padding: var(--s-5) var(--pad);
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--s-4);
   font-size: var(--fs-meta);
   color: var(--faint);
 }
@@ -910,16 +934,15 @@ body { hyphens: none; }
   .practice,
   .circle-grid,
   .about-grid,
-  .words-grid { grid-template-columns: 1fr; row-gap: 36px; }
+  .words-grid { grid-template-columns: 1fr; row-gap: var(--s-7); }
   .col-main,
   .col-side,
   .col-half,
   .practice-meta,
   .practice-main,
   .practice-photo { grid-column: 1 / -1; }
-  .hero-grid { row-gap: 40px; }
   .arch { max-width: 260px; margin: 0 auto; }
-  .practice { gap: 10px; padding: 26px 0; }
+  .practice { gap: var(--s-3); padding: var(--s-6) 0; }
   .practice-photo { aspect-ratio: auto; height: 200px; border-radius: 16px; order: -1; }
   .hide-sm { display: none; }
 }
