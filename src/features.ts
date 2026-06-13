@@ -19,6 +19,8 @@ export type FeatureKey =
   | 'sunBloomHover'     // sun ray-crown unfurls on arch hover/focus
   | 'progressSun'       // a small sun rides the scroll-progress thread
   | 'breathStage'       // the breathing circle animates (vs. a still sun)
+  | 'breathGuide'       // a progress arc traces the breath cycle (draw on inhale, drain on exhale)
+  | 'breathScrollReveal'// the breath stage eases in (scale + fade) as the section centers
   | 'breathDark'        // the breath section sinks into a deep moss night
   | 'breathOrganicEdge' // dark breath dissolves into the paper via a grainy, undulating veil
   | 'danceScrollTurn'   // the dance circle turns as you scroll through it
@@ -43,6 +45,8 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   sunBloomHover: true,
   progressSun: true,
   breathStage: true,
+  breathGuide: true,
+  breathScrollReveal: true,
   breathDark: true,
   breathOrganicEdge: true,
   danceScrollTurn: true,

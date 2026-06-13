@@ -116,7 +116,7 @@
   --maxw: 1100px;
   --pad: 48px;
 
-  --breath: 11s; /* one full breath cycle */
+  --breath: 12s; /* one full breath cycle: inhale 0-40%, hold 40-54%, exhale 54-96%, settle 96-100% */
 }
 
 * { box-sizing: border-box; }
@@ -674,16 +674,26 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
    the stage is sized in % of --stage so it scales from phones to desktops.
    Cycle (11s): in 0-40%, hold 40-50%, out 50-95%, rest. */
 .breath {
-  /* full-viewport moment #2, same height as the hero (capped for sane
-     rendering in absurdly tall viewports / full-page screenshots) */
-  min-height: var(--full);
-  padding: var(--section-y) 0; /* override .section padding; flex-centres within */
+  /* THE breath moment: fills the screen edge-to-edge (100svh) so that when the
+     scroll snaps here, nothing of the neighbouring sections peeks in — the dark
+     night is total. Floor at 620px so very short (landscape) viewports still
+     give the circle room rather than crushing it. */
+  min-height: max(620px, 100svh);
+  /* tighter than --section-y: the content is flex-centred inside a full screen,
+     so heavy padding only risks pushing it taller than the viewport (and a
+     snapped moment must fit edge-to-edge, never clip). */
+  padding: clamp(40px, 6svh, 76px) 0;
   display: flex;
   align-items: center;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
   text-align: center;
   background: var(--paper-2);
+}
+.breath-stage-wrap {
+  width: 100%;
+  transform-origin: center;
+  will-change: transform;
 }
 .breath .container { width: 100%; }
 .breath .section-title { margin-bottom: 0; }
@@ -693,11 +703,11 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
    two meditative/ceremonial moments; every reading section stays start-aligned
    so the page keeps one strong text edge. */
 .breath-stage {
-  --stage: clamp(280px, min(76vw, 54svh), 480px);
+  --stage: clamp(280px, min(78vw, 58svh), 540px);
   position: relative;
   width: var(--stage);
   height: var(--stage);
-  margin: clamp(20px, 4svh, 44px) auto 6px;
+  margin: clamp(24px, 5svh, 56px) auto 8px;
   display: grid;
   place-items: center;
 }
@@ -736,11 +746,49 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   animation: target-settle var(--breath) ease-in-out infinite;
 }
 @keyframes target-settle {
-  0%   { transform: scale(1);    opacity: .5; }
-  40%  { transform: scale(0.97); opacity: 1;  }
-  50%  { transform: scale(0.97); opacity: 1;  }
-  95%  { transform: scale(1);    opacity: .5; }
-  100% { transform: scale(1);    opacity: .5; }
+  0%   { transform: scale(1);    opacity: .45; }
+  40%  { transform: scale(0.95); opacity: 1;  }
+  54%  { transform: scale(0.95); opacity: 1;  }
+  96%  { transform: scale(1);    opacity: .45; }
+  100% { transform: scale(1);    opacity: .45; }
+}
+
+/* --- Progress arc: the precise breath guide --------------------------------
+   The expanding disc tells you *that* to breathe; this arc tells you *how far
+   along* you are. It draws clockwise from the top through the inhale, sits full
+   through the hold, then drains back through the exhale — so the user can match
+   their breath exactly, not just approximately. pathLength="100" lets the
+   dash maths be percentage-clean regardless of the rendered radius. Rotated
+   -90deg so 0% sits at twelve o'clock. Reversible via the breathGuide flag. */
+.breath-progress {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+  pointer-events: none;
+}
+.breath-progress circle { fill: none; }
+.breath-progress-track {
+  stroke: rgba(62, 107, 82, 0.18);
+  stroke-width: 0.7;
+}
+.breath-progress-arc {
+  stroke: var(--ochre);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 100; /* starts empty */
+  filter: drop-shadow(0 0 2px rgba(201, 154, 63, 0.55));
+  animation: breath-fill var(--breath) ease-in-out infinite;
+}
+@keyframes breath-fill {
+  0%   { stroke-dashoffset: 100; }  /* empty */
+  40%  { stroke-dashoffset: 0;   }  /* full at top of inhale */
+  54%  { stroke-dashoffset: 0;   }  /* held */
+  96%  { stroke-dashoffset: 100; }  /* drained by end of exhale */
+  100% { stroke-dashoffset: 100; }
 }
 
 /* warm glow that swells with the inhale */
@@ -751,11 +799,11 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   animation: breathe-glow var(--breath) ease-in-out infinite;
 }
 @keyframes breathe-glow {
-  0%   { transform: scale(1);    opacity: .45; }
-  40%  { transform: scale(1.65); opacity: .9;  }
-  50%  { transform: scale(1.65); opacity: .9;  }
-  95%  { transform: scale(1);    opacity: .45; }
-  100% { transform: scale(1);    opacity: .45; }
+  0%   { transform: scale(1);    opacity: .4; }
+  40%  { transform: scale(1.75); opacity: .95; }
+  54%  { transform: scale(1.75); opacity: .95; }
+  96%  { transform: scale(1);    opacity: .4; }
+  100% { transform: scale(1);    opacity: .4; }
 }
 
 .breath-core {
@@ -775,9 +823,9 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 @keyframes core-warm {
   0%   { opacity: 0; }
-  40%  { opacity: .55; }
-  50%  { opacity: .55; }
-  95%  { opacity: 0; }
+  40%  { opacity: .6; }
+  54%  { opacity: .6; }
+  96%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
@@ -798,17 +846,17 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 .breath-ripple.p2 { animation-delay: calc(var(--breath) * 0.06); border-color: rgba(201, 154, 63, 0.5); }
 @keyframes ripple {
-  0%, 38% { transform: scale(1.0); opacity: 0; }
-  44%     { transform: scale(1.22); opacity: .55; }
-  90%     { transform: scale(2.15); opacity: 0; }
-  100%    { transform: scale(2.15); opacity: 0; }
+  0%, 40% { transform: scale(1.0); opacity: 0; }
+  47%     { transform: scale(1.24); opacity: .5; }
+  94%     { transform: scale(2.2); opacity: 0; }
+  100%    { transform: scale(2.2); opacity: 0; }
 }
 
 @keyframes breathe {
   0%   { transform: scale(1); }
-  40%  { transform: scale(1.28); }
-  50%  { transform: scale(1.28); }
-  95%  { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  54%  { transform: scale(1.3); }
+  96%  { transform: scale(1); }
   100% { transform: scale(1); }
 }
 
@@ -835,18 +883,20 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .breath-words .hold { animation: word-hold var(--breath) ease-in-out infinite; }
 .breath-words .out  { animation: word-out var(--breath) ease-in-out infinite; }
 @keyframes word-in {
-  0% { opacity: 0; } 6% { opacity: 1; } 36% { opacity: 1; } 41% { opacity: 0; } 100% { opacity: 0; }
+  0% { opacity: 0; } 5% { opacity: 1; } 36% { opacity: 1; } 41% { opacity: 0; } 100% { opacity: 0; }
 }
 @keyframes word-hold {
-  0%, 41% { opacity: 0; } 44% { opacity: 1; } 48% { opacity: 1; } 52% { opacity: 0; } 100% { opacity: 0; }
+  0%, 41% { opacity: 0; } 45% { opacity: 1; } 51% { opacity: 1; } 56% { opacity: 0; } 100% { opacity: 0; }
 }
 @keyframes word-out {
-  0%, 52% { opacity: 0; } 58% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; }
+  0%, 56% { opacity: 0; } 61% { opacity: 1; } 93% { opacity: 1; } 97% { opacity: 0; } 100% { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .breath-core, .breath-core::after, .breath-ring, .breath-rays, .breath-glow, .breath-target { animation: none; }
   .breath-ripple { display: none; }
+  /* the guide arc resolves to a calm, complete ring rather than a drawing one */
+  .breath-progress-arc { animation: none; stroke-dashoffset: 0; }
   /* match the .breath-words .in/.hold/.out specificity, or animation wins */
   .breath-words .in, .breath-words .hold, .breath-words .out { animation: none; }
   .breath-words .in { opacity: 1; }
@@ -916,10 +966,21 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .breath-night .section-label { color: #a9cdb1; }
 .breath-night .section-title { color: var(--paper); }
 .breath-night .breath-note { color: rgba(247, 246, 236, 0.6); }
-/* warm the rings and glow against the dark; the core is already sand→accent */
+/* In the night, the core becomes a genuinely warm sun (sand→ochre→clay) so it
+   reads as a single light source inside the cool moss dark, rather than a green
+   disc on a green ground. Cool sage stays in the outer guide rings only. */
+.breath-night .breath-core {
+  background: radial-gradient(circle at 50% 38%, #f3dca0 0%, var(--ochre) 58%, var(--clay) 100%);
+}
+.breath-night .breath-core::after {
+  background: radial-gradient(circle at 50% 60%, #ffe8b0, var(--clay) 92%);
+}
+/* warm the rings and glow against the dark */
 .breath-night .breath-ring { border-color: rgba(176, 205, 182, 0.32); }
 .breath-night .breath-target { border-color: rgba(201, 154, 63, 0.6); }
-.breath-night .breath-glow { background: radial-gradient(circle, rgba(201, 154, 63, 0.34), transparent 70%); }
+.breath-night .breath-glow { background: radial-gradient(circle, rgba(201, 154, 63, 0.4), transparent 70%); }
+.breath-night .breath-progress-track { stroke: rgba(247, 246, 236, 0.14); }
+.breath-night .breath-progress-arc { filter: drop-shadow(0 0 3px rgba(201, 154, 63, 0.7)); }
 .breath-night .breath-rays {
   background: repeating-conic-gradient(
     from 0deg,
@@ -1144,6 +1205,7 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .breath-stage.still .breath-target,
 .breath-stage.still .breath-words { opacity: 0; }
 .breath-stage.still .breath-words .in { opacity: 1; }
+.breath-stage.still .breath-progress-arc { stroke-dashoffset: 0; } /* calm full ring */
 @media (prefers-reduced-motion: reduce) {
   .contact-medallion img { animation: none; }
   .contact-medallion:hover img { transform: none; }
