@@ -16,6 +16,7 @@ export type FeatureKey =
   | 'natureLife'        // an ambient bird occasionally flies in, perches on a growing branch, then leaves
   | 'astrology'         // render the celestial "sky right now" + find-your-sign section
   | 'astroMotion'       // constellations draw themselves in + stars twinkle
+  | 'zodiacMedallions'  // show the quirky flat zodiac roundels (vs. gold line-art constellations)
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
@@ -52,6 +53,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   natureLife: true,
   astrology: true,
   astroMotion: true,
+  zodiacMedallions: true,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,

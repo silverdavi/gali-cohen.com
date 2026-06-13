@@ -63,12 +63,26 @@ function Moon({ phase, size = 72 }: { phase: number; size?: number }) {
   );
 }
 
-// --- A sign "plate": constellation + name + meta + trait -------------------
+// --- A sign "plate": its emblem + name + meta + trait ----------------------
+// The emblem is a quirky flat "vintage-tarot" roundel (raster); set the
+// `zodiacMedallions` flag off to fall back to the gold line-art constellation.
 function SignPlate({ sign, draw, prefix }: { sign: SignKey; draw?: boolean; prefix: string }) {
   const z = ZODIAC[sign];
   return (
     <div className="astro-plate">
-      <Constellation sign={sign} draw={draw} />
+      {features.zodiacMedallions ? (
+        <img
+          className="astro-medallion"
+          src={`/photos/zodiac/${sign}.webp`}
+          alt=""
+          width={512}
+          height={512}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <Constellation sign={sign} draw={draw} />
+      )}
       <p className="astro-eyebrow">{prefix}</p>
       <h3 className="astro-sign">
         {/* U+FE0E forces text (monochrome) presentation so the glyph inherits
@@ -122,7 +136,7 @@ export function Astro() {
           </Reveal>
           <Reveal delay={0.12} className="astro-col">
             <div className="astro-plate astro-moon">
-              <Moon phase={moon.phase} />
+              <Moon phase={moon.phase} size={120} />
               <p className="astro-eyebrow">{astro.moonLabel}</p>
               <h3 className="astro-sign">{moonName}</h3>
               <p className="astro-meta">{litPct}% {astro.litWord}</p>

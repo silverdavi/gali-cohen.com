@@ -536,7 +536,9 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   border-radius: 999px;
 }
 .nav-moon svg { display: block; overflow: visible; }
-.nav-moon-disc { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.28; }
+/* faint body + ring so the disc always reads as a moon, even at new/near-new
+   when the lit limb is just a sliver */
+.nav-moon-disc { fill: rgba(42, 42, 36, 0.1); stroke: rgba(42, 42, 36, 0.34); stroke-width: 1; }
 .nav-moon-lit {
   fill: var(--ink);
   opacity: 0.8;
@@ -1261,6 +1263,34 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   margin: 0 auto var(--s-4);
   color: var(--ochre);
   overflow: visible;
+}
+
+/* The quirky flat zodiac roundel: a warm parchment "tarot" tile floating on the
+   dark moss. Rounded square (not a hard circle) so the gold ring is never
+   clipped; a hairline gold edge + soft shadow lift it off the night sky. */
+.astro-medallion {
+  display: block;
+  width: clamp(168px, 21vw, 232px);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto var(--s-4);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 0 rgba(245, 240, 222, 0.18) inset,
+    0 18px 40px -22px rgba(0, 0, 0, 0.7);
+  outline: 1px solid rgba(199, 154, 75, 0.45);
+  outline-offset: -1px;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease;
+}
+.astro-plate:hover .astro-medallion {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow:
+    0 1px 0 rgba(245, 240, 222, 0.22) inset,
+    0 26px 52px -22px rgba(0, 0, 0, 0.78);
+}
+@media (prefers-reduced-motion: reduce) {
+  .astro-medallion { transition: none; }
+  .astro-plate:hover .astro-medallion { transform: none; }
 }
 .cst-lines line {
   stroke: currentColor;
