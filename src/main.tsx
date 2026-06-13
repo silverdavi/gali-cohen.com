@@ -22,6 +22,9 @@ document.documentElement.dataset.daypart = features.timeOfDaySun
   ? daypartFor(new Date().getHours())
   : 'day'
 
+// CSS-only feature gate: photographs warm and lift on hover.
+document.documentElement.classList.toggle('ff-photo', features.photoHover)
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

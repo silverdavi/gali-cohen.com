@@ -9,6 +9,10 @@
 
 export type FeatureKey =
   | 'kineticType'       // headings rise word-by-word from a mask when revealed
+  | 'navWaves'          // nav hover/active underline is a flowing wave (sun over the sea)
+  | 'heroSunRays'       // an SVG ray crown radiates behind the hero arch (idle spin + scroll turn)
+  | 'photoHover'        // photographs warm and lift on hover (develop effect)
+  | 'figureSway'        // the dance figures sway gently in place
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
@@ -31,10 +35,17 @@ export type FeatureKey =
   | 'medallionSpin'     // the contact bowl rotates
   | 'magneticCta'       // the primary contact button drifts toward the cursor
   | 'cursorRipple'      // a soft ripple blooms where you click/tap
-  | 'timeOfDaySun';     // hero warmth shifts with the visitor's local clock
+  | 'timeOfDaySun'      // hero warmth shifts with the visitor's local clock
+  | 'showPricing'       // render the CMS-managed pricing section
+  | 'showEvents'        // render the CMS-managed upcoming-events section
+  | 'showStore';        // render the CMS-managed shop section
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
   kineticType: true,
+  navWaves: true,
+  heroSunRays: true,
+  photoHover: true,
+  figureSway: true,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,
@@ -58,6 +69,9 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   magneticCta: true,
   cursorRipple: true,
   timeOfDaySun: true,
+  showPricing: true,
+  showEvents: true,
+  showStore: true,
 };
 
 function resolve(): Record<FeatureKey, boolean> {

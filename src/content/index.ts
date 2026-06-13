@@ -8,7 +8,7 @@ export type Lang = 'en' | 'he';
 
 export type Content = {
   meta: { title: string; description: string };
-  nav: { practices: string; circles: string; about: string; cta: string };
+  nav: { practices: string; circles: string; about: string; pricing: string; events: string; shop: string; cta: string };
   profile: {
     name: string;
     hebrewName: string;
@@ -21,8 +21,6 @@ export type Content = {
   };
   hero: { ctaPrimary: string; ctaSecondary: string; scroll: string; photoAlt: string };
   breath: { label: string; title: string; wordIn: string; wordHold: string; wordOut: string; note: string };
-  practicesSection: { label: string; title: string; sub: string };
-  practices: { title: string; note: string; body: string; photo: string; photoAlt: string }[];
   circle: { label: string; title: string; body: string; caption: string; alt: string };
   band: { photo: string; caption: string; alt: string };
   aboutSection: {

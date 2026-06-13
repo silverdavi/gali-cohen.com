@@ -366,9 +366,9 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   color: var(--ink);
 }
 
-/* THE INDEX — numbered links centred in the bar, with a sun marker that slides
-   to the section you're in (scroll-spy). The novelty: the nav reports where you
-   are, and the numbers match the section headers below. */
+/* THE INDEX — numbered links centred in the bar. The novelty: under each link a
+   flowing wave (the "sea") rises on hover and runs warm/ochre on the section
+   you're in (scroll-spy), and the numbers match the section headers below. */
 .nav-index {
   position: relative;
   display: flex;
@@ -383,26 +383,46 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   color: var(--mute);
   transition: color .25s ease;
 }
-/* the horizon: a hairline that draws in from the centre on hover/active, the
-   line the sun rises over. sage by default, warming to ochre when you're there. */
-.nav-item::after {
-  content: '';
+/* the sea: a flowing wave under the item — calm sage water on hover, warm
+   ochre when you're there, with the sun (marker) riding above it. The svg is
+   2x the item width and slides one half-cycle on a loop, so the crest travels
+   like real water. Reversible via navWaves (then there's no underline, just
+   the colour shift + the sun marker for the active item). */
+.nav-wave {
   position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -9px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.55;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .4s cubic-bezier(0.22, 0.61, 0.36, 1), background-color .25s ease, opacity .25s ease;
+  left: 6%;
+  right: 6%;
+  bottom: -10px;
+  height: 8px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
 }
-.nav-item:hover::after { transform: scaleX(1); }
-.nav-item.is-active::after { transform: scaleX(1); background: var(--ochre); opacity: 0.8; }
+.nav-wave svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  animation: nav-wave-flow 2.6s linear infinite;
+}
+.nav-wave path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.nav-item:hover .nav-wave { opacity: 0.9; }
+.nav-item.is-active .nav-wave { opacity: 1; }
+.nav-item.is-active .nav-wave path { stroke: var(--ochre); stroke-width: 1.8; }
+@keyframes nav-wave-flow { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
-  .nav-item::after { transition: opacity .2s ease; }
-  .nav-item:hover::after, .nav-item.is-active::after { transform: scaleX(1); }
+  .nav-wave svg { animation: none; }
+  .nav-wave { transition: opacity .2s ease; }
 }
 .nav-num {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;
@@ -421,36 +441,6 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .nav-item:hover .nav-num { color: var(--accent); }
 .nav-item.is-active { color: var(--ink); }
 .nav-item.is-active .nav-num { color: var(--accent); }
-/* the sliding sun: a tiny sun (disc + rays) rising on the horizon under the
-   active item — the site's motif, reused as the "you are here" mark. It slides
-   between sections and breathes gently in place. */
-.nav-marker {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  width: 22px; height: 22px;
-  margin-left: -11px;
-  opacity: 0;
-  transition: transform .42s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .3s ease;
-}
-.nav-sun-mark { width: 100%; height: 100%; display: block; overflow: visible; }
-.nav-sun-disc { fill: var(--ochre); }
-.nav-sun-rays line {
-  stroke: var(--ochre);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  transform-origin: 12px 12px;
-  animation: nav-sun-breathe 6s ease-in-out infinite;
-}
-.nav-sun-mark { filter: drop-shadow(0 0 4px rgba(201, 154, 63, 0.55)); }
-@keyframes nav-sun-breathe {
-  0%, 100% { transform: scale(0.82); opacity: 0.7; }
-  50%      { transform: scale(1);    opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav-marker { transition: opacity .2s ease; }
-  .nav-sun-rays line { animation: none; transform: scale(0.9); }
-}
 
 .nav-cta {
   flex: none;
@@ -563,6 +553,45 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   z-index: 0;
 }
 .hero-sun.rise { animation: hero-sun-breathe 9s ease-in-out infinite alternate; }
+/* the ray crown: a 70s sunburst radiating from the sun, behind the arch. The
+   lower rays fall behind the photo frame (z1); only the top crown peeks over
+   the arch. Three nested transforms compose cleanly: the <svg> takes the
+   scroll-linked turn/sink (framer), an inner group spins slowly on idle, and an
+   innermost group blooms on hover — so none clobber each other. */
+.hero-rays {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 120%;
+  margin-left: -60%;
+  aspect-ratio: 1;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero-rays-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-rays-turn 150s linear infinite;
+}
+.hero-rays-bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.hero-ray {
+  stroke: var(--ochre);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  opacity: 0.5;
+  transition: opacity .6s ease;
+}
+.hero-photo.can-bloom:hover .hero-rays-bloom { transform: scale(1.18); }
+.hero-photo.can-bloom:hover .hero-ray { opacity: 0.85; }
+@keyframes hero-rays-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-rays-spin { animation: none; }
+}
 /* the arch frame holds the photograph */
 .hero-photo-frame {
   position: absolute;
@@ -1054,6 +1083,30 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   transition: filter .3s ease, transform .3s ease;
 }
 .practice:hover .practice-photo { filter: saturate(1.05); transform: translateY(-2px); }
+
+/* --- Photographs warm and "develop" on hover (photoHover flag) -------------
+   The image rests slightly cool and muted; on hover it warms, gains saturation
+   and a touch of brightness, and lifts/zooms a hair — like a print coming up in
+   the tray. Gated by the ff-photo root class so it's fully removable. */
+.ff-photo .practice-photo,
+.ff-photo .about-photo,
+.ff-photo .band-photo,
+.ff-photo .hero-photo-img {
+  transition: filter .55s ease, transform .55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.ff-photo .practice-photo,
+.ff-photo .about-photo,
+.ff-photo .band-photo { filter: saturate(0.82) contrast(1.02) brightness(0.99); }
+.ff-photo .practice:hover .practice-photo {
+  filter: saturate(1.12) contrast(1) brightness(1.05);
+  transform: scale(1.03) translateY(-3px);
+}
+.ff-photo .about-photo:hover {
+  filter: saturate(1.12) contrast(1) brightness(1.05);
+  transform: scale(1.02);
+}
+.ff-photo .band-photo:hover { filter: saturate(1.12) contrast(1) brightness(1.04); }
+.ff-photo .hero-photo:hover .hero-photo-img { filter: saturate(1.08) brightness(1.04); }
 .practice:last-child { border-bottom: 1px solid var(--rule); }
 .practice { transition: background .25s ease; }
 .practice:hover { background: linear-gradient(90deg, transparent, rgba(201, 154, 63, 0.06) 30%, transparent); }
@@ -1094,6 +1147,20 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   transition: animation-duration .4s ease;
 }
 .dance:hover .turning { animation-duration: 26s; } /* quicken when you lean in */
+/* each dancer sways gently in place (staggered) so the ring looks alive even
+   before you interact. transform-box keeps the origin at the figure's own feet. */
+.dance.can-sway .fig-sway {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: fig-sway 3.6s ease-in-out infinite;
+}
+@keyframes fig-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dance.can-sway .fig-sway { animation: none; }
+}
 .dance-ring {
   transition: stroke .4s ease, stroke-width .4s ease;
 }

@@ -1,0 +1,64 @@
+# Activities ("ways to work together"). Managed in the CMS at /admin.
+# Each item carries both languages; the site shows the active one.
+heading:
+  labelHe: דרכי עבודה
+  labelEn: Practices
+  titleHe: איך עובדים יחד
+  titleEn: Ways to work together
+  subHe: כל מסע מתחיל בשיחה. אלה הצורות שהעבודה בדרך כלל לובשת.
+  subEn: >-
+    Every journey starts with a conversation. These are the shapes the work
+    usually takes.
+items:
+  - titleHe: נשימה מודעת
+    titleEn: Breathwork
+    noteHe: אחד על אחד · 75 דקות
+    noteEn: One-on-one · 75 minutes
+    bodyHe: >-
+      נשימה מודעת ומונחית שמאפשרת לגוף לסיים את מה שהראש דוחה.
+      מאטים, מקשיבים, ונותנים לנשימה לדבר.
+    bodyEn: >-
+      Guided conscious breathing that lets the body finish what the mind keeps
+      postponing. We slow down, listen, and let the breath do the talking.
+    photo: /photos/breath.jpg
+    photoAltHe: אישה נושמת לאט מול חלון מואר, מצולמת מאחור
+    photoAltEn: A woman breathing slowly at a bright window, seen from behind
+  - titleHe: תנועה וריקוד
+    titleEn: Movement & dance
+    noteHe: מפגשים פתוחים · שבועי
+    noteEn: Open sessions · weekly
+    bodyHe: >-
+      תנועה חופשית בלי צעדים ללמוד ובלי קהל. מוזיקה, רצפה, יחפים.
+      הגוף זוכר איך. הוא תמיד זכר.
+    bodyEn: >-
+      Free movement with no steps to learn and nobody watching. Music, floor,
+      bare feet. The body remembers how — it always has.
+    photo: /photos/feet.jpg
+    photoAltHe: רגליים יחפות באמצע תנועה על רצפת עץ, שולי שמלה מסתחררים
+    photoAltEn: Bare feet mid-movement on a wooden floor, a hem swirling
+  - titleHe: מסעות זוגיים
+    titleEn: Couples journeys
+    noteHe: סדנאות פרטיות · בתיאום
+    noteEn: Private workshops · by invitation
+    bodyHe: >-
+      מסע מודרך לשניים שרוצים להיפגש מחדש: תקשורת, מגע ונוכחות,
+      בבנייה הדרגתית ובהחזקה רכה.
+    bodyEn: >-
+      A guided journey for two people who want to meet again — communication,
+      touch, and presence, built gradually and held with care.
+    photo: /photos/hands.jpg
+    photoAltHe: שתי זוגות ידיים אוחזות זו בזו על בד פשתן ירוק
+    photoAltEn: Two pairs of hands gently held together on green linen
+  - titleHe: מעגלי מדיטציה
+    titleEn: Meditation circles
+    noteHe: קבוצות קטנות · מולד הירח
+    noteEn: Small groups · new moon
+    bodyHe: >-
+      לשבת יחד במעגל, לעשות מעט מאוד, בכוונה גדולה. שקט בחברותא
+      הוא שקט אחר.
+    bodyEn: >-
+      Sitting together in a circle, doing very little, very deliberately.
+      Silence with company is a different silence.
+    photo: /photos/meditation.jpg
+    photoAltHe: מעגל מדיטציה קטן סביב נרות וקערה טיבטית
+    photoAltEn: A small meditation circle seated around candles and a singing bowl

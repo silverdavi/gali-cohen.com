@@ -1,0 +1,42 @@
+# Pricing / sessions. Managed in the CMS at /admin.
+# `ctaUrl` is optional: paste a booking or Stripe Payment Link. If left empty,
+# the button falls back to WhatsApp using the number in your profile.
+heading:
+  labelHe: תעריפים
+  labelEn: Pricing
+  titleHe: מפגשים והשקעה
+  titleEn: Sessions & investment
+  subHe: שקיפות מראש. אפשר תמיד לכתוב לי לפני, ולמצוא יחד את ההתאמה.
+  subEn: >-
+    Clear from the start. You can always write me first and we’ll find the
+    right fit together.
+  ctaHe: לקביעת מפגש
+  ctaEn: Book
+items:
+  - titleHe: מפגש נשימה אישי
+    titleEn: Private breathwork
+    price: "₪360"
+    unitHe: מפגש · 75 דק׳
+    unitEn: session · 75 min
+    noteHe: מפגש אחד על אחד בקליניקה בתל אביב.
+    noteEn: One-on-one in the Tel Aviv clinic.
+    featured: false
+    ctaUrl: ""
+  - titleHe: חבילת מסע · 4 מפגשים
+    titleEn: Journey package · 4 sessions
+    price: "₪1,280"
+    unitHe: רצף · ארבעה מפגשים
+    unitEn: series · four sessions
+    noteHe: תהליך מתמשך, בקצב שלכם, עם החזקה בין המפגשים.
+    noteEn: An ongoing process at your pace, with holding between sessions.
+    featured: true
+    ctaUrl: ""
+  - titleHe: מסע זוגי
+    titleEn: Couples journey
+    price: "₪520"
+    unitHe: מפגש · 90 דק׳
+    unitEn: session · 90 min
+    noteHe: לשניים שרוצים להיפגש מחדש — בתיאום מראש.
+    noteEn: For two people meeting again — by arrangement.
+    featured: false
+    ctaUrl: ""

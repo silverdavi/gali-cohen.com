@@ -9,18 +9,22 @@ const SLOTS = 10;
 const FIGURES = 9; // one slot kept open for the dancer who joins on hover
 
 // One dancing figure: head + open-armed body, drawn pointing outward from center.
-function Figure({ angle, className }: { angle: number; className?: string }) {
+// The outer <g> places the figure on the ring; the inner .fig-sway group does a
+// gentle staggered sway in place so the circle looks alive, not frozen.
+function Figure({ angle, className, delay = 0 }: { angle: number; className?: string; delay?: number }) {
   return (
     <g className={className} transform={`rotate(${angle} 140 140) translate(140 38)`}>
-      <circle cx="0" cy="0" r="7" fill="var(--accent)" />
-      {/* body */}
-      <path d="M0 7 V 34" stroke="var(--ink)" strokeWidth="3.4" strokeLinecap="round" />
-      {/* arms raised toward neighbors */}
-      <path d="M0 14 Q -12 8 -19 -1" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <path d="M0 14 Q 12 8 19 -1" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
-      {/* legs mid-step */}
-      <path d="M0 34 Q -7 44 -10 52" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <path d="M0 34 Q 8 43 9 52" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <g className="fig-sway" style={{ animationDelay: `${delay}s` }}>
+        <circle cx="0" cy="0" r="7" fill="var(--accent)" />
+        {/* body */}
+        <path d="M0 7 V 34" stroke="var(--ink)" strokeWidth="3.4" strokeLinecap="round" />
+        {/* arms raised toward neighbors */}
+        <path d="M0 14 Q -12 8 -19 -1" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
+        <path d="M0 14 Q 12 8 19 -1" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
+        {/* legs mid-step */}
+        <path d="M0 34 Q -7 44 -10 52" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
+        <path d="M0 34 Q 8 43 9 52" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
+      </g>
     </g>
   );
 }
@@ -50,14 +54,14 @@ export function Circle() {
           </Reveal>
           <Reveal y={28} className="col-side">
             <motion.div style={scrollTurn ? { rotate } : undefined} className="dance-wrap">
-              <svg className={`dance${features.danceJoinHover ? ' can-join' : ''}`} viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
+              <svg className={`dance${features.danceJoinHover ? ' can-join' : ''}${features.figureSway ? ' can-sway' : ''}`} viewBox="0 0 280 280" role="img" aria-label={circle.alt}>
                 <circle className="dance-ring" cx="140" cy="140" r="64" fill="none" stroke="var(--rule)" strokeWidth="1.5" strokeDasharray="3 7" />
                 <g className="turning">
                   {Array.from({ length: FIGURES }, (_, i) => (
-                    <Figure key={i} angle={(360 / SLOTS) * i} />
+                    <Figure key={i} angle={(360 / SLOTS) * i} delay={i * 0.4} />
                   ))}
                   {/* the open slot; a tenth dancer joins on hover */}
-                  <Figure className="joiner" angle={(360 / SLOTS) * FIGURES} />
+                  <Figure className="joiner" angle={(360 / SLOTS) * FIGURES} delay={FIGURES * 0.4} />
                 </g>
                 <circle className="dance-heart" cx="140" cy="140" r="5" fill="var(--ochre)" />
               </svg>

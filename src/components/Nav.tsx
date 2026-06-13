@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { content } from '../content';
 import { features } from '../features';
 
@@ -18,11 +18,7 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState<string>('');
-  const [marker, setMarker] = useState<{ x: number; w: number } | null>(null);
-  const [resizeTick, setResizeTick] = useState(0);
   const lastY = useRef(0);
-  const indexRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   // The page index: the same numbers appear in each section header.
   const items = [
@@ -64,27 +60,9 @@ export function Nav() {
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    const onResize = () => setResizeTick((t) => t + 1);
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Slide the sun marker under the active item (RTL-safe: offsets are physical).
-  useLayoutEffect(() => {
-    const wrap = indexRef.current;
-    const el = active ? itemRefs.current[active] : null;
-    if (!wrap || !el) {
-      setMarker(null);
-      return;
-    }
-    const wr = wrap.getBoundingClientRect();
-    const er = el.getBoundingClientRect();
-    setMarker({ x: er.left - wr.left + er.width / 2, w: er.width });
-  }, [active, scrolled, resizeTick]);
 
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}`}>
@@ -94,39 +72,24 @@ export function Nav() {
           <span className="nav-name">{content.profile.name}</span>
         </a>
 
-        <div className="nav-index" ref={indexRef}>
+        <div className="nav-index">
           {items.map((it) => (
             <a
               key={it.id}
               href={`#${it.id}`}
-              ref={(el) => { itemRefs.current[it.id] = el; }}
               className={`nav-item${active === it.id ? ' is-active' : ''}`}
             >
               <span className="nav-num">{it.num}</span>
               <span className="nav-label">{it.label}</span>
+              {features.navWaves && (
+                <span className="nav-wave" aria-hidden>
+                  <svg viewBox="0 0 48 8" preserveAspectRatio="none" focusable="false">
+                    <path d="M0 4 q 2 -2.6 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0 t 4 0" />
+                  </svg>
+                </span>
+              )}
             </a>
           ))}
-          {marker && (
-            <span
-              className="nav-marker"
-              style={{ transform: `translateX(${marker.x}px)`, opacity: 1 }}
-              aria-hidden
-            >
-              <svg className="nav-sun-mark" viewBox="0 0 24 24" focusable="false">
-                <g className="nav-sun-rays">
-                  <line x1="12" y1="1.5" x2="12" y2="4.5" />
-                  <line x1="12" y1="19.5" x2="12" y2="22.5" />
-                  <line x1="1.5" y1="12" x2="4.5" y2="12" />
-                  <line x1="19.5" y1="12" x2="22.5" y2="12" />
-                  <line x1="4.6" y1="4.6" x2="6.7" y2="6.7" />
-                  <line x1="17.3" y1="17.3" x2="19.4" y2="19.4" />
-                  <line x1="17.3" y1="6.7" x2="19.4" y2="4.6" />
-                  <line x1="4.6" y1="19.4" x2="6.7" y2="17.3" />
-                </g>
-                <circle className="nav-sun-disc" cx="12" cy="12" r="4" />
-              </svg>
-            </span>
-          )}
         </div>
 
         <a className="nav-cta" href="#contact">{content.nav.cta}</a>
