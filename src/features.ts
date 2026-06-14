@@ -12,6 +12,7 @@ export type FeatureKey =
   | 'navWaves'          // nav hover/active underline is a flowing wave (sun over the sea)
   | 'heroSunRays'       // an SVG ray crown radiates behind the hero arch (idle spin + scroll turn)
   | 'photoHover'        // photographs warm and lift on hover (develop effect)
+  | 'photoMotion'       // photos become "living stills": a subtle muted loop plays in view (cinemagraph)
   | 'figureSway'        // the dance figures sway gently in place
   | 'natureLife'        // an ambient bird occasionally flies in, perches on a growing branch, then leaves
   | 'astrology'         // render the celestial "sky right now" + find-your-sign section
@@ -49,6 +50,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   navWaves: true,
   heroSunRays: true,
   photoHover: true,
+  photoMotion: true,
   figureSway: true,
   natureLife: true,
   astrology: true,

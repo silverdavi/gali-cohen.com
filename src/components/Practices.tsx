@@ -1,7 +1,9 @@
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
+import { Cinemagraph } from './Cinemagraph';
 import { activities } from '../content/collections';
 import { features } from '../features';
+import { clipFor } from '../clips';
 
 export function Practices() {
   const { heading, items } = activities;
@@ -29,7 +31,7 @@ export function Practices() {
                   <h3 className="practice-title">{p.title}</h3>
                   <p className="practice-body">{p.body}</p>
                 </div>
-                <img className="practice-photo" src={p.photo} alt={p.photoAlt} loading="lazy" />
+                <Cinemagraph className="practice-photo" src={p.photo} clip={clipFor(p.photo)} alt={p.photoAlt} />
               </article>
             </Reveal>
           ))}

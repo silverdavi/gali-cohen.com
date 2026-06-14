@@ -2,6 +2,10 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { content } from '../content';
 import { features } from '../features';
+import { Cinemagraph } from './Cinemagraph';
+import { clipFor } from '../clips';
+
+const PORTRAIT_CLIP = clipFor('/photos/portrait.jpg');
 
 const RAYS = 12;
 
@@ -52,11 +56,13 @@ export function HeroArch() {
         </motion.svg>
       )}
       <div className="hero-photo-frame">
-        <img
-          className={`hero-photo-img${features.heroPhotoDrift ? ' drift' : ''}`}
+        <Cinemagraph
+          className={`hero-photo-img${
+            features.heroPhotoDrift && !(PORTRAIT_CLIP && features.photoMotion && !reduce) ? ' drift' : ''
+          }`}
           src="/photos/portrait.jpg"
-          alt=""
-          aria-hidden
+          clip={PORTRAIT_CLIP}
+          ariaHidden
           fetchPriority="high"
         />
       </div>

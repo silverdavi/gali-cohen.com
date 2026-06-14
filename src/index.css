@@ -1437,6 +1437,15 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 .ff-photo .band-photo:hover { filter: saturate(1.12) contrast(1) brightness(1.04); }
 .ff-photo .hero-photo:hover .hero-photo-img { filter: saturate(1.08) brightness(1.04); }
+/* A <video> standing in for a photo (cinemagraph) must size + crop exactly like
+   the <img> it replaces; video is inline by default, so force block to kill the
+   baseline gap. The shared photo classes (object-fit, radius, aspect) apply via
+   their class selectors. */
+video.practice-photo,
+video.hero-photo-img,
+video.about-photo,
+video.band-photo { display: block; }
+
 .practice:last-child { border-bottom: 1px solid var(--rule); }
 .practice { transition: background .25s ease; }
 .practice:hover { background: linear-gradient(90deg, transparent, rgba(201, 154, 63, 0.06) 30%, transparent); }

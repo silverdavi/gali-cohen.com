@@ -48,7 +48,11 @@ All copy lives in per-language YAML — never hard-coded in components:
 
 ## Feature flags
 
-Every optional dynamic behavior is gated in `src/features.ts` so anything can be disabled without touching component code — e.g. `breathDark`, `ambientLight`, `grain`, `kineticType`, `navWaves`, `photoHover`, `natureLife` (the bird), `astrology` / `astroMotion`, `zodiacMedallions`, and the commerce sections `showPricing` / `showEvents` / `showStore`. All respect `prefers-reduced-motion`. Flags can be overridden per-visit via the URL query string for testing.
+Every optional dynamic behavior is gated in `src/features.ts` so anything can be disabled without touching component code — e.g. `breathDark`, `ambientLight`, `grain`, `kineticType`, `navWaves`, `photoHover`, `photoMotion` (cinemagraphs), `natureLife` (the bird), `astrology` / `astroMotion`, `zodiacMedallions`, and the commerce sections `showPricing` / `showEvents` / `showStore`. All respect `prefers-reduced-motion`. Flags can be overridden per-visit via the URL query string for testing.
+
+### Cinemagraphs ("living stills")
+
+Selected photos can play a subtle, muted, seamless loop (e.g. candle flames flickering) via the `<Cinemagraph>` component. The still is always the `poster` (instant paint, no layout shift); the loop only plays while in view and is disabled entirely under `prefers-reduced-motion` or with `photoMotion` off. A photo upgrades itself automatically once its loop is listed in `src/clips.ts` and the files exist at `public/clips/<name>.{webm,mp4}`. Clips are generated with `tools/cinemagraph_svd.py` (Stable Video Diffusion on Hugging Face Jobs), then masked to one moving region and ping-ponged into a seamless loop (~50–90 KB each). See the master guide for the full recipe.
 
 The astrology section shows the **sun-sign season** and a **find-your-sign** reveal using a set of quirky flat "vintage-tarot" zodiac roundels (`public/photos/zodiac/*.webp`, ~45 KB each, generated then curated). Their backgrounds are keyed to transparent (border flood-fill, so the gold ring + figures survive) so each medallion floats on the dark moss rather than sitting in a cream tile. Setting `zodiacMedallions: false` falls back to the hand-authored gold line-art constellations. The moon is always a live SVG drawn to tonight's real phase (same math as the nav-bar moon glyph).
 
