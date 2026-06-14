@@ -1,7 +1,9 @@
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
+import { Cinemagraph } from './Cinemagraph';
 import { store, isExternal } from '../content/collections';
 import { features } from '../features';
+import { clipFor } from '../clips';
 
 export function Store() {
   const { heading, items } = store;
@@ -15,7 +17,7 @@ export function Store() {
             <Reveal key={p.title} delay={i * 0.06} className="col-third">
               <article className="product">
                 <div className={`product-media${features.photoHover ? ' can-hover' : ''}`}>
-                  <img src={p.image} alt={p.title} loading="lazy" />
+                  <Cinemagraph src={p.image} clip={clipFor(p.image)} alt={p.title} />
                 </div>
                 <div className="product-body">
                   <h3 className="product-title">{p.title}</h3>

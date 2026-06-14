@@ -2,6 +2,8 @@ import { Reveal } from './Reveal';
 import { content } from '../content';
 import { features } from '../features';
 import { useMagnetic } from '../useMagnetic';
+import { Cinemagraph } from './Cinemagraph';
+import { clipFor } from '../clips';
 
 export function Contact() {
   const { profile, contact, footer } = content;
@@ -12,7 +14,7 @@ export function Contact() {
         <div className="container">
           <Reveal>
             <div className={`contact-medallion${features.medallionSpin ? ' spin' : ''}`} aria-hidden>
-              <img src="/photos/bowl.jpg" alt="" loading="lazy" />
+              <Cinemagraph src="/photos/bowl.jpg" clip={clipFor('/photos/bowl.jpg')} ariaHidden />
             </div>
             <h2 className="contact-line">{contact.line}</h2>
             <p className="contact-sub">{contact.sub}</p>

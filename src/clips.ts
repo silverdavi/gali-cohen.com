@@ -3,7 +3,13 @@
 // committed and any <Cinemagraph src="/photos/<name>.jpg"> upgrades to a
 // living still automatically (subject to the photoMotion flag + reduced motion).
 const AVAILABLE = new Set<string>([
+  'portrait',
+  'breath',
+  'feet',
+  'hands',
   'meditation',
+  'bowl',
+  'dance-circle',
 ]);
 
 /** Map a photo path to its clip base (no extension), or undefined if none. */

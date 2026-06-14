@@ -1,6 +1,8 @@
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
+import { Cinemagraph } from './Cinemagraph';
 import { content } from '../content';
+import { clipFor } from '../clips';
 
 export function About() {
   const { aboutSection } = content;
@@ -18,7 +20,12 @@ export function About() {
           </Reveal>
           <Reveal delay={0.12} className="col-side">
             <div>
-              <img className="about-photo" src={aboutSection.photo} alt={aboutSection.photoAlt} loading="lazy" />
+              <Cinemagraph
+                className="about-photo"
+                src={aboutSection.photo}
+                clip={clipFor(aboutSection.photo)}
+                alt={aboutSection.photoAlt}
+              />
               <div className="about-facts">
                 {aboutSection.facts.map((f) => (
                   <div className="fact" key={f.label}>

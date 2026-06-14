@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# cinemagraph raw SVD intermediates (regenerable via HF Jobs)
+tools/raw/
