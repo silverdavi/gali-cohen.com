@@ -78,23 +78,38 @@ function client(wsUrl) {
 }
 
 const EXPR = `(async () => {
-  await new Promise(r => setTimeout(r, 900));
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  await wait(900);
+  const canHover = matchMedia('(hover: hover)').matches;
   const vids = [...document.querySelectorAll('video')];
   const out = [];
   for (const v of vids) {
     v.scrollIntoView({ block: 'center' });
-    await new Promise(r => setTimeout(r, 800));
-    const t0 = v.currentTime;
-    await new Promise(r => setTimeout(r, 600));
-    out.push({
+    await wait(700);
+    const rec = {
       src: (v.currentSrc || '').split('/').pop(),
-      paused: v.paused,
-      advanced: +(v.currentTime - t0).toFixed(3),
-      decoded: v.videoWidth + 'x' + v.videoHeight,
-      readyState: v.readyState,
-    });
+      restPaused: v.paused,         // should be TRUE at rest in hover mode
+    };
+    if (canHover) {
+      const target = v.parentElement || v;
+      target.dispatchEvent(new PointerEvent('pointerenter'));
+      await wait(700);
+      const t0 = v.currentTime;
+      await wait(500);
+      rec.hoverPlaying = !v.paused && v.currentTime > t0;
+      rec.decoded = v.videoWidth + 'x' + v.videoHeight; // now that it has loaded
+      target.dispatchEvent(new PointerEvent('pointerleave'));
+      await wait(300);
+      rec.leftPaused = v.paused;
+    } else {
+      const t0 = v.currentTime;
+      await wait(600);
+      rec.inViewPlaying = !v.paused && v.currentTime > t0;
+      rec.decoded = v.videoWidth + 'x' + v.videoHeight;
+    }
+    out.push(rec);
   }
-  return JSON.stringify({ count: vids.length, videos: out });
+  return JSON.stringify({ count: vids.length, canHover, videos: out });
 })()`;
 
 let server;
@@ -109,18 +124,25 @@ try {
   const res = await c.send('Runtime.evaluate', { expression: EXPR, awaitPromise: true, returnByValue: true });
   if (res.result?.exceptionDetails) throw new Error(JSON.stringify(res.result.exceptionDetails));
   const data = JSON.parse(res.result.result.value);
-  console.log('videos found:', data.count);
-  let playing = 0;
+  console.log(`videos found: ${data.count}   mode: ${data.canHover ? 'hover-to-play' : 'in-view (touch fallback)'}`);
+  let ok = 0;
   for (const v of data.videos) {
-    const ok = !v.paused && v.advanced > 0 && v.decoded !== '0x0';
-    if (ok) playing++;
-    console.log(`  ${ok ? 'PLAY' : 'STILL'}  ${v.src.padEnd(20)} paused=${v.paused} +${v.advanced}s decoded=${v.decoded} ready=${v.readyState}`);
+    let pass, detail;
+    if (data.canHover) {
+      pass = v.restPaused && v.hoverPlaying && v.leftPaused && v.decoded !== '0x0';
+      detail = `rest=${v.restPaused ? 'still' : 'PLAYING!'} hover=${v.hoverPlaying ? 'plays' : 'dead'} leave=${v.leftPaused ? 'stops' : 'STUCK!'} decoded=${v.decoded}`;
+    } else {
+      pass = v.inViewPlaying && v.decoded !== '0x0';
+      detail = `inView=${v.inViewPlaying ? 'plays' : 'dead'} decoded=${v.decoded}`;
+    }
+    if (pass) ok++;
+    console.log(`  ${pass ? 'OK  ' : 'FAIL'}  ${v.src.padEnd(20)} ${detail}`);
   }
-  console.log(`\nresult: ${playing}/${data.count} videos actively playing`);
+  console.log(`\nresult: ${ok}/${data.count} cinemagraphs behave correctly`);
   c.ws.close();
   chrome.kill();
   server?.close();
-  process.exit(playing > 0 && playing === data.count ? 0 : 2);
+  process.exit(ok > 0 && ok === data.count ? 0 : 2);
 } catch (err) {
   console.error('smoke failed:', err.message);
   chrome.kill();

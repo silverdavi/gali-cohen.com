@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { features } from '../features';
 
-// A "living still": shows the ordinary photo (the poster) until it scrolls into
-// view, then plays a short, muted, seamless loop on top — a subtle swish of
-// leaves / light / fabric. Degrades to a plain <img> when:
+// A "living still": shows the ordinary photo (the poster) at rest, and plays a
+// short, muted, seamless loop on top only while hovered — a subtle swish that
+// rewards intent rather than animating the whole page at once. On touch devices
+// (no hover) it falls back to playing while in view, so it isn't dead there.
+// Degrades to a plain <img> when:
 //   • no clip was generated for this photo (`clip` undefined),
 //   • the photoMotion feature flag is off, or
 //   • the visitor prefers reduced motion.
@@ -28,6 +30,13 @@ const prefersReduced =
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Devices with a real pointer get hover-to-play; touch screens (which can't
+// hover) fall back to play-while-in-view so the motion still happens there.
+const canHover =
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(hover: hover)').matches;
+
 export function Cinemagraph({
   src,
   clip,
@@ -40,21 +49,45 @@ export function Cinemagraph({
   const motion = !!clip && features.photoMotion && !prefersReduced;
   const ref = useRef<HTMLVideoElement>(null);
 
-  // Only load + play the loop while it is on screen; pause (and free decode
-  // work) the moment it leaves. Keeps it battery-friendly on long scrolls.
   useEffect(() => {
     if (!motion) return;
     const v = ref.current;
     if (!v) return;
+
+    const play = () => {
+      if (v.preload === 'none') v.preload = 'auto';
+      v.play().catch(() => {});
+    };
+    // Pause and rewind to the rest frame so it always settles back to the still.
+    const rest = () => {
+      v.pause();
+      try {
+        v.currentTime = 0;
+      } catch {
+        /* not seekable yet — harmless */
+      }
+    };
+
+    if (canHover) {
+      // Hover the whole photo frame (the parent), not just the <video>, so
+      // decorative overlays (e.g. the hero arch ring) don't swallow the event.
+      const target = v.parentElement ?? v;
+      target.addEventListener('pointerenter', play);
+      target.addEventListener('pointerleave', rest);
+      return () => {
+        target.removeEventListener('pointerenter', play);
+        target.removeEventListener('pointerleave', rest);
+        v.pause();
+      };
+    }
+
+    // No hover (touch): play while on screen, pause when it leaves — keeps it
+    // battery-friendly on long scrolls.
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) {
-            if (v.preload === 'none') v.preload = 'auto';
-            v.play().catch(() => {});
-          } else {
-            v.pause();
-          }
+          if (e.isIntersecting) play();
+          else v.pause();
         }
       },
       { threshold: 0.25 },
