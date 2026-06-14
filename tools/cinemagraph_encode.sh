@@ -66,8 +66,15 @@ for mp4 in "$RAW"/*.mp4; do
     -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 24 -movflags +faststart \
     "$OUT/$name.mp4"
 
-  printf '   -> %s.webm (%s)  %s.mp4 (%s)\n' \
+  # 5) poster = the loop's REST frame (frame 0). The component uses this as the
+  #    <video> poster so the at-rest still is pixel-identical to the first played
+  #    frame — hover swaps still->motion with no jump, and pausing back to frame 0
+  #    looks the same as rest. (The original src stays the no-motion fallback.)
+  ffmpeg -v error -y -i "$TMP/loop.mp4" -frames:v 1 -q:v 4 "$OUT/$name.jpg"
+
+  printf '   -> %s.webm (%s)  %s.mp4 (%s)  %s.jpg (%s)\n' \
     "$name" "$(du -h "$OUT/$name.webm" | cut -f1)" \
-    "$name" "$(du -h "$OUT/$name.mp4" | cut -f1)"
+    "$name" "$(du -h "$OUT/$name.mp4" | cut -f1)" \
+    "$name" "$(du -h "$OUT/$name.jpg" | cut -f1)"
 done
 echo "done -> $OUT"

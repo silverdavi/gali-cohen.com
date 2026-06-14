@@ -114,7 +114,7 @@ export function Cinemagraph({
     <video
       ref={ref}
       className={className}
-      poster={src}
+      poster={`${clip}.jpg`}
       muted
       loop
       playsInline

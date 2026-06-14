@@ -79,6 +79,15 @@ function client(wsUrl) {
 
 const EXPR = `(async () => {
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  // Scale magnitude from the computed transform matrix — ignores rotation (so a
+  // constantly-spinning medallion doesn't read as a zoom; only real scaling does).
+  const scaleOf = (el) => {
+    const t = getComputedStyle(el).transform;
+    const m = t && t.match(/matrix\\(([^)]+)\\)/);
+    if (!m) return 1;
+    const [a, b] = m[1].split(',').map(parseFloat);
+    return Math.hypot(a, b);
+  };
   await wait(900);
   const canHover = matchMedia('(hover: hover)').matches;
   const vids = [...document.querySelectorAll('video')];
@@ -92,12 +101,14 @@ const EXPR = `(async () => {
     };
     if (canHover) {
       const target = v.parentElement || v;
+      const sRest = scaleOf(v);
       target.dispatchEvent(new PointerEvent('pointerenter'));
       await wait(700);
       const t0 = v.currentTime;
       await wait(500);
       rec.hoverPlaying = !v.paused && v.currentTime > t0;
       rec.decoded = v.videoWidth + 'x' + v.videoHeight; // now that it has loaded
+      rec.noZoom = Math.abs(scaleOf(v) - sRest) < 0.02; // hover must not scale it
       target.dispatchEvent(new PointerEvent('pointerleave'));
       await wait(300);
       rec.leftPaused = v.paused;
@@ -129,8 +140,8 @@ try {
   for (const v of data.videos) {
     let pass, detail;
     if (data.canHover) {
-      pass = v.restPaused && v.hoverPlaying && v.leftPaused && v.decoded !== '0x0';
-      detail = `rest=${v.restPaused ? 'still' : 'PLAYING!'} hover=${v.hoverPlaying ? 'plays' : 'dead'} leave=${v.leftPaused ? 'stops' : 'STUCK!'} decoded=${v.decoded}`;
+      pass = v.restPaused && v.hoverPlaying && v.leftPaused && v.noZoom && v.decoded !== '0x0';
+      detail = `rest=${v.restPaused ? 'still' : 'PLAYING!'} hover=${v.hoverPlaying ? 'plays' : 'dead'} leave=${v.leftPaused ? 'stops' : 'STUCK!'} zoom=${v.noZoom ? 'none' : 'ZOOMS!'} decoded=${v.decoded}`;
     } else {
       pass = v.inViewPlaying && v.decoded !== '0x0';
       detail = `inView=${v.inViewPlaying ? 'plays' : 'dead'} decoded=${v.decoded}`;

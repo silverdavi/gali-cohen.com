@@ -1412,7 +1412,7 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   filter: saturate(0.92);
   transition: filter .3s ease, transform .3s ease;
 }
-.practice:hover .practice-photo { filter: saturate(1.05); transform: translateY(-2px); }
+.practice:hover img.practice-photo { filter: saturate(1.05); transform: translateY(-2px); }
 
 /* --- Photographs warm and "develop" on hover (photoHover flag) -------------
    The image rests slightly cool and muted; on hover it warms, gains saturation
@@ -1427,16 +1427,19 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 .ff-photo .practice-photo,
 .ff-photo .about-photo,
 .ff-photo .band-photo { filter: saturate(0.82) contrast(1.02) brightness(0.99); }
-.ff-photo .practice:hover .practice-photo {
+/* The warm/zoom "develop" on hover applies to plain photos (img) only. A living
+   still (video) deliberately opts out: hovering it just swaps the still for its
+   animated version — no scale, no warm — so the change reads as minute. */
+.ff-photo .practice:hover img.practice-photo {
   filter: saturate(1.12) contrast(1) brightness(1.05);
   transform: scale(1.03) translateY(-3px);
 }
-.ff-photo .about-photo:hover {
+.ff-photo img.about-photo:hover {
   filter: saturate(1.12) contrast(1) brightness(1.05);
   transform: scale(1.02);
 }
-.ff-photo .band-photo:hover { filter: saturate(1.12) contrast(1) brightness(1.04); }
-.ff-photo .hero-photo:hover .hero-photo-img { filter: saturate(1.08) brightness(1.04); }
+.ff-photo img.band-photo:hover { filter: saturate(1.12) contrast(1) brightness(1.04); }
+.ff-photo .hero-photo:hover img.hero-photo-img { filter: saturate(1.08) brightness(1.04); }
 /* A <video> standing in for a photo (cinemagraph) must size + crop exactly like
    the <img> it replaces; video is inline by default, so force block to kill the
    baseline gap. The shared photo classes (object-fit, radius, aspect) apply via
@@ -1642,8 +1645,9 @@ video.band-photo { display: block; }
 .contact-medallion.spin img,
 .contact-medallion.spin video { animation: medallion-turn 80s linear infinite; }
 @keyframes medallion-turn { to { transform: rotate(360deg); } }
-.contact-medallion:hover img,
-.contact-medallion:hover video { animation-play-state: paused; transform: scale(1.08); }
+/* img pauses + zooms on hover; the living-still video keeps its slow spin and
+   simply starts its subtle loop — no zoom. */
+.contact-medallion:hover img { animation-play-state: paused; transform: scale(1.08); }
 /* magnetic CTA drifts smoothly back to rest */
 .btn-primary { transition: transform .25s cubic-bezier(0.22, 0.61, 0.36, 1), background .2s ease, color .2s ease; }
 
@@ -1877,8 +1881,7 @@ video.band-photo { display: block; }
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.6s ease;
 }
-.product-media.can-hover:hover img,
-.product-media.can-hover:hover video { transform: scale(1.045); filter: saturate(1.06); }
+.product-media.can-hover:hover img { transform: scale(1.045); filter: saturate(1.06); }
 .product-body {
   display: flex;
   flex-direction: column;
