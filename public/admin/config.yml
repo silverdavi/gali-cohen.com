@@ -1,4 +1,4 @@
-# Decap CMS configuration for galigeulacohen.com
+# Decap CMS configuration for galigeula.com
 # -----------------------------------------------------------------------------
 # Editing locally (no login, recommended for quick edits):
 #   1. npm run dev
@@ -6,7 +6,7 @@
 #   3. open http://localhost:5173/admin/  -> "Work with local repository"
 #   Saves write straight to the YAML files; commit + push to publish.
 #
-# Editing live at galigeulacohen.com/admin (GitHub login):
+# Editing live at galigeula.com/admin (GitHub login):
 #   Requires a tiny OAuth helper — see CMS-SETUP.md — then uncomment `base_url`
 #   below and point it at the deployed helper.
 

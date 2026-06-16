@@ -1,7 +1,7 @@
-# galigeulacohen.com
+# galigeula.com
 # Open to all crawlers. The /admin/ CMS is auth-gated and marked noindex on the
 # page itself (left crawlable so the noindex directive is actually seen).
 User-agent: *
 Allow: /
 
-Sitemap: https://galigeulacohen.com/sitemap.xml
+Sitemap: https://galigeula.com/sitemap.xml

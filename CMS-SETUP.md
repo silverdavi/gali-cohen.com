@@ -30,7 +30,7 @@ The push triggers the deploy. Done.
 
 ---
 
-## Option B — edit live at galigeulacohen.com/admin (GitHub login)
+## Option B — edit live at galigeula.com/admin (GitHub login)
 
 This is for a non-developer editing from anywhere. It needs a tiny OAuth helper
 because GitHub Pages can’t run server code. One-time setup (~10 min):
@@ -38,7 +38,7 @@ because GitHub Pages can’t run server code. One-time setup (~10 min):
 ### 1. Create a GitHub OAuth App
 GitHub → Settings → Developer settings → **OAuth Apps** → New OAuth App
 - Application name: `Gali CMS`
-- Homepage URL: `https://galigeulacohen.com`
+- Homepage URL: `https://galigeula.com`
 - Authorization callback URL: `https://gali-cms-oauth.<your-subdomain>.workers.dev/callback`
 
 Copy the **Client ID** and generate a **Client Secret**.
@@ -70,7 +70,7 @@ backend:
   base_url: https://gali-cms-oauth.<your-subdomain>.workers.dev
 ```
 
-Commit + push. Now <https://galigeulacohen.com/admin> shows **“Login with
+Commit + push. Now <https://galigeula.com/admin> shows **“Login with
 GitHub.”** The editor must be a collaborator on the repo (Settings → Collaborators).
 
 ---

@@ -1,4 +1,4 @@
-# galigeulacohen.com
+# galigeula.com
 
 Personal site for Gali Geula Cohen — holistic & emotional therapist, Tel Aviv. Modern-70s spiritual look: warm cream paper, terracotta accent, an arch-sun hero, a full-viewport **breathing** hero, a slowly turning dance circle, an ambient "living nature" layer (a bird that flies in, perches on a growing branch, and leaves), and a celestial **astrology** interlude (today's sun season + moon phase, plus a "find your sign" reveal). All copy is placeholder until Gali supplies her own words.
 
@@ -22,7 +22,7 @@ site/
 ├── index.html              # head: title, meta, OG/Twitter, JSON-LD, font preloads
 ├── vite.config.ts          # build-id stamp + build-time CSP/referrer meta injection
 ├── public/                 # copied verbatim to dist/
-│   ├── CNAME               # galigeulacohen.com
+│   ├── CNAME               # galigeula.com
 │   ├── robots.txt          # crawl policy + sitemap pointer
 │   ├── sitemap.xml         # single canonical URL (SPA)
 │   ├── .well-known/security.txt   # RFC 9116 disclosure contact
@@ -86,7 +86,7 @@ The TLS and transport posture is hardened as far as the GitHub Pages + Route 53 
 
 **Structural limitation — and how to reach an A+ header grade**
 
-GitHub Pages cannot emit custom HTTP response headers. That means header-only protections — `Strict-Transport-Security` (HSTS), `X-Content-Type-Options`, `X-Frame-Options` / CSP `frame-ancestors`, `Permissions-Policy` — **cannot** be set on this hosting, and a header scanner (e.g. securityheaders.com) will not see the meta CSP. To pass those inspections, put a proxy/CDN in front of the apex (the account already uses Cloudflare for the CMS auth worker, so this is low-friction): proxy `galigeulacohen.com` through Cloudflare and add a response-header rule with:
+GitHub Pages cannot emit custom HTTP response headers. That means header-only protections — `Strict-Transport-Security` (HSTS), `X-Content-Type-Options`, `X-Frame-Options` / CSP `frame-ancestors`, `Permissions-Policy` — **cannot** be set on this hosting, and a header scanner (e.g. securityheaders.com) will not see the meta CSP. To pass those inspections, put a proxy/CDN in front of the apex (the account already uses Cloudflare for the CMS auth worker, so this is low-friction): proxy `galigeula.com` through Cloudflare and add a response-header rule with:
 
 ```
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
@@ -105,13 +105,13 @@ Localized **skip-to-content** link (first focusable element → `#main`), a sing
 
 ## Deploy
 
-GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `galigeulacohen.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account. Each build stamps a UTC date + short git hash into the footer (`__BUILD_ID__`), so a deploy is verifiable live without guessing — read the small version string at the bottom of the page.
+GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `galigeula.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account. Each build stamps a UTC date + short git hash into the footer (`__BUILD_ID__`), so a deploy is verifiable live without guessing — read the small version string at the bottom of the page.
 
 ### Vanity domain redirect
 
-`galigeula.com` (and `www.galigeula.com`) 301-redirect to `https://galigeulacohen.com`. GitHub Pages only allows one custom domain per repo, so the redirect is an AWS stack in the same account (`default` / "DavidIAM" profile, acct `302249171798`, us-east-1):
+`galigeula.com` (and `www.galigeula.com`) 301-redirect to `https://galigeula.com`. GitHub Pages only allows one custom domain per repo, so the redirect is an AWS stack in the same account (`default` / "DavidIAM" profile, acct `302249171798`, us-east-1):
 
-- S3 bucket `galigeula.com` — website config set to redirect-all to `galigeulacohen.com` over https (no objects).
+- S3 bucket `galigeula.com` — website config set to redirect-all to `galigeula.com` over https (no objects).
 - ACM cert for `galigeula.com` + `www.galigeula.com` (DNS-validated).
 - CloudFront `E34ZHGKM99QQ8S` (`d1h0c9e1hs7hhv.cloudfront.net`) — S3 website origin (http-only), viewer protocol redirect-to-https, the ACM cert as SNI.
 - Route 53 zone `galigeula.com` (`Z04649143KAPWML8RI117`): apex + `www` A/AAAA alias → the CloudFront distribution.

@@ -1,6 +1,6 @@
 # https://securitytxt.org/ — RFC 9116
-# How to report a security issue with galigeulacohen.com.
-Contact: mailto:hello@galigeulacohen.com
+# How to report a security issue with galigeula.com.
+Contact: mailto:hello@galigeula.com
 Expires: 2027-06-13T00:00:00.000Z
 Preferred-Languages: he, en
-Canonical: https://galigeulacohen.com/.well-known/security.txt
+Canonical: https://galigeula.com/.well-known/security.txt
