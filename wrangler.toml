@@ -1,0 +1,7 @@
+# One-command deploy for the CMS OAuth helper (see CMS-SETUP.md, Option B).
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+#   wrangler deploy
+name = "gali-cms-oauth"
+main = "cms-oauth-worker.js"
+compatibility_date = "2024-11-01"
