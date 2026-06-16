@@ -28,178 +28,169 @@ locale: he
 # Edits go straight to main and trigger a deploy (no PR/editorial workflow).
 # publish_mode is intentionally omitted = "simple".
 
-collections:
+# Singletons open the editor in ONE click (no intermediate file list). These are
+# the things edited most often. Sveltia shows them as individual sidebar items as
+# long as at least one regular `collections` entry also exists (Site text, below).
+singletons:
   - name: activities
     label: "פעילויות · Activities"
-    delete: false
-    files:
-      - name: activities
-        label: "Activities"
-        file: "src/content/activities.yaml"
+    file: "src/content/activities.yaml"
+    icon: self_improvement
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
         fields:
-          - label: "Heading"
-            name: heading
-            widget: object
-            collapsed: true
-            fields:
-              - { label: "Label (HE)", name: labelHe, widget: string }
-              - { label: "Label (EN)", name: labelEn, widget: string }
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
-          - label: "Items"
-            name: items
-            widget: list
-            summary: "{{fields.titleHe}}"
-            fields:
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Note (HE)", name: noteHe, widget: string }
-              - { label: "Note (EN)", name: noteEn, widget: string }
-              - { label: "Body (HE)", name: bodyHe, widget: text }
-              - { label: "Body (EN)", name: bodyEn, widget: text }
-              - { label: "Photo", name: photo, widget: image }
-              - { label: "Photo alt (HE)", name: photoAltHe, widget: string }
-              - { label: "Photo alt (EN)", name: photoAltEn, widget: string }
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+      - label: "Items"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}}"
+        fields:
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Note (HE)", name: noteHe, widget: string }
+          - { label: "Note (EN)", name: noteEn, widget: string }
+          - { label: "Body (HE)", name: bodyHe, widget: text }
+          - { label: "Body (EN)", name: bodyEn, widget: text }
+          - { label: "Photo", name: photo, widget: image }
+          - { label: "Photo alt (HE)", name: photoAltHe, widget: string }
+          - { label: "Photo alt (EN)", name: photoAltEn, widget: string }
 
   - name: pricing
     label: "תעריפים · Pricing"
-    delete: false
-    files:
-      - name: pricing
-        label: "Pricing"
-        file: "src/content/pricing.yaml"
+    file: "src/content/pricing.yaml"
+    icon: payments
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
         fields:
-          - label: "Heading"
-            name: heading
-            widget: object
-            collapsed: true
-            fields:
-              - { label: "Label (HE)", name: labelHe, widget: string }
-              - { label: "Label (EN)", name: labelEn, widget: string }
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
-              - { label: "Button label (HE)", name: ctaHe, widget: string }
-              - { label: "Button label (EN)", name: ctaEn, widget: string }
-          - label: "Items"
-            name: items
-            widget: list
-            summary: "{{fields.titleHe}} — {{fields.price}}"
-            fields:
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Price (e.g. ₪360)", name: price, widget: string }
-              - { label: "Unit (HE)", name: unitHe, widget: string }
-              - { label: "Unit (EN)", name: unitEn, widget: string }
-              - { label: "Note (HE)", name: noteHe, widget: string }
-              - { label: "Note (EN)", name: noteEn, widget: string }
-              - { label: "Featured (highlight this card)", name: featured, widget: boolean, default: false }
-              - label: "Checkout / booking link"
-                name: ctaUrl
-                widget: string
-                required: false
-                hint: "Stripe Payment Link or booking URL. Leave empty to fall back to WhatsApp."
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+          - { label: "Button label (HE)", name: ctaHe, widget: string }
+          - { label: "Button label (EN)", name: ctaEn, widget: string }
+      - label: "Items"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}} — {{fields.price}}"
+        fields:
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Price (e.g. ₪360)", name: price, widget: string }
+          - { label: "Unit (HE)", name: unitHe, widget: string }
+          - { label: "Unit (EN)", name: unitEn, widget: string }
+          - { label: "Note (HE)", name: noteHe, widget: string }
+          - { label: "Note (EN)", name: noteEn, widget: string }
+          - { label: "Featured (highlight this card)", name: featured, widget: boolean, default: false }
+          - label: "Checkout / booking link"
+            name: ctaUrl
+            widget: string
+            required: false
+            hint: "Stripe Payment Link or booking URL. Leave empty to fall back to WhatsApp."
 
   - name: events
     label: "מפגשים · Events"
-    delete: false
-    files:
-      - name: events
-        label: "Events"
-        file: "src/content/events.yaml"
+    file: "src/content/events.yaml"
+    icon: event
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
         fields:
-          - label: "Heading"
-            name: heading
-            widget: object
-            collapsed: true
-            fields:
-              - { label: "Label (HE)", name: labelHe, widget: string }
-              - { label: "Label (EN)", name: labelEn, widget: string }
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
-              - { label: "Button label (HE)", name: ctaHe, widget: string }
-              - { label: "Button label (EN)", name: ctaEn, widget: string }
-          - label: "Items"
-            name: items
-            widget: list
-            summary: "{{fields.date}} — {{fields.titleHe}}"
-            fields:
-              - { label: "Date", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
-              - { label: "Time (e.g. 19:30)", name: time, widget: string, required: false }
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Location (HE)", name: locationHe, widget: string }
-              - { label: "Location (EN)", name: locationEn, widget: string }
-              - { label: "Description (HE)", name: descHe, widget: text }
-              - { label: "Description (EN)", name: descEn, widget: text }
-              - label: "Sign-up link"
-                name: signupUrl
-                widget: string
-                required: false
-                hint: "Registration URL. Leave empty to fall back to WhatsApp."
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+          - { label: "Button label (HE)", name: ctaHe, widget: string }
+          - { label: "Button label (EN)", name: ctaEn, widget: string }
+      - label: "Items"
+        name: items
+        widget: list
+        summary: "{{fields.date}} — {{fields.titleHe}}"
+        fields:
+          - { label: "Date", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+          - { label: "Time (e.g. 19:30)", name: time, widget: string, required: false }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Location (HE)", name: locationHe, widget: string }
+          - { label: "Location (EN)", name: locationEn, widget: string }
+          - { label: "Description (HE)", name: descHe, widget: text }
+          - { label: "Description (EN)", name: descEn, widget: text }
+          - label: "Sign-up link"
+            name: signupUrl
+            widget: string
+            required: false
+            hint: "Registration URL. Leave empty to fall back to WhatsApp."
 
   - name: store
     label: "חנות · Shop"
-    delete: false
-    files:
-      - name: store
-        label: "Shop"
-        file: "src/content/store.yaml"
+    file: "src/content/store.yaml"
+    icon: storefront
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
         fields:
-          - label: "Heading"
-            name: heading
-            widget: object
-            collapsed: true
-            fields:
-              - { label: "Label (HE)", name: labelHe, widget: string }
-              - { label: "Label (EN)", name: labelEn, widget: string }
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
-              - { label: "Button label (HE)", name: ctaHe, widget: string }
-              - { label: "Button label (EN)", name: ctaEn, widget: string }
-          - label: "Items"
-            name: items
-            widget: list
-            summary: "{{fields.titleHe}} — {{fields.price}}"
-            fields:
-              - { label: "Title (HE)", name: titleHe, widget: string }
-              - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Price (e.g. ₪90)", name: price, widget: string }
-              - { label: "Image", name: image, widget: image }
-              - { label: "Description (HE)", name: descHe, widget: text }
-              - { label: "Description (EN)", name: descEn, widget: text }
-              - label: "Buy link"
-                name: buyUrl
-                widget: string
-                required: false
-                hint: "Stripe Payment Link (recommended). Leave empty to fall back to WhatsApp."
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+          - { label: "Button label (HE)", name: ctaHe, widget: string }
+          - { label: "Button label (EN)", name: ctaEn, widget: string }
+      - label: "Items"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}} — {{fields.price}}"
+        fields:
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Price (e.g. ₪90)", name: price, widget: string }
+          - { label: "Image", name: image, widget: image }
+          - { label: "Description (HE)", name: descHe, widget: text }
+          - { label: "Description (EN)", name: descEn, widget: text }
+          - label: "Buy link"
+            name: buyUrl
+            widget: string
+            required: false
+            hint: "Stripe Payment Link (recommended). Leave empty to fall back to WhatsApp."
 
-  # ----- Contact details: one place, used everywhere ------------------------
   - name: contact_info
     label: "פרטי קשר · Contact & social"
-    delete: false
-    files:
-      - name: contact_info
-        label: "Contact & social"
-        file: "src/content/site.yaml"
-        fields:
-          - { label: "Email", name: email, widget: string, hint: "Shown on the site + the email button." }
-          - { label: "Instagram URL", name: instagram, widget: string }
-          - label: "WhatsApp link"
-            name: whatsapp
-            widget: string
-            hint: "e.g. https://wa.me/972XXXXXXXXX — also the fallback for every Buy / Reserve button."
+    file: "src/content/site.yaml"
+    icon: alternate_email
+    fields:
+      - { label: "Email", name: email, widget: string, hint: "Shown on the site + the email button." }
+      - { label: "Instagram URL", name: instagram, widget: string }
+      - label: "WhatsApp link"
+        name: whatsapp
+        widget: string
+        hint: "e.g. https://wa.me/972XXXXXXXXX — also the fallback for every Buy / Reserve button."
 
+collections:
   # ----- All site copy (the live language is Hebrew) ------------------------
+  # Kept as a regular collection on purpose: it's the bulky, rarely-touched copy,
+  # and its presence is what makes the singletons above render as 1-click items.
   - name: site_he
     label: "תוכן האתר · Site text"
+    icon: article
     delete: false
     files:
       - name: site_he
