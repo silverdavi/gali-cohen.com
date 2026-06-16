@@ -3,8 +3,13 @@
 // language for now; flip DEFAULT_LANG to 'he' when the Hebrew copy is real.
 import en from './en.yaml';
 import he from './he.yaml';
+import siteFile from './site.yaml';
 
 export type Lang = 'en' | 'he';
+
+// Language-neutral contact + social links, edited once in the CMS.
+export type Site = { email: string; instagram: string; whatsapp: string };
+export const site = siteFile as Site;
 
 export type Content = {
   meta: { title: string; description: string };
@@ -15,9 +20,6 @@ export type Content = {
     kicker: string;
     role: string;
     lead: string;
-    email: string;
-    instagram: string;
-    whatsapp: string;
   };
   hero: { ctaPrimary: string; ctaSecondary: string; scroll: string; photoAlt: string };
   breath: { label: string; title: string; wordIn: string; wordHold: string; wordOut: string; note: string };

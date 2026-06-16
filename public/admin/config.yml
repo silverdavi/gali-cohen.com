@@ -175,3 +175,192 @@ collections:
                 widget: string
                 required: false
                 hint: "Stripe Payment Link (recommended). Leave empty to fall back to WhatsApp."
+
+  # ----- Contact details: one place, used everywhere ------------------------
+  - name: contact_info
+    label: "פרטי קשר · Contact & social"
+    delete: false
+    files:
+      - name: contact_info
+        label: "Contact & social"
+        file: "src/content/site.yaml"
+        fields:
+          - { label: "Email", name: email, widget: string, hint: "Shown on the site + the email button." }
+          - { label: "Instagram URL", name: instagram, widget: string }
+          - label: "WhatsApp link"
+            name: whatsapp
+            widget: string
+            hint: "e.g. https://wa.me/972XXXXXXXXX — also the fallback for every Buy / Reserve button."
+
+  # ----- All site copy (the live language is Hebrew) ------------------------
+  - name: site_he
+    label: "תוכן האתר · Site text"
+    delete: false
+    files:
+      - name: site_he
+        label: "All site text"
+        file: "src/content/he.yaml"
+        fields:
+          - label: "SEO / page meta"
+            name: meta
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Browser title", name: title, widget: string }
+              - { label: "Description", name: description, widget: text }
+          - label: "Navigation labels"
+            name: nav
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Practices", name: practices, widget: string }
+              - { label: "Circles", name: circles, widget: string }
+              - { label: "About", name: about, widget: string }
+              - { label: "Story / talk", name: story, widget: string }
+              - { label: "Pricing", name: pricing, widget: string }
+              - { label: "Events", name: events, widget: string }
+              - { label: "Shop", name: shop, widget: string }
+              - { label: "Contact button", name: cta, widget: string }
+              - { label: "Skip-to-content (accessibility)", name: skip, widget: string }
+          - label: "Profile"
+            name: profile
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Name", name: name, widget: string }
+              - { label: "Name (Latin)", name: hebrewName, widget: string }
+              - { label: "Kicker", name: kicker, widget: string }
+              - { label: "Role line", name: role, widget: string }
+              - { label: "Lead paragraph", name: lead, widget: text }
+          - label: "Hero"
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Primary button", name: ctaPrimary, widget: string }
+              - { label: "Secondary button", name: ctaSecondary, widget: string }
+              - { label: "Scroll hint", name: scroll, widget: string }
+              - { label: "Hero photo alt text", name: photoAlt, widget: string }
+          - label: "Breath (the hero practice)"
+            name: breath
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Word — inhale", name: wordIn, widget: string }
+              - { label: "Word — hold", name: wordHold, widget: string }
+              - { label: "Word — exhale", name: wordOut, widget: string }
+              - { label: "Note", name: note, widget: text }
+          - label: "Circle"
+            name: circle
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Body", name: body, widget: text }
+              - { label: "Caption", name: caption, widget: string }
+              - { label: "Illustration alt", name: alt, widget: string }
+          - label: "Photo band"
+            name: band
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Photo", name: photo, widget: image }
+              - { label: "Caption", name: caption, widget: string }
+              - { label: "Alt text", name: alt, widget: string }
+          - label: "About"
+            name: aboutSection
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Photo", name: photo, widget: image }
+              - { label: "Photo alt", name: photoAlt, widget: string }
+              - { label: "Paragraphs", name: paragraphs, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+              - label: "Facts"
+                name: facts
+                widget: list
+                summary: "{{fields.label}} — {{fields.value}}"
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Value", name: value, widget: string }
+          - label: "The talk / story"
+            name: storySection
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Lead", name: lead, widget: text }
+              - { label: "Paragraphs", name: paragraphs, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+              - { label: "Meta line", name: meta, widget: string }
+              - label: "Photos"
+                name: photos
+                widget: list
+                summary: "{{fields.alt}}"
+                fields:
+                  - { label: "Image", name: src, widget: image }
+                  - { label: "Alt text", name: alt, widget: string }
+          - label: "Testimonials"
+            name: wordsSection
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - label: "Items"
+                name: items
+                widget: list
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Quote", name: quote, widget: text }
+                  - { label: "Attribution", name: name, widget: string }
+          - label: "Sky / star-sign widget labels"
+            name: astro
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Subtitle", name: sub, widget: text }
+              - { label: "Sun label", name: sunLabel, widget: string }
+              - { label: "Moon label", name: moonLabel, widget: string }
+              - { label: "'lit' word", name: litWord, widget: string }
+              - { label: "Find title", name: findTitle, widget: string }
+              - { label: "Find subtitle", name: findSub, widget: string }
+              - { label: "Month label", name: monthLabel, widget: string }
+              - { label: "Day label", name: dayLabel, widget: string }
+              - { label: "Reveal button", name: reveal, widget: string }
+              - { label: "'You were born under'", name: yourSign, widget: string }
+              - { label: "Change-date button", name: again, widget: string }
+              - label: "Moon phase names"
+                name: moonPhases
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: "New", name: new, widget: string }
+                  - { label: "Waxing crescent", name: waxingCrescent, widget: string }
+                  - { label: "First quarter", name: firstQuarter, widget: string }
+                  - { label: "Waxing gibbous", name: waxingGibbous, widget: string }
+                  - { label: "Full", name: full, widget: string }
+                  - { label: "Waning gibbous", name: waningGibbous, widget: string }
+                  - { label: "Last quarter", name: lastQuarter, widget: string }
+                  - { label: "Waning crescent", name: waningCrescent, widget: string }
+          - label: "Contact section text"
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Headline", name: line, widget: string }
+              - { label: "Subtext", name: sub, widget: text }
+              - { label: "WhatsApp link label", name: whatsapp, widget: string }
+              - { label: "Instagram link label", name: instagram, widget: string }
+          - label: "Footer"
+            name: footer
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Place", name: place, widget: string }
+              - { label: "Credit", name: credit, widget: string }

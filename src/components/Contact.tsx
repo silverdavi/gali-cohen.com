@@ -1,5 +1,5 @@
 import { Reveal } from './Reveal';
-import { content } from '../content';
+import { content, site } from '../content';
 import { features } from '../features';
 import { useMagnetic } from '../useMagnetic';
 import { Cinemagraph } from './Cinemagraph';
@@ -18,10 +18,10 @@ export function Contact() {
             </div>
             <h2 className="contact-line">{contact.line}</h2>
             <p className="contact-sub">{contact.sub}</p>
-            <a className="btn btn-primary" href={`mailto:${profile.email}`} {...magnetic}>{profile.email}</a>
+            <a className="btn btn-primary" href={`mailto:${site.email}`} {...magnetic}>{site.email}</a>
             <div className="contact-links">
-              <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer">{contact.whatsapp}</a>
-              <a href={profile.instagram} target="_blank" rel="noopener noreferrer">{contact.instagram}</a>
+              <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">{contact.whatsapp}</a>
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer">{contact.instagram}</a>
             </div>
           </Reveal>
         </div>

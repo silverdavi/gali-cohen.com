@@ -21,6 +21,9 @@ trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$OUT"
 
 W=1024; H=576
+# How many SVD frames to use. Fewer = less accumulated drift = subtler ("200ms"
+# swish rather than a 2s zoom). The onset frames carry the gentlest motion.
+FRAMES="${FRAMES:-8}"
 
 # Per-photo opacity of the motion layer. Lower = subtler. Faces get the least.
 default_alpha() {
@@ -52,7 +55,7 @@ for mp4 in "$RAW"/*.mp4; do
     "[0:v]scale=${W}:${H},setsar=1,format=yuv420p[s];\
      [1:v]scale=${W}:${H},setsar=1,format=yuv420p[v];\
      [s][v]blend=all_mode=normal:all_opacity=${a},format=yuv420p[o]" \
-    -map "[o]" -frames:v 25 -r 12 "$TMP/sub.mp4"
+    -map "[o]" -frames:v "$FRAMES" -r 12 "$TMP/sub.mp4"
 
   # 3) ping-pong loop (drop the duplicated seam frame on the reverse)
   ffmpeg -v error -y -i "$TMP/sub.mp4" -filter_complex \

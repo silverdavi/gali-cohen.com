@@ -4,7 +4,7 @@
 // store BOTH languages per record (…He / …En fields) in a single file, so the
 // admin edits one form per item. This module flattens each record down to the
 // active language and resolves checkout/signup fallbacks.
-import { lang, content } from './index';
+import { lang, site } from './index';
 import activitiesFile from './activities.yaml';
 import pricingFile from './pricing.yaml';
 import eventsFile from './events.yaml';
@@ -15,7 +15,7 @@ const isHe = lang === 'he';
 const t = (he: string, en: string): string => (isHe ? he : en) ?? en ?? he ?? '';
 
 // Empty links fall back to WhatsApp so every CTA always goes somewhere useful.
-const whatsapp = content.profile.whatsapp;
+const whatsapp = site.whatsapp;
 const checkout = (url?: string): string => (url && url.trim() ? url.trim() : whatsapp);
 
 // --- raw file shapes (both languages) -------------------------------------
