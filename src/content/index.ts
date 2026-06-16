@@ -8,7 +8,7 @@ export type Lang = 'en' | 'he';
 
 export type Content = {
   meta: { title: string; description: string };
-  nav: { practices: string; circles: string; about: string; pricing: string; events: string; shop: string; cta: string; skip: string };
+  nav: { practices: string; circles: string; about: string; story: string; pricing: string; events: string; shop: string; cta: string; skip: string };
   profile: {
     name: string;
     hebrewName: string;
@@ -31,6 +31,14 @@ export type Content = {
     paragraphs: string[];
     facts: { label: string; value: string }[];
   };
+  storySection: {
+    label: string;
+    title: string;
+    lead: string;
+    paragraphs: string[];
+    meta: string;
+    photos: { src: string; alt: string }[];
+  };
   wordsSection: { label: string; items: { quote: string; name: string }[] };
   astro: {
     label: string;
@@ -52,7 +60,7 @@ export type Content = {
     };
   };
   contact: { line: string; sub: string; whatsapp: string; instagram: string };
-  footer: { place: string };
+  footer: { place: string; credit: string };
 };
 
 const CONTENT: Record<Lang, Content> = {

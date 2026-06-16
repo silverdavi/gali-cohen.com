@@ -48,14 +48,15 @@ export function Nav() {
     { id: 'practices', num: '01', label: content.nav.practices },
     { id: 'circle', num: '02', label: content.nav.circles },
     { id: 'about', num: '03', label: content.nav.about },
+    ...(features.showStory ? [{ id: 'story', num: '04', label: content.nav.story }] : []),
     ...(features.showPricing && pricing.items.length
-      ? [{ id: 'pricing', num: '04', label: content.nav.pricing }]
+      ? [{ id: 'pricing', num: '05', label: content.nav.pricing }]
       : []),
     ...(features.showEvents && events.items.length
-      ? [{ id: 'events', num: '05', label: content.nav.events }]
+      ? [{ id: 'events', num: '06', label: content.nav.events }]
       : []),
     ...(features.showStore && store.items.length
-      ? [{ id: 'shop', num: '06', label: content.nav.shop }]
+      ? [{ id: 'shop', num: '07', label: content.nav.shop }]
       : []),
   ];
 

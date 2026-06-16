@@ -9,6 +9,7 @@ nav:
   practices: Practices
   circles: Circles
   about: About
+  story: The talk
   pricing: Pricing
   events: Events
   shop: Shop
@@ -31,7 +32,7 @@ hero:
   ctaPrimary: Book a session
   ctaSecondary: See the work
   scroll: Scroll
-  photoAlt: A woman sitting quietly by an arched window, soft light and breath
+  photoAlt: Gali moving in a garden, hair loose in soft late-afternoon light
 
 breath:
   label: A small practice
@@ -55,14 +56,14 @@ circle:
 
 band:
   photo: /photos/dance-circle.jpg
-  caption: Placeholder photography, to be replaced with Gali’s own
-  alt: A circle of women holding hands on a beach at dusk, sea behind them
+  caption: An outdoor movement circle · a workshop in nature
+  alt: A circle of participants standing on mats on a wooden deck among green trees
 
 aboutSection:
   label: About
   title: The long way back to the body
-  photo: /photos/portrait.jpg
-  photoAlt: Gali seated before an arched studio window, placeholder photo
+  photo: /photos/about.jpg
+  photoAlt: A portrait of Gali smiling, white bougainvillea behind her
   paragraphs:
     - >-
       I came to this work the long way — through psychology and sociology at
@@ -82,17 +83,59 @@ aboutSection:
     - label: Languages
       value: Hebrew · English
 
+storySection:
+  label: The talk
+  title: Body, Faith & Redemption
+  lead: >-
+    Gali Geula’s personal story — from an ultra-orthodox girl who never quite
+    fit, searching for her place in the world, to finding God in the most
+    unexpected places.
+  paragraphs:
+    - >-
+      A life that moves through travels across the world, meditation, stripping,
+      tantra and psychedelics — through darkness, searching, stubbornness and
+      despair, and also through a great deal of light: angels along the way,
+      revelation, faith and hope.
+    - >-
+      The evening opens with a short dance, continues with the personal story,
+      and deepens into an open, honest conversation with the audience. It closes
+      with a song that is a prayer and a thanksgiving.
+  meta: About two hours · by invitation
+  photos:
+    - src: /photos/story-1.jpg
+      alt: Gali holding a protest sign — “the stigma kills”
+    - src: /photos/story-2.jpg
+      alt: Gali performing on stage under stage lights
+    - src: /photos/story-3.jpg
+      alt: Gali backstage before a performance
+
 wordsSection:
   label: Words from the room
   items:
     - quote: >-
-        I arrived holding my breath without knowing it. I left breathing. It
-        sounds small written down. It was not small.
-      name: N., breathwork journey
+        It was so connecting, gentle and moving — alone and together. Full of
+        soft inward movement and listening, in your own way. It releases stuck
+        places that are asking for a new relationship.
+      name: Participant · couples workshop
     - quote: >-
-        Gali holds a room the way you hold a sleeping child: completely, and
-        without making a thing of it.
-      name: A. & D., couples workshop
+        I didn’t expect a movement workshop to be so meaningful and deep. Your
+        voice is calm and soothing, and near the end I dropped into a kind of
+        meditation — and tears came. Like something released in me.
+      name: Participant · movement workshop
+    - quote: >-
+        I remembered the challenge you gave at the end — five minutes of music
+        and dance. On a rough day it was the only thing I could do, and
+        everything got a little better. Thank you for the reminder that I have
+        tools even when I feel helpless.
+      name: Participant · “Feminine Fire”
+    - quote: >-
+        Your presence is incredibly calming — it gives confidence and space.
+        Thank you for an amazing experience.
+      name: Participant · circle
+    - quote: >-
+        I’ve kept up the meditation every day and I feel so good. So grateful
+        you introduced me to it — you truly do wonders.
+      name: Participant · one-on-one
 
 astro:
   label: Under the same sky
@@ -130,3 +173,4 @@ contact:
 
 footer:
   place: Tel Aviv
+  credit: Photography · Debra S.

@@ -10,6 +10,7 @@ import { Practices } from './components/Practices';
 import { Circle } from './components/Circle';
 import { Band } from './components/Band';
 import { About } from './components/About';
+import { Story } from './components/Story';
 import { Pricing } from './components/Pricing';
 import { Events } from './components/Events';
 import { Store } from './components/Store';
@@ -34,6 +35,7 @@ export default function App() {
         <Circle />
         <Band />
         <About />
+        {features.showStory && <Story />}
         <Pricing />
         <Events />
         <Store />

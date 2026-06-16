@@ -9,7 +9,7 @@ export function Events() {
   return (
     <section className="section" id="events">
       <div className="container">
-        <SectionHead index="05" label={heading.label} title={heading.title} sub={heading.sub} />
+        <SectionHead index="06" label={heading.label} title={heading.title} sub={heading.sub} />
         <div className="event-list">
           {items.map((e, i) => (
             <Reveal key={`${e.iso}-${e.title}`} delay={i * 0.05}>

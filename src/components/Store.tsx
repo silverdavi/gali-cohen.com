@@ -11,7 +11,7 @@ export function Store() {
   return (
     <section className="section" id="shop">
       <div className="container">
-        <SectionHead index="06" label={heading.label} title={heading.title} sub={heading.sub} />
+        <SectionHead index="07" label={heading.label} title={heading.title} sub={heading.sub} />
         <div className="store-grid">
           {items.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.06} className="col-third">

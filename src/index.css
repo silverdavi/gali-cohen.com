@@ -1585,6 +1585,45 @@ video.band-photo { display: block; }
 }
 .fact-value { font-size: var(--fs-ui); color: var(--body); }
 
+/* --- Story / lecture ---------------------------------------------------------- */
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+  margin-top: var(--header-gap);
+}
+.story-text p { margin: 0 0 var(--s-4); max-width: var(--measure-body); }
+.story-meta {
+  margin: var(--s-4) 0 0;
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+/* A small, restrained gallery — the lead image spans the column, two smaller
+   ones sit beneath it. Kept slightly desaturated like the rest of the site. */
+.story-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+.story-photo { margin: 0; }
+.story-photo:first-child { grid-column: 1 / -1; }
+.story-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--rule);
+  filter: saturate(0.82) brightness(0.97);
+  transition: filter 0.5s ease;
+}
+.story-photo:first-child img { aspect-ratio: 4 / 3; }
+.ff-photo .story-photo img:hover { filter: saturate(1) brightness(1); }
+
 /* --- Words (quotes) ------------------------------------------------------------ */
 .words-grid {
   display: grid;
@@ -1695,6 +1734,11 @@ video.band-photo { display: block; }
   color: var(--faint);
 }
 /* build stamp: quiet, monospaced, ltr even in RTL so the hash reads correctly */
+.footer-credit {
+  color: var(--faint);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+}
 .footer-build {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;
   font-size: 11px;
@@ -1936,6 +1980,7 @@ video.band-photo { display: block; }
   .practice,
   .circle-grid,
   .about-grid,
+  .story-grid,
   .words-grid { grid-template-columns: 1fr; row-gap: var(--s-7); }
   .col-main,
   .col-side,

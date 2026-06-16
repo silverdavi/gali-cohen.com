@@ -43,7 +43,8 @@ export type FeatureKey =
   | 'timeOfDaySun'      // hero warmth shifts with the visitor's local clock
   | 'showPricing'       // render the CMS-managed pricing section
   | 'showEvents'        // render the CMS-managed upcoming-events section
-  | 'showStore';        // render the CMS-managed shop section
+  | 'showStore'         // render the CMS-managed shop section
+  | 'showStory';        // render the personal-story / lecture section ("גוף, אמונה וגאולה")
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
   kineticType: true,
@@ -75,13 +76,14 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   bandParallax: true,
   swayReveal: true,
   quoteLift: true,
-  medallionSpin: true,
+  medallionSpin: false, // off for the real session photo — a slow-spinning person reads oddly
   magneticCta: true,
   cursorRipple: true,
   timeOfDaySun: true,
   showPricing: true,
   showEvents: true,
   showStore: true,
+  showStory: true,
 };
 
 function resolve(): Record<FeatureKey, boolean> {
