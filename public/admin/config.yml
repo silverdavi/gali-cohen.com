@@ -40,13 +40,14 @@ collections:
           - label: "Heading"
             name: heading
             widget: object
+            collapsed: true
             fields:
               - { label: "Label (HE)", name: labelHe, widget: string }
               - { label: "Label (EN)", name: labelEn, widget: string }
               - { label: "Title (HE)", name: titleHe, widget: string }
               - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
           - label: "Items"
             name: items
             widget: list
@@ -73,13 +74,14 @@ collections:
           - label: "Heading"
             name: heading
             widget: object
+            collapsed: true
             fields:
               - { label: "Label (HE)", name: labelHe, widget: string }
               - { label: "Label (EN)", name: labelEn, widget: string }
               - { label: "Title (HE)", name: titleHe, widget: string }
               - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
               - { label: "Button label (HE)", name: ctaHe, widget: string }
               - { label: "Button label (EN)", name: ctaEn, widget: string }
           - label: "Items"
@@ -92,8 +94,8 @@ collections:
               - { label: "Price (e.g. ₪360)", name: price, widget: string }
               - { label: "Unit (HE)", name: unitHe, widget: string }
               - { label: "Unit (EN)", name: unitEn, widget: string }
-              - { label: "Note (HE)", name: noteHe, widget: text }
-              - { label: "Note (EN)", name: noteEn, widget: text }
+              - { label: "Note (HE)", name: noteHe, widget: string }
+              - { label: "Note (EN)", name: noteEn, widget: string }
               - { label: "Featured (highlight this card)", name: featured, widget: boolean, default: false }
               - label: "Checkout / booking link"
                 name: ctaUrl
@@ -112,13 +114,14 @@ collections:
           - label: "Heading"
             name: heading
             widget: object
+            collapsed: true
             fields:
               - { label: "Label (HE)", name: labelHe, widget: string }
               - { label: "Label (EN)", name: labelEn, widget: string }
               - { label: "Title (HE)", name: titleHe, widget: string }
               - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
               - { label: "Button label (HE)", name: ctaHe, widget: string }
               - { label: "Button label (EN)", name: ctaEn, widget: string }
           - label: "Items"
@@ -151,13 +154,14 @@ collections:
           - label: "Heading"
             name: heading
             widget: object
+            collapsed: true
             fields:
               - { label: "Label (HE)", name: labelHe, widget: string }
               - { label: "Label (EN)", name: labelEn, widget: string }
               - { label: "Title (HE)", name: titleHe, widget: string }
               - { label: "Title (EN)", name: titleEn, widget: string }
-              - { label: "Subtitle (HE)", name: subHe, widget: text, required: false }
-              - { label: "Subtitle (EN)", name: subEn, widget: text, required: false }
+              - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+              - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
               - { label: "Button label (HE)", name: ctaHe, widget: string }
               - { label: "Button label (EN)", name: ctaEn, widget: string }
           - label: "Items"
@@ -208,7 +212,7 @@ collections:
             collapsed: true
             fields:
               - { label: "Browser title", name: title, widget: string }
-              - { label: "Description", name: description, widget: text }
+              - { label: "Description", name: description, widget: string }
           - label: "Navigation labels"
             name: nav
             widget: object
@@ -325,7 +329,7 @@ collections:
             fields:
               - { label: "Label", name: label, widget: string }
               - { label: "Title", name: title, widget: string }
-              - { label: "Subtitle", name: sub, widget: text }
+              - { label: "Subtitle", name: sub, widget: string }
               - { label: "Sun label", name: sunLabel, widget: string }
               - { label: "Moon label", name: moonLabel, widget: string }
               - { label: "'lit' word", name: litWord, widget: string }
@@ -355,7 +359,7 @@ collections:
             collapsed: true
             fields:
               - { label: "Headline", name: line, widget: string }
-              - { label: "Subtext", name: sub, widget: text }
+              - { label: "Subtext", name: sub, widget: string }
               - { label: "WhatsApp link label", name: whatsapp, widget: string }
               - { label: "Instagram link label", name: instagram, widget: string }
           - label: "Footer"
