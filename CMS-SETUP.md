@@ -1,6 +1,7 @@
 # Content admin (CMS) — setup & usage
 
-The site is edited through **Decap CMS** at `/admin`. It is git-backed: every
+The site is edited through **Sveltia CMS** at `/admin` (a drop-in, faster
+replacement for Decap/Netlify CMS, same `config.yml`). It is git-backed: every
 save is a commit to this repo, and the existing GitHub Action rebuilds and
 deploys the site automatically. No database, no server, ~$0/month.
 
@@ -19,37 +20,64 @@ The commerce collections hold both Hebrew and English per record; **Site text** 
 the live (Hebrew) copy. `en.yaml` stays developer-maintained until an English
 toggle ships.
 
-> Safety note: the **Site text** form models every field on purpose. Decap
-> rewrites the whole file on save, so a partial model would silently delete the
-> unlisted blocks (story, sky widget, etc.). If you add a new section to
+> Safety note: the **Site text** form models every field on purpose. A git-backed
+> CMS rewrites the whole file on save, so a partial model would silently delete
+> the unlisted blocks (story, sky widget, etc.). If you add a new section to
 > `he.yaml`, add its fields here too.
 
 ---
 
-## Option A — edit locally (no login, fastest)
+## "Login" — what the password actually is
 
-Best for David / anyone with the repo checked out.
+A static site on GitHub Pages has no server, so there's no place to safely keep a
+username/password that can write commits. Instead, **the login credential is a
+GitHub token** — you paste it once and the browser remembers it, so day to day it
+behaves exactly like a saved password. This is the simplest thing that can both
+*log you in* and *save your edits* with zero infrastructure.
+
+### Edit live at galigeula.com/admin (recommended, no setup)
+
+1. Open <https://galigeula.com/admin>.
+2. Click **“Sign In Using Access Token.”**
+3. The dialog has a link to GitHub with the right permissions pre-selected.
+   Click it, create the token (a fine-grained token, **Contents: Read and write**
+   on the `gali-cohen.com` repo, is enough), and copy it.
+4. Paste the token into the dialog. You're in. The browser stores it, so you
+   won't be asked again on that device.
+
+The GitHub account you make the token from must have write access to the repo
+(owner, or added under **Settings → Collaborators**). Give the token an
+expiration you're comfortable with (e.g. 1 year); when it expires, repeat steps
+2–4 with a fresh one.
+
+> Treat the token like a password — anyone with it can edit the site. That's the
+> tradeoff for a no-server setup, and it's fine for a one-person site.
+
+### Edit locally (no token at all — for David)
+
+Sveltia reads/writes local files directly through the browser (Chromium: Chrome,
+Edge, Brave — Safari/Firefox don't support the file API).
 
 ```bash
-npm run dev                # terminal 1 — serves the site + /admin
-npx decap-server           # terminal 2 — local git bridge
+npm run dev                # serves the site + /admin
 ```
 
-Open <http://localhost:5173/admin/> and choose **“Work with local repository.”**
-Edits write straight to the YAML files. Then:
+Open <http://localhost:5173/admin/>, click **“Work with Local Repository,”** pick
+the repo folder once, and edit. Changes write straight to the YAML files. Then:
 
 ```bash
 git add -A && git commit -m "content: update events" && git push
 ```
 
-The push triggers the deploy. Done.
+The push triggers the deploy. (No `decap-server`/proxy needed — Sveltia dropped
+that in favor of the native file API.)
 
 ---
 
-## Option B — edit live at galigeula.com/admin (GitHub login)
+## Optional: one-click “Login with GitHub” (no token to paste)
 
-This is for a non-developer editing from anywhere. It needs a tiny OAuth helper
-because GitHub Pages can’t run server code. One-time setup (~10 min):
+If you'd rather click a button than paste a token, you can add a tiny OAuth
+helper. It's free but takes ~10 min and a Cloudflare account.
 
 ### 1. Create a GitHub OAuth App
 GitHub → Settings → Developer settings → **OAuth Apps** → New OAuth App
@@ -60,33 +88,31 @@ GitHub → Settings → Developer settings → **OAuth Apps** → New OAuth App
 Copy the **Client ID** and generate a **Client Secret**.
 
 ### 2. Deploy the OAuth helper (Cloudflare Workers, free)
-The worker (`cms-oauth-worker.js`) and its `wrangler.toml` are already in the repo,
-so from the `site/` folder it's three commands:
+The worker (`cms-oauth-worker.js`) and its `wrangler.toml` are in the repo, so
+from the `site/` folder it's a few commands:
 
 ```bash
 npm i -g wrangler
-wrangler login                     # opens a browser, free Cloudflare account
-wrangler secret put GITHUB_CLIENT_ID      # paste the Client ID from step 1
-wrangler secret put GITHUB_CLIENT_SECRET  # paste the Client Secret from step 1
-wrangler deploy                    # prints your https://gali-cms-oauth.<sub>.workers.dev URL
+wrangler login                            # free Cloudflare account
+wrangler secret put GITHUB_CLIENT_ID      # paste Client ID from step 1
+wrangler secret put GITHUB_CLIENT_SECRET  # paste Client Secret from step 1
+wrangler deploy                           # prints your workers.dev URL
 ```
 
-Use that printed URL as the callback host in step 1 and the `base_url` in step 3.
-(You can also paste the worker code + the two variables in the Cloudflare dashboard.)
-
 ### 3. Point the CMS at the helper
-In `public/admin/config.yml`, uncomment and set:
+In `public/admin/config.yml`, under `backend:`, set `base_url` and allow OAuth:
 
 ```yaml
 backend:
   name: github
   repo: silverdavi/gali-cohen.com
   branch: main
+  auth_methods: [oauth, token]
   base_url: https://gali-cms-oauth.<your-subdomain>.workers.dev
 ```
 
-Commit + push. Now <https://galigeula.com/admin> shows **“Login with
-GitHub.”** The editor must be a collaborator on the repo (Settings → Collaborators).
+Commit + push. `/admin` now shows **“Sign In with GitHub.”** The editor must be a
+collaborator on the repo.
 
 ---
 
@@ -97,11 +123,11 @@ The recommended, no-backend option is **Stripe Payment Links**:
 
 1. Stripe Dashboard → Products → create a product/price.
 2. Create a **Payment Link** for it (Stripe-hosted checkout).
-3. Paste that URL into the item’s link field in the CMS.
+3. Paste that URL into the item's link field in the CMS.
 
 If the field is left empty, the button falls back to **WhatsApp** (the number in
-`profile.whatsapp`) so it always goes somewhere useful. PayPal.me links or any
-booking URL work the same way.
+`site.yaml`) so it always goes somewhere useful. PayPal.me links or any booking
+URL work the same way.
 
 ---
 
@@ -110,4 +136,4 @@ booking URL work the same way.
 2. Map it in `src/content/collections.ts`.
 3. Render it in a component and add it to `App.tsx`.
 4. Add a matching `files` collection in `public/admin/config.yml` — **model
-   every field**, because Decap drops fields it doesn’t know about on save.
+   every field**, because a git-backed CMS drops fields it doesn't know about on save.

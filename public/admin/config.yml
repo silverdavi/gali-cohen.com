@@ -1,23 +1,24 @@
-# Decap CMS configuration for galigeula.com
+# Sveltia CMS configuration for galigeula.com (admin at /admin)
 # -----------------------------------------------------------------------------
-# Editing locally (no login, recommended for quick edits):
-#   1. npm run dev
-#   2. in a second terminal: npx decap-server
-#   3. open http://localhost:5173/admin/  -> "Work with local repository"
-#   Saves write straight to the YAML files; commit + push to publish.
+# LIVE LOGIN (no server, no OAuth app):
+#   Open https://galigeula.com/admin, click "Sign In with Token", follow the
+#   link to GitHub (scopes are pre-selected), generate a token, paste it back.
+#   The browser remembers it — that token is effectively the password.
+#   The GitHub account must have write access to the repo. See CMS-SETUP.md.
 #
-# Editing live at galigeula.com/admin (GitHub login):
-#   Requires a tiny OAuth helper — see CMS-SETUP.md — then uncomment `base_url`
-#   below and point it at the deployed helper.
+# LOCAL EDITING (no login, no proxy — Chromium browser):
+#   npm run dev, open http://localhost:5173/admin/, click "Work with Local
+#   Repository" and pick the repo folder. Sveltia uses the File System Access
+#   API, so there is no decap-server/proxy and `local_backend` is not needed.
 
 backend:
   name: github
   repo: silverdavi/gali-cohen.com
   branch: main
-  # base_url: https://YOUR-OAUTH-HELPER.workers.dev   # set after CMS-SETUP.md
-
-# Lets you edit on localhost with `npx decap-server`, no auth needed.
-local_backend: true
+  auth_methods: [token]   # token paste only; no OAuth app/server needed
+  # To switch to one-click "Login with GitHub" later: deploy the OAuth worker
+  # (see CMS-SETUP.md), set base_url below, and add 'oauth' to auth_methods.
+  # base_url: https://YOUR-OAUTH-HELPER.workers.dev
 
 media_folder: "public/photos"
 public_folder: "/photos"
