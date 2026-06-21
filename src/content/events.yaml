@@ -1,6 +1,3 @@
-# Upcoming events. Managed in the CMS at /admin.
-# `date` is an ISO date (YYYY-MM-DD); the site formats it per language.
-# `signupUrl` is optional — empty falls back to WhatsApp.
 heading:
   labelHe: מפגשים קרובים
   labelEn: Upcoming
@@ -11,30 +8,32 @@ heading:
   ctaHe: להרשמה
   ctaEn: Reserve
 items:
-  - date: "2026-07-04"
-    time: "19:30"
-    titleHe: מעגל נשים · מולד הירח
+  - date: 2026-07-29
+    time: 20:00
+    titleHe: מיינדפול דאנס לזוגות
     titleEn: Women’s circle · new moon
-    locationHe: סטודיו אדמה, תל אביב
+    locationHe: סטודיו פרמטה, תל אביב
     locationEn: Adama Studio, Tel Aviv
-    descHe: ערב של נשימה, תנועה ושיתוף במעגל סגור.
+    descHe: |-
+      סדנא שהיא שילוב האהבות הגדולות בחיי-
+      תנועה ומדיטציה,
+      ואיך לרקוד אותן בתוך הזוגיות❤️
+
+      דרך תנועה אינטואיטיבית, מגע ללא מטרה, נשימה, תשומת לב וכלים מעולם הטנטרה, נעמיק בחיבור שלנו – לעצמנו, לפרטנר ולנוכחות הרכה שברגע.
+
+      מה מחכה לכם:
+
+      • תרגילי תנועה ומגע מתוך הקשבה ומשחקיות.
+      • כלים מעולם המיינדפולנס והטנטרה- לנוכחות, חיבור, תקשורת מילולית ולא מילולית.
+      • תרגול זוגי של הקשבה, הובלה עדינה והתמסרות.
+
+      ✨ אין צורך בניסיון בתנועה או מדיטציה.
+      הסדנה מתרחשת בלבוש מלא.
+      התרגול כולו מתקיים אך ורק עם בן/ בת הזוג שאיתו הגעתם.
+
+      🌺סדנא אינטימית- עד 5 זוגות.
+      ⏰ 3 שעות
+      💸 250 ₪ לאדם 
+      📍מיקום: סטודיו פרמטה בפלרונטין.
     descEn: An evening of breath, movement and sharing in a closed circle.
-    signupUrl: ""
-  - date: "2026-07-19"
-    time: "10:00"
-    titleHe: סדנת נשימה ותנועה
-    titleEn: Breath & movement workshop
-    locationHe: חוף הים, הרצליה
-    locationEn: The beach, Herzliya
-    descHe: בוקר יחפים על החול — שלוש שעות של תרגול רך.
-    descEn: A barefoot morning on the sand — three hours of gentle practice.
-    signupUrl: ""
-  - date: "2026-08-08"
-    time: "18:00"
-    titleHe: מסע תנועה · ערב קיץ
-    titleEn: Movement journey · summer evening
-    locationHe: גן בוטני, תל אביב
-    locationEn: Botanical garden, Tel Aviv
-    descHe: ריקוד חופשי תחת עצים, לתוך השקיעה.
-    descEn: Free dance under the trees, into the sunset.
-    signupUrl: ""
+    signupUrl: ''
