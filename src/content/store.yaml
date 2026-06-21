@@ -1,6 +1,3 @@
-# Shop. Managed in the CMS at /admin.
-# `buyUrl` is optional: paste a Stripe Payment Link (recommended) or any
-# checkout/booking link. If empty, the button falls back to WhatsApp ordering.
 heading:
   labelHe: חנות
   labelEn: Shop
@@ -13,22 +10,22 @@ heading:
 items:
   - titleHe: שובר מתנה · מפגש נשימה
     titleEn: Gift card · breathwork session
-    price: "₪360"
+    price: ₪400
     image: /photos/bowl.jpg
-    descHe: מתנה למישהו שאוהבים — מפגש אישי אחד, ללא תאריך תפוגה.
+    descHe: מתנה למישהו שאוהבים - מפגש אישי אחד, ללא תאריך תפוגה.
     descEn: A gift for someone you love — one private session, no expiry.
-    buyUrl: ""
-  - titleHe: הקלטות נשימה מודרכת
+    buyUrl: ''
+  - titleHe: הקלטות תנועה ונשימה מודרכת
     titleEn: Guided breath recordings
-    price: "₪90"
+    price: ₪90
     image: /photos/meditation.jpg
     descHe: שלוש הקלטות להורדה, לתרגול בבית בקצב שלכם.
     descEn: Three downloadable recordings for practice at home, at your pace.
-    buyUrl: ""
-  - titleHe: קערת שירה טיבטית
+    buyUrl: ''
+  - titleHe: קלפים לזוגות
     titleEn: Tibetan singing bowl
-    price: "₪240"
-    image: /photos/hands.jpg
+    price: ₪240
+    image: /photos/studio.jpg
     descHe: קערה קטנה ביד, לפתוח ולסגור איתה את התרגול.
     descEn: A small hand bowl to open and close your practice.
-    buyUrl: ""
+    buyUrl: ''
