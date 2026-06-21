@@ -17,21 +17,12 @@ items:
     noteEn: One-on-one in the Tel Aviv clinic.
     featured: false
     ctaUrl: ''
-  - titleHe: חבילה ליווי אישי לנשים· 10 מפגשים
+  - titleHe: מפגש ליווי זוגי
     titleEn: Journey package · 4 sessions
-    price: ₪3800
-    unitHe: 10 מפגשים מותאמים אישית
+    price: ₪520
+    unitHe: שעה וחצי פגישה
     unitEn: series · four sessions
-    noteHe: 'תהליך מותאם אישית בדגש על חיבור וריפוי בתחומים: מיניות, אינטימיות, גוף-נפש'
+    noteHe: לזוגות שרוצים להעמיק את האינטימיות והחיבור
     noteEn: An ongoing process at your pace, with holding between sessions.
-    featured: true
-    ctaUrl: ''
-  - titleHe: חבילה זוגית· 10 מפגשים
-    titleEn: Couples journey
-    price: ₪4750
-    unitHe: תהליך מותאם אישית לזוג· 10 מפגשים· 90 דקות כל מפגש
-    unitEn: session · 90 min
-    noteHe: מוזמנים ליצור קשר לשיחת התאמה
-    noteEn: For two people meeting again — by arrangement.
     featured: true
     ctaUrl: ''
