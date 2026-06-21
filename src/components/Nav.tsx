@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { content } from '../content';
-import { pricing, events, store } from '../content/collections';
+import { faq, blog, podcast, store } from '../content/collections';
 import { features } from '../features';
-import { moonPhase, moonLitPath } from '../lib/astro';
 
 // A small concentric-ring sun, the site's motif shrunk to a brand glyph.
 function SunMark() {
@@ -16,47 +15,23 @@ function SunMark() {
   );
 }
 
-// A quiet quirk: a tiny moon in the bar drawn to tonight's *actual* phase
-// (same math as the astrology section). It links down to that section, so the
-// sun brand on one side and the live moon on the other bracket the bar.
-function NavMoon() {
-  const moon = moonPhase();
-  const size = 22;
-  const c = size / 2;
-  const R = c - 1.5;
-  const label = `${content.astro.moonLabel} · ${content.astro.moonPhases[moon.name]}`;
-  return (
-    <a className="nav-moon" href="#astro" aria-label={label} title={label}>
-      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} aria-hidden focusable="false">
-        <circle className="nav-moon-disc" cx={c} cy={c} r={R} />
-        <path className="nav-moon-lit" d={moonLitPath(R, moon.phase)} transform={`translate(${c} ${c})`} />
-      </svg>
-    </a>
-  );
-}
-
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState<string>('');
   const lastY = useRef(0);
 
-  // The page index: the same numbers appear in each section header. The
-  // commerce sections only appear if their flag is on and they have content,
-  // so the index always matches what's actually on the page.
+  // The page index: the same numbers appear in each section header. Sections that
+  // only render when they have content are gated here too, so the index always
+  // matches what's actually on the page.
   const items = [
-    { id: 'practices', num: '01', label: content.nav.practices },
-    { id: 'circle', num: '02', label: content.nav.circles },
-    { id: 'about', num: '03', label: content.nav.about },
-    ...(features.showStory ? [{ id: 'story', num: '04', label: content.nav.story }] : []),
-    ...(features.showPricing && pricing.items.length
-      ? [{ id: 'pricing', num: '05', label: content.nav.pricing }]
-      : []),
-    ...(features.showEvents && events.items.length
-      ? [{ id: 'events', num: '06', label: content.nav.events }]
-      : []),
+    { id: 'about', num: '01', label: content.nav.about },
+    { id: 'practices', num: '02', label: content.nav.services },
+    ...(faq.items.length ? [{ id: 'faq', num: '05', label: content.nav.faq }] : []),
+    ...(blog.items.length ? [{ id: 'blog', num: '06', label: content.nav.blog }] : []),
+    ...(podcast.items.length ? [{ id: 'podcast', num: '07', label: content.nav.podcast }] : []),
     ...(features.showStore && store.items.length
-      ? [{ id: 'shop', num: '07', label: content.nav.shop }]
+      ? [{ id: 'shop', num: '08', label: content.nav.shop }]
       : []),
   ];
 
@@ -126,7 +101,6 @@ export function Nav() {
         </div>
 
         <div className="nav-right">
-          {features.astrology && <NavMoon />}
           <a className="nav-cta" href="#contact">{content.nav.cta}</a>
         </div>
       </div>

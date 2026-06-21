@@ -9,6 +9,9 @@ import activitiesFile from './activities.yaml';
 import pricingFile from './pricing.yaml';
 import eventsFile from './events.yaml';
 import storeFile from './store.yaml';
+import faqFile from './faq.yaml';
+import blogFile from './blog.yaml';
+import podcastFile from './podcast.yaml';
 
 const isHe = lang === 'he';
 /** pick the active-language string from a He/En pair */
@@ -47,12 +50,27 @@ type RawProduct = {
   price: string; image: string;
   descHe: string; descEn: string; buyUrl?: string;
 };
+type RawFaq = { qHe: string; qEn: string; aHe: string; aEn: string };
+type RawArticle = {
+  titleHe: string; titleEn: string;
+  dateHe?: string; dateEn?: string;
+  excerptHe: string; excerptEn: string; url?: string;
+};
+type RawEpisode = {
+  titleHe: string; titleEn: string;
+  descHe: string; descEn: string;
+  duration?: string; url?: string;
+};
 type Raw<I> = { heading: RawHeading; items: I[] };
+type RawPodcast = Raw<RawEpisode> & { link?: string };
 
 const activitiesRaw = activitiesFile as Raw<RawActivity>;
 const pricingRaw = pricingFile as Raw<RawPrice>;
 const eventsRaw = eventsFile as Raw<RawEvent>;
 const storeRaw = storeFile as Raw<RawProduct>;
+const faqRaw = faqFile as Raw<RawFaq>;
+const blogRaw = blogFile as Raw<RawArticle>;
+const podcastRaw = podcastFile as RawPodcast;
 
 // --- localized, render-ready shapes ---------------------------------------
 export type Heading = { label: string; title: string; sub: string; cta: string };
@@ -129,6 +147,38 @@ export const store = {
     image: i.image,
     desc: t(i.descHe, i.descEn),
     href: checkout(i.buyUrl),
+  })),
+};
+
+export type Faq = { q: string; a: string };
+export const faq = {
+  heading: heading(faqRaw.heading),
+  items: (faqRaw.items ?? []).map((i): Faq => ({
+    q: t(i.qHe, i.qEn),
+    a: t(i.aHe, i.aEn),
+  })),
+};
+
+export type Article = { title: string; date: string; excerpt: string; href: string };
+export const blog = {
+  heading: heading(blogRaw.heading),
+  items: (blogRaw.items ?? []).map((i): Article => ({
+    title: t(i.titleHe, i.titleEn),
+    date: t(i.dateHe ?? '', i.dateEn ?? ''),
+    excerpt: t(i.excerptHe, i.excerptEn),
+    href: checkout(i.url),
+  })),
+};
+
+export type Episode = { title: string; desc: string; duration: string; href: string };
+export const podcast = {
+  heading: heading(podcastRaw.heading),
+  link: podcastRaw.link?.trim() || whatsapp,
+  items: (podcastRaw.items ?? []).map((i): Episode => ({
+    title: t(i.titleHe, i.titleEn),
+    desc: t(i.descHe, i.descEn),
+    duration: i.duration ?? '',
+    href: checkout(i.url),
   })),
 };
 

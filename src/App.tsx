@@ -6,19 +6,25 @@ import { features } from './features';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
 import { Breath } from './components/Breath';
-import { Practices } from './components/Practices';
-import { Circle } from './components/Circle';
-import { Band } from './components/Band';
 import { About } from './components/About';
-import { Story } from './components/Story';
+import { Practices } from './components/Practices';
 import { Pricing } from './components/Pricing';
-import { Events } from './components/Events';
+import { FreeCall } from './components/FreeCall';
+import { Band } from './components/Band';
+import { Story } from './components/Story';
+import { Faq } from './components/Faq';
+import { Blog } from './components/Blog';
+import { Podcast } from './components/Podcast';
+import { Social } from './components/Social';
 import { Store } from './components/Store';
-import { Astro } from './components/Astro';
 import { Words } from './components/Words';
 import { Contact } from './components/Contact';
 import { content } from './content';
 
+// Page order follows Gali's outline: about + services, the offer (pricing) and a
+// free intro call, then the talk, FAQ, journal, podcast, socials, products,
+// words, and a WhatsApp-first contact. The breathing hero and one calm photo
+// band are the kept "signature" moments.
 export default function App() {
   return (
     <>
@@ -31,16 +37,18 @@ export default function App() {
       <main id="main">
         <Hero />
         <Breath />
-        <Practices />
-        <Circle />
-        <Band />
         <About />
-        {features.showStory && <Story />}
+        <Practices />
         <Pricing />
-        <Events />
+        <FreeCall />
+        <Band />
+        {features.showStory && <Story />}
+        <Faq />
+        <Blog />
+        <Podcast />
+        <Social />
         <Store />
         <Words />
-        {features.astrology && <Astro />}
         <Contact />
       </main>
     </>

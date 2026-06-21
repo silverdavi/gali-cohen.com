@@ -9,7 +9,7 @@ export function About() {
   return (
     <section className="section" id="about">
       <div className="container">
-        <SectionHead index="03" label={aboutSection.label} title={aboutSection.title} />
+        <SectionHead index="01" label={aboutSection.label} title={aboutSection.title} />
         <div className="about-grid">
           <Reveal delay={0.06} className="col-main">
             <div className="about-text">

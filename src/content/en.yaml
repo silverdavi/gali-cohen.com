@@ -15,6 +15,10 @@ nav:
   shop: Shop
   cta: Say hello
   skip: Skip to content
+  services: Services
+  faq: FAQ
+  blog: Journal
+  podcast: Podcast
 
 profile:
   name: Gali Geula Cohen
@@ -149,6 +153,19 @@ wordsSection:
         Thank you, you truly do wonders! 🙏🙏🙏🙏
       name: Participant · one-on-one
 
+freeCall:
+  label: No commitment
+  title: A free intro call
+  body: >-
+    A short ~30-minute call for women and couples. We get to know each other,
+    you share what brings you, and we see together whether and how to continue.
+    No cost, no commitment.
+  cta: Book a call on WhatsApp
+  note: 30 minutes · women & couples
+socialSection:
+  label: Follow along
+  title: All my channels in one place
+  sub: Come join, read, and see what's brewing.
 astro:
   label: Under the same sky
   title: Where the sky is tonight

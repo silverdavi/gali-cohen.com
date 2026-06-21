@@ -8,12 +8,22 @@ import siteFile from './site.yaml';
 export type Lang = 'en' | 'he';
 
 // Language-neutral contact + social links, edited once in the CMS.
-export type Site = { email: string; instagram: string; whatsapp: string };
+export type SocialLink = { label: string; url: string };
+export type Site = {
+  email: string;
+  instagram: string;
+  whatsapp: string;
+  socials?: SocialLink[];
+};
 export const site = siteFile as Site;
 
 export type Content = {
   meta: { title: string; description: string };
-  nav: { practices: string; circles: string; about: string; story: string; pricing: string; events: string; shop: string; cta: string; skip: string };
+  nav: {
+    practices: string; circles: string; about: string; story: string;
+    pricing: string; events: string; shop: string; cta: string; skip: string;
+    services: string; faq: string; blog: string; podcast: string;
+  };
   profile: {
     name: string;
     hebrewName: string;
@@ -42,6 +52,8 @@ export type Content = {
     photos: { src: string; alt: string }[];
   };
   wordsSection: { label: string; items: { quote: string; name: string }[] };
+  freeCall: { label: string; title: string; body: string; cta: string; note: string };
+  socialSection: { label: string; title: string; sub: string };
   astro: {
     label: string;
     title: string;

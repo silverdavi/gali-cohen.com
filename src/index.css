@@ -1960,12 +1960,262 @@ video.band-photo { display: block; }
   color: var(--accent-deep);
 }
 
+/* --- WhatsApp-first button -------------------------------------------------------
+   The bottom contact + the free-call CTA lead with WhatsApp. Same sage family as
+   the primary button, but deeper and a touch larger so it reads as the main door
+   (email + Instagram step back to plain links). A small chat glyph marks it. */
+.btn-whatsapp {
+  background: var(--accent-deep);
+  padding: 14px 30px;
+  font-size: var(--fs-ui);
+  box-shadow: 0 16px 34px -22px rgba(46, 83, 64, 0.65);
+}
+.btn-whatsapp:hover { background: var(--ink); transform: translateY(-1px); }
+.btn-whatsapp::before {
+  content: '';
+  width: 17px; height: 17px;
+  background: currentColor;
+  -webkit-mask: var(--wa-glyph) center / contain no-repeat;
+  mask: var(--wa-glyph) center / contain no-repeat;
+}
+:root {
+  --wa-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.4.6c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1 2 1.2.2.1.4.1.6-.1l.7-.8c.2-.2.3-.2.6-.1l1.8.9c.3.1.5.2.5.4.1.2.1.9-.1 1.5z'/%3E%3C/svg%3E");
+}
+
+/* --- Free intro-call CTA banner --------------------------------------------------
+   A warm, bordered card between the offer and the talk. Body text on one side,
+   the WhatsApp button on the other; stacks on phones. */
+.freecall-section { border-top: 1px solid var(--rule); }
+.freecall {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-7);
+  flex-wrap: wrap;
+  padding: var(--s-8) var(--s-8);
+  border: 1px solid var(--accent);
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(201, 154, 63, 0.10), transparent 60%),
+    var(--paper);
+  box-shadow: 0 24px 56px -40px rgba(46, 83, 64, 0.5);
+}
+.freecall-body { flex: 1 1 320px; min-width: 0; }
+.freecall-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin: 0 0 var(--s-3);
+}
+.freecall-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-title);
+  color: var(--ink);
+  margin: 0 0 var(--s-3);
+}
+.freecall-text { margin: 0 0 var(--s-3); max-width: 52ch; color: var(--body); }
+.freecall-note {
+  margin: 0;
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  color: var(--mute);
+}
+.freecall-cta { flex: none; }
+
+/* --- FAQ (native <details> accordions) ------------------------------------------- */
+.faq-list {
+  margin-top: var(--header-gap);
+  max-width: 760px;
+  border-top: 1px solid var(--rule);
+}
+.faq-item { border-bottom: 1px solid var(--rule); }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-5) 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-h4, 19px);
+  line-height: var(--lh-title);
+  color: var(--ink);
+  transition: color .2s ease;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-item:hover .faq-q { color: var(--accent-deep); }
+.faq-mark {
+  position: relative;
+  width: 15px; height: 15px;
+  flex: none;
+}
+.faq-mark::before,
+.faq-mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--accent);
+  transition: transform .3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .3s ease;
+}
+.faq-mark::before { width: 15px; height: 1.5px; }
+.faq-mark::after  { width: 1.5px; height: 15px; }
+.faq-item[open] .faq-mark::after { transform: scaleY(0); opacity: 0; }
+.faq-a {
+  margin: 0;
+  padding: 0 0 var(--s-5);
+  max-width: var(--measure-body);
+  color: var(--body);
+  line-height: var(--lh-body);
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-mark::before, .faq-mark::after { transition: none; }
+}
+
+/* --- Blog / articles ------------------------------------------------------------- */
+.blog-grid {
+  margin-top: var(--header-gap);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+}
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  height: 100%;
+  padding: var(--s-7) var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: var(--paper);
+  color: var(--body);
+  transition: transform .35s cubic-bezier(0.22, 0.61, 0.36, 1), border-color .3s ease, box-shadow .35s ease;
+}
+.article:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 22px 46px -34px rgba(46, 83, 64, 0.5);
+}
+.article-date {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+.article-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-title);
+  color: var(--ink);
+}
+.article-excerpt { flex: 1; margin: 0; font-size: var(--fs-ui); line-height: var(--lh-body); }
+.article-more {
+  margin-top: var(--s-2);
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.article:hover .article-more { color: var(--accent-deep); }
+
+/* --- Podcast --------------------------------------------------------------------- */
+.podcast-list {
+  margin-top: var(--header-gap);
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+.episode {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  padding: var(--s-5) 2px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--body);
+  transition: padding-inline-start .3s ease;
+}
+.episode:hover { padding-inline-start: var(--s-3); }
+.episode-play {
+  flex: none;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: var(--accent);
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.episode-play svg { width: 18px; height: 18px; fill: currentColor; }
+.episode:hover .episode-play { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.episode-body { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.episode-title {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: var(--lh-title);
+  color: var(--ink);
+}
+.episode-desc { font-size: var(--fs-ui); line-height: var(--lh-body); color: var(--body); }
+.episode-dur {
+  flex: none;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: var(--fs-meta);
+  color: var(--faint);
+}
+.podcast-subscribe {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--s-6);
+  padding: 10px 22px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  color: var(--accent);
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.podcast-subscribe:hover { border-color: var(--accent); color: var(--accent-deep); transform: translateY(-1px); }
+
+/* --- Social links ---------------------------------------------------------------- */
+.social-row {
+  margin-top: var(--header-gap);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 24px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--body);
+  transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+}
+.social-link:hover {
+  border-color: var(--accent);
+  color: var(--paper);
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
 /* --- Responsive --------------------------------------------------------------------- */
 @media (max-width: 880px) {
   :root { --pad: 24px; }
   /* commerce grids collapse to one column on phones */
   .price-list,
-  .store-grid { grid-template-columns: 1fr; }
+  .store-grid,
+  .blog-grid { grid-template-columns: 1fr; }
+  .freecall { padding: var(--s-7) var(--s-6); }
   .event {
     grid-template-columns: 56px 1fr;
     column-gap: var(--s-4);

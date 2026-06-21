@@ -58,7 +58,7 @@ try {
     console.log('shot', name);
   };
   await shoot('01-hero.jpg');
-  for (const [anchor, file] of [['#practices','02-practices.jpg'],['#about','03-about.jpg'],['#story','04-story.jpg'],['#words','05-words.jpg'],['#contact','06-contact.jpg']]) {
+  for (const [anchor, file] of [['#about','02-about.jpg'],['#practices','03-practices.jpg'],['#pricing','04-pricing.jpg'],['#free-call','05-freecall.jpg'],['#faq','06-faq.jpg'],['#blog','07-blog.jpg'],['#podcast','08-podcast.jpg'],['#social','09-social.jpg'],['#shop','10-shop.jpg'],['#contact','11-contact.jpg']]) {
     await c.send('Runtime.evaluate', { expression: `document.querySelector('${anchor}')?.scrollIntoView({block:'start'})` });
     await sleep(1400);
     await shoot(file);

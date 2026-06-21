@@ -11,6 +11,10 @@ nav:
   shop: חנות
   cta: דברו איתי
   skip: דלגו לתוכן
+  services: השירותים
+  faq: שאלות נפוצות
+  blog: בלוג
+  podcast: פודקאסט
 profile:
   name: גלי גאולה כהן
   hebrewName: Gali Geula Cohen
@@ -130,6 +134,18 @@ wordsSection:
         מקווים לקחת איתנו דברים קטנים שיעשו שינוי לאט לאט.
         סופשבוע נעים ❤️
       name: משתתפת · סדנת טנטרה פרטית לזוגות
+freeCall:
+  label: בלי התחייבות
+  title: שיחת היכרות · חינם
+  body: >-
+    שיחה קצרה של כ-30 דקות לנשים ולזוגות. נכיר, תספרו מה מביא אתכם,
+    ונבדוק יחד אם והאיך נכון להמשיך. בלי עלות ובלי התחייבות.
+  cta: לתיאום שיחה בוואטסאפ
+  note: 30 דקות · לנשים וזוגות
+socialSection:
+  label: לעקוב ולהתעדכן
+  title: כל הרשתות במקום אחד
+  sub: מוזמנים להצטרף, לקרוא ולראות מה מתבשל.
 astro:
   label: תחת אותם שמיים
   title: איפה השמיים הלילה
@@ -156,8 +172,8 @@ astro:
 contact:
   line: בואי כמו שאת
   sub: מוזמנים ליצור קשר ולבדוק יחד מה יכול להתאים עבורכם 🌺
-  whatsapp: https://wa.me/972549431396
-  instagram: https://www.instagram.com/gali.geula/
+  whatsapp: וואטסאפ
+  instagram: אינסטגרם
 footer:
   place: תל אביב
   credit: 🌺

@@ -1,0 +1,41 @@
+# Podcast — edited in the CMS ("פודקאסט · Podcast"). Placeholder episodes; set
+# `link` to the show URL (Spotify/Apple) and a `url` per episode when ready.
+# Empty links fall back to WhatsApp.
+link: ""
+heading:
+  labelHe: פודקאסט
+  labelEn: Podcast
+  titleHe: שיחות על גוף ונפש
+  titleEn: Conversations on body & soul
+  subHe: שיחות פתוחות על מיניות, רוחניות, ריפוי וחזרה אל החיים.
+  subEn: Open conversations on sexuality, spirituality, healing and coming back to life.
+  ctaHe: להאזנה
+  ctaEn: Listen
+items:
+  - titleHe: פרק 01 · לחזור הביתה אל הגוף
+    titleEn: Episode 01 · Coming home to the body
+    descHe: >-
+      על הדרך מהראש אל הגוף, ולמה נוכחות היא נקודת ההתחלה של כל ריפוי.
+    descEn: >-
+      On the way from the head to the body, and why presence is the starting
+      point of all healing.
+    duration: "38 דק׳"
+    url: ""
+  - titleHe: פרק 02 · אינטימיות בלי מסכות
+    titleEn: Episode 02 · Intimacy without masks
+    descHe: >-
+      שיחה על קרבה, פגיעוּת ותקשורת אמיתית בין בני זוג.
+    descEn: >-
+      A conversation on closeness, vulnerability and honest communication between
+      partners.
+    duration: "45 דק׳"
+    url: ""
+  - titleHe: פרק 03 · אמונה במקומות לא צפויים
+    titleEn: Episode 03 · Faith in unexpected places
+    descHe: >-
+      מסע אישי דרך חושך ואור, ועל מציאת משמעות בדיוק היכן שלא חיפשנו.
+    descEn: >-
+      A personal journey through darkness and light, and finding meaning exactly
+      where we didn't look.
+    duration: "52 דק׳"
+    url: ""

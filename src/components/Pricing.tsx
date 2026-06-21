@@ -9,7 +9,7 @@ export function Pricing() {
   return (
     <section className="section" id="pricing">
       <div className="container">
-        <SectionHead index="05" label={heading.label} title={heading.title} sub={heading.sub} />
+        <SectionHead index="03" label={heading.label} title={heading.title} sub={heading.sub} />
         <div className="price-list">
           {items.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.06} className="col-third">

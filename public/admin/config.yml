@@ -172,6 +172,106 @@ singletons:
             required: false
             hint: "Stripe Payment Link (recommended). Leave empty to fall back to WhatsApp."
 
+  - name: faq
+    label: "שאלות נפוצות · FAQ"
+    file: "src/content/faq.yaml"
+    icon: help
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+      - label: "Questions"
+        name: items
+        widget: list
+        summary: "{{fields.qHe}}"
+        fields:
+          - { label: "Question (HE)", name: qHe, widget: string }
+          - { label: "Question (EN)", name: qEn, widget: string }
+          - { label: "Answer (HE)", name: aHe, widget: text }
+          - { label: "Answer (EN)", name: aEn, widget: text }
+
+  - name: blog
+    label: "בלוג · Articles"
+    file: "src/content/blog.yaml"
+    icon: article
+    fields:
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+          - { label: "Read-more label (HE)", name: ctaHe, widget: string }
+          - { label: "Read-more label (EN)", name: ctaEn, widget: string }
+      - label: "Articles"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}}"
+        fields:
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Date (HE)", name: dateHe, widget: string, required: false }
+          - { label: "Date (EN)", name: dateEn, widget: string, required: false }
+          - { label: "Excerpt (HE)", name: excerptHe, widget: text }
+          - { label: "Excerpt (EN)", name: excerptEn, widget: text }
+          - label: "Link"
+            name: url
+            widget: string
+            required: false
+            hint: "Where the article lives. Leave empty to fall back to WhatsApp."
+
+  - name: podcast
+    label: "פודקאסט · Podcast"
+    file: "src/content/podcast.yaml"
+    icon: podcasts
+    fields:
+      - label: "Show link (Spotify / Apple)"
+        name: link
+        widget: string
+        required: false
+        hint: "The 'subscribe' button target. Leave empty to fall back to WhatsApp."
+      - label: "Heading"
+        name: heading
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "Label (HE)", name: labelHe, widget: string }
+          - { label: "Label (EN)", name: labelEn, widget: string }
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Subtitle (HE)", name: subHe, widget: string, required: false }
+          - { label: "Subtitle (EN)", name: subEn, widget: string, required: false }
+          - { label: "Subscribe label (HE)", name: ctaHe, widget: string }
+          - { label: "Subscribe label (EN)", name: ctaEn, widget: string }
+      - label: "Episodes"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}}"
+        fields:
+          - { label: "Title (HE)", name: titleHe, widget: string }
+          - { label: "Title (EN)", name: titleEn, widget: string }
+          - { label: "Description (HE)", name: descHe, widget: text }
+          - { label: "Description (EN)", name: descEn, widget: text }
+          - { label: "Duration (e.g. 38 דק׳)", name: duration, widget: string, required: false }
+          - label: "Episode link"
+            name: url
+            widget: string
+            required: false
+            hint: "Listen URL. Leave empty to fall back to WhatsApp."
+
   - name: contact_info
     label: "פרטי קשר · Contact & social"
     file: "src/content/site.yaml"
@@ -183,6 +283,15 @@ singletons:
         name: whatsapp
         widget: string
         hint: "e.g. https://wa.me/972XXXXXXXXX — also the fallback for every Buy / Reserve button."
+      - label: "Social links (the Social section)"
+        name: socials
+        widget: list
+        required: false
+        summary: "{{fields.label}}"
+        hint: "Leave a URL empty to hide that one until you have the link."
+        fields:
+          - { label: "Label", name: label, widget: string }
+          - { label: "URL", name: url, widget: string, required: false }
 
 collections:
   # ----- All site copy (the live language is Hebrew) ------------------------
@@ -218,6 +327,10 @@ collections:
               - { label: "Shop", name: shop, widget: string }
               - { label: "Contact button", name: cta, widget: string }
               - { label: "Skip-to-content (accessibility)", name: skip, widget: string }
+              - { label: "Services", name: services, widget: string }
+              - { label: "FAQ", name: faq, widget: string }
+              - { label: "Blog", name: blog, widget: string }
+              - { label: "Podcast", name: podcast, widget: string }
           - label: "Profile"
             name: profile
             widget: object
@@ -344,6 +457,24 @@ collections:
                   - { label: "Waning gibbous", name: waningGibbous, widget: string }
                   - { label: "Last quarter", name: lastQuarter, widget: string }
                   - { label: "Waning crescent", name: waningCrescent, widget: string }
+          - label: "Free intro-call banner"
+            name: freeCall
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Body", name: body, widget: text }
+              - { label: "Button label", name: cta, widget: string }
+              - { label: "Note (e.g. 30 min · women & couples)", name: note, widget: string }
+          - label: "Social section text"
+            name: socialSection
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Subtitle", name: sub, widget: string }
           - label: "Contact section text"
             name: contact
             widget: object
@@ -351,8 +482,8 @@ collections:
             fields:
               - { label: "Headline", name: line, widget: string }
               - { label: "Subtext", name: sub, widget: string }
-              - { label: "WhatsApp link label", name: whatsapp, widget: string }
-              - { label: "Instagram link label", name: instagram, widget: string }
+              - { label: "WhatsApp button text (not the link)", name: whatsapp, widget: string, hint: "The visible button label. The actual link lives in 'Contact & social'." }
+              - { label: "Instagram link text (not the link)", name: instagram, widget: string, hint: "The visible label. The actual link lives in 'Contact & social'." }
           - label: "Footer"
             name: footer
             widget: object

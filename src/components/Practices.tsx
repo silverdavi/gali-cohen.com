@@ -11,7 +11,7 @@ export function Practices() {
     <section className="section" id="practices">
       <div className="container">
         <SectionHead
-          index="01"
+          index="02"
           label={heading.label}
           title={heading.title}
           sub={heading.sub}
