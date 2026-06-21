@@ -18,9 +18,17 @@ export function Contact() {
             </div>
             <h2 className="contact-line">{contact.line}</h2>
             <p className="contact-sub">{contact.sub}</p>
-            <a className="btn btn-primary" href={`mailto:${site.email}`} {...magnetic}>{site.email}</a>
+            <a
+              className="btn btn-primary btn-whatsapp"
+              href={site.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              {...magnetic}
+            >
+              {contact.whatsapp}
+            </a>
             <div className="contact-links">
-              <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">{contact.whatsapp}</a>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
               <a href={site.instagram} target="_blank" rel="noopener noreferrer">{contact.instagram}</a>
             </div>
           </Reveal>

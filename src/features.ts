@@ -54,9 +54,9 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   photoMotion: true,
   figureSway: true,
   natureLife: true,
-  astrology: true,
-  astroMotion: true,
-  zodiacMedallions: true,
+  astrology: false, // removed per Gali — no celestial section or nav moon
+  astroMotion: false,
+  zodiacMedallions: false,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,

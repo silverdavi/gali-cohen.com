@@ -6,7 +6,8 @@
 // tools/cinemagraph_encode.sh blends the motion over the frozen still at low
 // opacity + ping-pong). Each name has /public/clips/<name>.{webm,mp4,jpg}.
 const AVAILABLE = new Set<string>([
-  'portrait',
+  // 'portrait' intentionally omitted — the hero is now a headshot; a face that
+  // subtly drifts reads as uncanny, so it stays a clean still.
   'breath',
   'feet',
   'hands',
