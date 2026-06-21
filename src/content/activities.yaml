@@ -1,64 +1,69 @@
-# Activities ("ways to work together"). Managed in the CMS at /admin.
-# Each item carries both languages; the site shows the active one.
 heading:
   labelHe: דרכי עבודה
   labelEn: Practices
-  titleHe: איך עובדים יחד
+  titleHe: איך יוצרים קשר
   titleEn: Ways to work together
-  subHe: כל מסע מתחיל בשיחה — אלה הצורות שהעבודה לובשת על פי רוב.
-  subEn: >-
-    Every journey starts with a conversation — these are the shapes it
-    usually takes.
+  subHe: כל מסע מתחיל בשיחה
+  subEn: Every journey starts with a conversation — these are the shapes it usually takes.
 items:
-  - titleHe: נשימה מודעת
+  - titleHe: תהליך ליווי אישי לנשים
     titleEn: Breathwork
     noteHe: אחד על אחד · 75 דקות
     noteEn: One-on-one · 75 minutes
-    bodyHe: >-
-      נשימה מודעת ומונחית שמאפשרת לגוף לסיים את מה שהראש דוחה.
-      מאטים, מקשיבים, ונותנים לנשימה לדבר.
-    bodyEn: >-
-      Guided conscious breathing that lets the body finish what the mind keeps
-      postponing. We slow down, listen, and let the breath do the talking.
+    bodyHe: ליווי אישי מותאם עבורך- מרחב בטוח להעמקה, הקשבה וצמיחה דרך הגוף, הרגש והלב.
+    bodyEn: Guided conscious breathing that lets the body finish what the mind keeps postponing. We slow down, listen, and let the breath do the talking.
     photo: /photos/breath.jpg
     photoAltHe: גלי מלווה אישה שוכבת במפגש נשימה ומגע, אור רך וכריות רקומות
     photoAltEn: Gali guiding a reclining woman in a breath-and-touch session, soft light
-  - titleHe: תנועה וריקוד
+  - titleHe: תהליך ליווי אישי לזוגות
     titleEn: Movement & dance
-    noteHe: מפגשים פתוחים · שבועי
+    noteHe: מפגשים אישיים · 90 דקות
     noteEn: Open sessions · weekly
-    bodyHe: >-
-      תנועה חופשית בלי צעדים ללמוד ובלי קהל. מוזיקה, רצפה, יחפים.
-      הגוף זוכר איך. הוא תמיד זכר.
-    bodyEn: >-
-      Free movement with no steps to learn and nobody watching. Music, floor,
-      bare feet. The body remembers how — it always has.
-    photo: /photos/feet.jpg
+    bodyHe: ליווי זוגי תהליכי המאפשר להעמיק את התקשורת, האינטימיות והחיבור, תוך יצירת מרחב בטוח לצמיחה משותפת.
+    bodyEn: Free movement with no steps to learn and nobody watching. Music, floor, bare feet. The body remembers how — it always has.
+    photo: /photos/סדנאותזוגות.JPEG
     photoAltHe: משתתפות בתנועה חופשית על דק עץ בחוץ, ראש נשען לאחור
     photoAltEn: Participants in free movement on an outdoor deck, head tilted back
-  - titleHe: מסעות זוגיים
+  - titleHe: סדנת טנטרה פרטית לזוגות
     titleEn: Couples journeys
-    noteHe: סדנאות פרטיות · בתיאום
+    noteHe: סדנאות פרטיות · 3 שעות · בתיאום אישי
     noteEn: Private workshops · by invitation
-    bodyHe: >-
-      מסע מודרך לשניים שרוצים להיפגש מחדש: תקשורת, מגע ונוכחות,
-      בבנייה הדרגתית ובהחזקה רכה.
-    bodyEn: >-
-      A guided journey for two people who want to meet again — communication,
-      touch, and presence, built gradually and held with care.
-    photo: /photos/hands.jpg
+    bodyHe: |-
+      סדנא חוויתית פרטית אינטימית לזוגות שרוצים להעמיק את החיבור, האהבה והעונג.
+      מסע של כ3 שעות שנבנה בהדרגה- כשהמהות היא חוויה שהיא גם מענגת וגם מלמדת, כזו שתשאיר אתכם עם כלים להעמקה וחקירה גם לאחר הסדנא.
+      אם חפצה נפשכם להעמיק את האינטימיות, החיבור, התקשורת, להביא יותר לב ונוכחות לחיבור שלכם לעצמכם קודם כל ומשם גם לפרטנר, ללמוד לגעת, לענג ולהתענג- מוזמנים באהבה.
+
+      לסדנא יש מבנה כללי אבל היא גם מותאמת אישית לכל זוג- אשמח לשמוע צרכים, רצונות וגבולות לפני.
+      כמו כן חשוב לי להדגיש שאני נטו מנחה את הסדנא (אין מגע איתי)- המהות היא להעצים את החיבור והתשוקה בניכם עם כמה שיותר רגישות והקשבה.
+      מתאים גם לזוגות להט"בים, חרדים ודתיים (אני מגיעה מהמגזר החרדי ועובדת הרבה עם זוגות מהמגזר).
+    bodyEn: A guided journey for two people who want to meet again — communication, touch, and presence, built gradually and held with care.
+    photo: /photos/82ffe6e7-c7f1-470a-87f6-bf95c529fb2c.png
     photoAltHe: גלי ומשתתפת בעבודת זוגות על הרצפה באוהל, מבט ומגע
     photoAltEn: Gali and a partner in floor work inside a bell tent, eye contact
-  - titleHe: מעגלי מדיטציה
+  - titleHe: מיינדפול דאנס לזוגות · 3 שעות
     titleEn: Meditation circles
-    noteHe: קבוצות קטנות · מולד הירח
+    noteHe: 3 שעות של חקירה בתנועה, אינטימיות וחיבור ללא מילים 💃
     noteEn: Small groups · new moon
-    bodyHe: >-
-      לשבת יחד במעגל, לעשות מעט מאוד, בכוונה גדולה. שקט בחברותא
-      הוא שקט אחר.
-    bodyEn: >-
-      Sitting together in a circle, doing very little, very deliberately.
-      Silence with company is a different silence.
-    photo: /photos/meditation.jpg
+    bodyHe: |-
+      סדנא שהיא שילוב האהבות הגדולות בחיי- תנועה ומדיטציה, ואיך לרקוד אותן בתוך הזוגיות❤️  
+      דרך תנועה אינטואיטיבית, מגע ללא מטרה, נשימה, תשומת לב וכלים מעולם הטנטרה, נעמיק בחיבור שלנו - לעצמנו, לפרטנר ולנוכחות הרכה שברגע.  
+
+      מה מחכה לכם: 
+      • תרגילי תנועה ומגע מתוך הקשבה ומשחקיות. 
+      • כלים מעולם המיינדפולנס והטנטרה- לנוכחות, חיבור, תקשורת מילולית ולא מילולית. 
+      • תרגול זוגי של הקשבה, הובלה עדינה והתמסרות.  
+
+      ✨ אין צורך בניסיון בתנועה או מדיטציה. 
+      הסדנה מתרחשת בלבוש מלא. 
+      התרגול כולו מתקיים אך ורק עם בן/ בת הזוג שאיתו הגעתם.  
+
+      🌺סדנא אינטימית- עד 5 זוגות . 
+      ⏰ 3 שעות 
+      💸 250 ₪ לאדם  
+      📍מיקום: סטודיו פרמטה בפלרונטין. 
+
+      📅 תאריך: יום רביעי, 29.7.26, 20:00-23:00 .
+    bodyEn: Sitting together in a circle, doing very little, very deliberately. Silence with company is a different silence.
+    photo: /photos/מיינדפול יולי.png
     photoAltHe: מעגל מדיטציה באוהל, גלי יושבת במרכז בעיניים עצומות
     photoAltEn: A meditation circle in a bell tent, Gali seated at the center, eyes closed
