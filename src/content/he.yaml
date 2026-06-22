@@ -45,8 +45,8 @@ band:
   alt: מעגל משתתפים עומדים על מזרנים על דק עץ בין עצים ירוקים
 aboutSection:
   label: אודות
-  title: בחזרה אל הגוף והלב
-  photo: /photos/2.PNG
+  title: כמה מילים עליי
+  photo: /photos/בעלי חיים 2.jpg
   photoAlt: דיוקן של גלי מחייכת, על רקע פריחה לבנה
   paragraphs:
     - |-
@@ -64,7 +64,7 @@ aboutSection:
       value: עברית · אנגלית
 storySection:
   label: הרצאה
-  title: גוף, אמונה וגאולה
+  title: ההרצאה- גוף, אמונה וגאולה
   lead: |-
     גוף, אמונה וגאולה
 
