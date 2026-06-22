@@ -1,41 +1,52 @@
-# Podcast — edited in the CMS ("פודקאסט · Podcast"). Placeholder episodes; set
-# `link` to the show URL (Spotify/Apple) and a `url` per episode when ready.
-# Empty links fall back to WhatsApp.
-link: ""
+link: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
 heading:
-  labelHe: פודקאסט
+  labelHe: פודקאסט "מעבר לטאבו" עם טל רומן
   labelEn: Podcast
-  titleHe: שיחות על גוף ונפש
+  titleHe: שיחות
   titleEn: Conversations on body & soul
-  subHe: שיחות פתוחות על מיניות, רוחניות, ריפוי וחזרה אל החיים.
+  subHe: שיחות פתוחות על יחסים, מיניות, תודעה, רוח וכל מה שלא תמיד מעיזים לדבר עליו.
   subEn: Open conversations on sexuality, spirituality, healing and coming back to life.
   ctaHe: להאזנה
   ctaEn: Listen
 items:
   - titleHe: פרק 01 · לחזור הביתה אל הגוף
-    titleEn: Episode 01 · Coming home to the body
-    descHe: >-
-      על הדרך מהראש אל הגוף, ולמה נוכחות היא נקודת ההתחלה של כל ריפוי.
-    descEn: >-
-      On the way from the head to the body, and why presence is the starting
-      point of all healing.
-    duration: "38 דק׳"
-    url: ""
-  - titleHe: פרק 02 · אינטימיות בלי מסכות
+    titleEn: פרק 1- על מיניות מקודשת, אמונה ואייוואסקה עם חרדים
+    descHe: |-
+      בפרק הראשון של ״מעבר לטאבו״ תכירו אותנו, יוצרות הפודקאסט- טל רומן וגלי גאולה כהן. 
+      נגע במסע חיינו הכולל בתוכו עבודה בחשפנות, ילדות בחברה החרדית, חרם, התנסות במרחיבי תודעה, טראומות ועוד.. 
+      ועד להפיכתנו למנחות, מטפלות ומרצות בתחומי הגוף- נפש- מיניות-יחסים וריפוי הלב. 
+      מוזמנים.ות להאזין ולהתרחב מעבר לטאבו.. האזנה נעימה 🙂
+    descEn: On the way from the head to the body, and why presence is the starting point of all healing.
+    duration: 60 דק'
+    url: https://youtu.be/Fhh06rsPs_c?si=AIMn0ObJ2EdvgrIQ
+  - titleHe: פרק 2- עמוס סילבר (מייסד טלגראס)- על קנאביס, יציאה ממשברים ויחסים מזווית אחרת
     titleEn: Episode 02 · Intimacy without masks
-    descHe: >-
-      שיחה על קרבה, פגיעוּת ותקשורת אמיתית בין בני זוג.
-    descEn: >-
-      A conversation on closeness, vulnerability and honest communication between
-      partners.
-    duration: "45 דק׳"
-    url: ""
-  - titleHe: פרק 03 · אמונה במקומות לא צפויים
+    descHe: בפרק השני של "מעבר לטאבו" , עמוס הביא את סיפור חייו המרתק- דיברנו על העבר החרדי שלו, רגעי משבר, יחסים מורכבים ומעוררי השראה עם אבא והמשפחה, קנאביס, סמים, יחסים ומיניות ובסופו של דבר על החיים בכלל - רק מזוויות פחות שגרתיות.
+    descEn: A conversation on closeness, vulnerability and honest communication between partners.
+    duration: 63 דק'
+    url: https://youtu.be/oUk5e4NQkdg?si=asgM8FovPTmW0wUe
+  - titleHe: פרק 3- נוי חריף- כוכבת אונליפאנס ומדריכת טרילותרפיה
     titleEn: Episode 03 · Faith in unexpected places
-    descHe: >-
-      מסע אישי דרך חושך ואור, ועל מציאת משמעות בדיוק היכן שלא חיפשנו.
-    descEn: >-
-      A personal journey through darkness and light, and finding meaning exactly
-      where we didn't look.
-    duration: "52 דק׳"
-    url: ""
+    descHe: |-
+      בפרק השלישי של "מעבר לטאבו" אירחנו את נוי חריף- כוכבת אונלי פאנס, מדריכת טרילותרפיה, בת 32, אמא ל3 חתולים, בזוגיות.
+      היה כלכך מרתק שהזמן עף והספקנו בקושי לגעת בכל הנושאים שרצינו. עד לעונג הבא.
+    descEn: A personal journey through darkness and light, and finding meaning exactly where we didn't look.
+    duration: 57 דק׳
+    url: https://youtu.be/oUk5e4NQkdg?si=ZzO7C2HYnmMBDKod
+  - titleHe: פרק 4- יציאת מצרים- מקשר רעיל לזוגיות בריאה
+    titleEn: :)
+    descHe: |-
+      מה הופך קשר ללא בריא? איך לזהות דגלים אדומים (כולל נרקסיזם)?, ואיך נראית זוגיות בריאה שבאמת מזינה את הלב?
+      בפרק אנחנו מדברות על המסע האישי שלנו, על דיוק גבולות והקשבה פנימית בתוך זוגיות.
+    descEn: :)
+    duration: 44 דק'
+    url: https://www.youtube.com/watch?v=DfEtQUfocGg&list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL&index=2
+  - titleHe: פרק 5- שלומית שפרבר- על ריפוי כאבים ביחסים, תנועה ויהדות עכשווית
+    titleEn: :)
+    descHe: |-
+      בפרק הזה נפגשנו עם שולמית שפרבר- מטפלת מינית מוסמכת, דוקטורנטית במעבדה למחקר מיניות באוניברסיטת חיפה, וחוקרת מיניות, טראומה והחלמה.
+      דברנו על ריפוי כאבים וטראומות מיניות דרך חיבור והקשבה לגוף, תנועה ועוד.
+      נגענו גם בהסתכלות המרעננת שלה על יהדות עכשווית והחכמה שטמונה שם.
+    descEn: :)
+    duration: 55 דק'
+    url: https://www.youtube.com/watch?v=FYfix6HcxIA&list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL&index=1
