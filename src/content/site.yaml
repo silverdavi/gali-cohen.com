@@ -1,12 +1,18 @@
 email: GaliCo.10@gmail.com
 instagram: https://www.instagram.com/gali.geula/
 whatsapp: https://wa.me/972549431396
-# "Link to all my social" — shown in the Social section. Leave a url empty to
-# hide that one until you have the link. Add more rows freely in the CMS.
 socials:
-  - { label: Instagram, url: "https://www.instagram.com/gali.geula/" }
-  - { label: WhatsApp, url: "https://wa.me/972549431396" }
-  - { label: Facebook, url: "" }
-  - { label: YouTube, url: "" }
-  - { label: TikTok, url: "" }
-  - { label: Spotify, url: "" }
+  - label: Instagram
+    url: https://www.instagram.com/gali.geula/
+  - label: WhatsApp
+    url: https://wa.me/972549431396
+  - label: Facebook
+    url: https://www.facebook.com/gali.cohen.902/
+  - label: YouTube
+    url: https://www.youtube.com/@Gali-Geula-Cohen
+  - label: TikTok
+    url: https://www.tiktok.com/@gali.geula?fbclid=IwY2xjawSmH2RleHRuA2FlbQIxMABicmlkETFKQWZIeEc3UU9iZ1NvUEZZc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHp_lnFOEVYUxrBeWoSLpmog6DEk_KSY8GiSYRWuPet4MS1b70-KRRrYsd59Y_aem_J1VflU4n7F_PW1o0B3U42Q
+  - label: X
+    url: https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2Fgalicohen1%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExSkFmSHhHN1FPYmdTb1BGWXNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5-tpLvvaQMJlivJYcWrBulvKlQUbUcQY8JZ_-H_P8QBKYC_gyMHWnX400b2w_aem_OdszLNYjhDTx_yjv-6NXCA&h=AUCcuYjW5g4-SiMOf5Z1AQVTTNQffYYAnng9xfImB1mnIRjekDR6FOoU9eDBPKwRAK-ZDZV0VNJfBjhOrFxsToFdWGEiyQteUMnxLx5uZwdyXsrqtsMOZeOittaXAGFTkIv0X2xXXuBEeNiAfw
+  - label: Threads
+    url: https://www.threads.com/@gali.geula?xmt=AQG0AcSvcGflDxg__ERP46meeNQZEV6Xi1xmVcqkqIrDXzM
