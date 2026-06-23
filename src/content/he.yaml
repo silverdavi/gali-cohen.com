@@ -46,7 +46,7 @@ band:
 aboutSection:
   label: אודות
   title: כמה מילים עליי
-  photo: /photos/בעלי חיים 2.jpg
+  photo: /photos/רוקדתת.jpg
   photoAlt: דיוקן של גלי מחייכת, על רקע פריחה לבנה
   paragraphs:
     - |-
@@ -89,7 +89,7 @@ storySection:
       alt: גלי על במה במופע, אורות במה
     - src: /photos/אני יוגה.jpg
       alt: גלי מחזיקה שלט מחאה — "הסטיגמה הורגת"
-    - src: /photos/בעלי חיים 2.jpg
+    - src: /photos/הרצאהחשפניות.jpg
       alt: גלי מאחורי הקלעים לפני מופע
 wordsSection:
   label: המלצות
