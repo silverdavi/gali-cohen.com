@@ -4,7 +4,7 @@ import { events, isExternal } from '../content/collections';
 import { features } from '../features';
 
 export function Events() {
-  const { heading, items } = events;
+  const { heading, items, group } = events;
   if (!features.showEvents || items.length === 0) return null;
   return (
     <section className="section" id="events">
@@ -40,6 +40,21 @@ export function Events() {
             </Reveal>
           ))}
         </div>
+        {group && (
+          <Reveal delay={0.1}>
+            <a
+              className="events-group"
+              href={group.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden focusable="false">
+                <path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.3A10 10 0 1 0 12 2z" />
+              </svg>
+              <span>{group.label}</span>
+            </a>
+          </Reveal>
+        )}
       </div>
     </section>
   );

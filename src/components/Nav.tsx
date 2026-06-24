@@ -31,8 +31,7 @@ export function Nav() {
     ...(content.wordsSection.items.length ? [{ id: 'words', num: '04', label: content.nav.words }] : []),
     ...(podcast.shows.length ? [{ id: 'podcast', num: '05', label: content.nav.podcast }] : []),
     ...(blog.items.length ? [{ id: 'blog', num: '06', label: content.nav.blog }] : []),
-    { id: 'contact', num: '07', label: content.nav.contact },
-    ...(features.showStore && store.items.length ? [{ id: 'shop', num: '08', label: content.nav.shop }] : []),
+    ...(features.showStore && store.items.length ? [{ id: 'shop', num: '07', label: content.nav.shop }] : []),
   ];
 
   useEffect(() => {

@@ -70,7 +70,7 @@ type RawPodcast = { heading: RawHeading; shows: RawShow[] };
 
 const activitiesRaw = activitiesFile as Raw<RawActivity>;
 const pricingRaw = pricingFile as Raw<RawPrice>;
-const eventsRaw = eventsFile as Raw<RawEvent>;
+const eventsRaw = eventsFile as Raw<RawEvent> & { groupUrl?: string; groupLabelHe?: string; groupLabelEn?: string };
 const storeRaw = storeFile as Raw<RawProduct>;
 const faqRaw = faqFile as Raw<RawFaq>;
 const blogRaw = blogFile as Raw<RawArticle>;
@@ -129,6 +129,10 @@ const isoDate = (v: unknown): string => {
 };
 export const events = {
   heading: heading(eventsRaw.heading),
+  // Optional "quiet WhatsApp updates group" link shown under the events.
+  group: eventsRaw.groupUrl && eventsRaw.groupUrl.trim()
+    ? { url: eventsRaw.groupUrl.trim(), label: t(eventsRaw.groupLabelHe ?? '', eventsRaw.groupLabelEn ?? '') }
+    : null,
   items: (eventsRaw.items ?? [])
     .slice()
     .sort((a, b) => isoDate(a.date).localeCompare(isoDate(b.date)))

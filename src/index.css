@@ -2449,6 +2449,21 @@ video.band-photo { display: block; }
   color: var(--accent-deep);
 }
 
+.events-group {
+  margin-top: var(--s-6);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 11px 24px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 600;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.events-group:hover { background: var(--accent); color: var(--paper); transform: translateY(-1px); }
+.events-group svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+
 /* --- Blog reader (article modal) ------------------------------------------------- */
 button.article {
   width: 100%;

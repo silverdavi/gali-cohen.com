@@ -7,6 +7,9 @@ heading:
   subEn: Circles, workshops, and open sessions — places are limited.
   ctaHe: להרשמה
   ctaEn: Reserve
+# קישור לקבוצת ווטסאפ שקטה לעדכונים (אם ריק — לא מוצג).
+groupUrl: ""
+groupLabelHe: לקבוצת הווטסאפ השקטה — עדכונים בלבד
 items:
   - date: 2026-07-29
     time: 20:00

@@ -64,6 +64,8 @@ singletons:
           - { label: "כותרת", name: titleHe, widget: string }
           - { label: "כותרת משנה", name: subHe, widget: string, required: false }
           - { label: "תווית כפתור", name: ctaHe, widget: string }
+      - { label: "קישור לקבוצת ווטסאפ לעדכונים", name: groupUrl, widget: string, required: false, hint: "אם ריק — הכפתור לא יוצג." }
+      - { label: "טקסט כפתור קבוצת הווטסאפ", name: groupLabelHe, widget: string, required: false }
       - label: "אירועים"
         name: items
         widget: list
