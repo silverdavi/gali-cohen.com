@@ -26,14 +26,16 @@ export function About() {
                 clip={clipFor(aboutSection.photo)}
                 alt={aboutSection.photoAlt}
               />
-              <div className="about-facts">
-                {aboutSection.facts.map((f) => (
-                  <div className="fact" key={f.label}>
-                    <span className="fact-label">{f.label}</span>
-                    <span className="fact-value">{f.value}</span>
-                  </div>
-                ))}
-              </div>
+              {aboutSection.facts.length > 0 && (
+                <div className="about-facts">
+                  {aboutSection.facts.map((f) => (
+                    <div className="fact" key={f.label}>
+                      <span className="fact-label">{f.label}</span>
+                      <span className="fact-value">{f.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </Reveal>
         </div>

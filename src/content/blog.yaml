@@ -1,44 +1,39 @@
-# Blog / articles — edited in the CMS ("בלוג · Articles"). Placeholder posts;
-# add real articles (and a link per post) when ready. Empty links fall back to
-# WhatsApp so a card is never a dead end.
+# בלוג / מאמרים — נערך ב‑CMS ("בלוג · מאמרים").
+# כותבים מאמר מלא בשדה "תוכן המאמר" (bodyHe) — הוא נפתח לקריאה בתוך האתר.
+# אם משאירים את התוכן ריק ומוסיפים קישור (url) — הכרטיס יוביל לקישור החיצוני.
 heading:
   labelHe: בלוג
-  labelEn: Journal
   titleHe: מאמרים ומחשבות
-  titleEn: Writing & reflections
   subHe: כתיבה על גוף, נשימה, מיניות וחזרה הביתה אל עצמנו.
-  subEn: On body, breath, sexuality, and the way home to ourselves.
   ctaHe: לקריאה
-  ctaEn: Read
 items:
   - titleHe: לנשום אל תוך הרגע
-    titleEn: Breathing into the moment
     dateHe: יוני 2026
-    dateEn: June 2026
     excerptHe: >-
       איך נשימה אחת מודעת יכולה לשנות את כל מערכת היחסים שלנו עם הגוף — תרגול
       קטן שאפשר לקחת לכל מקום.
-    excerptEn: >-
-      How a single conscious breath can shift our whole relationship with the
-      body — a small practice you can take anywhere.
+    bodyHe: |-
+      זה טקסט לדוגמה — כאן את כותבת את המאמר המלא, בדיוק כמו פוסט.
+      אפשר לכתוב כמה פסקאות שרוצים, והן יוצגו יפה כשנכנסים לקרוא.
+
+      כדי להתחיל פסקה חדשה — פשוט משאירים שורה ריקה ביניהן.
+      הטקסט הזה הוא רק הדגמה; אפשר למחוק אותו ולכתוב את שלך.
     url: ""
   - titleHe: אינטימיות מתחילה בהקשבה
-    titleEn: Intimacy begins with listening
     dateHe: מאי 2026
-    dateEn: May 2026
     excerptHe: >-
       מה קורה כשמפסיקים לתקן ומתחילים להקשיב — על קרבה, גבולות ותקשורת בזוגיות.
-    excerptEn: >-
-      What happens when we stop fixing and start listening — on closeness,
-      boundaries and communication in a relationship.
+    bodyHe: |-
+      טקסט לדוגמה למאמר השני. כאן מרחב פתוח לכתיבה חופשית.
+
+      אפשר לספר סיפור, לשתף תובנה, או להזמין לתהליך.
     url: ""
   - titleHe: הגוף זוכר
-    titleEn: The body remembers
     dateHe: אפריל 2026
-    dateEn: April 2026
     excerptHe: >-
       תנועה כשפה של ריפוי — איך אנחנו פוגשים מקומות תקועים ומשחררים אותם בעדינות.
-    excerptEn: >-
-      Movement as a language of healing — how we meet stuck places and release
-      them gently.
+    bodyHe: |-
+      טקסט לדוגמה למאמר השלישי.
+
+      אפשר להחליף את כל התוכן הזה במאמר אמיתי דרך מערכת העריכה.
     url: ""

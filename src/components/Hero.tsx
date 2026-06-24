@@ -37,7 +37,7 @@ export function Hero() {
           <HeroArch />
         </Reveal>
       </div>
-      <a className="hero-scroll" href="#breath">{hero.scroll}</a>
+      {hero.scroll && <a className="hero-scroll" href="#breath">{hero.scroll}</a>}
     </header>
   );
 }

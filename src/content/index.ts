@@ -23,6 +23,7 @@ export type Content = {
     practices: string; circles: string; about: string; story: string;
     pricing: string; events: string; shop: string; cta: string; skip: string;
     services: string; faq: string; blog: string; podcast: string;
+    words: string; contact: string; menu: string; close: string;
   };
   profile: {
     name: string;

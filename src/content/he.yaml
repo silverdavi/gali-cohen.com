@@ -4,17 +4,21 @@ meta:
 nav:
   practices: דרכי עבודה
   circles: מעגלי נשים
-  about: אודות
+  about: נעים להכיר
   story: ההרצאה
   pricing: תעריפים
-  events: מפגשים
+  events: יומן מתעדכן
   shop: חנות
   cta: דברו איתי
   skip: דלגו לתוכן
-  services: השירותים
+  services: שירותי העסק
   faq: שאלות נפוצות
-  blog: בלוג
+  blog: בלוג ומאמרים
   podcast: פודקאסט
+  words: המלצות
+  contact: פרטי קשר
+  menu: תפריט
+  close: סגירה
 profile:
   name: גלי גאולה כהן
   hebrewName: Gali Geula Cohen
@@ -24,10 +28,10 @@ profile:
 hero:
   ctaPrimary: לקביעת מפגש
   ctaSecondary: מה אני מציעה
-  scroll: גלילה
+  scroll: ""
   photoAlt: שמחה
 breath:
-  label: תרגול קטן
+  label: ""
   title: הישארו כאן לנשימה אחת
   wordIn: שאיפה
   wordHold: עצירה
@@ -53,15 +57,7 @@ aboutSection:
       הדרך שלי החלה מתוך מסע אישי של חיפוש, ריפוי וחיבור מחדש לגוף. 
       היום אני מלווה נשים וזוגות המבקשים לחיות ביותר נוכחות, אינטימיות, חופש ואהבה.
     - אני מאמינה שהגוף הוא שער לחיבור, לריפוי ולחיים מלאים יותר. דרך מיניות קשובה, נשימה, תנועה ונוכחות, אני מלווה אנשים בדרך לקרבה עמוקה יותר לעצמם, לגופם ולמערכות היחסים שלהם
-  facts:
-    - label: טיפול
-      value: טיפול הוליסטי, רגשי וגופני
-    - label: הכשרה
-      value: תואר ראשון בפסיכולוגיה וסוציולוגיה · מורה מוסמכת ליוגה · טנטרה
-    - label: איפה
-      value: תל אביב
-    - label: שפות
-      value: עברית · אנגלית
+  facts: []
 storySection:
   label: הרצאה
   title: ההרצאה- גוף, אמונה וגאולה

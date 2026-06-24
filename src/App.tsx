@@ -7,24 +7,22 @@ import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
 import { Breath } from './components/Breath';
 import { About } from './components/About';
+import { Story } from './components/Story';
 import { Practices } from './components/Practices';
-import { Pricing } from './components/Pricing';
 import { FreeCall } from './components/FreeCall';
 import { Band } from './components/Band';
-import { Story } from './components/Story';
-import { Faq } from './components/Faq';
-import { Blog } from './components/Blog';
-import { Podcast } from './components/Podcast';
-import { Social } from './components/Social';
-import { Store } from './components/Store';
+import { Events } from './components/Events';
 import { Words } from './components/Words';
+import { Podcast } from './components/Podcast';
+import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
+import { Store } from './components/Store';
+import { Footer } from './components/Footer';
 import { content } from './content';
 
-// Page order follows Gali's outline: about + services, the offer (pricing) and a
-// free intro call, then the talk, FAQ, journal, podcast, socials, products,
-// words, and a WhatsApp-first contact. The breathing hero and one calm photo
-// band are the kept "signature" moments.
+// Page order follows Gali's menu: about → services → calendar → testimonials →
+// podcast → blog → contact → store. The breathing hero, personal story, free
+// intro-call CTA and one calm photo band are the kept "signature" moments.
 export default function App() {
   return (
     <>
@@ -38,19 +36,18 @@ export default function App() {
         <Hero />
         <Breath />
         <About />
+        {features.showStory && <Story />}
         <Practices />
-        <Pricing />
         <FreeCall />
         <Band />
-        {features.showStory && <Story />}
-        <Faq />
-        <Blog />
-        <Podcast />
-        <Social />
-        <Store />
+        <Events />
         <Words />
+        <Podcast />
+        <Blog />
         <Contact />
+        <Store />
       </main>
+      <Footer />
     </>
   );
 }

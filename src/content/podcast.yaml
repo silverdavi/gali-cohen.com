@@ -1,52 +1,20 @@
-link: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
+# פודקאסט — שני פודקאסטים. "url" ריק + statusHe מלא = "בקרוב".
+# (הפרקים עצמם נמצאים בפלייליסט של "מעבר לטאבו" ביוטיוב.)
 heading:
-  labelHe: פודקאסט "מעבר לטאבו" עם טל רומן
+  labelHe: פודקאסט
   labelEn: Podcast
-  titleHe: פודקאסט
-  titleEn: Conversations on body & soul
-  subHe: שיחות פתוחות על יחסים, מיניות, תודעה, רוח וכל מה שלא תמיד מעיזים לדבר עליו.
-  subEn: Open conversations on sexuality, spirituality, healing and coming back to life.
+  titleHe: להאזנה
+  titleEn: Listen
+  subHe: שתי שיחות, שני עולמות — בחרו לאן להיכנס.
+  subEn: Two conversations, two worlds — choose where to step in.
   ctaHe: להאזנה
   ctaEn: Listen
-items:
-  - titleHe: פרק 1- על מיניות מקודשת, אמונה ואייוואסקה עם חרדים
-    titleEn: :)
-    descHe: |-
-      בפרק הראשון של ״מעבר לטאבו״ תכירו אותנו, יוצרות הפודקאסט- טל רומן וגלי גאולה כהן. 
-      נגע במסע חיינו הכולל בתוכו עבודה בחשפנות, ילדות בחברה החרדית, חרם, התנסות במרחיבי תודעה, טראומות ועוד.. 
-      ועד להפיכתנו למנחות, מטפלות ומרצות בתחומי הגוף- נפש- מיניות-יחסים וריפוי הלב. 
-      מוזמנים.ות להאזין ולהתרחב מעבר לטאבו.. האזנה נעימה 🙂
-    descEn: On the way from the head to the body, and why presence is the starting point of all healing.
-    duration: 60 דק'
-    url: https://youtu.be/Fhh06rsPs_c?si=AIMn0ObJ2EdvgrIQ
-  - titleHe: פרק 2- עמוס סילבר (מייסד טלגראס)- על קנאביס, יציאה ממשברים ויחסים מזווית אחרת
-    titleEn: Episode 02 · Intimacy without masks
-    descHe: בפרק השני של "מעבר לטאבו" , עמוס הביא את סיפור חייו המרתק- דיברנו על העבר החרדי שלו, רגעי משבר, יחסים מורכבים ומעוררי השראה עם אבא והמשפחה, קנאביס, סמים, יחסים ומיניות ובסופו של דבר על החיים בכלל - רק מזוויות פחות שגרתיות.
-    descEn: A conversation on closeness, vulnerability and honest communication between partners.
-    duration: 63 דק'
-    url: https://youtu.be/oUk5e4NQkdg?si=asgM8FovPTmW0wUe
-  - titleHe: פרק 3- נוי חריף- כוכבת אונליפאנס ומדריכת טרילותרפיה
-    titleEn: Episode 03 · Faith in unexpected places
-    descHe: |-
-      בפרק השלישי של "מעבר לטאבו" אירחנו את נוי חריף- כוכבת אונלי פאנס, מדריכת טרילותרפיה, בת 32, אמא ל3 חתולים, בזוגיות.
-      היה כלכך מרתק שהזמן עף והספקנו בקושי לגעת בכל הנושאים שרצינו. עד לעונג הבא.
-    descEn: A personal journey through darkness and light, and finding meaning exactly where we didn't look.
-    duration: 57 דק׳
-    url: https://youtu.be/oUk5e4NQkdg?si=ZzO7C2HYnmMBDKod
-  - titleHe: פרק 4- יציאת מצרים- מקשר רעיל לזוגיות בריאה
-    titleEn: :)
-    descHe: |-
-      מה הופך קשר ללא בריא? איך לזהות דגלים אדומים (כולל נרקסיזם)?, ואיך נראית זוגיות בריאה שבאמת מזינה את הלב?
-      בפרק אנחנו מדברות על המסע האישי שלנו, על דיוק גבולות והקשבה פנימית בתוך זוגיות.
-    descEn: :)
-    duration: 44 דק'
-    url: https://www.youtube.com/watch?v=DfEtQUfocGg&list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL&index=2
-  - titleHe: פרק 5- שלומית שפרבר- על ריפוי כאבים ביחסים, תנועה ויהדות עכשווית
-    titleEn: :)
-    descHe: |-
-      בפרק הזה נפגשנו עם שולמית שפרבר- מטפלת מינית מוסמכת, דוקטורנטית במעבדה למחקר מיניות באוניברסיטת חיפה, וחוקרת מיניות, טראומה והחלמה.
-      דברנו על ריפוי כאבים וטראומות מיניות דרך חיבור והקשבה לגוף, תנועה ועוד.
-      נגענו גם בהסתכלות המרעננת שלה על יהדות עכשווית והחכמה שטמונה שם.
-    descEn: :)
-    duration: 55 דק'
-    url: https://www.youtube.com/watch?v=FYfix6HcxIA&list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL&index=1
+shows:
+  - nameHe: מעבר לטאבו · עם טל רומן
+    descHe: שיחות פתוחות על יחסים, מיניות, תודעה, רוח וכל מה שלא תמיד מעיזים לדבר עליו.
+    statusHe: ""
+    url: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
+  - nameHe: ובחרת בחיים · עם לירן
+    descHe: על חמלה, טבעונות ודרך חיים — יוצא לאור בקרוב.
+    statusHe: בקרוב
+    url: ""

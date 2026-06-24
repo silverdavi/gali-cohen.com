@@ -29,10 +29,11 @@ type RawHeading = {
   ctaHe?: string; ctaEn?: string;
 };
 type RawActivity = {
-  titleHe: string; titleEn: string;
-  noteHe: string; noteEn: string;
-  bodyHe: string; bodyEn: string;
-  photo: string; photoAltHe: string; photoAltEn: string;
+  titleHe: string; titleEn?: string;
+  noteHe: string; noteEn?: string;
+  bodyHe: string; bodyEn?: string;
+  price?: string;
+  photo: string; photoAltHe: string; photoAltEn?: string;
 };
 type RawPrice = {
   titleHe: string; titleEn: string;
@@ -52,17 +53,20 @@ type RawProduct = {
 };
 type RawFaq = { qHe: string; qEn: string; aHe: string; aEn: string };
 type RawArticle = {
-  titleHe: string; titleEn: string;
+  titleHe: string; titleEn?: string;
   dateHe?: string; dateEn?: string;
-  excerptHe: string; excerptEn: string; url?: string;
+  excerptHe: string; excerptEn?: string;
+  bodyHe?: string; bodyEn?: string;
+  url?: string;
 };
-type RawEpisode = {
-  titleHe: string; titleEn: string;
-  descHe: string; descEn: string;
-  duration?: string; url?: string;
+type RawShow = {
+  nameHe: string; nameEn?: string;
+  descHe: string; descEn?: string;
+  statusHe?: string; statusEn?: string;
+  url?: string;
 };
 type Raw<I> = { heading: RawHeading; items: I[] };
-type RawPodcast = Raw<RawEpisode> & { link?: string };
+type RawPodcast = { heading: RawHeading; shows: RawShow[] };
 
 const activitiesRaw = activitiesFile as Raw<RawActivity>;
 const pricingRaw = pricingFile as Raw<RawPrice>;
@@ -81,15 +85,16 @@ const heading = (h: RawHeading): Heading => ({
   cta: t(h.ctaHe ?? '', h.ctaEn ?? ''),
 });
 
-export type Activity = { title: string; note: string; body: string; photo: string; photoAlt: string };
+export type Activity = { title: string; note: string; body: string; price: string; photo: string; photoAlt: string };
 export const activities = {
   heading: heading(activitiesRaw.heading),
   items: (activitiesRaw.items ?? []).map((i): Activity => ({
-    title: t(i.titleHe, i.titleEn),
-    note: t(i.noteHe, i.noteEn),
-    body: t(i.bodyHe, i.bodyEn),
+    title: t(i.titleHe, i.titleEn ?? ''),
+    note: t(i.noteHe, i.noteEn ?? ''),
+    body: t(i.bodyHe, i.bodyEn ?? ''),
+    price: i.price ?? '',
     photo: i.photo,
-    photoAlt: t(i.photoAltHe, i.photoAltEn),
+    photoAlt: t(i.photoAltHe, i.photoAltEn ?? ''),
   })),
 };
 
@@ -116,23 +121,30 @@ export type EventItem = {
   dateLabel: string; day: string; month: string; iso: string; time: string;
 };
 const monthFmt = new Intl.DateTimeFormat(isHe ? 'he-IL' : 'en-US', { month: 'short' });
+// The YAML loader can parse a bare `2026-07-29` into a JS Date, so always coerce
+// to a plain YYYY-MM-DD string before doing anything with it (never render a Date).
+const isoDate = (v: unknown): string => {
+  if (v instanceof Date) return v.toISOString().slice(0, 10);
+  return String(v ?? '');
+};
 export const events = {
   heading: heading(eventsRaw.heading),
   items: (eventsRaw.items ?? [])
     .slice()
-    .sort((a, b) => a.date.localeCompare(b.date))
+    .sort((a, b) => isoDate(a.date).localeCompare(isoDate(b.date)))
     .map((i): EventItem => {
-      const d = new Date(`${i.date}T${i.time || '00:00'}`);
+      const ds = isoDate(i.date);
+      const d = new Date(`${ds}T${i.time || '00:00'}`);
       const valid = !Number.isNaN(d.getTime());
       return {
         title: t(i.titleHe, i.titleEn),
         location: t(i.locationHe, i.locationEn),
         desc: t(i.descHe, i.descEn),
         href: checkout(i.signupUrl),
-        dateLabel: valid ? dateFmt.format(d) : i.date,
+        dateLabel: valid ? dateFmt.format(d) : ds,
         day: valid ? String(d.getDate()) : '',
         month: valid ? monthFmt.format(d) : '',
-        iso: i.date,
+        iso: ds,
         time: i.time || '',
       };
     }),
@@ -159,26 +171,31 @@ export const faq = {
   })),
 };
 
-export type Article = { title: string; date: string; excerpt: string; href: string };
+export type Article = { title: string; date: string; excerpt: string; body: string; href: string; external: boolean };
 export const blog = {
   heading: heading(blogRaw.heading),
   items: (blogRaw.items ?? []).map((i): Article => ({
-    title: t(i.titleHe, i.titleEn),
+    title: t(i.titleHe, i.titleEn ?? ''),
     date: t(i.dateHe ?? '', i.dateEn ?? ''),
-    excerpt: t(i.excerptHe, i.excerptEn),
-    href: checkout(i.url),
+    excerpt: t(i.excerptHe, i.excerptEn ?? ''),
+    body: t(i.bodyHe ?? '', i.bodyEn ?? ''),
+    // A post with a body opens in a reader on the page; one with only a link
+    // goes out to that link instead.
+    href: (i.url && i.url.trim()) || '',
+    external: Boolean(i.url && i.url.trim()),
   })),
 };
 
-export type Episode = { title: string; desc: string; duration: string; href: string };
+export type Show = { name: string; desc: string; status: string; href: string };
 export const podcast = {
   heading: heading(podcastRaw.heading),
-  link: podcastRaw.link?.trim() || whatsapp,
-  items: (podcastRaw.items ?? []).map((i): Episode => ({
-    title: t(i.titleHe, i.titleEn),
-    desc: t(i.descHe, i.descEn),
-    duration: i.duration ?? '',
-    href: checkout(i.url),
+  // A show with a `status` (e.g. "בקרוב") renders as coming-soon; otherwise it's
+  // a live "listen" link.
+  shows: (podcastRaw.shows ?? []).map((s): Show => ({
+    name: t(s.nameHe, s.nameEn ?? ''),
+    desc: t(s.descHe, s.descEn ?? ''),
+    status: t(s.statusHe ?? '', s.statusEn ?? ''),
+    href: checkout(s.url),
   })),
 };
 

@@ -30,6 +30,7 @@ export function Practices() {
                   <p className="practice-meta">{p.note}</p>
                   <h3 className="practice-title">{p.title}</h3>
                   <p className="practice-body">{p.body}</p>
+                  {p.price && <p className="practice-price">{p.price}</p>}
                 </div>
                 <Cinemagraph className="practice-photo" src={p.photo} clip={clipFor(p.photo)} alt={p.photoAlt} />
               </article>

@@ -80,7 +80,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   magneticCta: true,
   cursorRipple: true,
   timeOfDaySun: true,
-  showPricing: true,
+  showPricing: false, // removed per Gali — pricing lives inside each service instead
   showEvents: true,
   showStore: true,
   showStory: true,

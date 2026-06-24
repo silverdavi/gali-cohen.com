@@ -25,9 +25,11 @@ export function Breath() {
       {organicEdge && <div className="breath-veil top" aria-hidden />}
       {organicEdge && <div className="breath-veil bottom" aria-hidden />}
       <div className="container">
-        <Reveal>
-          <p className="section-label">{breath.label}</p>
-        </Reveal>
+        {breath.label && (
+          <Reveal>
+            <p className="section-label">{breath.label}</p>
+          </Reveal>
+        )}
         <KineticText as="h2" className="section-title" text={breath.title} />
         <motion.div className="breath-stage-wrap" style={scrollReveal ? { scale, opacity } : undefined}>
           <div className={`breath-stage${features.breathStage ? '' : ' still'}`} role="img" aria-label={breath.note}>

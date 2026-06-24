@@ -58,11 +58,21 @@ try {
     console.log('shot', name);
   };
   await shoot('01-hero.jpg');
-  for (const [anchor, file] of [['#about','02-about.jpg'],['#practices','03-practices.jpg'],['#pricing','04-pricing.jpg'],['#free-call','05-freecall.jpg'],['#faq','06-faq.jpg'],['#blog','07-blog.jpg'],['#podcast','08-podcast.jpg'],['#social','09-social.jpg'],['#shop','10-shop.jpg'],['#contact','11-contact.jpg']]) {
+  // open the side drawer
+  await c.send('Runtime.evaluate', { expression: `document.querySelector('.nav-burger')?.click()` });
+  await sleep(900);
+  await shoot('01b-drawer.jpg');
+  await c.send('Runtime.evaluate', { expression: `document.querySelector('.nav-scrim')?.click()` });
+  await sleep(600);
+  for (const [anchor, file] of [['#about','02-about.jpg'],['#practices','03-practices.jpg'],['#events','04-events.jpg'],['#words','05-words.jpg'],['#podcast','06-podcast.jpg'],['#blog','07-blog.jpg'],['#contact','08-contact.jpg'],['#shop','09-shop.jpg']]) {
     await c.send('Runtime.evaluate', { expression: `document.querySelector('${anchor}')?.scrollIntoView({block:'start'})` });
     await sleep(1400);
     await shoot(file);
   }
+  // open a blog article reader
+  await c.send('Runtime.evaluate', { expression: `document.querySelector('#blog .article')?.click()` });
+  await sleep(900);
+  await shoot('07b-reader.jpg');
   c.s.close(); chrome.kill(); server?.close();
   console.log('done ->', OUT);
   process.exit(0);

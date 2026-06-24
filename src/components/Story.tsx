@@ -11,7 +11,7 @@ export function Story() {
   return (
     <section className="section story" id="story">
       <div className="container">
-        <SectionHead index="04" label={s.label} title={s.title} sub={s.lead} />
+        <SectionHead label={s.label} title={s.title} sub={s.lead} />
         <div className="story-grid">
           <Reveal delay={0.06} className="col-main">
             <div className="story-text">
