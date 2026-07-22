@@ -1,24 +1,24 @@
 meta:
-  title: גלי גאולה כהן - מיניות קשובה · תנועה · נשימה
+  title: גלי גאולה כהן - מיניות קשובה · תנועה · נשימה   *האתר בבנייה*
   description: גלי גאולה כהן, מטפלת גוף- נפש, מיניות הוליסטית. מלווה תהליכי ריפוי לנשים וזוגות, מעבירה סדנאות תנועה, מדיטציה, מעגלי נשים ועוד.
 nav:
-  practices: דרכי עבודה
-  circles: מעגלי נשים
   about: נעים להכיר
-  story: ההרצאה
-  pricing: תעריפים
+  services: שירותי העסק
   events: יומן מתעדכן
+  words: המלצות
+  podcast: פודקאסט
+  blog: בלוג ומאמרים
+  contact: פרטי קשר
   shop: חנות
   cta: דברו איתי
-  skip: דלגו לתוכן
-  services: שירותי העסק
-  faq: שאלות נפוצות
-  blog: בלוג ומאמרים
-  podcast: פודקאסט
-  words: המלצות
-  contact: פרטי קשר
   menu: תפריט
   close: סגירה
+  skip: דלגו לתוכן
+  practices: דרכי עבודה
+  circles: מעגלי נשים
+  story: ההרצאה
+  pricing: תעריפים
+  faq: שאלות נפוצות
 profile:
   name: גלי גאולה כהן
   hebrewName: Gali Geula Cohen
@@ -28,21 +28,15 @@ profile:
 hero:
   ctaPrimary: לקביעת מפגש
   ctaSecondary: מה אני מציעה
-  scroll: ""
+  scroll: ''
   photoAlt: שמחה
 breath:
-  label: ""
+  label: ''
   title: הישארו כאן לנשימה אחת
   wordIn: שאיפה
   wordHold: עצירה
   wordOut: נשיפה
   note: המעגל נע בקצב של נשימה איטית. עקבו אחריו פעם אחת לפני שתמשיכו. זה כל התרגול.
-circle:
-  label: יחד
-  title: מעגלי נשים- מתחדשות
-  body: אחת לחודש, עם התחדשות הלבנה, אנו נפגשות למעגל נשים. מרחב לשתף, להקשיב, לנשום, להיות ולהתכוונן יחד לחודש החדש.
-  caption: מעגלי נשים · התחדשות · להיות
-  alt: מעגל של דמויות רוקדות, מסתובב לאט
 band:
   photo: /photos/dance-circle.jpg
   caption: מעגל תנועה בחוץ · סדנה בטבע
@@ -130,39 +124,12 @@ wordsSection:
         מקווים לקחת איתנו דברים קטנים שיעשו שינוי לאט לאט.
         סופשבוע נעים ❤️
       name: משתתפת · סדנת טנטרה פרטית לזוגות
-astro:
-  label: תחת אותם שמיים
-  title: איפה השמיים הלילה
-  sub: טקס קטן של הבטה למעלה. איפה השמש והירח נמצאים עכשיו — והמזל שתחתיו נולדתם.
-  sunLabel: השמש במזל
-  moonLabel: הירח
-  litWord: מואר
-  findTitle: מצאו את המזל שלכם
-  findSub: הזינו את היום שבו נולדתם — השנה לא משנה כאן.
-  monthLabel: חודש
-  dayLabel: יום
-  reveal: גלו
-  yourSign: נולדתם תחת מזל
-  again: שינוי תאריך
-  moonPhases:
-    new: ירח חדש
-    waxingCrescent: מגל מתמלא
-    firstQuarter: רבע ראשון
-    waxingGibbous: גיבן מתמלא
-    full: ירח מלא
-    waningGibbous: גיבן מתמעט
-    lastQuarter: רבע אחרון
-    waningCrescent: מגל מתמעט
 freeCall:
   label: בלי התחייבות
   title: שיחת היכרות · חינם
   body: שיחה קצרה של כ-30 דקות לנשים ולזוגות. נכיר, תספרו מה מביא אתכם, ונבדוק יחד אם והאיך נכון להמשיך. בלי עלות ובלי התחייבות.
   cta: לתיאום שיחה בוואטסאפ
   note: 30 דקות · לנשים וזוגות
-socialSection:
-  label: לעקוב ולהתעדכן
-  title: כל הרשתות במקום אחד
-  sub: מוזמנים להצטרף, לקרוא ולראות מה מתבשל.
 contact:
   line: בואי כמו שאת
   sub: מוזמנים ליצור קשר ולבדוק יחד מה יכול להתאים עבורכם 🌺
@@ -171,3 +138,36 @@ contact:
 footer:
   place: תל אביב
   credit: 🌺
+astro:
+  moonPhases:
+    waningCrescent: מגל מתמעט
+    lastQuarter: רבע אחרון
+    waningGibbous: גיבן מתמעט
+    full: ירח מלא
+    waxingGibbous: גיבן מתמלא
+    firstQuarter: רבע ראשון
+    waxingCrescent: מגל מתמלא
+    new: ירח חדש
+  again: שינוי תאריך
+  yourSign: נולדתם תחת מזל
+  reveal: גלו
+  dayLabel: יום
+  monthLabel: חודש
+  findSub: הזינו את היום שבו נולדתם — השנה לא משנה כאן.
+  findTitle: מצאו את המזל שלכם
+  litWord: מואר
+  moonLabel: הירח
+  sunLabel: השמש במזל
+  sub: טקס קטן של הבטה למעלה. איפה השמש והירח נמצאים עכשיו — והמזל שתחתיו נולדתם.
+  title: איפה השמיים הלילה
+  label: תחת אותם שמיים
+circle:
+  alt: מעגל של דמויות רוקדות, מסתובב לאט
+  caption: מעגלי נשים · התחדשות · להיות
+  body: אחת לחודש, עם התחדשות הלבנה, אנו נפגשות למעגל נשים. מרחב לשתף, להקשיב, לנשום, להיות ולהתכוונן יחד לחודש החדש.
+  title: מעגלי נשים- מתחדשות
+  label: יחד
+socialSection:
+  label: לעקוב ולהתעדכן
+  title: כל הרשתות במקום אחד
+  sub: מוזמנים להצטרף, לקרוא ולראות מה מתבשל.
