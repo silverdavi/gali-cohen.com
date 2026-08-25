@@ -1,33 +1,33 @@
 heading:
   labelHe: דרכי עבודה
-  labelEn: Practices
   titleHe: איך יוצרים קשר
-  titleEn: Ways to work together
   subHe: כל מסע מתחיל בשיחה
+  labelEn: Practices
+  titleEn: Ways to work together
   subEn: Every journey starts with a conversation — these are the shapes it usually takes.
 items:
   - titleHe: תהליך ליווי אישי לנשים
-    titleEn: Breathwork
-    noteHe: אחד על אחד · 75 דקות
-    noteEn: One-on-one · 75 minutes
+    noteHe: אחת על אחת · 60 דקות
     bodyHe: ליווי אישי מותאם עבורך- מרחב בטוח להעמקה, הקשבה וצמיחה דרך הגוף, הרגש והלב.
-    bodyEn: Guided conscious breathing that lets the body finish what the mind keeps postponing. We slow down, listen, and let the breath do the talking.
+    price: ''
     photo: /photos/breath.jpg
     photoAltHe: גלי מלווה אישה שוכבת במפגש נשימה ומגע, אור רך וכריות רקומות
     photoAltEn: Gali guiding a reclining woman in a breath-and-touch session, soft light
+    bodyEn: Guided conscious breathing that lets the body finish what the mind keeps postponing. We slow down, listen, and let the breath do the talking.
+    noteEn: One-on-one · 75 minutes
+    titleEn: Breathwork
   - titleHe: תהליך ליווי אישי לזוגות
-    titleEn: Movement & dance
     noteHe: מפגשים אישיים · 90 דקות
-    noteEn: Open sessions · weekly
     bodyHe: ליווי זוגי תהליכי המאפשר להעמיק את התקשורת, האינטימיות והחיבור, תוך יצירת מרחב בטוח לצמיחה משותפת.
-    bodyEn: Free movement with no steps to learn and nobody watching. Music, floor, bare feet. The body remembers how — it always has.
+    price: ''
     photo: /photos/סדנאותזוגות.JPEG
     photoAltHe: משתתפות בתנועה חופשית על דק עץ בחוץ, ראש נשען לאחור
     photoAltEn: Participants in free movement on an outdoor deck, head tilted back
+    bodyEn: Free movement with no steps to learn and nobody watching. Music, floor, bare feet. The body remembers how — it always has.
+    noteEn: Open sessions · weekly
+    titleEn: Movement & dance
   - titleHe: סדנת טנטרה פרטית לזוגות
-    titleEn: Couples journeys
     noteHe: סדנאות פרטיות · 3 שעות · בתיאום אישי
-    noteEn: Private workshops · by invitation
     bodyHe: |-
       סדנא חוויתית פרטית אינטימית לזוגות שרוצים להעמיק את החיבור, האהבה והעונג.
       מסע של כ3 שעות שנבנה בהדרגה- כשהמהות היא חוויה שהיא גם מענגת וגם מלמדת, כזו שתשאיר אתכם עם כלים להעמקה וחקירה גם לאחר הסדנא.
@@ -36,14 +36,15 @@ items:
       לסדנא יש מבנה כללי אבל היא גם מותאמת אישית לכל זוג- אשמח לשמוע צרכים, רצונות וגבולות לפני.
       כמו כן חשוב לי להדגיש שאני נטו מנחה את הסדנא (אין מגע איתי)- המהות היא להעצים את החיבור והתשוקה בניכם עם כמה שיותר רגישות והקשבה.
       מתאים גם לזוגות להט"בים, חרדים ודתיים (אני מגיעה מהמגזר החרדי ועובדת הרבה עם זוגות מהמגזר).
-    bodyEn: A guided journey for two people who want to meet again — communication, touch, and presence, built gradually and held with care.
+    price: ''
     photo: /photos/82ffe6e7-c7f1-470a-87f6-bf95c529fb2c.png
     photoAltHe: גלי ומשתתפת בעבודת זוגות על הרצפה באוהל, מבט ומגע
     photoAltEn: Gali and a partner in floor work inside a bell tent, eye contact
+    bodyEn: A guided journey for two people who want to meet again — communication, touch, and presence, built gradually and held with care.
+    noteEn: Private workshops · by invitation
+    titleEn: Couples journeys
   - titleHe: מיינדפול דאנס לזוגות · 3 שעות
-    titleEn: Meditation circles
     noteHe: 3 שעות של חקירה בתנועה, אינטימיות וחיבור ללא מילים 💃
-    noteEn: Small groups · new moon
     bodyHe: |-
       סדנא שהיא שילוב האהבות הגדולות בחיי- תנועה ומדיטציה, ואיך לרקוד אותן בתוך הזוגיות❤️  
       דרך תנועה אינטואיטיבית, מגע ללא מטרה, נשימה, תשומת לב וכלים מעולם הטנטרה, נעמיק בחיבור שלנו - לעצמנו, לפרטנר ולנוכחות הרכה שברגע.  
@@ -59,11 +60,11 @@ items:
 
       🌺סדנא אינטימית- עד 5 זוגות . 
       ⏰ 3 שעות 
-      💸 250 ₪ לאדם  
-      📍מיקום: סטודיו פרמטה בפלרונטין. 
-
-      📅 תאריך: יום רביעי, 29.7.26, 20:00-23:00 .
-    bodyEn: Sitting together in a circle, doing very little, very deliberately. Silence with company is a different silence.
+      💸
+    price: 250 ₪ לאדם
     photo: /photos/מיינדפול יולי.png
     photoAltHe: מעגל מדיטציה באוהל, גלי יושבת במרכז בעיניים עצומות
     photoAltEn: A meditation circle in a bell tent, Gali seated at the center, eyes closed
+    bodyEn: Sitting together in a circle, doing very little, very deliberately. Silence with company is a different silence.
+    noteEn: Small groups · new moon
+    titleEn: Meditation circles
