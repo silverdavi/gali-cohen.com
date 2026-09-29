@@ -1,18 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SectionHead } from './SectionHead';
-import { content, dir } from '../content';
+import { content } from '../content';
 
 // Testimonials as a one-at-a-time slider: prev/next arrows, dots, and a gentle
 // auto-advance that pauses on hover/focus and yields to reduced-motion.
-export function Words() {
+// `items` defaults to every testimonial (used nowhere now, but keeps the
+// component generically reusable) — the home page passes just the featured,
+// limited subset.
+export function Words({ items: itemsProp }: { items?: { quote: string; name: string }[] } = {}) {
   const { wordsSection } = content;
-  const items = wordsSection.items;
+  const items = itemsProp ?? wordsSection.items;
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduce = useReducedMotion();
-  const rtl = dir === 'rtl';
 
+  // Purely semantic: step is +1/-1 through the list, independent of reading
+  // direction — only the arrow icons and their left/right position need to
+  // account for RTL, not which way "next" moves through the array.
   const go = useCallback(
     (step: number) => setI((p) => (p + step + items.length) % items.length),
     [items.length],
@@ -31,7 +36,7 @@ export function Words() {
   return (
     <section className="section words" id="words">
       <div className="container">
-        <SectionHead index="04" label={wordsSection.label} />
+        <SectionHead label={wordsSection.label} />
         <div
           className="words-slider"
           onMouseEnter={() => setPaused(true)}
@@ -49,9 +54,9 @@ export function Words() {
           <button
             className="words-arrow prev"
             aria-label="הקודם"
-            onClick={() => go(rtl ? 1 : -1)}
+            onClick={() => go(-1)}
           >
-            <svg viewBox="0 0 24 24" aria-hidden focusable="false"><path d="M15 5l-7 7 7 7" /></svg>
+            <svg viewBox="0 0 24 24" aria-hidden focusable="false"><path d="M9 5l7 7-7 7" /></svg>
           </button>
 
           <div className="words-stage">
@@ -64,6 +69,7 @@ export function Words() {
                 exit={reduce ? undefined : { opacity: 0, y: -14 }}
                 transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
               >
+                <span className="word-mark" aria-hidden>“</span>
                 <blockquote>{w.quote}</blockquote>
                 <figcaption>{w.name}</figcaption>
               </motion.figure>
@@ -73,9 +79,9 @@ export function Words() {
           <button
             className="words-arrow next"
             aria-label="הבא"
-            onClick={() => go(rtl ? -1 : 1)}
+            onClick={() => go(1)}
           >
-            <svg viewBox="0 0 24 24" aria-hidden focusable="false"><path d="M9 5l7 7-7 7" /></svg>
+            <svg viewBox="0 0 24 24" aria-hidden focusable="false"><path d="M15 5l-7 7 7 7" /></svg>
           </button>
         </div>
 

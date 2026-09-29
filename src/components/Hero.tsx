@@ -1,43 +1,49 @@
+import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
-import { HeroArch } from './HeroArch';
+import { HeroPortrait } from './HeroPortrait';
 import { KineticText } from './KineticText';
-import { content, lang } from '../content';
+import { content } from '../content';
 
+// Trimmed to what a visitor needs in a few seconds: who she is, who it's for,
+// what she offers, where to go next — the old kicker/romanized-name/role/lead
+// stack duplicated the same identity three times over. The fuller bio moved
+// to /about.
+//
+// Structure: <header class="hero"> carries the full-viewport-width background
+// (glows, gradients); everything else sits inside the constrained/centered
+// .hero-container. Column order (portrait right, copy left) is set explicitly
+// in CSS via .hero-container's own `direction: ltr` (see index.css) rather
+// than left to RTL's natural column-reversal — the DOM order below (copy
+// first, portrait second) is the reading/tab order and is intentionally NOT
+// the same as the visual left-to-right order.
 export function Hero() {
   const { profile, hero } = content;
-  // The secondary name renders in the other script: Hebrew on the English
-  // site, Latin on the Hebrew site.
-  const altLang = lang === 'he' ? 'en' : 'he';
-  const altDir = lang === 'he' ? 'ltr' : 'rtl';
   return (
-    <header className="hero container" id="top">
-      <div className="hero-grid">
-        <div className="col-main">
-          <Reveal>
-            <p className="hero-kicker">{profile.kicker}</p>
-          </Reveal>
+    <header className="hero" id="top">
+      <div className="hero-container">
+        <div className="hero-copy">
           <KineticText as="h1" className="hero-name" text={profile.name} stagger={90} />
-          <Reveal delay={0.14}>
-            <p className="hero-hebrew" lang={altLang} dir={altDir}>{profile.hebrewName}</p>
+          <Reveal delay={0.12}>
+            <p className="hero-tagline">{hero.tagline}</p>
           </Reveal>
-          <Reveal delay={0.2}>
-            <p className="hero-role">{profile.role}</p>
+          <Reveal delay={0.18}>
+            <p className="hero-audience">{hero.audienceLine}</p>
           </Reveal>
-          <Reveal delay={0.26}>
-            <p className="hero-lead">{profile.lead}</p>
+          <Reveal delay={0.24}>
+            <p className="hero-values">{hero.valuesLine}</p>
           </Reveal>
-          <Reveal delay={0.32}>
+          <Reveal delay={0.3}>
             <div className="hero-ctas">
-              <a className="btn btn-primary" href="#contact">{hero.ctaPrimary}</a>
-              <a className="btn btn-ghost" href="#practices">{hero.ctaSecondary}</a>
+              <Link className="btn btn-primary" to="/services">{hero.ctaPrimary}</Link>
+              <Link className="btn btn-ghost" to="/about">{hero.ctaSecondary}</Link>
             </div>
           </Reveal>
         </div>
-        <Reveal delay={0.2} y={28} className="col-side hero-art">
-          <HeroArch />
+        <Reveal delay={0.16} y={28} className="hero-portrait-col">
+          <HeroPortrait />
         </Reveal>
       </div>
-      {hero.scroll && <a className="hero-scroll" href="#breath">{hero.scroll}</a>}
+      {hero.scroll && <a className="hero-scroll" href="#services">{hero.scroll}</a>}
     </header>
   );
 }

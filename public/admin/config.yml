@@ -10,6 +10,10 @@
 #   npm run dev, open http://localhost:5173/admin/, click "Work with Local
 #   Repository" and pick the repo folder.
 #
+# Publishing here commits straight to `main` (see backend.branch below), which
+# automatically triggers the GitHub Actions workflow that builds and deploys
+# the site — publish and the live site updates on its own, nothing else to do.
+#
 # The whole site is Hebrew, so every field below is Hebrew only — no English.
 
 backend:
@@ -21,12 +25,10 @@ backend:
 media_folder: "public/photos"
 public_folder: "/photos"
 
-locale: he
-
 singletons:
-  - name: activities
-    label: "שירותי העסק"
-    file: "src/content/activities.yaml"
+  - name: services
+    label: "שירותים"
+    file: "src/content/services.yaml"
     icon: self_improvement
     fields:
       - label: "כותרת הקטע"
@@ -37,22 +39,58 @@ singletons:
           - { label: "תווית קטנה", name: labelHe, widget: string }
           - { label: "כותרת", name: titleHe, widget: string }
           - { label: "כותרת משנה", name: subHe, widget: string, required: false }
-      - label: "שירותים"
-        name: items
+      - label: "קטגוריות"
+        name: categories
         widget: list
         summary: "{{fields.titleHe}}"
-        hint: "אפשר להוסיף / להסיר שירותים לפי תקופות בעזרת + / סל המחזור."
+        hint: "שלוש קטגוריות קבועות (ליווי אישי לנשים / ליווי זוגי / סדנאות) — אין להוסיף או להסיר קטגוריה, רק לערוך את התוכן והמסלולים בתוכה."
         fields:
-          - { label: "שם השירות", name: titleHe, widget: string }
-          - { label: "שורת פרטים (למשל: אחד על אחד · 75 דקות)", name: noteHe, widget: string }
-          - { label: "תיאור מלא", name: bodyHe, widget: text }
-          - { label: "מחיר (אופציונלי, למשל: 360 ₪)", name: price, widget: string, required: false }
+          - { label: "מזהה (slug) — לא לשנות, קובע את כתובת הדף", name: slug, widget: string }
+          - { label: "שם הקטגוריה", name: titleHe, widget: string }
+          - { label: "תיאור קצר (מוצג בכרטיס ובראש הדף)", name: shortDescHe, widget: text }
           - { label: "תמונה", name: photo, widget: image }
           - { label: "תיאור התמונה (לנגישות)", name: photoAltHe, widget: string }
+          - { label: "תיאור לגוגל (SEO, עד 160 תווים)", name: metaDescriptionHe, widget: string }
+          - label: "מסלולים בקטגוריה"
+            name: tracks
+            widget: list
+            summary: "{{fields.titleHe}}"
+            hint: "אפשר להוסיף/להסיר מסלולים חופשית."
+            fields:
+              - { label: "שם המסלול", name: titleHe, widget: string }
+              - { label: "שורת פרטים (למשל: אחת על אחת · 60 דקות)", name: noteHe, widget: string, required: false }
+              - { label: "תיאור מלא", name: bodyHe, widget: text }
+              - label: "סוג מחיר"
+                name: priceType
+                widget: select
+                default: fixed
+                options:
+                  - { label: "מחיר קבוע", value: fixed }
+                  - { label: "לפי פנייה (ללא מחיר מוצג)", value: contact }
+              - { label: "מחיר (₪, מספר בלבד — רק אם 'סוג מחיר' הוא מחיר קבוע)", name: price, widget: number, required: false, value_type: int }
+              - label: "יחידת המחיר"
+                name: priceUnit
+                widget: select
+                required: false
+                options:
+                  - { label: "למפגש", value: session }
+                  - { label: "לאדם", value: person }
+                  - { label: "לחבילה", value: package }
+              - { label: "תמונה (אופציונלי — ריק = תמונת הקטגוריה)", name: photo, widget: image, required: false }
+              - { label: "תיאור התמונה (לנגישות)", name: photoAltHe, widget: string, required: false }
+          - label: "התהליך — שלבים (אופציונלי)"
+            name: processSteps
+            widget: list
+            required: false
+            summary: "{{fields.titleHe}}"
+            hint: "מוצג כרשימה ממוספרת בראש דף הקטגוריה. השאירו ריק כדי לא להציג שלבים בכלל."
+            fields:
+              - { label: "כותרת השלב", name: titleHe, widget: string }
+              - { label: "תיאור השלב", name: bodyHe, widget: text }
 
-  - name: events
-    label: "יומן מתעדכן"
-    file: "src/content/events.yaml"
+  - name: workshops
+    label: "סדנאות (יומן)"
+    file: "src/content/workshops.yaml"
     icon: event
     fields:
       - label: "כותרת הקטע"
@@ -66,42 +104,76 @@ singletons:
           - { label: "תווית כפתור", name: ctaHe, widget: string }
       - { label: "קישור לקבוצת ווטסאפ לעדכונים", name: groupUrl, widget: string, required: false, hint: "אם ריק — הכפתור לא יוצג." }
       - { label: "טקסט כפתור קבוצת הווטסאפ", name: groupLabelHe, widget: string, required: false }
-      - label: "אירועים"
+      - label: "סדנאות"
         name: items
         widget: list
         summary: "{{fields.date}} — {{fields.titleHe}}"
         fields:
+          - { label: "מזהה (slug)", name: slug, widget: string, hint: "אותיות אנגלית/מספרים/מקפים בלבד — קובע את כתובת ה-URL של הסדנה, למשל mindful-dance-2026-10-08." }
+          - { label: "שם הסדנה", name: titleHe, widget: string }
           - { label: "תאריך", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
-          - { label: "שעה (למשל 19:30)", name: time, widget: string, required: false }
-          - { label: "שם האירוע", name: titleHe, widget: string }
+          - { label: "שעה (למשל 20:00)", name: time, widget: string, required: false }
+          - { label: "שעת סיום (אופציונלי)", name: endTime, widget: string, required: false }
           - { label: "מיקום", name: locationHe, widget: string }
-          - { label: "תיאור", name: descHe, widget: text }
+          - { label: "קישור למפה (אופציונלי)", name: locationUrl, widget: string, required: false }
+          - { label: "פתיח רגשי (אופציונלי, שורה-שתיים בראש הדף)", name: introHe, widget: text, required: false }
+          - { label: "תיאור מלא", name: descHe, widget: text }
+          - { label: "מה קורה בסדנה (אופציונלי)", name: whatHappensHe, widget: text, required: false }
+          - { label: "למי זה מתאים (אופציונלי)", name: whoForHe, widget: text, required: false }
+          - { label: "תיאור לגוגל (SEO, עד 160 תווים)", name: metaDescriptionHe, widget: string, required: false }
+          - { label: "תמונה", name: image, widget: image, required: false }
+          - label: "גלריה (אופציונלי)"
+            name: gallery
+            widget: list
+            required: false
+            field: { label: "תמונה", name: src, widget: image }
+          - label: "קטגוריית שירות קשורה (אופציונלי)"
+            name: categorySlug
+            widget: select
+            required: false
+            options:
+              - { label: "ליווי אישי לנשים", value: individual-guidance-women }
+              - { label: "ליווי זוגי", value: couples-guidance }
+              - { label: "סדנאות", value: workshops-format }
           - { label: "קישור להרשמה", name: signupUrl, widget: string, required: false, hint: "אם ריק — מפנה לוואטסאפ." }
-
-  - name: blog
-    label: "בלוג ומאמרים"
-    file: "src/content/blog.yaml"
-    icon: article
-    fields:
-      - label: "כותרת הקטע"
-        name: heading
-        widget: object
-        collapsed: true
-        fields:
-          - { label: "תווית קטנה", name: labelHe, widget: string }
-          - { label: "כותרת", name: titleHe, widget: string }
-          - { label: "כותרת משנה", name: subHe, widget: string, required: false }
-          - { label: "תווית 'לקריאה'", name: ctaHe, widget: string }
-      - label: "מאמרים"
-        name: items
-        widget: list
-        summary: "{{fields.titleHe}}"
-        fields:
-          - { label: "כותרת המאמר", name: titleHe, widget: string }
-          - { label: "תאריך (למשל: יוני 2026)", name: dateHe, widget: string, required: false }
-          - { label: "תקציר קצר (מוצג בכרטיס)", name: excerptHe, widget: text }
-          - { label: "תוכן המאמר (הפוסט המלא)", name: bodyHe, widget: text, required: false, hint: "כתבי כאן את המאמר המלא — הוא נפתח לקריאה בתוך האתר. שורה ריקה = פסקה חדשה." }
-          - { label: "קישור חיצוני (במקום תוכן)", name: url, widget: string, required: false, hint: "אם משאירים את התוכן ריק — הכרטיס יוביל לקישור הזה." }
+          - label: "סוג מחיר"
+            name: priceType
+            widget: select
+            default: fixed
+            options:
+              - { label: "מחיר קבוע", value: fixed }
+              - { label: "לפי פנייה (ללא מחיר מוצג)", value: contact }
+          - { label: "מחיר (₪, מספר בלבד)", name: price, widget: number, required: false, value_type: int }
+          - label: "יחידת המחיר"
+            name: priceUnit
+            widget: select
+            required: false
+            options:
+              - { label: "למפגש", value: session }
+              - { label: "לאדם", value: person }
+              - { label: "לחבילה", value: package }
+          - { label: "תפוסה (טקסט חופשי, למשל: עד 5 זוגות)", name: capacity, widget: string, required: false }
+          - label: "סטטוס"
+            name: status
+            widget: select
+            default: upcoming
+            hint: "טיוטה/בוטלה לא מוצגות בשום מקום פומבי. התקיימה עוברת לארכיון ב-/workshops (הדף שלה נשאר פעיל)."
+            options:
+              - { label: "טיוטה (לא מוצגת)", value: draft }
+              - { label: "קרובה", value: upcoming }
+              - { label: "אזל המקום", value: sold-out }
+              - { label: "התקיימה", value: completed }
+              - { label: "בוטלה", value: cancelled }
+          - { label: "מומלצת (מוצגת ראשונה בדף הבית)", name: featured, widget: boolean, default: false }
+          - { label: "פעילה (מוצגת באתר)", name: enabled, widget: boolean, default: true }
+          - label: "שאלות נפוצות (אופציונלי)"
+            name: faq
+            widget: list
+            required: false
+            summary: "{{fields.qHe}}"
+            fields:
+              - { label: "שאלה", name: qHe, widget: string }
+              - { label: "תשובה", name: aHe, widget: text }
 
   - name: podcast
     label: "פודקאסט"
@@ -122,10 +194,97 @@ singletons:
         widget: list
         summary: "{{fields.nameHe}}"
         fields:
+          - { label: "מזהה (slug)", name: slug, widget: string, hint: "אותיות אנגלית/מקפים — קובע את כתובת ה-URL, למשל meever-latabu." }
           - { label: "שם הפודקאסט", name: nameHe, widget: string }
           - { label: "תיאור", name: descHe, widget: text }
           - { label: "סטטוס (למשל: בקרוב — משאירים ריק כשהוא באוויר)", name: statusHe, widget: string, required: false }
-          - { label: "קישור להאזנה", name: url, widget: string, required: false, hint: "אם 'סטטוס' מלא — לא צריך קישור." }
+          - { label: "תמונה מקדימה", name: coverImage, widget: string, required: false, hint: "כתובת תמונה קבועה. אפשר להשאיר ריק." }
+          - label: "קישורים לפלטפורמות האזנה"
+            name: platformLinks
+            widget: list
+            required: false
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "שם הפלטפורמה (למשל YouTube, Spotify)", name: label, widget: string }
+              - { label: "קישור", name: url, widget: string }
+          - label: "פרקים"
+            name: episodes
+            widget: list
+            required: false
+            summary: "{{fields.titleHe}}"
+            hint: "כל עוד אין פרקים כאן, כפתור ההאזנה פותח את הפלייליסט המלא. הוספת פרק כאן פותחת לו דף עצמאי משלו."
+            fields:
+              - { label: "מזהה (slug)", name: slug, widget: string }
+              - { label: "שם הפרק", name: titleHe, widget: string }
+              - { label: "תיאור", name: descHe, widget: text, required: false }
+              - { label: "תאריך פרסום (YYYY-MM-DD)", name: publishedDate, widget: string, required: false }
+              - { label: "משך בדקות", name: durationMinutes, widget: number, required: false, value_type: int }
+              - { label: "מזהה סרטון יוטיוב", name: youtubeVideoId, widget: string, required: false, hint: "החלק שאחרי v= בכתובת היוטיוב." }
+              - { label: "תמונה מקדימה (אופציונלי)", name: coverImage, widget: string, required: false }
+
+  - name: videos
+    label: "סרטונים"
+    file: "src/content/videos.yaml"
+    icon: movie
+    fields:
+      - label: "כותרת הקטע"
+        name: heading
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "תווית קטנה", name: labelHe, widget: string }
+          - { label: "כותרת", name: titleHe, widget: string }
+          - { label: "כותרת משנה", name: subHe, widget: string, required: false }
+          - { label: "תווית 'לצפייה'", name: ctaHe, widget: string }
+      - label: "סרטונים"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}}"
+        hint: "הרצאה מוקלטת היא גם 'סרטון' — פשוט מתארים אותה ככזו בתיאור."
+        fields:
+          - { label: "מזהה (slug)", name: slug, widget: string }
+          - { label: "כותרת", name: titleHe, widget: string }
+          - { label: "תיאור", name: descHe, widget: text }
+          - { label: "תיאור לגוגל (SEO)", name: metaDescriptionHe, widget: string, required: false }
+          - { label: "תמונה מקדימה", name: thumbnail, widget: string, required: false }
+          - label: "מקור הסרטון"
+            name: provider
+            widget: select
+            default: youtube
+            options: [youtube, vimeo, external]
+          - { label: "מזהה סרטון (ליוטיוב/וימאו)", name: videoId, widget: string, required: false }
+          - { label: "קישור לסרטון (למקור חיצוני, או כגיבוי)", name: videoUrl, widget: string, required: false }
+          - { label: "תאריך פרסום (YYYY-MM-DD)", name: publishedDate, widget: string, required: false }
+          - { label: "מומלץ", name: featured, widget: boolean, default: false }
+          - { label: "סדר תצוגה (מספר קטן יותר = ראשון)", name: order, widget: number, default: 0, value_type: int }
+          - { label: "פעיל (מוצג באתר)", name: enabled, widget: boolean, default: true }
+
+  - name: blog
+    label: "בלוג ומאמרים"
+    file: "src/content/blog.yaml"
+    icon: article
+    fields:
+      - label: "כותרת הקטע"
+        name: heading
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "תווית קטנה", name: labelHe, widget: string }
+          - { label: "כותרת", name: titleHe, widget: string }
+          - { label: "כותרת משנה", name: subHe, widget: string, required: false }
+          - { label: "תווית 'לקריאה'", name: ctaHe, widget: string }
+      - label: "מאמרים"
+        name: items
+        widget: list
+        summary: "{{fields.titleHe}}"
+        fields:
+          - { label: "מזהה (slug)", name: slug, widget: string, hint: "קובע את כתובת ה-URL של המאמר." }
+          - { label: "כותרת המאמר", name: titleHe, widget: string }
+          - { label: "תאריך פרסום", name: dateISO, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }
+          - { label: "תמונה", name: image, widget: image, required: false }
+          - { label: "תקציר קצר (מוצג בכרטיס)", name: excerptHe, widget: text }
+          - { label: "תוכן המאמר (הפוסט המלא)", name: bodyHe, widget: text, required: false, hint: "כתבי כאן את המאמר המלא — הוא נפתח לדף קריאה משלו. שורה ריקה = פסקה חדשה." }
+          - { label: "קישור חיצוני (במקום תוכן)", name: url, widget: string, required: false, hint: "אם משאירים את התוכן ריק — הכרטיס יוביל לקישור הזה." }
 
   - name: store
     label: "חנות"
@@ -141,16 +300,61 @@ singletons:
           - { label: "כותרת", name: titleHe, widget: string }
           - { label: "כותרת משנה", name: subHe, widget: string, required: false }
           - { label: "תווית כפתור", name: ctaHe, widget: string }
+      - label: "טופס הזמנה (כשאין קישור לרכישה — ראו הסבר בשדה 'קישור לרכישה' למטה)"
+        name: order
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "כותרת החלון", name: titleHe, widget: string }
+          - { label: "תווית שדה ההערה", name: noteHe, widget: string }
+          - { label: "placeholder שדה ההערה", name: notePlaceholderHe, widget: string }
+          - { label: "תווית כפתור השליחה", name: submitHe, widget: string }
       - label: "מוצרים"
         name: items
         widget: list
-        summary: "{{fields.titleHe}} — {{fields.price}}"
+        summary: "{{fields.titleHe}} — {{fields.price}} ₪"
         fields:
           - { label: "שם המוצר", name: titleHe, widget: string }
-          - { label: "מחיר (למשל: 90 ₪)", name: price, widget: string }
+          - { label: "מזהה (slug) — אופציונלי, מאפשר דף מוצר עצמאי", name: slug, widget: string, required: false }
+          - { label: "קטגוריה (אופציונלי, למשל: שוברים)", name: category, widget: string, required: false }
           - { label: "תמונה", name: image, widget: image }
           - { label: "תיאור", name: descHe, widget: text }
-          - { label: "קישור לרכישה", name: buyUrl, widget: string, required: false, hint: "אם ריק — מפנה לוואטסאפ." }
+          - { label: "מחיר (₪, מספר בלבד)", name: price, widget: number, value_type: int }
+          - { label: "מחיר מבצע (אופציונלי, קטן ממחיר רגיל)", name: salePrice, widget: number, required: false, value_type: int }
+          - { label: "פעיל (מוצג באתר)", name: active, widget: boolean, default: true }
+          - { label: "מומלץ", name: featured, widget: boolean, default: false }
+          - { label: "סדר תצוגה (מספר קטן יותר = ראשון)", name: order, widget: number, default: 0, value_type: int }
+          - { label: "קישור לרכישה", name: buyUrl, widget: string, required: false, hint: "עם קישור (לדף תשלום אמיתי) — הכפתור עובר אליו ישירות. ריק — הכפתור פותח טופס קצר (שם + הערה) ואז שולח הכל בוואטסאפ." }
+
+  - name: legal
+    label: "עמודים משפטיים"
+    file: "src/content/legal.yaml"
+    icon: gavel
+    fields:
+      - label: "הצהרת נגישות"
+        name: accessibility
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "כותרת", name: title, widget: string }
+          - { label: "עודכן לאחרונה", name: updated, widget: string }
+          - { label: "תוכן", name: body, widget: text }
+      - label: "מדיניות פרטיות"
+        name: privacy
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "כותרת", name: title, widget: string }
+          - { label: "עודכן לאחרונה", name: updated, widget: string }
+          - { label: "תוכן", name: body, widget: text }
+      - label: "תנאי שימוש"
+        name: terms
+        widget: object
+        collapsed: true
+        fields:
+          - { label: "כותרת", name: title, widget: string }
+          - { label: "עודכן לאחרונה", name: updated, widget: string }
+          - { label: "תוכן", name: body, widget: text }
 
   - name: contact_info
     label: "פרטי קשר ורשתות"
@@ -160,12 +364,12 @@ singletons:
       - { label: "אימייל", name: email, widget: string, hint: "מופיע ככפתור אימייל." }
       - { label: "אינסטגרם (כתובת)", name: instagram, widget: string }
       - { label: "קישור וואטסאפ", name: whatsapp, widget: string, hint: "למשל https://wa.me/972XXXXXXXXX — גם כפתור הברירת־מחדל של כל הכפתורים." }
-      - label: "רשתות חברתיות (מוצגות עם אייקון)"
+      - label: "רשתות חברתיות (מוצגות עם אייקון, גם בפוטר וגם בפרטי קשר)"
         name: socials
         widget: list
         required: false
         summary: "{{fields.label}}"
-        hint: "השם קובע איזה אייקון יוצג. שמות נתמכים: Instagram, WhatsApp, Facebook, YouTube, TikTok, Spotify, Email. כתובת ריקה = מוסתר."
+        hint: "השם קובע איזה אייקון יוצג. שמות נתמכים: Instagram, WhatsApp, Facebook, YouTube, TikTok, Spotify, X, Threads, Apple Podcasts. כתובת ריקה = מוסתר."
         fields:
           - { label: "שם הרשת", name: label, widget: string }
           - { label: "כתובת (URL)", name: url, widget: string, required: false }
@@ -189,18 +393,57 @@ collections:
             fields:
               - { label: "כותרת הדפדפן", name: title, widget: string }
               - { label: "תיאור בתוצאות החיפוש בגוגל", name: description, widget: string, hint: "זה הטקסט שמופיע מתחת לכותרת בגוגל." }
+          - label: "בקרת תצוגה של דף הבית"
+            name: homepage
+            widget: object
+            collapsed: true
+            hint: "סדר הקטעים בעמוד הבית קבוע — כאן שולטים רק אם קטע מוצג ולכמה פריטים."
+            fields:
+              - label: "שירותים"
+                name: services
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+              - label: "סדנאות קרובות"
+                name: workshops
+                widget: object
+                fields:
+                  - { label: "מוצג", name: enabled, widget: boolean, default: true }
+                  - { label: "כמה סדנאות להציג", name: limit, widget: number, default: 3, value_type: int }
+              - label: "אודות"
+                name: about
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+              - label: "המלצות"
+                name: testimonials
+                widget: object
+                fields:
+                  - { label: "מוצג", name: enabled, widget: boolean, default: true }
+                  - { label: "כמה המלצות להציג", name: limit, widget: number, default: 5, value_type: int }
+              - label: "תוכן (מאמרים, פודקאסט, סרטונים)"
+                name: content
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+              - label: "חנות"
+                name: store
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+              - label: "יצירת קשר"
+                name: contact
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
           - label: "תוויות התפריט"
             name: nav
             widget: object
             collapsed: true
             fields:
+              - { label: "בית", name: home, widget: string }
               - { label: "נעים להכיר", name: about, widget: string }
               - { label: "שירותי העסק", name: services, widget: string }
-              - { label: "יומן מתעדכן", name: events, widget: string }
+              - { label: "סדנאות", name: events, widget: string }
               - { label: "המלצות", name: words, widget: string }
               - { label: "פודקאסט", name: podcast, widget: string }
               - { label: "בלוג ומאמרים", name: blog, widget: string }
-              - { label: "פרטי קשר", name: contact, widget: string }
+              - { label: "צור קשר (גם בתפריט וגם בקטע יצירת הקשר)", name: contact, widget: string }
               - { label: "חנות", name: shop, widget: string }
               - { label: "כפתור 'דברו איתי'", name: cta, widget: string }
               - { label: "כפתור פתיחת תפריט", name: menu, widget: string }
@@ -218,30 +461,25 @@ collections:
             collapsed: true
             fields:
               - { label: "שם", name: name, widget: string }
-              - { label: "שם באנגלית", name: hebrewName, widget: string }
-              - { label: "שורת פתיח קטנה", name: kicker, widget: string }
-              - { label: "שורת תפקיד", name: role, widget: string }
-              - { label: "פסקת פתיחה", name: lead, widget: text }
+              - { label: "שם באנגלית (ישן, לא מוצג יותר ב-Hero)", name: hebrewName, widget: string, required: false }
+              - { label: "שורת פתיח קטנה (ישן, לא מוצג יותר ב-Hero)", name: kicker, widget: string, required: false }
+              - { label: "שורת תפקיד (ישן, לא מוצג יותר ב-Hero — מלא רק בעמוד עליי)", name: role, widget: string, required: false }
+              - { label: "פסקת פתיחה (ישן, לא מוצג יותר ב-Hero)", name: lead, widget: text, required: false }
           - label: "עמוד הבית (Hero)"
             name: hero
             widget: object
             collapsed: true
             fields:
+              - { label: "שורת תיוג (למשל: מרחבים של חיבור, ריפוי וגילוי 🌿)", name: tagline, widget: string }
+              - { label: "שורת קהל יעד (למשל: לנשים ולזוגות)", name: audienceLine, widget: string }
+              - { label: "שורת ערכים (למשל: גוף • רגש • תנועה • יחסים • מיניות קשובה)", name: valuesLine, widget: string }
               - { label: "כפתור ראשי", name: ctaPrimary, widget: string }
               - { label: "כפתור משני", name: ctaSecondary, widget: string }
               - { label: "רמז גלילה (אפשר להשאיר ריק כדי להסתיר)", name: scroll, widget: string, required: false }
-              - { label: "תיאור תמונת הבית (נגישות)", name: photoAlt, widget: string }
-          - label: "רגע הנשימה"
-            name: breath
-            widget: object
-            collapsed: true
-            fields:
-              - { label: "תווית קטנה (אפשר ריק)", name: label, widget: string, required: false }
-              - { label: "כותרת", name: title, widget: string }
-              - { label: "מילה — שאיפה", name: wordIn, widget: string }
-              - { label: "מילה — החזקה", name: wordHold, widget: string }
-              - { label: "מילה — נשיפה", name: wordOut, widget: string }
-              - { label: "הערה", name: note, widget: text }
+              - { label: "תמונת ה-Hero", name: photo, widget: image }
+              - { label: "תיאור תמונת הבית (לנגישות)", name: photoAlt, widget: string }
+              - { label: "מיקוד אופקי בתמונה (0–100, 50 = מרכז)", name: photoFocalX, widget: number, default: 50, min: 0, max: 100, value_type: int }
+              - { label: "מיקוד אנכי בתמונה (0–100, 0 = למעלה)", name: photoFocalY, widget: number, default: 30, min: 0, max: 100, value_type: int }
           - label: "רצועת תמונה"
             name: band
             widget: object
@@ -259,8 +497,8 @@ collections:
               - { label: "כותרת", name: title, widget: string }
               - { label: "תמונה", name: photo, widget: image }
               - { label: "תיאור התמונה (נגישות)", name: photoAlt, widget: string }
-              - { label: "פסקאות", name: paragraphs, widget: list, field: { label: פסקה, name: paragraph, widget: text } }
-              - label: "עובדות קצרות (אפשר להשאיר ריק — אז לא יוצג)"
+              - { label: "פסקאות (2–3, מוצגות גם בדף הבית וגם בעמוד עליי המלא)", name: paragraphs, widget: list, field: { label: פסקה, name: paragraph, widget: text } }
+              - label: "עובדות קצרות (מוצגות בעמוד עליי המלא בלבד; אפשר להשאיר ריק)"
                 name: facts
                 widget: list
                 required: false
@@ -268,7 +506,7 @@ collections:
                 fields:
                   - { label: "כותרת", name: label, widget: string }
                   - { label: "ערך", name: value, widget: string }
-          - label: "ההרצאה / הסיפור האישי"
+          - label: "ההרצאה / הסיפור האישי (מוצג בעמוד עליי המלא)"
             name: storySection
             widget: object
             collapsed: true
@@ -298,7 +536,8 @@ collections:
                 fields:
                   - { label: "ההמלצה", name: quote, widget: text }
                   - { label: "שם הממליצ/ה", name: name, widget: string }
-          - label: "באנר שיחת היכרות חינם"
+                  - { label: "להציג בדף הבית", name: featured, widget: boolean, default: false, hint: "רק המלצות מסומנות מופיעות בדף הבית (עד המספר שנקבע ב'בקרת תצוגה של דף הבית' למעלה) — כל ההמלצות תמיד מופיעות יחד." }
+          - label: "באנר שיחת היכרות חינם (לא מוצג כרגע בדף הבית)"
             name: freeCall
             widget: object
             collapsed: true
@@ -308,7 +547,7 @@ collections:
               - { label: "טקסט", name: body, widget: text }
               - { label: "תווית כפתור", name: cta, widget: string }
               - { label: "הערה (למשל: 30 דק׳ · נשים וזוגות)", name: note, widget: string }
-          - label: "טקסט קטע פרטי הקשר"
+          - label: "טקסט קטע יצירת קשר"
             name: contact
             widget: object
             collapsed: true
@@ -316,6 +555,12 @@ collections:
               - { label: "כותרת", name: line, widget: string }
               - { label: "טקסט משנה", name: sub, widget: string }
               - { label: "טקסט כפתור הוואטסאפ (לא הקישור)", name: whatsapp, widget: string, hint: "הקישור עצמו נמצא ב'פרטי קשר ורשתות'." }
+              - { label: "טופס — תווית שדה השם", name: formName, widget: string }
+              - { label: "טופס — placeholder שדה השם", name: formNamePlaceholder, widget: string }
+              - { label: "טופס — תווית שדה ההודעה", name: formMessage, widget: string }
+              - { label: "טופס — placeholder שדה ההודעה", name: formMessagePlaceholder, widget: string }
+              - { label: "טופס — תווית כפתור השליחה", name: formSubmit, widget: string }
+              - { label: "טופס — הערה מתחת לטופס", name: formNote, widget: string }
               - { label: "ישן: טקסט אינסטגרם", name: instagram, widget: string, required: false }
           - label: "כותרת תחתונה (Footer)"
             name: footer

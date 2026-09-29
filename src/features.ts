@@ -4,34 +4,23 @@
 //
 // Override per-visit without editing code by adding query params, e.g.
 //   ?calm           -> disables every dynamic flag (a quiet kill switch)
-//   ?ff=cursorRipple:0,timeOfDaySun:0   -> turn specific flags off
+//   ?ff=cursorRipple:0,grain:0          -> turn specific flags off
 //   ?ff=magneticCta:1                   -> force one on
 
 export type FeatureKey =
   | 'kineticType'       // headings rise word-by-word from a mask when revealed
   | 'navWaves'          // nav hover/active underline is a flowing wave (sun over the sea)
-  | 'heroSunRays'       // an SVG ray crown radiates behind the hero arch (idle spin + scroll turn)
   | 'photoHover'        // photographs warm and lift on hover (develop effect)
   | 'photoMotion'       // photos become "living stills": a subtle muted loop plays in view (cinemagraph)
   | 'figureSway'        // the dance figures sway gently in place
-  | 'natureLife'        // an ambient bird occasionally flies in, perches on a growing branch, then leaves
   | 'astrology'         // render the celestial "sky right now" + find-your-sign section
   | 'astroMotion'       // constellations draw themselves in + stars twinkle
   | 'zodiacMedallions'  // show the quirky flat zodiac roundels (vs. gold line-art constellations)
   | 'ambientLight'      // slow warm light field drifting behind the page
   | 'grain'             // fine film grain over everything (premium texture)
   | 'heroPhotoDrift'    // hero photo slowly drifts/zooms (Ken Burns)
-  | 'heroSunRise'       // the sun behind the hero arch breathes
   | 'navHideOnScroll'   // nav hides on scroll-down, returns on scroll-up
-  | 'scrollSunset'      // hero sun sets behind the swell as you scroll past
-  | 'pointerTiltArch'   // arch tilts slightly toward the cursor
-  | 'sunBloomHover'     // sun ray-crown unfurls on arch hover/focus
   | 'progressSun'       // a small sun rides the scroll-progress thread
-  | 'breathStage'       // the breathing circle animates (vs. a still sun)
-  | 'breathGuide'       // a progress arc traces the breath cycle (draw on inhale, drain on exhale)
-  | 'breathScrollReveal'// the breath stage eases in (scale + fade) as the section centers
-  | 'breathDark'        // the breath section sinks into a deep moss night
-  | 'breathOrganicEdge' // dark breath dissolves into the paper via a grainy, undulating veil
   | 'danceScrollTurn'   // the dance circle turns as you scroll through it
   | 'danceJoinHover'    // a tenth dancer joins the ring on hover
   | 'bandParallax'      // the photo band drifts at a softer pace
@@ -40,37 +29,23 @@ export type FeatureKey =
   | 'medallionSpin'     // the contact bowl rotates
   | 'magneticCta'       // the primary contact button drifts toward the cursor
   | 'cursorRipple'      // a soft ripple blooms where you click/tap
-  | 'timeOfDaySun'      // hero warmth shifts with the visitor's local clock
-  | 'showPricing'       // render the CMS-managed pricing section
-  | 'showEvents'        // render the CMS-managed upcoming-events section
   | 'showStore'         // render the CMS-managed shop section
   | 'showStory';        // render the personal-story / lecture section ("גוף, אמונה וגאולה")
 
 const DEFAULTS: Record<FeatureKey, boolean> = {
   kineticType: true,
   navWaves: true,
-  heroSunRays: true,
   photoHover: true,
   photoMotion: true,
   figureSway: true,
-  natureLife: true,
   astrology: false, // removed per Gali — no celestial section or nav moon
   astroMotion: false,
   zodiacMedallions: false,
   ambientLight: true,
   grain: true,
   heroPhotoDrift: true,
-  heroSunRise: true,
   navHideOnScroll: true,
-  scrollSunset: true,
-  pointerTiltArch: true,
-  sunBloomHover: true,
   progressSun: true,
-  breathStage: true,
-  breathGuide: true,
-  breathScrollReveal: true,
-  breathDark: true,
-  breathOrganicEdge: true,
   danceScrollTurn: true,
   danceJoinHover: true,
   bandParallax: true,
@@ -79,9 +54,6 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   medallionSpin: false, // off for the real session photo — a slow-spinning person reads oddly
   magneticCta: true,
   cursorRipple: true,
-  timeOfDaySun: true,
-  showPricing: false, // removed per Gali — pricing lives inside each service instead
-  showEvents: true,
   showStore: true,
   showStory: true,
 };

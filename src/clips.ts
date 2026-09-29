@@ -8,11 +8,15 @@
 const AVAILABLE = new Set<string>([
   // 'portrait' intentionally omitted — the hero is now a headshot; a face that
   // subtly drifts reads as uncanny, so it stays a clean still.
+  // 'dance-circle' intentionally omitted — the source photo is 2000x1125, but
+  // the generated loop (and its poster) is only 1024x576. Stretched full-bleed
+  // across the band and scaled 1.2x for the parallax, that reads as blurry;
+  // several people's limbs also drift more noticeably than a single portrait
+  // does, so it stays a clean, crisp still instead.
   'breath',
   'feet',
   'hands',
   'meditation',
-  'dance-circle',
   'bowl',
 ]);
 

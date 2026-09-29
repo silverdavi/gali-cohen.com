@@ -4,6 +4,7 @@
 import en from './en.yaml';
 import he from './he.yaml';
 import siteFile from './site.yaml';
+import legalFile from './legal.yaml';
 
 export type Lang = 'en' | 'he';
 
@@ -17,13 +18,28 @@ export type Site = {
 };
 export const site = siteFile as Site;
 
+// The three static legal pages (accessibility statement, privacy policy,
+// terms of use) — Hebrew-only, like site.yaml, edited from the CMS.
+export type LegalPage = { title: string; updated: string; body: string };
+export type Legal = { accessibility: LegalPage; privacy: LegalPage; terms: LegalPage };
+export const legal = legalFile as Legal;
+
 export type Content = {
   meta: { title: string; description: string };
+  homepage: {
+    services: { enabled: boolean };
+    workshops: { enabled: boolean; limit: number };
+    about: { enabled: boolean };
+    testimonials: { enabled: boolean; limit: number };
+    content: { enabled: boolean };
+    store: { enabled: boolean };
+    contact: { enabled: boolean };
+  };
   nav: {
     practices: string; circles: string; about: string; story: string;
     pricing: string; events: string; shop: string; cta: string; skip: string;
     services: string; faq: string; blog: string; podcast: string;
-    words: string; contact: string; menu: string; close: string;
+    words: string; contact: string; menu: string; close: string; home: string;
   };
   profile: {
     name: string;
@@ -32,7 +48,18 @@ export type Content = {
     role: string;
     lead: string;
   };
-  hero: { ctaPrimary: string; ctaSecondary: string; scroll: string; photoAlt: string };
+  hero: {
+    tagline: string;
+    audienceLine: string;
+    valuesLine: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    scroll: string;
+    photo: string;
+    photoAlt: string;
+    photoFocalX: number;
+    photoFocalY: number;
+  };
   breath: { label: string; title: string; wordIn: string; wordHold: string; wordOut: string; note: string };
   circle: { label: string; title: string; body: string; caption: string; alt: string };
   band: { photo: string; caption: string; alt: string };
@@ -52,7 +79,7 @@ export type Content = {
     meta: string;
     photos: { src: string; alt: string }[];
   };
-  wordsSection: { label: string; items: { quote: string; name: string }[] };
+  wordsSection: { label: string; items: { quote: string; name: string; featured?: boolean }[] };
   freeCall: { label: string; title: string; body: string; cta: string; note: string };
   socialSection: { label: string; title: string; sub: string };
   astro: {
@@ -74,7 +101,12 @@ export type Content = {
       full: string; waningGibbous: string; lastQuarter: string; waningCrescent: string;
     };
   };
-  contact: { line: string; sub: string; whatsapp: string; instagram: string };
+  contact: {
+    line: string; sub: string; whatsapp: string; instagram: string;
+    formName: string; formNamePlaceholder: string;
+    formMessage: string; formMessagePlaceholder: string;
+    formSubmit: string; formNote: string;
+  };
   footer: { place: string; credit: string };
 };
 

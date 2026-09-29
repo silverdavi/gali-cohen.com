@@ -6,6 +6,7 @@ meta:
     Breathwork, movement, meditation circles, and couples journeys.
 
 nav:
+  home: Home
   practices: Practices
   circles: Circles
   about: About
@@ -199,6 +200,12 @@ contact:
     a conversation.
   whatsapp: WhatsApp
   instagram: Instagram
+  formName: Name
+  formNamePlaceholder: Your name
+  formMessage: Message
+  formMessagePlaceholder: What would you like to tell me?
+  formSubmit: Send on WhatsApp
+  formNote: This opens the message in WhatsApp, where you can edit it before sending
 
 footer:
   place: Tel Aviv

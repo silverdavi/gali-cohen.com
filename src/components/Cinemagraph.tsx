@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import { features } from '../features';
 
 // A "living still": shows the ordinary photo (the poster) at rest, and plays a
@@ -23,6 +23,7 @@ type Props = {
   ariaHidden?: boolean;
   loading?: 'lazy' | 'eager';
   fetchPriority?: 'high' | 'low' | 'auto';
+  style?: CSSProperties;
 };
 
 const prefersReduced =
@@ -45,6 +46,7 @@ export function Cinemagraph({
   ariaHidden,
   loading = 'lazy',
   fetchPriority,
+  style,
 }: Props) {
   const motion = !!clip && features.photoMotion && !prefersReduced;
   const ref = useRef<HTMLVideoElement>(null);
@@ -102,6 +104,7 @@ export function Cinemagraph({
         src={src}
         alt={alt}
         className={className}
+        style={style}
         aria-hidden={ariaHidden || undefined}
         loading={loading}
         fetchPriority={fetchPriority}
@@ -114,6 +117,7 @@ export function Cinemagraph({
     <video
       ref={ref}
       className={className}
+      style={style}
       poster={`${clip}.jpg`}
       muted
       loop

@@ -45,7 +45,7 @@ export function Circle() {
   return (
     <section className="section" id="circle" ref={ref}>
       <div className="container">
-        <SectionHead index="02" label={circle.label} title={circle.title} />
+        <SectionHead label={circle.label} title={circle.title} />
         <div className="circle-grid">
           {/* col-main first in the DOM so grid auto-placement keeps both columns
               on row 1 (a col-side-first order wraps the text to a second row) */}

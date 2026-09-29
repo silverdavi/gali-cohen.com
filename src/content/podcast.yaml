@@ -1,20 +1,30 @@
-# פודקאסט — שני פודקאסטים. "url" ריק + statusHe מלא = "בקרוב".
-# (הפרקים עצמם נמצאים בפלייליסט של "מעבר לטאבו" ביוטיוב.)
+# פודקאסט — Show ברמה עליונה, ומתחתיו episodes (מתחיל ריק). דף פרק
+# (/podcast/<show>/<episode>) נבנה רק לפרקים אמיתיים ב-episodes — כדי להוסיף
+# פודקאסט שלישי, או פרק לפודקאסט קיים, צריך רק לערוך את התוכן כאן.
+# coverImage: תמונה מקדימה קבועה (לא נטענת ב-API בזמן אמת). כדי לרענן אותה
+# כשהפרק הראשון בפלייליסט מתחלף, פותחים בדפדפן:
+# https://www.youtube.com/oembed?url=<כתובת-הפלייליסט-מקודדת>&format=json
+# ולוקחים את שדה thumbnail_url מהתשובה (או בונים ידנית
+# https://i.ytimg.com/vi/<מזהה-הסרטון>/maxresdefault.jpg).
 heading:
   labelHe: פודקאסט
-  labelEn: Podcast
   titleHe: להאזנה
-  titleEn: Listen
   subHe: שתי שיחות, שני עולמות — בחרו לאן להיכנס.
-  subEn: Two conversations, two worlds — choose where to step in.
   ctaHe: להאזנה
-  ctaEn: Listen
 shows:
-  - nameHe: מעבר לטאבו · עם טל רומן
+  - slug: meever-latabu
+    nameHe: מעבר לטאבו · עם טל רומן
     descHe: שיחות פתוחות על יחסים, מיניות, תודעה, רוח וכל מה שלא תמיד מעיזים לדבר עליו.
     statusHe: ""
-    url: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
-  - nameHe: ובחרת בחיים · עם לירן
+    coverImage: https://i.ytimg.com/vi/6GfQjIe4HCs/maxresdefault.jpg
+    platformLinks:
+      - label: YouTube
+        url: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
+    episodes: []
+  - slug: uvacharta-bachaim
+    nameHe: ובחרת בחיים · עם לירן
     descHe: על חמלה, טבעונות ודרך חיים — יוצא לאור בקרוב.
     statusHe: בקרוב
-    url: ""
+    coverImage: ''
+    platformLinks: []
+    episodes: []

@@ -2,28 +2,24 @@ import { Reveal } from './Reveal';
 import { KineticText } from './KineticText';
 
 type Props = {
-  /** zero-padded section number, e.g. "01". Omit for unnumbered moments. */
-  index?: string;
   label: string;
   title?: string;
   sub?: string;
+  /** h1 on a standalone page whose main title this is; h2 (default) when
+      embedded as one of several sections on a page that already has its own
+      h1 elsewhere (Home's h1 is the hero name; AboutPage's h1 is its first
+      SectionHead, so its second — Story — stays h2). */
+  as?: 'h1' | 'h2';
 };
 
-// The one header used by every section, so the eyebrow / title / standfirst
-// rhythm is identical everywhere by construction (not re-typed per section).
-// The index number ties each section to its entry in the nav index. The title
-// is kinetic (word-by-word rise) so the eye lands on it as the section opens.
-export function SectionHead({ index, label, title, sub }: Props) {
+// The one header used by every section. `label` (the small eyebrow above the
+// title) is accepted but deliberately not rendered — removed sitewide per
+// Gali. The title is kinetic (word-by-word rise) so the eye lands on it as
+// the section opens.
+export function SectionHead({ title, sub, as = 'h2' }: Props) {
   return (
     <header className="section-head">
-      <Reveal>
-        <p className="section-label">
-          {index && <span className="section-index">{index}</span>}
-          {index && <span className="section-rule" aria-hidden />}
-          <span className="section-label-text">{label}</span>
-        </p>
-      </Reveal>
-      {title && <KineticText as="h2" className="section-title" text={title} />}
+      {title && <KineticText as={as} className="section-title" text={title} />}
       {sub && (
         <Reveal delay={0.12}>
           <p className="section-sub">{sub}</p>
