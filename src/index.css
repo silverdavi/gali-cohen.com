@@ -670,12 +670,13 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
   aspect-ratio: 768 / 1024; /* the portrait Gali supplied, 3:4 */
   object-fit: cover;
   object-position: center 18%;
-  transform: scale(1.02);
+  /* Zoom is anchored on the face so the crown of the portrait stays in frame. */
+  transform-origin: center 18%;
 }
 .hero-photo-img.drift { animation: hero-kenburns 30s ease-in-out infinite alternate; }
 @keyframes hero-kenburns {
-  from { transform: scale(1.02); }
-  to   { transform: scale(1.08); }
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-photo-img.drift { animation: none; }
