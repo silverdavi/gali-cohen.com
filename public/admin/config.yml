@@ -529,7 +529,7 @@ collections:
             collapsed: true
             fields:
               - { label: "תווית קטנה", name: label, widget: string }
-              - label: "המלצות (מוצגות בסליידר)"
+              - label: "המלצות (בדף הבית מוצגות כמה קצרות זו לצד זו)"
                 name: items
                 widget: list
                 summary: "{{fields.name}}"
@@ -537,7 +537,7 @@ collections:
                   - { label: "ההמלצה", name: quote, widget: text }
                   - { label: "שם הממליצ/ה", name: name, widget: string }
                   - { label: "להציג בדף הבית", name: featured, widget: boolean, default: false, hint: "רק המלצות מסומנות מופיעות בדף הבית (עד המספר שנקבע ב'בקרת תצוגה של דף הבית' למעלה) — כל ההמלצות תמיד מופיעות יחד." }
-          - label: "באנר שיחת היכרות חינם (לא מוצג כרגע בדף הבית)"
+          - label: "באנר שיחת היכרות חינם (מוצג בדף הבית)"
             name: freeCall
             widget: object
             collapsed: true

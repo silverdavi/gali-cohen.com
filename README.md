@@ -20,7 +20,7 @@ npm run preview  # serve the production build locally
 ```
 site/
 ├── index.html              # head: title, meta, OG/Twitter, JSON-LD, font preloads
-├── vite.config.ts          # build-id stamp + build-time CSP/referrer meta injection
+├── vite.config.ts          # build-time CSP/referrer meta injection
 ├── public/                 # copied verbatim to dist/
 │   ├── CNAME               # galigeula.com
 │   ├── robots.txt          # crawl policy + sitemap pointer
@@ -105,7 +105,7 @@ Localized **skip-to-content** link (first focusable element → `#main`), a sing
 
 ## Deploy
 
-GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `galigeula.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account. Each build stamps a UTC date + short git hash into the footer (`__BUILD_ID__`), so a deploy is verifiable live without guessing — read the small version string at the bottom of the page.
+GitHub Pages via Actions (`.github/workflows/deploy.yml`). Custom domain `galigeula.com` in `public/CNAME`; Route 53 zone lives in the DavidIAM AWS account. Deploys run from `main` only, so a pull request does not get its own preview URL.
 
 ### Vanity domain redirect
 

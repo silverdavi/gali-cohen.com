@@ -47,9 +47,30 @@ const PUBLIC_UPCOMING: Workshop['status'][] = ['upcoming', 'sold-out'];
 
 export const getAllWorkshops = (): Workshop[] => workshops;
 
+/** Calendar day in Israel. Workshop dates are Tel Aviv dates, so a listing
+ *  must not depend on the visitor's timezone or on UTC midnight. */
+function todayInIsrael(): string {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Jerusalem',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((p) => p.type === type)?.value ?? '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+
+/** An upcoming/sold-out workshop whose calendar date is already over is no
+ *  longer listed. Today still counts — the event may be later this evening.
+ *  A missing or non-ISO date is left visible rather than dropped silently. */
+function isOnOrAfterToday(iso: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return true;
+  return iso >= todayInIsrael();
+}
+
 export const getUpcomingWorkshops = (limit?: number): Workshop[] => {
   const list = workshops
-    .filter((w) => w.enabled && PUBLIC_UPCOMING.includes(w.status))
+    .filter((w) => w.enabled && PUBLIC_UPCOMING.includes(w.status) && isOnOrAfterToday(w.iso))
     .sort((a, b) => a.iso.localeCompare(b.iso));
   return typeof limit === 'number' ? list.slice(0, limit) : list;
 };
