@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
 import { HeroPortrait } from './HeroPortrait';
 import { KineticText } from './KineticText';
-import { content } from '../content';
+import { content, site } from '../content';
+import { getUpcomingWorkshops } from '../cms/queries';
 
 // Trimmed to what a visitor needs in a few seconds: who she is, who it's for,
 // what she offers, where to go next — the old kicker/romanized-name/role/lead
@@ -18,6 +19,7 @@ import { content } from '../content';
 // the same as the visual left-to-right order.
 export function Hero() {
   const { profile, hero } = content;
+  const nextWorkshop = getUpcomingWorkshops(1)[0];
   return (
     <header className="hero" id="top">
       <div className="hero-container">
@@ -34,8 +36,8 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="hero-ctas">
-              <Link className="btn btn-primary" to="/services">{hero.ctaPrimary}</Link>
-              <Link className="btn btn-ghost" to="/about">{hero.ctaSecondary}</Link>
+              <Link className="btn btn-primary" to={nextWorkshop ? `/workshops/${nextWorkshop.slug}` : '/workshops'}>{hero.ctaPrimary}</Link>
+              <a className="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.ctaSecondary}</a>
             </div>
           </Reveal>
         </div>

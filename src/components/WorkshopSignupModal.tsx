@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { content, site } from '../content';
 import { formatPrice } from '../cms/queries';
+import { formatTimeRange } from '../lib/formatDate';
 import type { Workshop } from '../cms/types';
 
 // The signup form used when a workshop has no real external registration
@@ -27,9 +28,10 @@ export function WorkshopSignupModal({ workshop, onClose }: { workshop: Workshop;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault(); // native form-action would submit off-origin — blocked by CSP, and not what we want anyway
+    const when = formatTimeRange(workshop.time, workshop.endTime);
     const lines = [
       `היי, אשמח להירשם לסדנה: ${workshop.title}`,
-      `${workshop.dateLabel}${workshop.time ? ` · ${workshop.time}` : ''}${workshop.location ? ` · ${workshop.location}` : ''}`,
+      `${workshop.dateLabel}${when ? ` · ${when}` : ''}${workshop.location ? ` · ${workshop.location}` : ''}`,
       formatPrice(workshop.price),
       '',
       name.trim() ? `שם: ${name.trim()}` : '',

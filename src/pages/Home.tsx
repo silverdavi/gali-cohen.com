@@ -9,6 +9,7 @@ import { PodcastTeaser } from '../components/PodcastTeaser';
 import { VideosTeaser } from '../components/VideosTeaser';
 import { Store } from '../components/Store';
 import { Contact } from '../components/Contact';
+import { FreeCall } from '../components/FreeCall';
 import { content } from '../content';
 import { getFeaturedTestimonials, getHomepageConfig } from '../cms/queries';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -26,6 +27,7 @@ export function Home() {
       <Hero />
       {cfg.services.enabled && <ServicesTeaser />}
       {cfg.workshops.enabled && <WorkshopsTeaser limit={cfg.workshops.limit} />}
+      <FreeCall />
       {cfg.about.enabled && <About />}
       {cfg.testimonials.enabled && featured.length > 0 && <Words items={featured} />}
       {cfg.content.enabled && (

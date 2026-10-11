@@ -8,6 +8,7 @@ import { getWorkshopBySlug, getRelatedWorkshops, formatPrice } from '../cms/quer
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { formatTimeRange } from '../lib/formatDate';
 import { NotFoundPage } from './NotFoundPage';
 
 const STATUS_NOTE: Record<string, string> = {
@@ -33,6 +34,7 @@ export function WorkshopPage() {
   const note = STATUS_NOTE[w.status];
   const canSignUp = w.status === 'upcoming';
   const related = getRelatedWorkshops(w);
+  const when = formatTimeRange(w.time, w.endTime);
 
   return (
     <div className="container page workshop-page">
@@ -48,7 +50,7 @@ export function WorkshopPage() {
       <Reveal delay={0.06} className="workshop-page-body">
         <p className="practice-meta">
           {w.dateLabel}
-          {w.time && ` · ${w.time}`}
+          {when && ` · ${when}`}
           {w.location && ` · ${w.location}`}
         </p>
         <h1 className="legal-title">{w.title}</h1>

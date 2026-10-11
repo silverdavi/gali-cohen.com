@@ -1397,10 +1397,7 @@ video.band-photo { display: block; }
 .contact-links a { font-size: var(--fs-ui); color: var(--mute); transition: color .2s ease; }
 .contact-links a:hover { color: var(--accent); }
 
-/* A quiet, centred sign-off rather than a stretched data row (name / place /
-   build hash each pinned to a corner reads as generated, not written). The
-   deploy stamp stays for verifying a release live, but small enough to be
-   found rather than announced. */
+/* A quiet, centred sign-off. */
 .footer {
   border-top: 1px solid var(--rule);
   padding: var(--s-6) var(--pad);
@@ -1441,16 +1438,6 @@ video.band-photo { display: block; }
   color: var(--faint);
   font-size: 16px;
   letter-spacing: 0.04em;
-}
-/* build stamp: quiet, monospaced, ltr even in RTL so the hash reads correctly */
-.footer-build {
-  flex-basis: 100%;
-  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  opacity: 0.45;
-  direction: ltr;
-  unicode-bidi: isolate;
 }
 .footer-links {
   flex-basis: 100%;
@@ -2364,37 +2351,24 @@ html.a11y-stop-motion *::after {
 }
 .drawer-cta:hover { background: var(--accent-deep); transform: translateY(-1px); }
 
-/* --- Words: the sunset-panel treatment ---------------------------------------
-   A quiet card carousel, same visual language as every other section — no
-   special background treatment (an earlier gradient-panel version read as
-   too ornate/dressy against the rest of the site). */
-
-/* --- Testimonials slider --------------------------------------------------------- */
-.words-slider {
+/* --- Testimonials: three short quotes, side by side -----------------------------
+   Same card language as before (paper stock, soft shadow), just not one
+   oversized quote at a time. */
+.words-grid {
   margin-top: var(--header-gap);
-  display: flex;
-  align-items: center;
-  gap: var(--s-5);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+  align-items: stretch;
 }
-/* A fixed height (not just a minimum) so the arrows and dots stay put as you
-   click through — testimonials range from one line to fourteen, and letting
-   the stage grow to fit each one made the whole page jump on every click. */
-.words-stage {
-  flex: 1;
-  min-width: 0;
-  height: clamp(390px, 48vw, 500px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* A clean, professional card: paper-2 stock, a soft shadow, no rotation. */
 .words .word {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
   border: 0;
-  padding: var(--s-7) var(--s-6) var(--s-6);
-  max-width: 62ch;
-  max-height: 100%;
-  overflow: hidden;
+  padding: var(--s-6) var(--s-5) var(--s-5);
   text-align: center;
   background: var(--paper-2);
   border-radius: 22px;
@@ -2404,52 +2378,22 @@ html.a11y-stop-motion *::after {
 .word-mark {
   display: block;
   font-family: var(--display);
-  font-size: 60px;
+  font-size: 48px;
   line-height: 1;
   color: var(--accent);
   opacity: 0.3;
-  margin-bottom: -20px;
+  margin-bottom: -16px;
 }
 .words .word blockquote {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 8; /* only the two longest of twelve quotes ever hit this */
-  overflow: hidden;
+  flex: 1;
   font-family: var(--sans);
-  font-size: clamp(22px, 2.8vw, 32px); /* the section's large-editorial-type
-                                           moment, a step up from --fs-lead */
-  line-height: var(--lh-lead);
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.55;
   color: var(--ink);
-  font-weight: 300;
+  font-weight: 400;
   margin: 0 0 var(--s-4);
 }
 .words .word figcaption { font-size: var(--fs-meta); color: var(--mute); letter-spacing: 0.03em; }
-.words-arrow {
-  flex: none;
-  width: 46px; height: 46px;
-  display: grid; place-items: center;
-  background: var(--paper-2);
-  border: 1px solid var(--rule);
-  border-radius: 50%;
-  color: var(--accent);
-  transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
-}
-.words-arrow:hover { border-color: var(--accent); background: var(--accent); color: var(--paper); transform: translateY(-1px); }
-.words-arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.words-dots {
-  display: flex;
-  justify-content: center;
-  gap: var(--s-2);
-  margin-top: var(--s-6);
-}
-.words-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--rule);
-  transition: background .25s ease, transform .25s ease;
-}
-.words-dot:hover { background: var(--faint); }
-.words-dot.is-active { background: var(--accent); transform: scale(1.3); }
 
 /* --- Podcast: two shows ---------------------------------------------------------- */
 .shows-grid {
@@ -2695,16 +2639,10 @@ button.article {
   .blog-grid,
   .shows-grid,
   .services-grid,
-  .workshop-teaser-grid { grid-template-columns: 1fr; }
+  .workshop-teaser-grid,
+  .words-grid { grid-template-columns: 1fr; }
   .freecall { padding: var(--s-7) var(--s-6); }
-  /* Side-by-side arrows ate ~130px of a ~360px-wide screen before the card
-     even got its own padding, squeezing the quote text into a ~90px column —
-     nearly one word per line. Wrap the card onto its own full-width row and
-     drop the arrows to a row below it instead. */
-  .words-slider { flex-wrap: wrap; justify-content: center; gap: var(--s-4); }
-  .words-stage { flex-basis: 100%; order: -1; }
-  .words .word { padding: var(--s-6) var(--s-4) var(--s-4); max-width: 100%; }
-  .words-arrow { width: 40px; height: 40px; }
+  .words .word { padding: var(--s-6) var(--s-4) var(--s-4); }
   .event {
     grid-template-columns: 56px 1fr;
     column-gap: var(--s-4);

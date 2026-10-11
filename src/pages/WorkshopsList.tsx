@@ -4,6 +4,7 @@ import { SectionHead } from '../components/SectionHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Cinemagraph } from '../components/Cinemagraph';
 import { getUpcomingWorkshops, workshopsHeading, workshopsGroup, formatPrice } from '../cms/queries';
+import { formatTimeRange } from '../lib/formatDate';
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -24,7 +25,9 @@ export function WorkshopsList() {
 
       {upcoming.length > 0 ? (
         <div className="workshop-teaser-grid">
-          {upcoming.map((w, i) => (
+          {upcoming.map((w, i) => {
+            const when = formatTimeRange(w.time, w.endTime);
+            return (
             <Reveal key={w.slug} delay={i * 0.06} className="col-third">
               <Link className="workshop-teaser-card" to={`/workshops/${w.slug}`}>
                 <div className="workshop-teaser-media">
@@ -32,14 +35,15 @@ export function WorkshopsList() {
                   {w.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                 </div>
                 <h3 className="workshop-teaser-title">{w.title}</h3>
-                <p className="workshop-teaser-date">{w.dateLabel}{w.time && ` · ${w.time}`}</p>
+                <p className="workshop-teaser-date">{w.dateLabel}{when && ` · ${when}`}</p>
                 <p className="workshop-teaser-meta">{w.location} · {formatPrice(w.price)}</p>
                 <span className="workshop-teaser-cta">
                   {w.status === 'sold-out' ? 'אזל · לפרטים' : workshopsHeading.cta}
                 </span>
               </Link>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <p className="section-sub">כרגע אין אירועים מתוכננים.</p>
