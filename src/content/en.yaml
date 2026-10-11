@@ -57,14 +57,14 @@ circle:
   alt: A circle of dancing figures, slowly turning
 
 band:
-  photo: /photos/dance-circle.jpg
+  photo: /photos/dance-circle.webp
   caption: An outdoor movement circle · a workshop in nature
   alt: A circle of participants standing on mats on a wooden deck among green trees
 
 aboutSection:
   label: About
   title: The long way back to the body
-  photo: /photos/about.jpg
+  photo: /photos/about.webp
   photoAlt: A portrait of Gali smiling, white bougainvillea behind her
   paragraphs:
     - >-
@@ -104,11 +104,11 @@ storySection:
       with a song that is a prayer and a thanksgiving.
   meta: About two hours · by invitation
   photos:
-    - src: /photos/story-1.jpg
+    - src: /photos/story-1.webp
       alt: Gali holding a protest sign — “the stigma kills”
-    - src: /photos/story-2.jpg
+    - src: /photos/story-2.webp
       alt: Gali performing on stage under stage lights
-    - src: /photos/story-3.jpg
+    - src: /photos/story-3.webp
       alt: Gali backstage before a performance
 
 wordsSection:

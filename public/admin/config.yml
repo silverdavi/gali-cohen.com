@@ -418,7 +418,7 @@ collections:
                 widget: object
                 fields:
                   - { label: "מוצג", name: enabled, widget: boolean, default: true }
-                  - { label: "כמה המלצות להציג", name: limit, widget: number, default: 5, value_type: int }
+                  - { label: "כמה המלצות להציג (לא בשימוש — הקרוסלה מציגה את כולן)", name: limit, widget: number, default: 5, value_type: int }
               - label: "תוכן (מאמרים, פודקאסט, סרטונים)"
                 name: content
                 widget: object
@@ -529,14 +529,15 @@ collections:
             collapsed: true
             fields:
               - { label: "תווית קטנה", name: label, widget: string }
-              - label: "המלצות (בדף הבית מוצגות כמה קצרות זו לצד זו)"
+              - label: "המלצות (כולן מופיעות בקרוסלה בדף הבית)"
                 name: items
                 widget: list
                 summary: "{{fields.name}}"
+                hint: "כל פריט ברשימה מופיע בקרוסלה. הוספת המלצה כאן מציגה אותה באתר בלי שינוי נוסף."
                 fields:
                   - { label: "ההמלצה", name: quote, widget: text }
                   - { label: "שם הממליצ/ה", name: name, widget: string }
-                  - { label: "להציג בדף הבית", name: featured, widget: boolean, default: false, hint: "רק המלצות מסומנות מופיעות בדף הבית (עד המספר שנקבע ב'בקרת תצוגה של דף הבית' למעלה) — כל ההמלצות תמיד מופיעות יחד." }
+                  - { label: "להציג בדף הבית (לא בשימוש — כולן מוצגות)", name: featured, widget: boolean, default: false, required: false }
           - label: "באנר שיחת היכרות חינם (מוצג בדף הבית)"
             name: freeCall
             widget: object

@@ -1,6 +1,7 @@
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
 import { content } from '../content';
+import { photoSources } from '../lib/photo';
 
 // Gali's personal-story lecture ("Body, Faith & Redemption"). Holds the most
 // personal images she supplied (her past as a performer), so it lives in its own
@@ -25,7 +26,7 @@ export function Story() {
             <div className="story-photos">
               {s.photos.map((ph) => (
                 <figure className="story-photo" key={ph.src}>
-                  <img src={ph.src} alt={ph.alt} loading="lazy" decoding="async" />
+                  <img {...photoSources(ph.src)} sizes="(max-width: 880px) 92vw, 420px" alt={ph.alt} loading="lazy" decoding="async" />
                 </figure>
               ))}
             </div>

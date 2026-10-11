@@ -1,0 +1,17 @@
+export const photoWidths: Record<string, number[]> = {
+  "/photos/about.webp": [480, 960, 1200],
+  "/photos/bowl.webp": [480, 820],
+  "/photos/breath.webp": [480, 960, 1400],
+  "/photos/dance-circle.webp": [480, 960, 1600],
+  "/photos/gali-hero.webp": [480, 960],
+  "/photos/hands.webp": [480, 960, 1400],
+  "/photos/meditation.webp": [480, 960, 1400],
+  "/photos/nightsky.webp": [480, 960, 1280],
+  "/photos/story-1.webp": [480, 674],
+  "/photos/story-2.webp": [480, 667],
+  "/photos/story-3.webp": [480, 800],
+  "/photos/אני יוגה.webp": [480, 960, 1600],
+  "/photos/הרצאהחשפניות.webp": [480, 960],
+  "/photos/סדנאותזוגות.webp": [480, 960, 1600],
+  "/photos/רוקדתת.webp": [480, 958],
+};

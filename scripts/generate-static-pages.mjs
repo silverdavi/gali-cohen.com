@@ -51,6 +51,7 @@ function injectHead(template, route) {
     [/<meta property="og:title" content="[^"]*"\s*\/>/, `<meta property="og:title" content="${escapeAttr(route.title)}" />`],
     [/<meta property="og:description" content="[^"]*"\s*\/>/, `<meta property="og:description" content="${escapeAttr(description)}" />`],
     [/<meta property="og:image" content="[^"]*"\s*\/>/, `<meta property="og:image" content="${imageUrl}" />`],
+    [/<meta property="og:image:alt" content="[^"]*"\s*\/>/, `<meta property="og:image:alt" content="${escapeAttr(route.imageAlt || route.title)}" />`],
     [/<meta name="twitter:title" content="[^"]*"\s*\/>/, `<meta name="twitter:title" content="${escapeAttr(route.title)}" />`],
     [/<meta name="twitter:description" content="[^"]*"\s*\/>/, `<meta name="twitter:description" content="${escapeAttr(description)}" />`],
     [/<meta name="twitter:image" content="[^"]*"\s*\/>/, `<meta name="twitter:image" content="${imageUrl}" />`],
@@ -118,6 +119,7 @@ async function main() {
 
     for (const w of q.getAllWorkshops()) {
       if (!w.slug) continue;
+      const share = q.workshopShareMeta(w);
       const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Event',
@@ -135,9 +137,10 @@ async function main() {
       };
       routes.push({
         path: `/workshops/${w.slug}`,
-        title: `${w.title} · גלי גאולה כהן`,
-        description: w.metaDescription || w.desc.slice(0, 160),
+        title: share.title,
+        description: share.description,
         image: w.image,
+        imageAlt: w.title,
         jsonLd,
       });
     }
@@ -216,6 +219,55 @@ async function main() {
       routes.push({ path: `/store/${p.slug}`, title: `${p.title} · חנות · גלי גאולה כהן`, description: p.desc, image: p.image, jsonLd });
     }
 
+    // Hub pages have no slug of their own. Without a real index.html, GitHub
+    // Pages redirects /services to /services/ (because child pages exist) and
+    // then 404s. Each one gets the same title the React page sets after JS.
+    const plain = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
+    const hubs = [
+      {
+        path: '/about',
+        title: `${content.aboutSection.title} · גלי גאולה כהן`,
+        description: plain(content.aboutSection.paragraphs[0]).slice(0, 160),
+        sitemap: true,
+      },
+      {
+        path: '/services',
+        title: `${q.servicesHeading.title} · גלי גאולה כהן`,
+        description: q.servicesHeading.sub,
+        sitemap: true,
+      },
+      {
+        path: '/workshops',
+        title: `${q.workshopsHeading.title} · גלי גאולה כהן`,
+        description: q.workshopsHeading.sub,
+        sitemap: q.getAllWorkshops().length > 0,
+      },
+      {
+        path: '/podcast',
+        title: `${q.podcastHeading.title} · גלי גאולה כהן`,
+        description: q.podcastHeading.sub,
+        sitemap: q.getAllShows().length > 0,
+      },
+      {
+        path: '/store',
+        title: `${q.storeHeading.title} · גלי גאולה כהן`,
+        description: q.storeHeading.sub,
+        sitemap: q.getAllProducts().length > 0,
+      },
+      {
+        path: '/blog',
+        title: `${q.blogHeading.title} · גלי גאולה כהן`,
+        description: q.blogHeading.sub,
+        sitemap: q.getAllArticles().length > 0,
+      },
+      {
+        path: '/videos',
+        title: `${q.videosHeading.title} · גלי גאולה כהן`,
+        description: q.videosHeading.sub,
+        sitemap: q.getAllVideos().length > 0,
+      },
+    ];
+
     // Fail loudly on a route colliding with a static route, or two entities
     // racing for the same generated path (cache.ts already guards per-entity
     // slug uniqueness — this is the cross-entity-type check on top of that).
@@ -229,15 +281,22 @@ async function main() {
       }
       seen.add(r.path);
     }
+    for (const hub of hubs) {
+      if (seen.has(hub.path)) throw new Error(`Duplicate generated route "${hub.path}".`);
+      seen.add(hub.path);
+    }
 
-    for (const route of routes) {
+    const pages = [...routes, ...hubs];
+    for (const route of pages) {
       const html = injectHead(template, route);
       const dir = path.join(DIST, route.path.replace(/^\//, ''));
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(path.join(dir, 'index.html'), html);
     }
 
-    const sitemapPaths = ['/', '/services', '/workshops', '/about', '/blog', '/podcast', '/videos', '/store', ...routes.map((r) => r.path)];
+    // Empty sections (no articles, no videos) still have an HTML file so a
+    // direct visit is HTTP 200, but they are not advertised to crawlers.
+    const sitemapPaths = ['/', ...pages.filter((p) => p.sitemap !== false).map((p) => p.path)];
     const sitemap =
       '<?xml version="1.0" encoding="UTF-8"?>\n' +
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
@@ -245,7 +304,7 @@ async function main() {
       '\n</urlset>\n';
     fs.writeFileSync(path.join(DIST, 'sitemap.xml'), sitemap);
 
-    console.log(`generate-static-pages: wrote ${routes.length} entity pages + sitemap.xml (${sitemapPaths.length} URLs).`);
+    console.log(`generate-static-pages: wrote ${pages.length} pages + sitemap.xml (${sitemapPaths.length} URLs).`);
   } finally {
     await server.close();
   }

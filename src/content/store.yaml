@@ -18,7 +18,7 @@ items:
     active: true
     featured: false
     order: 0
-    image: /photos/bowl.jpg
+    image: /photos/bowl.webp
     descHe: |-
       מתנה למישהו שאוהבים (או לעצמכם) - מפגש אישי אחד של ליווי גוף-נפש: נשימה מודעת, מגע ונוכחות, במרחב בטוח להאט ולהקשיב לגוף.
       ללא תאריך תפוגה - מממשים מתי שמתאים, בתיאום מראש.
@@ -32,7 +32,7 @@ items:
     active: true
     featured: false
     order: 1
-    image: /photos/meditation.jpg
+    image: /photos/meditation.webp
     descHe: |-
       שלוש הקלטות מודרכות להורדה - נשימה מודעת, תנועה עדינה וכלים לנוכחות, בקולי.
       מרחב קטן לעצור, להאט ולשוב הביתה אל הגוף, מתי שנוח לכם ובקצב שלכם - בלי צורך לצאת מהבית ובלי ניסיון קודם.
@@ -46,7 +46,7 @@ items:
     active: true
     featured: false
     order: 2
-    image: /photos/hands.jpg
+    image: /photos/hands.webp
     descHe: |-
       סדנה חוויתית פרטית אינטימית לזוגות שרוצים להעמיק את החיבור, האהבה והעונג.
       מסע של כ-3 שעות שנבנה בהדרגה - כשהמהות היא חוויה שהיא גם מענגת וגם מלמדת, כזו שתשאיר אתכם עם כלים להעמקה וחקירה גם לאחר הסדנה.
