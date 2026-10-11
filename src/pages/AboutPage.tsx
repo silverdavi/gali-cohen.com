@@ -5,6 +5,7 @@ import { Cinemagraph } from '../components/Cinemagraph';
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { photoSources } from '../lib/photo';
 import { features } from '../features';
 
 // Full about page: the home teaser's photo + paragraphs + facts, folding in
@@ -64,7 +65,7 @@ export function AboutPage() {
               <div className="story-photos">
                 {storySection.photos.map((ph) => (
                   <figure className="story-photo" key={ph.src}>
-                    <img src={ph.src} alt={ph.alt} loading="lazy" decoding="async" />
+                    <img {...photoSources(ph.src)} sizes="(max-width: 880px) 92vw, 420px" alt={ph.alt} loading="lazy" decoding="async" />
                   </figure>
                 ))}
               </div>

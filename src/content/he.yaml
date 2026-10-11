@@ -1,6 +1,6 @@
 meta:
-  title: גלי גאולה כהן | גוף · רגש · יחסים | טיפול וליווי לנשים וזוגות
-  description: גלי גאולה כהן - טיפול וליווי רגשי־גופני לנשים וזוגות, סדנאות ותהליכי עומק המשלבים גוף, רגש, תנועה, תקשורת, גבולות, אינטימיות ומיניות קשובה.
+  title: גלי גאולה כהן | מיינדפול דאנס לזוגות
+  description: גלי גאולה כהן מנחה סדנאות מיינדפול דאנס לזוגות בתל אביב — תנועה, מדיטציה וחיבור זוגי, בלי צורך בניסיון קודם.
 homepage:
   services:
     enabled: true
@@ -50,18 +50,18 @@ hero:
   ctaPrimary: להרשמה לסדנה ב-3.12
   ctaSecondary: שיחת היכרות חינם
   scroll: ''
-  photo: /photos/HeroImage.png
-  photoAlt: דיוקן של גלי גאולה כהן מחייכת בחוץ, אור טבעי רך
+  photo: /photos/gali-hero.webp
+  photoAlt: גלי גאולה כהן מחייכת, פרחים לבנים ברקע
   photoFocalX: 50
-  photoFocalY: 30
+  photoFocalY: 18
 band:
-  photo: /photos/dance-circle.jpg
+  photo: /photos/dance-circle.webp
   caption: מעגל תנועה בחוץ · סדנה בטבע
   alt: מעגל משתתפים עומדים על מזרנים על דק עץ בין עצים ירוקים
 aboutSection:
   label: אודות
   title: כמה מילים עליי
-  photo: /photos/רוקדתת.jpg
+  photo: /photos/רוקדתת.webp
   photoAlt: דיוקן של גלי מחייכת, על רקע פריחה לבנה
   paragraphs:
     - |-
@@ -92,9 +92,9 @@ storySection:
       הערב נחתם בשיר שהוא תפילה והודיה.
   meta: משך המפגש כשעתיים · להזמנה
   photos:
-    - src: /photos/אני יוגה.jpg
+    - src: /photos/אני יוגה.webp
       alt: גלי מחזיקה שלט מחאה — "הסטיגמה הורגת"
-    - src: /photos/הרצאהחשפניות.jpg
+    - src: /photos/הרצאהחשפניות.webp
       alt: גלי מאחורי הקלעים לפני מופע
 wordsSection:
   label: המלצות

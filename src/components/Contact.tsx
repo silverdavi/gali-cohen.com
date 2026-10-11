@@ -43,7 +43,7 @@ export function Contact({ titleAs: Title = 'h2' }: { titleAs?: 'h1' | 'h2' } = {
       {Title === 'h1' && <Breadcrumbs items={[{ label: content.nav.contact }]} />}
       <Reveal>
         <div className={`contact-medallion${features.medallionSpin ? ' spin' : ''}`} aria-hidden>
-          <Cinemagraph src="/photos/bowl.jpg" clip={clipFor('/photos/bowl.jpg')} ariaHidden />
+          <Cinemagraph src="/photos/bowl.webp" clip={clipFor('/photos/bowl.webp')} ariaHidden />
         </div>
         <Title className="contact-line">{contact.line}</Title>
         <p className="contact-sub">{contact.sub}</p>

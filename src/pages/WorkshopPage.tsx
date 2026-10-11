@@ -4,7 +4,7 @@ import { Reveal } from '../components/Reveal';
 import { Cinemagraph } from '../components/Cinemagraph';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { WorkshopSignupModal } from '../components/WorkshopSignupModal';
-import { getWorkshopBySlug, getRelatedWorkshops, formatPrice } from '../cms/queries';
+import { getWorkshopBySlug, getRelatedWorkshops, formatPrice, workshopShareMeta } from '../cms/queries';
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -27,7 +27,8 @@ export function WorkshopPage() {
   const w = slug ? getWorkshopBySlug(slug) : undefined;
   const [signingUp, setSigningUp] = useState(false);
 
-  useDocumentMeta(w ? `${w.title} · גלי גאולה כהן` : 'הדף לא נמצא', w?.metaDescription);
+  const share = w ? workshopShareMeta(w) : undefined;
+  useDocumentMeta(share ? share.title : 'הדף לא נמצא', share?.description);
 
   if (!w) return <NotFoundPage />;
 

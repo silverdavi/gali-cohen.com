@@ -9,7 +9,7 @@ categories:
   - slug: individual-guidance-women
     titleHe: ליווי אישי לנשים
     shortDescHe: ליווי אישי מותאם אישית - מרחב בטוח להעמקה, הקשבה וצמיחה דרך הגוף, הרגש והלב.
-    photo: /photos/breath.jpg
+    photo: /photos/breath.webp
     photoAltHe: גלי מלווה אישה שוכבת במפגש נשימה ומגע, אור רך וכריות רקומות
     metaDescriptionHe: ליווי אישי לנשים עם גלי גאולה כהן - נשימה מודעת, מגע ונוכחות, מרחב בטוח לצמיחה בקצב שלך.
     tracks:
@@ -25,12 +25,12 @@ categories:
         price: 400
         currency: ILS
         priceUnit: session
-        photo: /photos/breath.jpg
+        photo: /photos/breath.webp
         photoAltHe: גלי מלווה אישה שוכבת במפגש נשימה ומגע, אור רך וכריות רקומות
   - slug: couples-guidance
     titleHe: ליווי זוגי
     shortDescHe: ליווי זוגי תהליכי המאפשר להעמיק את התקשורת, האינטימיות והחיבור, תוך יצירת מרחב בטוח לצמיחה משותפת.
-    photo: /photos/סדנאותזוגות.JPEG
+    photo: /photos/סדנאותזוגות.webp
     photoAltHe: משתתפות בתנועה חופשית על דק עץ בחוץ, ראש נשען לאחור
     metaDescriptionHe: ליווי זוגי עם גלי גאולה כהן - תרגילי נשימה, מגע ותנועה משותפים, מרחב בטוח להעמקת התקשורת והאינטימיות.
     tracks:
@@ -46,7 +46,7 @@ categories:
         price: 520
         currency: ILS
         priceUnit: session
-        photo: /photos/סדנאותזוגות.JPEG
+        photo: /photos/סדנאותזוגות.webp
         photoAltHe: משתתפות בתנועה חופשית על דק עץ בחוץ, ראש נשען לאחור
       - titleHe: סדנת טנטרה פרטית לזוגות
         noteHe: סדנאות פרטיות · 3 שעות · בתיאום אישי
@@ -60,7 +60,7 @@ categories:
           מתאים גם לזוגות להט"בים, חרדים ודתיים (אני מגיעה מהמגזר החרדי ועובדת הרבה עם זוגות מהמגזר).
         priceType: contact
         price: null
-        photo: /photos/hands.jpg
+        photo: /photos/hands.webp
         photoAltHe: גלי ומשתתפת בעבודת זוגות על הרצפה באוהל, מבט ומגע
       - titleHe: מיינדפול דאנס לזוגות
         noteHe: 3 שעות של חקירה בתנועה, אינטימיות וחיבור ללא מילים 💃
@@ -83,12 +83,12 @@ categories:
         price: 250
         currency: ILS
         priceUnit: person
-        photo: /photos/meditation.jpg
+        photo: /photos/meditation.webp
         photoAltHe: מעגל מדיטציה באוהל, גלי יושבת במרכז בעיניים עצומות
   - slug: workshops-format
     titleHe: סדנאות
     shortDescHe: סדנאות קבוצתיות מתוארכות, בנושאי גוף, תנועה, נשימה וזוגיות — לוח הסדנאות הקרובות בעמוד הסדנאות.
-    photo: /photos/meditation.jpg
+    photo: /photos/meditation.webp
     photoAltHe: מעגל מדיטציה באוהל, גלי יושבת במרכז בעיניים עצומות
     metaDescriptionHe: סדנאות קבוצתיות עם גלי גאולה כהן - גוף, תנועה, נשימה וזוגיות. לוח הסדנאות הקרובות ופרטי הרשמה.
     tracks: []

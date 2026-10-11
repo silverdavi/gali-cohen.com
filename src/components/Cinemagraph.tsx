@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { features } from '../features';
+import { photoSources } from '../lib/photo';
 
 // A "living still": shows the ordinary photo (the poster) at rest, and plays a
 // short, muted, seamless loop on top only while hovered — a subtle swish that
@@ -23,6 +24,8 @@ type Props = {
   ariaHidden?: boolean;
   loading?: 'lazy' | 'eager';
   fetchPriority?: 'high' | 'low' | 'auto';
+  /** Passed to the still image. Ignored while a clip is playing. */
+  sizes?: string;
   style?: CSSProperties;
 };
 
@@ -46,6 +49,7 @@ export function Cinemagraph({
   ariaHidden,
   loading = 'lazy',
   fetchPriority,
+  sizes = '(max-width: 880px) 92vw, 640px',
   style,
 }: Props) {
   const motion = !!clip && features.photoMotion && !prefersReduced;
@@ -99,9 +103,12 @@ export function Cinemagraph({
   }, [motion]);
 
   if (!motion) {
+    const photo = photoSources(src);
     return (
       <img
-        src={src}
+        src={photo.src}
+        srcSet={photo.srcSet}
+        sizes={photo.srcSet ? sizes : undefined}
         alt={alt}
         className={className}
         style={style}

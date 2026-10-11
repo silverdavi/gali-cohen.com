@@ -118,3 +118,14 @@ export const getFeaturedTestimonials = (limit?: number): Testimonial[] => {
 };
 
 export const getHomepageConfig = (): HomepageConfig => content.homepage;
+
+/** Title and description used both in the page `<head>` (after JS) and in the
+ *  static HTML a share preview or crawler reads. The date keeps two workshops
+ *  with the same name from looking identical when shared. */
+export function workshopShareMeta(w: Workshop): { title: string; description: string } {
+  const description = (w.metaDescription || w.desc).replace(/\s+/g, ' ').trim().slice(0, 160);
+  return {
+    title: `${w.title} · ${w.dateLabel} · גלי גאולה כהן`,
+    description,
+  };
+}

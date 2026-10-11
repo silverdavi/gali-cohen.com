@@ -11,7 +11,7 @@ import { Store } from '../components/Store';
 import { Contact } from '../components/Contact';
 import { FreeCall } from '../components/FreeCall';
 import { content } from '../content';
-import { getFeaturedTestimonials, getHomepageConfig } from '../cms/queries';
+import { getHomepageConfig } from '../cms/queries';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 
 // The gateway page — short, each section a teaser onward to its own full
@@ -19,7 +19,6 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 // controls whether a section shows at all and how many items it teases.
 export function Home() {
   const cfg = getHomepageConfig();
-  const featured = getFeaturedTestimonials(cfg.testimonials.limit);
   useDocumentMeta(content.meta.title, content.meta.description);
 
   return (
@@ -29,7 +28,7 @@ export function Home() {
       {cfg.workshops.enabled && <WorkshopsTeaser limit={cfg.workshops.limit} />}
       <FreeCall />
       {cfg.about.enabled && <About />}
-      {cfg.testimonials.enabled && featured.length > 0 && <Words items={featured} />}
+      {cfg.testimonials.enabled && <Words />}
       {cfg.content.enabled && (
         <section className="section" id="content">
           <div className="container">
