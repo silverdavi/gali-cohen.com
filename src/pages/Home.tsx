@@ -8,45 +8,39 @@ import { BlogTeaser } from '../components/BlogTeaser';
 import { PodcastTeaser } from '../components/PodcastTeaser';
 import { VideosTeaser } from '../components/VideosTeaser';
 import { Store } from '../components/Store';
-import { Contact } from '../components/Contact';
 import { FreeCall } from '../components/FreeCall';
 import { content } from '../content';
 import { getHomepageConfig } from '../cms/queries';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { sectionEnabled } from '../lib/sections';
 
-// The gateway page — short, each section a teaser onward to its own full
-// page. Section order is fixed here; the homepage.* config in he.yaml only
-// controls whether a section shows at all and how many items it teases.
+// Order: who she is, how to work with her, the next workshop, testimonials,
+// then the free intro call. homepage.* in he.yaml turns a block on or off.
+// The longer contact form lives on /contact, so the homepage doesn't repeat it.
 export function Home() {
   const cfg = getHomepageConfig();
   useDocumentMeta(content.meta.title, content.meta.description);
+  const showWriting = cfg.content.enabled && (sectionEnabled('blog') || sectionEnabled('podcast') || sectionEnabled('videos'));
 
   return (
     <>
       <Hero />
       {cfg.services.enabled && <ServicesTeaser />}
       {cfg.workshops.enabled && <WorkshopsTeaser limit={cfg.workshops.limit} />}
-      <FreeCall />
-      {cfg.about.enabled && <About />}
       {cfg.testimonials.enabled && <Words />}
-      {cfg.content.enabled && (
+      {showWriting && (
         <section className="section" id="content">
           <div className="container">
             <SectionHead label="תוכן" title="מאמרים, פודקאסט וסרטונים" />
-            <BlogTeaser limit={3} />
-            <PodcastTeaser />
-            <VideosTeaser limit={3} />
+            {sectionEnabled('blog') && <BlogTeaser limit={3} />}
+            {sectionEnabled('podcast') && <PodcastTeaser />}
+            {sectionEnabled('videos') && <VideosTeaser limit={3} />}
           </div>
         </section>
       )}
-      {cfg.store.enabled && <Store />}
-      {cfg.contact.enabled && (
-        <section className="section" id="contact-section">
-          <div className="container">
-            <Contact />
-          </div>
-        </section>
-      )}
+      {cfg.about.enabled && <About />}
+      {cfg.store.enabled && sectionEnabled('store') && <Store />}
+      {cfg.contact.enabled && <FreeCall />}
     </>
   );
 }

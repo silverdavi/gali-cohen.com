@@ -47,6 +47,8 @@ export type Workshop = {
   desc: string;
   metaDescription: string;
   image: string;
+  imageFocalX?: number;
+  imageFocalY?: number;
   gallery: string[];
   categorySlug: string;
   signupHref: string;

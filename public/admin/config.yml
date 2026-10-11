@@ -397,7 +397,7 @@ collections:
             name: homepage
             widget: object
             collapsed: true
-            hint: "סדר הקטעים בעמוד הבית קבוע — כאן שולטים רק אם קטע מוצג ולכמה פריטים."
+            hint: "סדר הקטעים קבוע: פתיח, הליווי, הסדנה הקרובה, המלצות, שיחת היכרות. כאן שולטים אם קטע מוצג. בלוג, פודקאסט, סרטונים וחנות מוסתרים גם דרך 'סעיפים מוסתרים' למטה."
             fields:
               - label: "שירותים"
                 name: services
@@ -431,6 +431,28 @@ collections:
                 name: contact
                 widget: object
                 fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+          - label: "סעיפים מוסתרים"
+            name: sections
+            widget: object
+            collapsed: false
+            hint: "כבוי = לא בתפריט, לא בפוטר, לא במפת האתר, וקישור ישן חוזר לעמוד הבית. התוכן נשאר בקבצים. להחזיר: מוצג = כן. לבלוג/פודקאסט/סרטונים צריך גם להדליק 'תוכן' בבקרת דף הבית. לחנות צריך גם להדליק 'חנות' שם."
+            fields:
+              - label: "בלוג ומאמרים"
+                name: blog
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: false }]
+              - label: "פודקאסט"
+                name: podcast
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: false }]
+              - label: "סרטונים"
+                name: videos
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: false }]
+              - label: "חנות"
+                name: store
+                widget: object
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: false }]
           - label: "תוויות התפריט"
             name: nav
             widget: object

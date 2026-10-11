@@ -56,6 +56,9 @@ export type RawWorkshop = RawPrice & {
   descHe: string;
   metaDescriptionHe?: string;
   image?: string;
+  /** 0–100. Where a wide photo should stay when a card crops it. 50 is center. */
+  imageFocalX?: number;
+  imageFocalY?: number;
   gallery?: string[];
   categorySlug?: string;
   signupUrl?: string;

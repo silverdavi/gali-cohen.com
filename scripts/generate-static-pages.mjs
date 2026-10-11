@@ -88,6 +88,7 @@ async function main() {
 
     const q = await server.ssrLoadModule('/src/cms/queries.ts');
     const { legal, content } = await server.ssrLoadModule('/src/content/index.ts');
+    const sectionOn = (key) => content.sections?.[key]?.enabled !== false;
 
     const template = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
     /** @type {{path: string, title: string, description?: string, image?: string, jsonLd?: object}[]} */
@@ -145,7 +146,7 @@ async function main() {
       });
     }
 
-    for (const a of q.getAllArticles()) {
+    for (const a of sectionOn('blog') ? q.getAllArticles() : []) {
       if (!a.slug) continue;
       const jsonLd = {
         '@context': 'https://schema.org',
@@ -158,7 +159,7 @@ async function main() {
       routes.push({ path: `/blog/${a.slug}`, title: `${a.title} · גלי גאולה כהן`, description: a.excerpt, image: a.image, jsonLd });
     }
 
-    for (const s of q.getAllShows()) {
+    for (const s of sectionOn('podcast') ? q.getAllShows() : []) {
       if (!s.slug) continue;
       routes.push({
         path: `/podcast/${s.slug}`,
@@ -186,7 +187,7 @@ async function main() {
       }
     }
 
-    for (const v of q.getAllVideos()) {
+    for (const v of sectionOn('videos') ? q.getAllVideos() : []) {
       if (!v.slug) continue;
       const jsonLd = {
         '@context': 'https://schema.org',
@@ -205,7 +206,7 @@ async function main() {
       });
     }
 
-    for (const p of q.getAllProducts()) {
+    for (const p of sectionOn('store') ? q.getAllProducts() : []) {
       if (!p.slug) continue;
       const effectivePrice = p.salePrice ?? p.price;
       const jsonLd = {
@@ -242,30 +243,30 @@ async function main() {
         description: q.workshopsHeading.sub,
         sitemap: q.getAllWorkshops().length > 0,
       },
-      {
+      ...(sectionOn('podcast') ? [{
         path: '/podcast',
         title: `${q.podcastHeading.title} · גלי גאולה כהן`,
         description: q.podcastHeading.sub,
         sitemap: q.getAllShows().length > 0,
-      },
-      {
+      }] : []),
+      ...(sectionOn('store') ? [{
         path: '/store',
         title: `${q.storeHeading.title} · גלי גאולה כהן`,
         description: q.storeHeading.sub,
         sitemap: q.getAllProducts().length > 0,
-      },
-      {
+      }] : []),
+      ...(sectionOn('blog') ? [{
         path: '/blog',
         title: `${q.blogHeading.title} · גלי גאולה כהן`,
         description: q.blogHeading.sub,
         sitemap: q.getAllArticles().length > 0,
-      },
-      {
+      }] : []),
+      ...(sectionOn('videos') ? [{
         path: '/videos',
         title: `${q.videosHeading.title} · גלי גאולה כהן`,
         description: q.videosHeading.sub,
         sitemap: q.getAllVideos().length > 0,
-      },
+      }] : []),
     ];
 
     // Fail loudly on a route colliding with a static route, or two entities

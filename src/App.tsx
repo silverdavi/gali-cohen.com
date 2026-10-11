@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { SiteLayout } from './pages/SiteLayout';
 import { Home } from './pages/Home';
 import { ServicesHub } from './pages/ServicesHub';
@@ -19,6 +19,7 @@ import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { LegalPage } from './components/LegalPage';
 import { legal } from './content';
+import { sectionEnabled } from './lib/sections';
 
 // Real routes, real URLs — every route below also gets a static
 // dist/<path>/index.html at build time (scripts/generate-static-pages.mjs)
@@ -39,15 +40,15 @@ export default function App() {
           <Route path="workshops" element={<WorkshopsList />} />
           <Route path="workshops/:slug" element={<WorkshopPage />} />
           <Route path="about" element={<AboutPage />} />
-          <Route path="blog" element={<BlogList />} />
-          <Route path="blog/:slug" element={<ArticlePage />} />
-          <Route path="podcast" element={<PodcastShows />} />
-          <Route path="podcast/:showSlug" element={<PodcastShowPage />} />
-          <Route path="podcast/:showSlug/:episodeSlug" element={<PodcastEpisodePage />} />
-          <Route path="videos" element={<VideosList />} />
-          <Route path="videos/:slug" element={<VideoPage />} />
-          <Route path="store" element={<StorePage />} />
-          <Route path="store/:slug" element={<ProductPage />} />
+          <Route path="blog" element={sectionEnabled('blog') ? <BlogList /> : <Navigate to="/" replace />} />
+          <Route path="blog/:slug" element={sectionEnabled('blog') ? <ArticlePage /> : <Navigate to="/" replace />} />
+          <Route path="podcast" element={sectionEnabled('podcast') ? <PodcastShows /> : <Navigate to="/" replace />} />
+          <Route path="podcast/:showSlug" element={sectionEnabled('podcast') ? <PodcastShowPage /> : <Navigate to="/" replace />} />
+          <Route path="podcast/:showSlug/:episodeSlug" element={sectionEnabled('podcast') ? <PodcastEpisodePage /> : <Navigate to="/" replace />} />
+          <Route path="videos" element={sectionEnabled('videos') ? <VideosList /> : <Navigate to="/" replace />} />
+          <Route path="videos/:slug" element={sectionEnabled('videos') ? <VideoPage /> : <Navigate to="/" replace />} />
+          <Route path="store" element={sectionEnabled('store') ? <StorePage /> : <Navigate to="/" replace />} />
+          <Route path="store/:slug" element={sectionEnabled('store') ? <ProductPage /> : <Navigate to="/" replace />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="accessibility" element={<LegalPage page={legal.accessibility} />} />
           <Route path="privacy" element={<LegalPage page={legal.privacy} />} />

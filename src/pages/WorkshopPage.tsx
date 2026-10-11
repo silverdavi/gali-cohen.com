@@ -43,7 +43,13 @@ export function WorkshopPage() {
       {w.image && (
         <Reveal>
           <div className="workshop-page-media">
-            <Cinemagraph src={w.image} clip={clipFor(w.image)} alt={w.title} />
+            <Cinemagraph
+              src={w.image}
+              clip={clipFor(w.image)}
+              alt={w.title}
+              sizes="(max-width: 880px) 92vw, 1100px"
+              style={w.imageFocalX != null ? { objectPosition: `${w.imageFocalX}% ${w.imageFocalY ?? 50}%` } : undefined}
+            />
           </div>
         </Reveal>
       )}

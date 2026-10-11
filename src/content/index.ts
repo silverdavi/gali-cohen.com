@@ -35,6 +35,13 @@ export type Content = {
     store: { enabled: boolean };
     contact: { enabled: boolean };
   };
+  /** Master switch for sections that are hidden for now. Content files stay. */
+  sections: {
+    blog: { enabled: boolean };
+    podcast: { enabled: boolean };
+    videos: { enabled: boolean };
+    store: { enabled: boolean };
+  };
   nav: {
     practices: string; circles: string; about: string; story: string;
     pricing: string; events: string; shop: string; cta: string; skip: string;

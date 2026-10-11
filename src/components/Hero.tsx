@@ -36,8 +36,12 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="hero-ctas">
-              <Link className="btn btn-primary" to={nextWorkshop ? `/workshops/${nextWorkshop.slug}` : '/workshops'}>{hero.ctaPrimary}</Link>
-              <a className="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.ctaSecondary}</a>
+              {hero.ctaPrimary && (
+                <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.ctaPrimary}</a>
+              )}
+              {hero.ctaSecondary && (
+                <Link className="btn btn-ghost" to={nextWorkshop ? `/workshops/${nextWorkshop.slug}` : '/workshops'}>{hero.ctaSecondary}</Link>
+              )}
             </div>
           </Reveal>
         </div>

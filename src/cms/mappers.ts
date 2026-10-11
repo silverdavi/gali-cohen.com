@@ -110,6 +110,8 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     desc: w.descHe,
     metaDescription: w.metaDescriptionHe ?? '',
     image: w.image ?? '',
+    imageFocalX: w.imageFocalX,
+    imageFocalY: w.imageFocalY,
     gallery: w.gallery ?? [],
     categorySlug: w.categorySlug ?? '',
     signupHref: checkout(w.signupUrl),
