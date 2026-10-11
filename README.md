@@ -27,7 +27,7 @@ site/
 │   ├── sitemap.xml         # single canonical URL (SPA)
 │   ├── .well-known/security.txt   # RFC 9116 disclosure contact
 │   ├── admin/              # Decap CMS (git-backed, noindex) — see CMS-SETUP.md
-│   ├── fonts/ photos/ og.jpg favicon.svg apple-touch-icon.png
+│   ├── fonts/ photos/ og-v2.jpg favicon.svg apple-touch-icon.png
 │   └── photos/nightsky.jpg # backdrop for the astrology section
 └── src/
     ├── content/            # all copy: he.yaml (default) + en.yaml + typed loader
@@ -62,7 +62,7 @@ The astrology section shows the **sun-sign season** and a **find-your-sign** rev
 
 ## SEO & discoverability
 
-- **Per-page meta**: localized `<title>` + `description`, Open Graph + Twitter card (`og.jpg`, 1200×630), `theme-color`, `canonical`, `apple-touch-icon`.
+- **Per-page meta**: localized `<title>` + `description`, Open Graph + Twitter card (`og-v2.jpg`, 1200×630), `theme-color`, `canonical`, `apple-touch-icon`.
 - **Structured data**: `schema.org/Person` JSON-LD in `index.html` (name, alt name, job title, locality, languages).
 - **`sitemap.xml` + `robots.txt`**: this is a single-page site, so the sitemap lists **one** canonical URL. The sections (practices, circle, about, astrology, contact…) are in-page anchors, not separate documents — they are deliberately not listed as distinct URLs. `robots.txt` allows all crawlers and points to the sitemap. Update `<lastmod>` in `sitemap.xml` on meaningful content changes.
 - **No hreflang yet**: only Hebrew is published. When English ships on its own URL, add reciprocal `hreflang` tags.

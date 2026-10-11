@@ -39,7 +39,7 @@ function injectHead(template, route) {
   const fullUrl = `${SITE_URL}${route.path}/`;
   const imageUrl = route.image
     ? (route.image.startsWith('http') ? route.image : `${SITE_URL}${route.image}`)
-    : `${SITE_URL}/og.jpg`;
+    : `${SITE_URL}/og-v2.jpg`;
   const description = route.description || '';
 
   let html = template;
