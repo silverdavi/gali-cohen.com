@@ -97,7 +97,9 @@ items:
       • הסדנה מתקיימת בתל אביב.
       • מחיר: 700 ש"ח לאדם (1400 לזוג).
     metaDescriptionHe: סדנת טנטרה פרטית חוויתית לזוגות עם גלי גאולה כהן. כ־3 שעות בתיאום אישי בתל אביב. 700 ש"ח לאדם, 1400 לזוג.
-    image: /photos/hands.webp
+    image: /photos/tantra-couple.webp
+    imageFocalX: 50
+    imageFocalY: 30
     gallery: []
     categorySlug: workshops-format
     signupUrl: ''

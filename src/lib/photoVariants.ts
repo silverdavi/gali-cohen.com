@@ -11,6 +11,7 @@ export const photoWidths: Record<string, number[]> = {
   "/photos/story-1.webp": [480, 674],
   "/photos/story-2.webp": [480, 667],
   "/photos/story-3.webp": [480, 800],
+  "/photos/tantra-couple.webp": [480, 960, 1122],
   "/photos/אני יוגה.webp": [480, 960, 1600],
   "/photos/הרצאהחשפניות.webp": [480, 960],
   "/photos/סדנאותזוגות.webp": [480, 960, 1600],
