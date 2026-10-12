@@ -15,9 +15,9 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { sectionEnabled } from '../lib/sections';
 
 // Order: who she is, how to work with her, the next workshop, testimonials,
-// the content block (podcast, while blog and videos are off), then the free
-// intro call. homepage.* in he.yaml turns a block on or off.
-// The longer contact form lives on /contact, so the homepage doesn't repeat it.
+// the content block (podcast, while blog and videos are off). The free intro
+// call is off via homepage.contact.enabled; its copy stays in he.yaml.
+// homepage.* in he.yaml turns a block on or off.
 export function Home() {
   const cfg = getHomepageConfig();
   useDocumentMeta(content.meta.title, content.meta.description);

@@ -3,7 +3,7 @@ import { Reveal } from './Reveal';
 import { HeroPortrait } from './HeroPortrait';
 import { KineticText } from './KineticText';
 import { content, site } from '../content';
-import { getUpcomingWorkshops } from '../cms/queries';
+import { getHomepageConfig, getUpcomingWorkshops } from '../cms/queries';
 
 // Trimmed to what a visitor needs in a few seconds: who she is, who it's for,
 // what she offers, where to go next — the old kicker/romanized-name/role/lead
@@ -19,7 +19,9 @@ import { getUpcomingWorkshops } from '../cms/queries';
 // the same as the visual left-to-right order.
 export function Hero() {
   const { profile, hero } = content;
+  const showFreeCall = getHomepageConfig().contact.enabled;
   const nextWorkshop = getUpcomingWorkshops(1)[0];
+  const workshopTo = nextWorkshop ? `/workshops/${nextWorkshop.slug}` : '/workshops';
   return (
     <header className="hero" id="top">
       <div className="hero-container">
@@ -37,10 +39,13 @@ export function Hero() {
           <Reveal delay={0.3}>
             <div className="hero-ctas">
               {hero.ctaPrimary && (
-                <a className="btn btn-primary" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.ctaPrimary}</a>
+                <Link className="btn btn-primary" to={workshopTo}>{hero.ctaPrimary}</Link>
               )}
               {hero.ctaSecondary && (
-                <Link className="btn btn-ghost" to={nextWorkshop ? `/workshops/${nextWorkshop.slug}` : '/workshops'}>{hero.ctaSecondary}</Link>
+                <Link className="btn btn-ghost" to="/contact">{hero.ctaSecondary}</Link>
+              )}
+              {showFreeCall && hero.freeCallCta && (
+                <a className="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.freeCallCta}</a>
               )}
             </div>
           </Reveal>

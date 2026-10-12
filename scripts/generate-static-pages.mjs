@@ -234,13 +234,13 @@ async function main() {
       {
         path: '/services',
         title: `${q.servicesHeading.title} · גלי גאולה כהן`,
-        description: q.servicesHeading.sub,
+        description: q.servicesHeading.sub || content.meta.description,
         sitemap: true,
       },
       {
         path: '/workshops',
         title: `${q.workshopsHeading.title} · גלי גאולה כהן`,
-        description: q.workshopsHeading.sub,
+        description: q.workshopsHeading.sub || content.meta.description,
         sitemap: q.getAllWorkshops().length > 0,
       },
       ...(sectionOn('podcast') ? [{
