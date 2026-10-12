@@ -39,6 +39,7 @@ singletons:
           - { label: "תווית קטנה", name: labelHe, widget: string }
           - { label: "כותרת", name: titleHe, widget: string }
           - { label: "כותרת משנה", name: subHe, widget: string, required: false }
+      - { label: "פסקאות פתיחה (מתחת לכותרת, לפני הכרטיסים)", name: introHe, widget: list, required: false, field: { label: פסקה, name: paragraph, widget: text } }
       - label: "קטגוריות"
         name: categories
         widget: list

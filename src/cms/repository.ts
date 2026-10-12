@@ -44,7 +44,7 @@ export type RawServiceCategory = {
   processSteps?: RawProcessStep[];
 };
 
-export type RawServicesFile = { heading: RawHeading; categories: RawServiceCategory[] };
+export type RawServicesFile = { heading: RawHeading; introHe?: string[]; categories: RawServiceCategory[] };
 
 export type RawFaqItem = { qHe: string; aHe: string };
 

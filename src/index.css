@@ -1877,6 +1877,13 @@ html.a11y-stop-motion *::after {
 /* --- Services hub (3 fixed categories) ---------------------------------------------
    Same card language as .product (store), so the two new page kinds — a shop
    grid and a services grid — read as one visual family. */
+.services-intro {
+  max-width: var(--measure-body);
+  margin-top: var(--s-5);
+}
+.services-intro p {
+  margin: 0 0 var(--s-4);
+}
 .services-grid {
   margin-top: var(--header-gap);
   display: grid;

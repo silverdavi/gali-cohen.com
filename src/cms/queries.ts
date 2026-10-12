@@ -22,6 +22,8 @@ export { isExternal } from './mappers';
 
 // --- headings ---------------------------------------------------------------
 export const servicesHeading = mapHeading(servicesRaw.heading);
+/** Opening paragraphs on the תהליכים אישיים page, above the category cards. */
+export const servicesIntro: string[] = servicesRaw.introHe ?? [];
 export const workshopsHeading = mapHeading(workshopsRaw.heading);
 export const podcastHeading = mapHeading(podcastRaw.heading);
 export const videosHeading = mapHeading(videosRaw.heading);
