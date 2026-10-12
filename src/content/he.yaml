@@ -77,7 +77,8 @@ band:
 aboutSection:
   label: אודות
   title: כמה מילים עליי
-  greeting: קוראים לי גלי גאולה כהן
+  greeting: נעים מאוד
+  greetingNext: קוראים לי גלי גאולה כהן
   photo: /photos/רוקדתת.webp
   photoAlt: דיוקן של גלי מחייכת, על רקע פריחה לבנה
   paragraphs:

@@ -77,8 +77,9 @@ export type Content = {
     title: string;
     photo: string;
     photoAlt: string;
-    /** First line under the about heading. The paragraphs below stay as written. */
+    /** First line under the about heading, then the line after it. The paragraphs below stay as written. */
     greeting?: string;
+    greetingNext?: string;
     paragraphs: string[];
     facts: { label: string; value: string }[];
   };
