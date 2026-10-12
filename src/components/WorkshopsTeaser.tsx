@@ -24,7 +24,15 @@ export function WorkshopsTeaser({ limit }: { limit?: number }) {
             <Reveal key={w.slug} delay={i * 0.06} className="col-third">
               <Link className="workshop-teaser-card" to={`/workshops/${w.slug}`}>
                 <div className="workshop-teaser-media">
-                  {w.image && <Cinemagraph src={w.image} clip={clipFor(w.image)} alt={w.title} />}
+                  {w.image && (
+                    <Cinemagraph
+                      src={w.image}
+                      clip={clipFor(w.image)}
+                      alt={w.title}
+                      sizes="(max-width: 880px) 92vw, 420px"
+                      style={w.imageFocalX != null ? { objectPosition: `${w.imageFocalX}% ${w.imageFocalY ?? 50}%` } : undefined}
+                    />
+                  )}
                   {w.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                 </div>
                 <h3 className="workshop-teaser-title">{w.title}</h3>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { getShowBySlug, podcastHeading } from '../cms/queries';
 import { content } from '../content';
 import { toEmbedUrl } from '../lib/youtube';
@@ -15,6 +15,7 @@ export function PodcastShowPage() {
 
   useDocumentMeta(show ? `${show.name} · פודקאסט · גלי גאולה כהן` : 'הדף לא נמצא', show?.desc);
 
+  if (show && !show.enabled) return <Navigate to="/podcast" replace />;
   if (!show) return <NotFoundPage />;
 
   const wholeEmbed = show.embedHref ? toEmbedUrl(show.embedHref) : null;

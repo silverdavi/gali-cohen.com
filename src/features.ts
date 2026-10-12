@@ -55,7 +55,7 @@ const DEFAULTS: Record<FeatureKey, boolean> = {
   magneticCta: true,
   cursorRipple: true,
   showStore: true,
-  showStory: true,
+  showStory: false, // long lecture stays in he.yaml storySection; set true to show it again on /about
 };
 
 function resolve(): Record<FeatureKey, boolean> {

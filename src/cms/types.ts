@@ -47,6 +47,8 @@ export type Workshop = {
   desc: string;
   metaDescription: string;
   image: string;
+  imageFocalX?: number;
+  imageFocalY?: number;
   gallery: string[];
   categorySlug: string;
   signupHref: string;
@@ -92,6 +94,9 @@ export type PodcastShow = {
   episodes: PodcastEpisode[];
   /** first playable link, resolved for the "whole playlist" fallback embed */
   embedHref: string;
+  /** false keeps the show in the file but off the site. A visit to its URL
+   *  goes to /podcast. */
+  enabled: boolean;
 };
 
 export type VideoProvider = 'youtube' | 'vimeo' | 'external';

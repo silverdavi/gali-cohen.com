@@ -9,7 +9,7 @@
 heading:
   labelHe: פודקאסט
   titleHe: להאזנה
-  subHe: שתי שיחות, שני עולמות — בחרו לאן להיכנס.
+  subHe: שיחות פתוחות על יחסים, מיניות, תודעה ורוח.
   ctaHe: להאזנה
 shows:
   - slug: meever-latabu
@@ -21,7 +21,10 @@ shows:
       - label: YouTube
         url: https://www.youtube.com/playlist?list=PLOAxVmCoEmZPoIH-PkdlY8ASoxIiS-mKL
     episodes: []
+  # enabled: false מסתיר תוכנית בלי למחוק אותה. הכתובת הישנה חוזרת ל-/podcast.
+  # כשיש פרקים: enabled: true (או מוחקים את השורה).
   - slug: uvacharta-bachaim
+    enabled: false
     nameHe: ובחרת בחיים · עם לירן
     descHe: על חמלה, טבעונות ודרך חיים — יוצא לאור בקרוב.
     statusHe: בקרוב

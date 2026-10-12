@@ -4,6 +4,7 @@
 import { content } from '../content';
 import { getAllWorkshops, getAllArticles, getAllShows, getAllVideos, getAllProducts } from '../cms/queries';
 import { features } from '../features';
+import { sectionEnabled } from './sections';
 
 type NavItem = { path: string; label: string; visible: boolean };
 
@@ -12,10 +13,10 @@ const ITEMS: NavItem[] = [
   { path: '/about', label: content.nav.about, visible: true },
   { path: '/services', label: content.nav.services, visible: true },
   { path: '/workshops', label: content.nav.events, visible: getAllWorkshops().length > 0 },
-  { path: '/blog', label: content.nav.blog, visible: getAllArticles().length > 0 },
-  { path: '/podcast', label: content.nav.podcast, visible: getAllShows().length > 0 },
-  { path: '/videos', label: 'סרטונים', visible: getAllVideos().length > 0 },
-  { path: '/store', label: content.nav.shop, visible: features.showStore && getAllProducts().length > 0 },
+  { path: '/blog', label: content.nav.blog, visible: sectionEnabled('blog') && getAllArticles().length > 0 },
+  { path: '/podcast', label: content.nav.podcast, visible: sectionEnabled('podcast') && getAllShows().length > 0 },
+  { path: '/videos', label: 'סרטונים', visible: sectionEnabled('videos') && getAllVideos().length > 0 },
+  { path: '/store', label: content.nav.shop, visible: sectionEnabled('store') && features.showStore && getAllProducts().length > 0 },
   { path: '/contact', label: content.nav.contact, visible: true },
 ];
 

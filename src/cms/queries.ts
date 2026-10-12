@@ -90,7 +90,7 @@ export const getRelatedWorkshops = (workshop: Workshop, limit = 3): Workshop[] =
     .slice(0, limit);
 
 // --- podcast ----------------------------------------------------------------
-export const getAllShows = (): PodcastShow[] => podcastShows;
+export const getAllShows = (): PodcastShow[] => podcastShows.filter((s) => s.enabled);
 export const getShowBySlug = (slug: string): PodcastShow | undefined => podcastShowsBySlug.get(slug);
 export const getEpisode = (showSlug: string, episodeSlug: string): { show: PodcastShow; episode: PodcastEpisode } | undefined =>
   podcastEpisodesByKey.get(`${showSlug}/${episodeSlug}`);

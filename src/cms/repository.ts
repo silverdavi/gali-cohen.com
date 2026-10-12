@@ -56,6 +56,9 @@ export type RawWorkshop = RawPrice & {
   descHe: string;
   metaDescriptionHe?: string;
   image?: string;
+  /** 0–100. Where a wide photo should stay when a card crops it. 50 is center. */
+  imageFocalX?: number;
+  imageFocalY?: number;
   gallery?: string[];
   categorySlug?: string;
   signupUrl?: string;
@@ -94,6 +97,8 @@ export type RawPodcastShow = {
   coverImage?: string;
   platformLinks?: { label: string; url: string }[];
   episodes?: RawPodcastEpisode[];
+  /** false hides the show without deleting it. Omitted means visible. */
+  enabled?: boolean;
 };
 
 export type RawPodcastFile = { heading: RawHeading; shows: RawPodcastShow[] };

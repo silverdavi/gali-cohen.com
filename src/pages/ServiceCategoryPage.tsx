@@ -23,7 +23,7 @@ export function ServiceCategoryPage() {
   return (
     <div className="container page">
       <Breadcrumbs items={[{ label: content.nav.services, path: '/services' }, { label: category.title }]} />
-      <SectionHead label="שירותים" title={category.title} sub={category.shortDesc} as="h1" />
+      <SectionHead label={content.nav.services} title={category.title} sub={category.shortDesc} as="h1" />
       {category.processSteps.length > 0 && (
         <div className="process-steps">
           {category.processSteps.map((step, i) => (
