@@ -15,12 +15,23 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { sectionEnabled } from '../lib/sections';
 
 // Order: who she is, how to work with her, the next workshop, testimonials,
-// then the free intro call. homepage.* in he.yaml turns a block on or off.
+// the content block (podcast, while blog and videos are off), then the free
+// intro call. homepage.* in he.yaml turns a block on or off.
 // The longer contact form lives on /contact, so the homepage doesn't repeat it.
 export function Home() {
   const cfg = getHomepageConfig();
   useDocumentMeta(content.meta.title, content.meta.description);
-  const showWriting = cfg.content.enabled && (sectionEnabled('blog') || sectionEnabled('podcast') || sectionEnabled('videos'));
+  const writing = [
+    sectionEnabled('blog') ? 'מאמרים' : '',
+    sectionEnabled('podcast') ? 'פודקאסט' : '',
+    sectionEnabled('videos') ? 'סרטונים' : '',
+  ].filter(Boolean);
+  const writingTitle = writing.length === 3
+    ? 'מאמרים, פודקאסט וסרטונים'
+    : writing.length === 2
+      ? `${writing[0]} ו${writing[1]}`
+      : writing[0];
+  const showWriting = cfg.content.enabled && writing.length > 0;
 
   return (
     <>
@@ -31,7 +42,7 @@ export function Home() {
       {showWriting && (
         <section className="section" id="content">
           <div className="container">
-            <SectionHead label="תוכן" title="מאמרים, פודקאסט וסרטונים" />
+            <SectionHead label="תוכן" title={writingTitle} />
             {sectionEnabled('blog') && <BlogTeaser limit={3} />}
             {sectionEnabled('podcast') && <PodcastTeaser />}
             {sectionEnabled('videos') && <VideosTeaser limit={3} />}

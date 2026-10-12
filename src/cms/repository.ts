@@ -97,6 +97,8 @@ export type RawPodcastShow = {
   coverImage?: string;
   platformLinks?: { label: string; url: string }[];
   episodes?: RawPodcastEpisode[];
+  /** false hides the show without deleting it. Omitted means visible. */
+  enabled?: boolean;
 };
 
 export type RawPodcastFile = { heading: RawHeading; shows: RawPodcastShow[] };

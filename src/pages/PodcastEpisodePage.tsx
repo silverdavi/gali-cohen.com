@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { getEpisode, podcastHeading } from '../cms/queries';
+import { Navigate, useParams } from 'react-router-dom';
+import { getEpisode, getShowBySlug, podcastHeading } from '../cms/queries';
 import { videoIdToEmbedUrl } from '../lib/youtube';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -7,6 +7,7 @@ import { NotFoundPage } from './NotFoundPage';
 
 export function PodcastEpisodePage() {
   const { showSlug, episodeSlug } = useParams<{ showSlug: string; episodeSlug: string }>();
+  const showRecord = showSlug ? getShowBySlug(showSlug) : undefined;
   const found = showSlug && episodeSlug ? getEpisode(showSlug, episodeSlug) : undefined;
 
   useDocumentMeta(
@@ -14,6 +15,7 @@ export function PodcastEpisodePage() {
     found?.episode.desc,
   );
 
+  if (showRecord && !showRecord.enabled) return <Navigate to="/podcast" replace />;
   if (!found) return <NotFoundPage />;
   const { show, episode } = found;
 

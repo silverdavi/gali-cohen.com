@@ -154,6 +154,7 @@ export function mapPodcastShow(s: RawPodcastShow): PodcastShow {
     platformLinks,
     episodes: (s.episodes ?? []).map(mapPodcastEpisode),
     embedHref: checkout(platformLinks[0]?.url),
+    enabled: s.enabled !== false,
   };
 }
 

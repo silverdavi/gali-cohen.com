@@ -13,7 +13,7 @@ homepage:
     enabled: true
     limit: 3
   content:
-    enabled: false
+    enabled: true
   store:
     enabled: false
   contact:
@@ -21,11 +21,12 @@ homepage:
 # סעיפים מוסתרים זמנית. להחזיר: enabled: true
 # (וגם homepage.content או homepage.store, אם רוצים אותם שוב בעמוד הבית).
 # התוכן עצמו נשאר בקבצי הבלוג, הפודקאסט, הסרטונים והחנות.
+# הפודקאסט דולק. תוכנית בלי פרקים מוסתרת בנפרד ב-podcast.yaml (enabled: false).
 sections:
   blog:
     enabled: false
   podcast:
-    enabled: false
+    enabled: true
   videos:
     enabled: false
   store:
