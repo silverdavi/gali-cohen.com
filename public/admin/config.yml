@@ -527,7 +527,6 @@ collections:
               - { label: "תווית קטנה", name: label, widget: string }
               - { label: "כותרת", name: title, widget: string }
               - { label: "שורה ראשונה מתחת לכותרת", name: greeting, widget: string, required: false }
-              - { label: "השורה שאחריה", name: greetingNext, widget: string, required: false }
               - { label: "תמונה", name: photo, widget: image }
               - { label: "תיאור התמונה (נגישות)", name: photoAlt, widget: string }
               - { label: "פסקאות (2–3, מוצגות גם בדף הבית וגם בעמוד עליי המלא)", name: paragraphs, widget: list, field: { label: פסקה, name: paragraph, widget: text } }
