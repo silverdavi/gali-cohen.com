@@ -61,6 +61,8 @@ export type Content = {
     valuesLine: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    /** WhatsApp intro-call button. Rendered only while homepage.contact.enabled. */
+    freeCallCta?: string;
     scroll: string;
     photo: string;
     photoAlt: string;

@@ -398,7 +398,7 @@ collections:
             name: homepage
             widget: object
             collapsed: true
-            hint: "סדר הקטעים קבוע: פתיח, הליווי, הסדנה הקרובה, המלצות, תוכן (אם מוצג), שיחת היכרות. כאן שולטים אם קטע מוצג. בלוג, סרטונים וחנות מוסתרים גם דרך 'סעיפים מוסתרים' למטה. תוכנית פודקאסט בודדת מוסתרת מהשדה 'מוצג' שלה."
+            hint: "סדר הקטעים קבוע: פתיח, תהליכים אישיים, הסדנה הקרובה, המלצות, תוכן (אם מוצג), ושיחת היכרות רק אם היא דולקת. כאן שולטים אם קטע מוצג. בלוג, סרטונים וחנות מוסתרים גם דרך 'סעיפים מוסתרים' למטה. תוכנית פודקאסט בודדת מוסתרת מהשדה 'מוצג' שלה."
             fields:
               - label: "שירותים"
                 name: services
@@ -428,10 +428,11 @@ collections:
                 name: store
                 widget: object
                 fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
-              - label: "יצירת קשר"
+              - label: "שיחת היכרות (באנר בדף הבית)"
                 name: contact
                 widget: object
-                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: true }]
+                hint: "כבוי = הבאנר לא מוצג, וגם לא כפתור הוואטסאפ בפס הפתיחה. הטקסט נשאר למטה ב'באנר שיחת היכרות'. להחזיר: מוצג = כן."
+                fields: [{ label: "מוצג", name: enabled, widget: boolean, default: false }]
           - label: "סעיפים מוסתרים"
             name: sections
             widget: object
@@ -461,7 +462,7 @@ collections:
             fields:
               - { label: "בית", name: home, widget: string }
               - { label: "נעים להכיר", name: about, widget: string }
-              - { label: "שירותי העסק", name: services, widget: string }
+              - { label: "תהליכים אישיים", name: services, widget: string }
               - { label: "סדנאות", name: events, widget: string }
               - { label: "המלצות", name: words, widget: string }
               - { label: "פודקאסט", name: podcast, widget: string }
@@ -496,8 +497,9 @@ collections:
               - { label: "שורת תיוג (למשל: מרחבים של חיבור, ריפוי וגילוי 🌿)", name: tagline, widget: string }
               - { label: "שורת קהל יעד (למשל: לנשים ולזוגות)", name: audienceLine, widget: string }
               - { label: "שורת ערכים (למשל: גוף • רגש • תנועה • יחסים • מיניות קשובה)", name: valuesLine, widget: string }
-              - { label: "כפתור ראשי", name: ctaPrimary, widget: string }
-              - { label: "כפתור משני", name: ctaSecondary, widget: string }
+              - { label: "כפתור ראשי (הרשמה לסדנה)", name: ctaPrimary, widget: string }
+              - { label: "כפתור משני (ליצירת קשר)", name: ctaSecondary, widget: string }
+              - { label: "כפתור שיחת היכרות (מוצג רק כשהבאנר דולק)", name: freeCallCta, widget: string, required: false }
               - { label: "רמז גלילה (אפשר להשאיר ריק כדי להסתיר)", name: scroll, widget: string, required: false }
               - { label: "תמונת ה-Hero", name: photo, widget: image }
               - { label: "תיאור תמונת הבית (לנגישות)", name: photoAlt, widget: string }
@@ -561,7 +563,7 @@ collections:
                   - { label: "ההמלצה", name: quote, widget: text }
                   - { label: "שם הממליצ/ה", name: name, widget: string }
                   - { label: "להציג בדף הבית (לא בשימוש — כולן מוצגות)", name: featured, widget: boolean, default: false, required: false }
-          - label: "באנר שיחת היכרות חינם (מוצג בדף הבית)"
+          - label: "באנר שיחת היכרות (הטקסט נשמר; מוצג רק כשהמתג דולק)"
             name: freeCall
             widget: object
             collapsed: true
