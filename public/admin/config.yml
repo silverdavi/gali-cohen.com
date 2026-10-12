@@ -475,7 +475,7 @@ collections:
               - { label: "בלוג ומאמרים", name: blog, widget: string }
               - { label: "צור קשר (גם בתפריט וגם בקטע יצירת הקשר)", name: contact, widget: string }
               - { label: "חנות", name: shop, widget: string }
-              - { label: "כפתור 'דברו איתי'", name: cta, widget: string }
+              - { label: "כפתור 'ליצירת קשר'", name: cta, widget: string }
               - { label: "כפתור פתיחת תפריט", name: menu, widget: string }
               - { label: "כפתור סגירת תפריט", name: close, widget: string }
               - { label: "דילוג לתוכן (נגישות)", name: skip, widget: string }

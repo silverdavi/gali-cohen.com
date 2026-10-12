@@ -43,7 +43,7 @@ nav:
   blog: בלוג ומאמרים
   contact: צור קשר
   shop: חנות
-  cta: דברו איתי
+  cta: ליצירת קשר
   menu: תפריט
   close: סגירה
   skip: דלגו לתוכן
@@ -77,7 +77,7 @@ band:
 aboutSection:
   label: אודות
   title: כמה מילים עליי
-  greeting: נעים מאוד – גלי גאולה כהן
+  greeting: קוראים לי גלי גאולה כהן
   photo: /photos/רוקדתת.webp
   photoAlt: דיוקן של גלי מחייכת, על רקע פריחה לבנה
   paragraphs:
