@@ -4,6 +4,7 @@ import { SectionHead } from '../components/SectionHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Cinemagraph } from '../components/Cinemagraph';
 import { getServiceCategoryBySlug, formatPrice } from '../cms/queries';
+import { LinkedPhrase } from '../components/LinkedPhrase';
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -23,7 +24,18 @@ export function ServiceCategoryPage() {
   return (
     <div className="container page">
       <Breadcrumbs items={[{ label: content.nav.services, path: '/services' }, { label: category.title }]} />
-      <SectionHead label={content.nav.services} title={category.title} sub={category.shortDesc} as="h1" />
+      <SectionHead
+        label={content.nav.services}
+        title={category.title}
+        as="h1"
+        sub={(
+          <LinkedPhrase
+            text={category.shortDesc}
+            phrase={category.shortDescLinkPhrase}
+            href={category.shortDescLinkHref}
+          />
+        )}
+      />
       {category.processSteps.length > 0 && (
         <div className="process-steps">
           {category.processSteps.map((step, i) => (

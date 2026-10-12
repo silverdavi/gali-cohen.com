@@ -1,10 +1,11 @@
+import type { ReactNode } from 'react';
 import { Reveal } from './Reveal';
 import { KineticText } from './KineticText';
 
 type Props = {
   label: string;
   title?: string;
-  sub?: string;
+  sub?: ReactNode;
   /** h1 on a standalone page whose main title this is; h2 (default) when
       embedded as one of several sections on a page that already has its own
       h1 elsewhere (Home's h1 is the hero name; AboutPage's h1 is its first

@@ -33,7 +33,7 @@ export function validateContent(): void {
   for (const w of workshops) {
     if (!w.slug) errors.push(`Workshop "${w.title}" is missing a slug.`);
     if (!w.title) errors.push('A workshop is missing a title.');
-    if (!w.iso || Number.isNaN(new Date(w.iso).getTime())) {
+    if (!w.ongoing && (!w.iso || Number.isNaN(new Date(w.iso).getTime()))) {
       errors.push(`Workshop "${w.slug || w.title}" has an invalid date ("${w.iso}").`);
     }
     if (!WORKSHOP_STATUSES.includes(w.status)) {

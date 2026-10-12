@@ -4,7 +4,7 @@ import { Reveal } from '../components/Reveal';
 import { Cinemagraph } from '../components/Cinemagraph';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { WorkshopSignupModal } from '../components/WorkshopSignupModal';
-import { getWorkshopBySlug, getRelatedWorkshops, formatPrice, workshopShareMeta } from '../cms/queries';
+import { getWorkshopBySlug, getRelatedWorkshops, formatWorkshopPrice, workshopShareMeta } from '../cms/queries';
 import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -93,7 +93,7 @@ export function WorkshopPage() {
 
         <div className="workshop-practical">
           <div>
-            <p className="practice-price">{formatPrice(w.price)}</p>
+            <p className="practice-price">{formatWorkshopPrice(w)}</p>
             {w.capacity && <p className="workshop-capacity">{w.capacity}</p>}
           </div>
           {canSignUp && (
@@ -110,6 +110,15 @@ export function WorkshopPage() {
         </div>
 
         {signingUp && <WorkshopSignupModal workshop={w} onClose={() => setSigningUp(false)} />}
+
+        {content.wordsSection.items
+          .filter((item) => item.workshopSlug === w.slug)
+          .map((item) => (
+            <figure className="workshop-quote" key={item.name}>
+              <blockquote>{item.quote}</blockquote>
+              <figcaption>{item.name}</figcaption>
+            </figure>
+          ))}
 
         {w.faq.length > 0 && (
           <div className="workshop-faq">

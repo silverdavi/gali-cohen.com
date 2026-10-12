@@ -80,6 +80,8 @@ export function mapServiceCategory(c: RawServiceCategory): ServiceCategory {
     slug: c.slug,
     title: c.titleHe,
     shortDesc: c.shortDescHe,
+    shortDescLinkPhrase: c.shortDescLinkPhrase,
+    shortDescLinkHref: c.shortDescLinkHref,
     photo: c.photo,
     photoAlt: c.photoAltHe,
     metaDescription: c.metaDescriptionHe,
@@ -96,9 +98,10 @@ export function mapFaqItem(f: RawFaqItem): FaqItem {
 }
 
 export function mapWorkshop(w: RawWorkshop): Workshop {
-  const iso = isoDate(w.date);
+  const ongoing = Boolean(w.ongoing);
+  const iso = ongoing ? '' : isoDate(w.date);
   const d = new Date(`${iso}T${w.time || '00:00'}`);
-  const valid = !Number.isNaN(d.getTime());
+  const valid = !ongoing && !Number.isNaN(d.getTime());
   return {
     slug: w.slug,
     title: w.titleHe,
@@ -121,7 +124,9 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     status: w.status,
     featured: Boolean(w.featured),
     enabled: w.enabled !== false,
-    dateLabel: valid ? dateFmt.format(d) : iso,
+    ongoing,
+    priceNote: w.priceNoteHe ?? '',
+    dateLabel: ongoing ? (w.scheduleHe || 'בתיאום אישי') : (valid ? dateFmt.format(d) : iso),
     day: valid ? String(d.getDate()) : '',
     month: valid ? monthFmt.format(d) : '',
     intro: w.introHe ?? '',

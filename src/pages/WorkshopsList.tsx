@@ -3,7 +3,7 @@ import { Reveal } from '../components/Reveal';
 import { SectionHead } from '../components/SectionHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Cinemagraph } from '../components/Cinemagraph';
-import { getUpcomingWorkshops, workshopsHeading, workshopsGroup, formatPrice } from '../cms/queries';
+import { getUpcomingWorkshops, workshopsHeading, workshopsGroup, formatWorkshopPrice } from '../cms/queries';
 import { formatTimeRange } from '../lib/formatDate';
 import { content } from '../content';
 import { clipFor } from '../clips';
@@ -44,7 +44,7 @@ export function WorkshopsList() {
                 </div>
                 <h3 className="workshop-teaser-title">{w.title}</h3>
                 <p className="workshop-teaser-date">{w.dateLabel}{when && ` · ${when}`}</p>
-                <p className="workshop-teaser-meta">{w.location} · {formatPrice(w.price)}</p>
+                <p className="workshop-teaser-meta">{w.location} · {formatWorkshopPrice(w)}</p>
                 <span className="workshop-teaser-cta">
                   {w.status === 'sold-out' ? 'אזל · לפרטים' : workshopsHeading.cta}
                 </span>

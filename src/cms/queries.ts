@@ -70,10 +70,23 @@ function isOnOrAfterToday(iso: string): boolean {
 
 export const getUpcomingWorkshops = (limit?: number): Workshop[] => {
   const list = workshops
-    .filter((w) => w.enabled && PUBLIC_UPCOMING.includes(w.status) && isOnOrAfterToday(w.iso))
-    .sort((a, b) => a.iso.localeCompare(b.iso));
+    .filter((w) => w.enabled && PUBLIC_UPCOMING.includes(w.status) && (w.ongoing || isOnOrAfterToday(w.iso)))
+    .sort((a, b) => {
+      const aDated = /^\d{4}-\d{2}-\d{2}$/.test(a.iso);
+      const bDated = /^\d{4}-\d{2}-\d{2}$/.test(b.iso);
+      if (aDated && bDated) return a.iso.localeCompare(b.iso);
+      if (aDated) return -1;
+      if (bDated) return 1;
+      return 0;
+    });
   return typeof limit === 'number' ? list.slice(0, limit) : list;
 };
+
+/** Per-person price, plus the couple amount when the workshop has one. */
+export function formatWorkshopPrice(w: Workshop): string {
+  const base = formatPrice(w.price);
+  return w.priceNote ? `${base} (${w.priceNote})` : base;
+}
 
 export const getPastWorkshops = (): Workshop[] =>
   workshops
