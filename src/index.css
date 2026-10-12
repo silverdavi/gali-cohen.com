@@ -1079,6 +1079,36 @@ video.band-photo { display: block; }
   color: var(--ink);
   margin: 0 0 var(--s-3);
 }
+.about-greeting {
+  margin: 0 0 var(--s-4);
+  font-family: var(--display);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--ink);
+}
+.inline-link {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.inline-link:hover { color: var(--ink); }
+.workshop-quote {
+  margin: var(--s-7) 0 0;
+  padding: var(--s-5) 0 0;
+  border-top: 1px solid var(--rule);
+}
+.workshop-quote blockquote {
+  margin: 0;
+  font-family: var(--display);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.workshop-quote figcaption {
+  margin-top: var(--s-3);
+  color: var(--mute);
+  font-size: var(--fs-meta);
+}
 .practice-body {
   margin: 0;
   max-width: var(--measure-body);
@@ -1847,6 +1877,13 @@ html.a11y-stop-motion *::after {
 /* --- Services hub (3 fixed categories) ---------------------------------------------
    Same card language as .product (store), so the two new page kinds — a shop
    grid and a services grid — read as one visual family. */
+.services-intro {
+  max-width: var(--measure-body);
+  margin-top: var(--s-5);
+}
+.services-intro p {
+  margin: 0 0 var(--s-4);
+}
 .services-grid {
   margin-top: var(--header-gap);
   display: grid;

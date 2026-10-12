@@ -22,6 +22,7 @@ export function AboutPage() {
       <div className="about-grid">
         <Reveal delay={0.06} className="col-main">
           <div className="about-text">
+            {aboutSection.greeting && <p className="about-greeting">{aboutSection.greeting}</p>}
             {aboutSection.paragraphs.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}

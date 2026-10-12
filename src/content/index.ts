@@ -77,6 +77,8 @@ export type Content = {
     title: string;
     photo: string;
     photoAlt: string;
+    /** First line under the about heading. The paragraphs below stay as written. */
+    greeting?: string;
     paragraphs: string[];
     facts: { label: string; value: string }[];
   };
@@ -88,7 +90,7 @@ export type Content = {
     meta: string;
     photos: { src: string; alt: string }[];
   };
-  wordsSection: { label: string; items: { quote: string; name: string; featured?: boolean }[] };
+  wordsSection: { label: string; items: { quote: string; name: string; featured?: boolean; workshopSlug?: string }[] };
   freeCall: { label: string; title: string; body: string; cta: string; note: string };
   socialSection: { label: string; title: string; sub: string };
   astro: {

@@ -23,6 +23,8 @@ export type ServiceCategory = {
   slug: string;
   title: string;
   shortDesc: string;
+  shortDescLinkPhrase?: string;
+  shortDescLinkHref?: string;
   photo: string;
   photoAlt: string;
   metaDescription: string;
@@ -59,6 +61,10 @@ export type Workshop = {
   status: WorkshopStatus;
   featured: boolean;
   enabled: boolean;
+  /** Private / by appointment. Listed without a calendar date. */
+  ongoing: boolean;
+  /** Shown with the price, e.g. the per-couple amount. */
+  priceNote: string;
   dateLabel: string;
   day: string;
   month: string;

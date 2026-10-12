@@ -34,6 +34,9 @@ export type RawServiceCategory = {
   slug: string;
   titleHe: string;
   shortDescHe: string;
+  /** When set, that exact phrase inside shortDescHe links to this path. */
+  shortDescLinkPhrase?: string;
+  shortDescLinkHref?: string;
   photo: string;
   photoAltHe: string;
   metaDescriptionHe: string;
@@ -41,7 +44,7 @@ export type RawServiceCategory = {
   processSteps?: RawProcessStep[];
 };
 
-export type RawServicesFile = { heading: RawHeading; categories: RawServiceCategory[] };
+export type RawServicesFile = { heading: RawHeading; introHe?: string[]; categories: RawServiceCategory[] };
 
 export type RawFaqItem = { qHe: string; aHe: string };
 
@@ -66,6 +69,12 @@ export type RawWorkshop = RawPrice & {
   status: 'draft' | 'upcoming' | 'sold-out' | 'completed' | 'cancelled';
   featured?: boolean;
   enabled?: boolean;
+  /** No fixed date. Stays listed, and is not dropped when a calendar date passes. */
+  ongoing?: boolean;
+  /** Shown instead of a date, e.g. בתיאום אישי. */
+  scheduleHe?: string;
+  /** Second price line, e.g. ₪1400 לזוג, shown next to the per-person price. */
+  priceNoteHe?: string;
   introHe?: string;
   whatHappensHe?: string;
   whoForHe?: string;
