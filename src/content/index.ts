@@ -14,6 +14,7 @@ export type Site = {
   email: string;
   instagram: string;
   whatsapp: string;
+  whatsappGroup?: string;
   socials?: SocialLink[];
 };
 export const site = siteFile as Site;
@@ -117,6 +118,7 @@ export type Content = {
     formName: string; formNamePlaceholder: string;
     formMessage: string; formMessagePlaceholder: string;
     formSubmit: string; formNote: string;
+    groupTitle: string; groupText: string; groupCta: string;
   };
   footer: { place: string; credit: string };
 };

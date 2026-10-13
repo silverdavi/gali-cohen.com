@@ -703,7 +703,8 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 [dir='rtl'] .hero-name { letter-spacing: 0; line-height: 1.04; }
 [dir='rtl'] .section-title { letter-spacing: 0; line-height: 1.22; }
 [dir='rtl'] .words .word blockquote { line-height: 1.6; }
-[dir='rtl'] .contact-line { letter-spacing: 0; }
+[dir='rtl'] .contact-line,
+[dir='rtl'] .contact-group-title { letter-spacing: 0; }
 [dir='rtl'] .progress { transform-origin: 100% 50%; }
 
 /* --- Kinetic type: word-by-word rise from a mask --------------------------
@@ -1383,6 +1384,37 @@ video.band-photo { display: block; }
 /* contact-sub: centred + a touch narrower (42ch) than a standfirst — a centred
    line reads best short. Mute, because the email button below it is the focus. */
 .contact-sub { color: var(--mute); font-size: var(--fs-body); max-width: 42ch; margin: 0 auto var(--s-7); }
+
+/* A small highlighted invite at the top of the contact page, above the form.
+   Same warm card language as the free-call banner, sized down and stacked
+   because this page is centred. */
+.contact-group {
+  max-width: 480px;
+  margin: 0 auto var(--s-8);
+  padding: var(--s-6) var(--s-6) var(--s-5);
+  border: 1px solid var(--accent);
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(201, 166, 105, 0.18), transparent 58%),
+    var(--paper-2);
+  box-shadow: 0 18px 40px -28px rgba(58, 42, 34, 0.45);
+}
+.contact-group-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(clamp(20px, 2.1vw, 24px) * var(--a11y-font-scale, 1));
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 var(--s-3);
+  text-wrap: balance;
+}
+.contact-group-text {
+  margin: 0 auto var(--s-5);
+  max-width: 36ch;
+  color: var(--body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
 
 /* A short form as a second path to the same place: it composes the message
    and hands it to WhatsApp (window.open, not a native form submit — the
@@ -2845,7 +2877,7 @@ button.article {
    does. Placed last so it wins over each element's older `font-weight: 400`
    (tuned for the previous single-weight serif) without editing every rule. */
 .nav-name, .hero-name, .section-title, .astro-sign,
-.astro-find-title, .practice-title, .contact-line,
+.astro-find-title, .practice-title, .contact-line, .contact-group-title,
 .event-day, .event-title, .product-title, .product-price, .freecall-title,
 .article-title, .episode-title, .word-mark, .practice-price, .reader-title,
 .show-name {
