@@ -206,6 +206,9 @@ contact:
   formMessagePlaceholder: What would you like to tell me?
   formSubmit: Send on WhatsApp
   formNote: This opens the message in WhatsApp, where you can edit it before sending
+  groupTitle: Join my quiet WhatsApp group
+  groupText: Once a week I share workshops, tips, and content there.
+  groupCta: Join the group
 
 footer:
   place: Tel Aviv

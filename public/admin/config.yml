@@ -371,6 +371,7 @@ singletons:
       - { label: "אימייל", name: email, widget: string, hint: "מופיע ככפתור אימייל." }
       - { label: "אינסטגרם (כתובת)", name: instagram, widget: string }
       - { label: "קישור וואטסאפ", name: whatsapp, widget: string, hint: "למשל https://wa.me/972XXXXXXXXX — גם כפתור הברירת־מחדל של כל הכפתורים." }
+      - { label: "קישור לקבוצת הוואטסאפ (עמוד יצירת קשר)", name: whatsappGroup, widget: string, required: false, hint: "נפתח בכרטיסייה חדשה מהבלוק שבראש עמוד יצירת הקשר." }
       - label: "רשתות חברתיות (מוצגות עם אייקון, גם בפוטר וגם בפרטי קשר)"
         name: socials
         widget: list
@@ -594,6 +595,9 @@ collections:
               - { label: "טופס — placeholder שדה ההודעה", name: formMessagePlaceholder, widget: string }
               - { label: "טופס — תווית כפתור השליחה", name: formSubmit, widget: string }
               - { label: "טופס — הערה מתחת לטופס", name: formNote, widget: string }
+              - { label: "קבוצת וואטסאפ — כותרת", name: groupTitle, widget: string }
+              - { label: "קבוצת וואטסאפ — טקסט", name: groupText, widget: string }
+              - { label: "קבוצת וואטסאפ — כפתור", name: groupCta, widget: string }
               - { label: "ישן: טקסט אינסטגרם", name: instagram, widget: string, required: false }
           - label: "כותרת תחתונה (Footer)"
             name: footer

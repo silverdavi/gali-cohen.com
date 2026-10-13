@@ -23,6 +23,7 @@ import { hasBrandIcon } from '../lib/brandIcon';
 export function Contact({ titleAs: Title = 'h2' }: { titleAs?: 'h1' | 'h2' } = {}) {
   const { contact } = content;
   const magnetic = useMagnetic();
+  const groupMagnetic = useMagnetic();
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
 
@@ -42,6 +43,21 @@ export function Contact({ titleAs: Title = 'h2' }: { titleAs?: 'h1' | 'h2' } = {
     <div className="contact" id="contact">
       {Title === 'h1' && <Breadcrumbs items={[{ label: content.nav.contact }]} />}
       <Reveal>
+        {Title === 'h1' && site.whatsappGroup?.trim() && (
+          <aside className="contact-group">
+            <h2 className="contact-group-title">{contact.groupTitle}</h2>
+            <p className="contact-group-text">{contact.groupText}</p>
+            <a
+              className="btn btn-primary btn-whatsapp"
+              href={site.whatsappGroup.trim()}
+              target="_blank"
+              rel="noopener noreferrer"
+              {...groupMagnetic}
+            >
+              {contact.groupCta}
+            </a>
+          </aside>
+        )}
         <div className={`contact-medallion${features.medallionSpin ? ' spin' : ''}`} aria-hidden>
           <Cinemagraph src="/photos/bowl.webp" clip={clipFor('/photos/bowl.webp')} ariaHidden />
         </div>
