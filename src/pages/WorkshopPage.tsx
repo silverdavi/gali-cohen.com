@@ -42,7 +42,7 @@ export function WorkshopPage() {
       <Breadcrumbs items={[{ label: content.nav.events, path: '/workshops' }, { label: w.title }]} />
       {w.image && (
         <Reveal>
-          <div className="workshop-page-media">
+          <div className={w.imageFull ? 'workshop-page-media is-full' : 'workshop-page-media'}>
             <Cinemagraph
               src={w.image}
               clip={clipFor(w.image)}
@@ -61,6 +61,7 @@ export function WorkshopPage() {
           {w.location && ` · ${w.location}`}
         </p>
         <h1 className="legal-title">{w.title}</h1>
+        {w.subtitle && <p className="workshop-page-subtitle">{w.subtitle}</p>}
         {note && <p className="workshop-status-note">{note}</p>}
         {w.intro && <p className="workshop-intro">{w.intro}</p>}
 
@@ -97,7 +98,9 @@ export function WorkshopPage() {
             {w.capacity && <p className="workshop-capacity">{w.capacity}</p>}
           </div>
           {canSignUp && (
-            w.hasSignupLink ? (
+            w.registration ? (
+              <p className="workshop-registration">{w.registration}</p>
+            ) : w.hasSignupLink ? (
               <a className="btn btn-primary workshop-cta" href={w.signupHref} target="_blank" rel="noopener noreferrer">
                 לפרטים והרשמה
               </a>
@@ -109,7 +112,7 @@ export function WorkshopPage() {
           )}
         </div>
 
-        {signingUp && <WorkshopSignupModal workshop={w} onClose={() => setSigningUp(false)} />}
+        {signingUp && !w.registration && <WorkshopSignupModal workshop={w} onClose={() => setSigningUp(false)} />}
 
         {content.wordsSection.items
           .filter((item) => item.workshopSlug === w.slug)
@@ -150,6 +153,7 @@ export function WorkshopPage() {
                     {rw.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                   </div>
                   <h3 className="workshop-teaser-title">{rw.title}</h3>
+                  {rw.subtitle && <p className="workshop-teaser-subtitle">{rw.subtitle}</p>}
                   <p className="workshop-teaser-date">{rw.dateLabel}</p>
                 </Link>
               </Reveal>

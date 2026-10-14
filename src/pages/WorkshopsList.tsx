@@ -43,10 +43,11 @@ export function WorkshopsList() {
                   {w.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                 </div>
                 <h3 className="workshop-teaser-title">{w.title}</h3>
+                {w.subtitle && <p className="workshop-teaser-subtitle">{w.subtitle}</p>}
                 <p className="workshop-teaser-date">{w.dateLabel}{when && ` · ${when}`}</p>
                 <p className="workshop-teaser-meta">{w.location} · {formatWorkshopPrice(w)}</p>
                 <span className="workshop-teaser-cta">
-                  {w.status === 'sold-out' ? 'אזל · לפרטים' : workshopsHeading.cta}
+                  {w.status === 'sold-out' ? 'אזל · לפרטים' : (w.registration || workshopsHeading.cta)}
                 </span>
               </Link>
             </Reveal>

@@ -84,8 +84,20 @@ export const getUpcomingWorkshops = (limit?: number): Workshop[] => {
   return typeof limit === 'number' ? list.slice(0, limit) : list;
 };
 
-/** Per-person price, plus the couple amount when the workshop has one. */
+/** Homepage cards keep the limited upcoming list, then append workshops that
+ *  asked to stay on the homepage. The dated "next" workshop stays first. */
+export function getHomepageWorkshops(limit?: number): Workshop[] {
+  const upcoming = getUpcomingWorkshops(limit);
+  const extras = getUpcomingWorkshops().filter(
+    (w) => w.showOnHome && !upcoming.some((u) => u.slug === w.slug),
+  );
+  return [...upcoming, ...extras];
+}
+
+/** Per-person price, plus the couple amount when the workshop has one.
+ *  A verbatim price label (a recommended range, for example) is shown as written. */
 export function formatWorkshopPrice(w: Workshop): string {
+  if (w.priceLabel) return w.priceLabel;
   const base = formatPrice(w.price);
   return w.priceNote ? `${base} (${w.priceNote})` : base;
 }

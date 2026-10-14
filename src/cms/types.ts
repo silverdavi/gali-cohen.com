@@ -40,6 +40,8 @@ export type FaqItem = { q: string; a: string };
 export type Workshop = {
   slug: string;
   title: string;
+  /** Second line directly under the title, on the page and on cards. */
+  subtitle: string;
   /** YYYY-MM-DD */
   iso: string;
   time: string;
@@ -51,6 +53,8 @@ export type Workshop = {
   image: string;
   imageFocalX?: number;
   imageFocalY?: number;
+  /** Show the photo at its own ratio on the detail page, without the wide crop. */
+  imageFull: boolean;
   gallery: string[];
   categorySlug: string;
   signupHref: string;
@@ -65,6 +69,12 @@ export type Workshop = {
   ongoing: boolean;
   /** Shown with the price, e.g. the per-couple amount. */
   priceNote: string;
+  /** Verbatim price line. When set, it replaces the calculated price string. */
+  priceLabel: string;
+  /** Walk-in (or other) registration sentence. When set, there is no signup button. */
+  registration: string;
+  /** Keep a card on the homepage even when the teaser limit would leave it out. */
+  showOnHome: boolean;
   dateLabel: string;
   day: string;
   month: string;

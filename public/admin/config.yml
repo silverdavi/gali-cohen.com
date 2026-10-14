@@ -114,10 +114,12 @@ singletons:
         fields:
           - { label: "מזהה (slug)", name: slug, widget: string, hint: "אותיות אנגלית/מספרים/מקפים בלבד — קובע את כתובת ה-URL של הסדנה, למשל mindful-dance-2026-10-08." }
           - { label: "שם הסדנה", name: titleHe, widget: string }
+          - { label: "שורה שנייה מתחת לשם", name: subtitleHe, widget: string, required: false }
           - { label: "תאריך", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }
           - { label: "סדנה מתמשכת בלי תאריך קבוע", name: ongoing, widget: boolean, default: false, required: false, hint: "נשארת ברשימת הסדנאות ולא נעלמת בגלל תאריך שעבר." }
           - { label: "במקום תאריך (למשל: בתיאום אישי)", name: scheduleHe, widget: string, required: false }
           - { label: "הערת מחיר (למשל: ₪1400 לזוג)", name: priceNoteHe, widget: string, required: false }
+          - { label: "משפט מחיר מדויק (למשל: מחיר מומלץ 70-100 ₪)", name: priceLabelHe, widget: string, required: false, hint: "אם מולא — מוצג כמו שהוא, בלי מחיר מחושב." }
           - { label: "שעה (למשל 20:00)", name: time, widget: string, required: false }
           - { label: "שעת סיום (אופציונלי)", name: endTime, widget: string, required: false }
           - { label: "מיקום", name: locationHe, widget: string }
@@ -128,6 +130,7 @@ singletons:
           - { label: "למי זה מתאים (אופציונלי)", name: whoForHe, widget: text, required: false }
           - { label: "תיאור לגוגל (SEO, עד 160 תווים)", name: metaDescriptionHe, widget: string, required: false }
           - { label: "תמונה", name: image, widget: image, required: false }
+          - { label: "הצג את התמונה בשלמותה בדף", name: imageFull, widget: boolean, default: false, required: false, hint: "בלי החיתוך הרחב של שאר הסדנאות. מתאים לפלייר עומד." }
           - label: "גלריה (אופציונלי)"
             name: gallery
             widget: list
@@ -141,7 +144,8 @@ singletons:
               - { label: "ליווי אישי לנשים", value: individual-guidance-women }
               - { label: "ליווי זוגי", value: couples-guidance }
               - { label: "סדנאות", value: workshops-format }
-          - { label: "קישור להרשמה", name: signupUrl, widget: string, required: false, hint: "אם ריק — מפנה לוואטסאפ." }
+          - { label: "קישור להרשמה", name: signupUrl, widget: string, required: false, hint: "אם ריק — מפנה לוואטסאפ. לא בשימוש כשיש משפט הגעה." }
+          - { label: "משפט הגעה בלי הרשמה", name: registrationHe, widget: string, required: false, hint: "אם מולא — אין כפתור הרשמה, והמשפט הזה מוצג במקום." }
           - label: "סוג מחיר"
             name: priceType
             widget: select
@@ -171,6 +175,7 @@ singletons:
               - { label: "התקיימה", value: completed }
               - { label: "בוטלה", value: cancelled }
           - { label: "מומלצת (מוצגת ראשונה בדף הבית)", name: featured, widget: boolean, default: false }
+          - { label: "כרטיס גם בדף הבית", name: showOnHome, widget: boolean, default: false, required: false, hint: "נשארת בכרטיסי דף הבית גם כשמגבלת הסדנאות הקרובות לא כוללת אותה." }
           - { label: "פעילה (מוצגת באתר)", name: enabled, widget: boolean, default: true }
           - label: "שאלות נפוצות (אופציונלי)"
             name: faq

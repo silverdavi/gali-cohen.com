@@ -112,3 +112,45 @@ items:
     status: upcoming
     featured: false
     enabled: true
+  - slug: ecstatic-dance
+    titleHe: אקסטטיק דאנס
+    subtitleHe: ריקוד השבט
+    ongoing: true
+    scheduleHe: כל יום שני
+    date: ''
+    time: '19:30'
+    endTime: '22:30'
+    locationHe: השבט, פאול קור 16, תל אביב
+    locationUrl: ''
+    introHe: טקס קקאו ואקסטטיק דאנס • כל יום שני
+    descHe: |-
+      ההזמנה היא לרקוד את הגוף והחיים
+
+      אדי זאידמן וגלי גאולה כהן
+
+      כל יום שני, 19:30-22:30
+      השבט, פאול קור 16, תל אביב
+
+      19:30 חיבוקים ומינגלינג
+      20:00 טקס קקאו – גלי כהן
+      20:30 אקסטטיק דאנס – דיג'יי צ'יף
+      22:00 נחיתה רכה עם מוזיקה חיה ומעגל סגירה
+
+      רחבה בלי דיבורים, טלפונים ואלכוהול. פינת קפה ותה ונשנושים טבעוניים חופשיים.
+    metaDescriptionHe: "אקסטטיק דאנס. ריקוד השבט. טקס קקאו ואקסטטיק דאנס, כל יום שני, 19:30-22:30. השבט, פאול קור 16, תל אביב."
+    image: /photos/tribal-dance.webp
+    imageFull: true
+    imageFocalX: 50
+    imageFocalY: 88
+    gallery: []
+    categorySlug: ''
+    signupUrl: ''
+    priceType: contact
+    price: null
+    currency: ILS
+    priceLabelHe: מחיר מומלץ 70-100 ₪
+    registrationHe: בלי הרשמה מראש, פשוט מגיעים
+    showOnHome: true
+    status: upcoming
+    featured: false
+    enabled: true
