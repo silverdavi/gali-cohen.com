@@ -496,7 +496,7 @@ collections:
               - { label: "נעים להכיר", name: about, widget: string }
               - { label: "תהליכים אישיים", name: services, widget: string }
               - { label: "סדנאות", name: events, widget: string }
-              - { label: "הרצאות", name: lectures, widget: string }
+              - { label: "ההרצאה", name: lectures, widget: string }
               - { label: "המלצות", name: words, widget: string }
               - { label: "פודקאסט", name: podcast, widget: string }
               - { label: "בלוג ומאמרים", name: blog, widget: string }
@@ -537,7 +537,7 @@ collections:
               - { label: "תיאור תמונת הבית (לנגישות)", name: photoAlt, widget: string }
               - { label: "מיקוד אופקי בתמונה (0–100, 50 = מרכז)", name: photoFocalX, widget: number, default: 50, min: 0, max: 100, value_type: int }
               - { label: "מיקוד אנכי בתמונה (0–100, 0 = למעלה)", name: photoFocalY, widget: number, default: 30, min: 0, max: 100, value_type: int }
-          - label: "הרצאות"
+          - label: "ההרצאה"
             name: lecture
             widget: object
             collapsed: true
