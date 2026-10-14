@@ -224,6 +224,11 @@ async function main() {
     // Pages redirects /services to /services/ (because child pages exist) and
     // then 404s. Each one gets the same title the React page sets after JS.
     const plain = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
+    // Services and workshops publish no subtitle of their own, so they inherited
+    // the site description. The homepage description is restored separately;
+    // these two pages keep the description they already had.
+    const inheritedHubDescription =
+      'מטפלת ומלווה נשים וזוגות בתל אביב. ליווי אישי, תהליך זוגי, וסדנאות — מיינדפול דאנס לזוגות, תנועה, מדיטציה ונשימה.';
     const hubs = [
       {
         path: '/about',
@@ -234,13 +239,13 @@ async function main() {
       {
         path: '/services',
         title: `${q.servicesHeading.title} · גלי גאולה כהן`,
-        description: q.servicesHeading.sub || content.meta.description,
+        description: q.servicesHeading.sub || inheritedHubDescription,
         sitemap: true,
       },
       {
         path: '/workshops',
         title: `${q.workshopsHeading.title} · גלי גאולה כהן`,
-        description: q.workshopsHeading.sub || content.meta.description,
+        description: q.workshopsHeading.sub || inheritedHubDescription,
         sitemap: q.getAllWorkshops().length > 0,
       },
       ...(sectionOn('podcast') ? [{

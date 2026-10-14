@@ -501,9 +501,8 @@ collections:
             widget: object
             collapsed: true
             fields:
-              - { label: "שורת תיוג (למשל: מרחבים של חיבור, ריפוי וגילוי 🌿)", name: tagline, widget: string }
-              - { label: "שורת קהל יעד (למשל: לנשים ולזוגות)", name: audienceLine, widget: string }
-              - { label: "שורת ערכים (למשל: גוף • רגש • תנועה • יחסים • מיניות קשובה)", name: valuesLine, widget: string }
+              - { label: "שורה שנייה מתחת לשם", name: tagline, widget: string }
+              - { label: "שורה שלישית", name: audienceLine, widget: string }
               - { label: "כפתור ראשי (הרשמה לסדנה)", name: ctaPrimary, widget: string }
               - { label: "כפתור משני (ליצירת קשר)", name: ctaSecondary, widget: string }
               - { label: "כפתור שיחת היכרות (מוצג רק כשהבאנר דולק)", name: freeCallCta, widget: string, required: false }

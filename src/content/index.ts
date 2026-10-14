@@ -59,7 +59,7 @@ export type Content = {
   hero: {
     tagline: string;
     audienceLine: string;
-    valuesLine: string;
+    valuesLine?: string;
     ctaPrimary: string;
     ctaSecondary: string;
     /** WhatsApp intro-call button. Rendered only while homepage.contact.enabled. */
