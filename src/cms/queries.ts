@@ -101,13 +101,21 @@ export const getUpcomingSectionWorkshops = (): Workshop[] =>
   listedUpcoming((w) => w.inUpcomingSection);
 
 /** Homepage cards keep the limited upcoming list, then append workshops that
- *  asked to stay on the homepage. The dated "next" workshop stays first. */
+ *  asked to stay on the homepage, then the one-time workshops that used to
+ *  sit in their own section. One list, so the page does not repeat the heading. */
 export function getHomepageWorkshops(limit?: number): Workshop[] {
   const upcoming = getUpcomingWorkshops(limit);
   const extras = getUpcomingWorkshops().filter(
     (w) => w.showOnHome && !upcoming.some((u) => u.slug === w.slug),
   );
-  return [...upcoming, ...extras];
+  const seen = new Set([...upcoming, ...extras].map((w) => w.slug));
+  const section = getUpcomingSectionWorkshops().filter((w) => !seen.has(w.slug));
+  return sortUpcoming([...upcoming, ...extras, ...section]);
+}
+
+/** Workshops page: the featured list and the former separate section, together. */
+export function getListedUpcomingWorkshops(): Workshop[] {
+  return sortUpcoming([...getUpcomingWorkshops(), ...getUpcomingSectionWorkshops()]);
 }
 
 /** Per-person price, plus the couple amount when the workshop has one.

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
 import { Cinemagraph } from './Cinemagraph';
-import { getHomepageWorkshops, getUpcomingWorkshops, workshopsHeading } from '../cms/queries';
+import { getHomepageWorkshops, getListedUpcomingWorkshops, workshopsHeading } from '../cms/queries';
 import { clipFor } from '../clips';
 import { formatTimeRange } from '../lib/formatDate';
 
@@ -10,7 +10,7 @@ import { formatTimeRange } from '../lib/formatDate';
 // no price. Full details live on /workshops/<slug>.
 export function WorkshopsTeaser({ limit }: { limit?: number }) {
   const upcoming = getHomepageWorkshops(limit);
-  const all = getUpcomingWorkshops();
+  const all = getListedUpcomingWorkshops();
   if (upcoming.length === 0) return null;
 
   return (

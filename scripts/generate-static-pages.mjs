@@ -224,9 +224,8 @@ async function main() {
     // Pages redirects /services to /services/ (because child pages exist) and
     // then 404s. Each one gets the same title the React page sets after JS.
     const plain = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
-    // Services publishes no subtitle of its own, so it inherits the site
-    // description. Workshops shows a short line under its heading; that line
-    // is display copy, and the page keeps the description it already had.
+    // Services and workshops publish no subtitle of their own, so they keep
+    // the description they already had.
     const inheritedHubDescription =
       'מטפלת ומלווה נשים וזוגות בתל אביב. ליווי אישי, תהליך זוגי, וסדנאות — מיינדפול דאנס לזוגות, תנועה, מדיטציה ונשימה.';
     const hubs = [
