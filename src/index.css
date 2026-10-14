@@ -1590,6 +1590,14 @@ video.band-photo { display: block; }
 .legal-updated { color: var(--faint); font-size: var(--fs-meta); margin: 0 0 var(--s-6); }
 .legal-body { display: flex; flex-direction: column; gap: var(--s-4); }
 .legal-body p { color: var(--body); line-height: 1.85; margin: 0; }
+.workshop-desc-points { display: flex; flex-direction: column; gap: var(--s-2); }
+.workshop-desc-list {
+  margin: 0;
+  padding-inline-start: 1.25em;
+  color: var(--body);
+  line-height: 1.85;
+}
+.workshop-desc-list li { margin: 0; }
 .workshop-status-note { color: var(--accent-deep); font-weight: 600; margin: 0 0 var(--s-4); }
 /* --- Workshop detail: an experiential page, not a product card --------------
    Hero-scale image at the page's full width, then everything else (meta,
