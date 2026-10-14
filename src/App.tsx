@@ -37,6 +37,7 @@ export default function App() {
         <Route element={<SiteLayout />}>
           <Route index element={<Home />} />
           <Route path="services" element={<ServicesHub />} />
+          <Route path="services/workshops-format" element={<Navigate to="/workshops" replace />} />
           <Route path="services/:categorySlug" element={<ServiceCategoryPage />} />
           <Route path="workshops" element={<WorkshopsList />} />
           <Route path="lectures" element={<LecturesPage />} />

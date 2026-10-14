@@ -13,6 +13,47 @@ import { workshopWhatsappHref } from '../lib/workshopWhatsapp';
 import { photoSources } from '../lib/photo';
 import { NotFoundPage } from './NotFoundPage';
 
+function withBreaks(lines: string[]) {
+  return lines.map((line, m) => (
+    <span key={m}>
+      {line}
+      {m < lines.length - 1 && <br />}
+    </span>
+  ));
+}
+
+// "מה מחכה לכם:" is a real list. Other description lines keep their breaks.
+function WorkshopDescription({ text }: { text: string }) {
+  const blocks = text.split(/\n{2,}/);
+  return (
+    <div className="legal-body">
+      {blocks.map((block, n) => {
+        const lines = block.split('\n');
+        const bulletAt = lines.findIndex((line) => line.trim().startsWith('•'));
+        const isWaitingList = bulletAt > 0 && lines[bulletAt - 1].includes('מה מחכה לכם');
+        if (!isWaitingList) return <p key={n}>{withBreaks(lines)}</p>;
+        const items = lines.slice(bulletAt).map((line) => line.trim().replace(/^•\s*/, '')).filter(Boolean);
+        return (
+          <div className="workshop-desc-points" key={n}>
+            <p>{withBreaks(lines.slice(0, bulletAt))}</p>
+            <ul className="workshop-desc-list">
+              {items.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Hebrew opening quote sits at the right; the closing quote closes on the left.
+function hebrewQuote(quote: string): string {
+  const open = '”';
+  const close = '“';
+  if (quote.startsWith(open) && quote.endsWith(close)) return quote;
+  return `${open}${quote}${close}`;
+}
+
 const STATUS_NOTE: Record<string, string> = {
   'sold-out': 'הסדנה מלאה — אפשר להשאיר פרטים לרשימת המתנה.',
   cancelled: 'הסדנה בוטלה.',
@@ -67,18 +108,7 @@ export function WorkshopPage() {
         {note && <p className="workshop-status-note">{note}</p>}
         {w.intro && <p className="workshop-intro">{w.intro}</p>}
 
-        <div className="legal-body">
-          {w.desc.split(/\n{2,}/).map((para, n) => (
-            <p key={n}>
-              {para.split('\n').map((line, m, arr) => (
-                <span key={m}>
-                  {line}
-                  {m < arr.length - 1 && <br />}
-                </span>
-              ))}
-            </p>
-          ))}
-        </div>
+        <WorkshopDescription text={w.desc} />
 
         {w.whatHappens && (
           <div className="workshop-subsection">
@@ -141,7 +171,7 @@ export function WorkshopPage() {
                   <h3 className="workshop-feedback-sub">{group.title}</h3>
                 )}
                 {group.quotes.map((quote) => (
-                  <blockquote className="workshop-feedback-quote" key={quote}>{quote}</blockquote>
+                  <blockquote className="workshop-feedback-quote" key={quote}>{hebrewQuote(quote)}</blockquote>
                 ))}
               </section>
             ))}

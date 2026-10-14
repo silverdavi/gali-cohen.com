@@ -110,6 +110,9 @@ async function main() {
     });
 
     for (const cat of q.getAllServiceCategories()) {
+      // The workshops category has no tracks of its own. Its card goes
+      // straight to /workshops, so this empty intro page is not published.
+      if (cat.slug === 'workshops-format') continue;
       routes.push({
         path: `/services/${cat.slug}`,
         title: `${cat.title} · גלי גאולה כהן`,
