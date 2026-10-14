@@ -17,7 +17,7 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 // someone already has the link — just not surfaced from this listing).
 export function WorkshopsList() {
   const upcoming = getUpcomingWorkshops();
-  useDocumentMeta(`${workshopsHeading.title} · גלי גאולה כהן`, workshopsHeading.sub);
+  useDocumentMeta(`${workshopsHeading.title} · גלי גאולה כהן`);
 
   return (
     <div className="container page">

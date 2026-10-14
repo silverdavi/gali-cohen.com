@@ -224,15 +224,15 @@ async function main() {
     // Pages redirects /services to /services/ (because child pages exist) and
     // then 404s. Each one gets the same title the React page sets after JS.
     const plain = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
-    // Services and workshops publish no subtitle of their own, so they inherited
-    // the site description. The homepage description is restored separately;
-    // these two pages keep the description they already had.
+    // Services publishes no subtitle of its own, so it inherits the site
+    // description. Workshops shows a short line under its heading; that line
+    // is display copy, and the page keeps the description it already had.
     const inheritedHubDescription =
       'מטפלת ומלווה נשים וזוגות בתל אביב. ליווי אישי, תהליך זוגי, וסדנאות — מיינדפול דאנס לזוגות, תנועה, מדיטציה ונשימה.';
     const hubs = [
       {
         path: '/lectures',
-        title: `${content.lecture.title} · גלי גאולה כהן`,
+        title: `${content.nav.lectures} · גלי גאולה כהן`,
         description: plain(content.lecture.paragraphs[0]).slice(0, 160),
         image: content.lecture.hero.src,
         imageAlt: content.lecture.hero.alt,
@@ -253,7 +253,7 @@ async function main() {
       {
         path: '/workshops',
         title: `${q.workshopsHeading.title} · גלי גאולה כהן`,
-        description: q.workshopsHeading.sub || inheritedHubDescription,
+        description: inheritedHubDescription,
         sitemap: q.getAllWorkshops().length > 0,
       },
       ...(sectionOn('podcast') ? [{

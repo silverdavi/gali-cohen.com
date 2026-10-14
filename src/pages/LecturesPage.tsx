@@ -12,7 +12,7 @@ export function LecturesPage() {
   const { lecture } = content;
   const magnetic = useMagnetic();
   const whatsapp = `${site.whatsapp}?text=${encodeURIComponent(lecture.whatsappText)}`;
-  useDocumentMeta(`${lecture.title} · גלי גאולה כהן`, lecture.paragraphs[0]?.slice(0, 160));
+  useDocumentMeta(`${content.nav.lectures} · גלי גאולה כהן`, lecture.paragraphs[0]?.slice(0, 160));
 
   return (
     <div className="container page">
