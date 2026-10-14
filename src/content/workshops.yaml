@@ -188,7 +188,6 @@ items:
     price: null
     currency: ILS
     priceLabelHe: "תמורה: 100 ₪ | לנרשמים בזוג: 90 ₪ לאדם | מחיר הכרות: 50 ₪"
-    registrationHe: "לפרטים והרשמה: 054-9431396 (ווצאפ)"
     capacity: אינטימי (עד 10 איש)
     status: upcoming
     featured: false

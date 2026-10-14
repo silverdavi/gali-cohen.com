@@ -9,6 +9,7 @@ import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { formatTimeRange } from '../lib/formatDate';
+import { workshopWhatsappHref } from '../lib/workshopWhatsapp';
 import { photoSources } from '../lib/photo';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -103,8 +104,8 @@ export function WorkshopPage() {
               {w.registration && <p className="workshop-registration">{w.registration}</p>}
               {w.hasSignupLink ? (
                 <a
-                  className={/wa\.me|whatsapp/i.test(w.signupHref) ? 'btn btn-primary btn-whatsapp workshop-cta' : 'btn btn-primary workshop-cta'}
-                  href={w.signupHref}
+                  className="workshop-teaser-cta"
+                  href={/wa\.me|whatsapp/i.test(w.signupHref) ? workshopWhatsappHref(w) : w.signupHref}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
