@@ -3,8 +3,7 @@ import { Reveal } from '../components/Reveal';
 import { SectionHead } from '../components/SectionHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Cinemagraph } from '../components/Cinemagraph';
-import { UpcomingWorkshops } from '../components/UpcomingWorkshops';
-import { getUpcomingWorkshops, workshopsHeading, workshopsGroup, formatWorkshopPrice } from '../cms/queries';
+import { getListedUpcomingWorkshops, workshopsHeading, workshopsGroup, formatWorkshopPrice } from '../cms/queries';
 import { formatTimeRange } from '../lib/formatDate';
 import { content } from '../content';
 import { clipFor } from '../clips';
@@ -16,7 +15,7 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 // are not shown here (their own /workshops/<slug> page still resolves if
 // someone already has the link — just not surfaced from this listing).
 export function WorkshopsList() {
-  const upcoming = getUpcomingWorkshops();
+  const upcoming = getListedUpcomingWorkshops();
   useDocumentMeta(`${workshopsHeading.title} · גלי גאולה כהן`);
 
   return (
@@ -58,8 +57,6 @@ export function WorkshopsList() {
       ) : (
         <p className="section-sub">כרגע אין אירועים מתוכננים.</p>
       )}
-
-      <UpcomingWorkshops />
 
       {workshopsGroup && (
         <Reveal delay={0.1}>
