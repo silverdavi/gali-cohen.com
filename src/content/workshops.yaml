@@ -139,11 +139,16 @@ items:
 
       רחבה בלי דיבורים, טלפונים ואלכוהול. פינת קפה ותה ונשנושים טבעוניים חופשיים.
     metaDescriptionHe: "אקסטטיק דאנס. ריקוד השבט. טקס קקאו ואקסטטיק דאנס, כל יום שני, 19:30-22:30. השבט, פאול קור 16, תל אביב."
-    image: /photos/tribal-dance.webp
+    image: /photos/ecstatic-1.webp
     imageFull: true
     imageFocalX: 50
-    imageFocalY: 88
-    gallery: []
+    imageFocalY: 40
+    gallery:
+      - /photos/ecstatic-2.webp
+      - /photos/ecstatic-3.webp
+      - /photos/ecstatic-4.webp
+      - /photos/ecstatic-6.webp
+      - /photos/ecstatic-5.webp
     categorySlug: ''
     signupUrl: ''
     priceType: contact

@@ -9,6 +9,7 @@ import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { formatTimeRange } from '../lib/formatDate';
+import { photoSources } from '../lib/photo';
 import { NotFoundPage } from './NotFoundPage';
 
 const STATUS_NOTE: Record<string, string> = {
@@ -138,6 +139,20 @@ export function WorkshopPage() {
                   <blockquote className="workshop-feedback-quote" key={quote}>{quote}</blockquote>
                 ))}
               </section>
+            ))}
+          </div>
+        )}
+
+        {w.gallery.length > 0 && (
+          <div className="workshop-gallery">
+            {w.gallery.map((src) => (
+              <figure key={src}>
+                <img
+                  {...photoSources(src)}
+                  alt={w.title}
+                  sizes="(max-width: 880px) 46vw, 360px"
+                />
+              </figure>
             ))}
           </div>
         )}
