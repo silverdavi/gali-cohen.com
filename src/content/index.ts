@@ -48,6 +48,19 @@ export type Content = {
     pricing: string; events: string; shop: string; cta: string; skip: string;
     services: string; faq: string; blog: string; podcast: string;
     words: string; contact: string; menu: string; close: string; home: string;
+    lectures: string;
+  };
+  lecture: {
+    title: string;
+    subtitle: string;
+    paragraphs: string[];
+    duration: string;
+    audienceLabel: string;
+    audience: string;
+    cta: string;
+    whatsappText: string;
+    hero: { src: string; alt: string };
+    gallery: { src: string; alt: string }[];
   };
   profile: {
     name: string;

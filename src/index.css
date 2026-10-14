@@ -1584,6 +1584,51 @@ video.band-photo { display: block; }
 .workshop-page-media.player-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink); }
 .workshop-page-media.player-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .workshop-page-body { max-width: 760px; margin: 0 auto; }
+
+/* --- Lectures (/lectures) -------------------------------------------------------
+   The stage photo is a portrait with a credit in the corner, so it is shown
+   at its own ratio (never cropped). The other two photos sit in a small
+   gallery beneath the booking button. */
+.lecture-body { max-width: 720px; margin: 0 auto; }
+.lecture-hero { margin: var(--s-6) auto 0; max-width: 480px; }
+.lecture-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  border: 1px solid var(--rule);
+  filter: sepia(0.12) saturate(0.8) hue-rotate(-8deg) brightness(0.97);
+}
+.lecture-copy { display: flex; flex-direction: column; gap: var(--s-4); margin-top: var(--s-6); }
+.lecture-copy p { margin: 0; color: var(--body); line-height: 1.85; }
+.lecture-duration { font-weight: 600; color: var(--ink); }
+.lecture-audience { margin-top: var(--s-7); }
+.lecture-audience h2 {
+  font-family: var(--display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 var(--s-3);
+}
+.lecture-audience p { margin: 0; color: var(--body); line-height: 1.85; }
+.lecture-cta { margin-top: var(--s-6); }
+.lecture-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+  margin-top: var(--s-7);
+}
+.lecture-gallery figure { margin: 0; }
+.lecture-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  border: 1px solid var(--rule);
+  filter: sepia(0.12) saturate(0.8) hue-rotate(-8deg) brightness(0.97);
+}
 .workshop-intro {
   font-family: var(--sans);
   font-size: var(--fs-lead);

@@ -30,7 +30,7 @@ const PERSON = {
 // workshop slugged "services". The three legal pages are NOT in this set:
 // they're deliberately in the generated `routes` list below (each needs its
 // own real title too), not left to the plain index.html fallback.
-const STATIC_ROUTES = new Set(['/', '/services', '/workshops', '/about', '/blog', '/podcast', '/videos', '/store']);
+const STATIC_ROUTES = new Set(['/', '/services', '/workshops', '/lectures', '/about', '/blog', '/podcast', '/videos', '/store']);
 
 const escapeAttr = (s) => String(s ?? '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const escapeHtml = (s) => String(s ?? '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -230,6 +230,14 @@ async function main() {
     const inheritedHubDescription =
       'מטפלת ומלווה נשים וזוגות בתל אביב. ליווי אישי, תהליך זוגי, וסדנאות — מיינדפול דאנס לזוגות, תנועה, מדיטציה ונשימה.';
     const hubs = [
+      {
+        path: '/lectures',
+        title: `${content.lecture.title} · גלי גאולה כהן`,
+        description: plain(content.lecture.paragraphs[0]).slice(0, 160),
+        image: content.lecture.hero.src,
+        imageAlt: content.lecture.hero.alt,
+        sitemap: true,
+      },
       {
         path: '/about',
         title: `${content.aboutSection.title} · גלי גאולה כהן`,

@@ -471,6 +471,7 @@ collections:
               - { label: "נעים להכיר", name: about, widget: string }
               - { label: "תהליכים אישיים", name: services, widget: string }
               - { label: "סדנאות", name: events, widget: string }
+              - { label: "הרצאות", name: lectures, widget: string }
               - { label: "המלצות", name: words, widget: string }
               - { label: "פודקאסט", name: podcast, widget: string }
               - { label: "בלוג ומאמרים", name: blog, widget: string }
@@ -511,6 +512,31 @@ collections:
               - { label: "תיאור תמונת הבית (לנגישות)", name: photoAlt, widget: string }
               - { label: "מיקוד אופקי בתמונה (0–100, 50 = מרכז)", name: photoFocalX, widget: number, default: 50, min: 0, max: 100, value_type: int }
               - { label: "מיקוד אנכי בתמונה (0–100, 0 = למעלה)", name: photoFocalY, widget: number, default: 30, min: 0, max: 100, value_type: int }
+          - label: "הרצאות"
+            name: lecture
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "כותרת", name: title, widget: string }
+              - { label: "כותרת משנה", name: subtitle, widget: string }
+              - { label: "פסקאות", name: paragraphs, widget: list, field: { label: פסקה, name: paragraph, widget: text } }
+              - { label: "משך", name: duration, widget: string }
+              - { label: "כותרת 'למי זה מתאים'", name: audienceLabel, widget: string }
+              - { label: "למי זה מתאים", name: audience, widget: text }
+              - { label: "טקסט הכפתור", name: cta, widget: string }
+              - { label: "הודעת וואטסאפ מוכנה", name: whatsappText, widget: string }
+              - label: "תמונה ראשית"
+                name: hero
+                widget: object
+                fields:
+                  - { label: "תמונה", name: src, widget: image }
+                  - { label: "תיאור (נגישות)", name: alt, widget: string }
+              - label: "גלריה"
+                name: gallery
+                widget: list
+                fields:
+                  - { label: "תמונה", name: src, widget: image }
+                  - { label: "תיאור (נגישות)", name: alt, widget: string }
           - label: "רצועת תמונה"
             name: band
             widget: object
