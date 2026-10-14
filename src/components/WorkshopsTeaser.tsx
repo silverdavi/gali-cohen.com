@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
 import { SectionHead } from './SectionHead';
 import { Cinemagraph } from './Cinemagraph';
-import { getUpcomingWorkshops, workshopsHeading } from '../cms/queries';
+import { getHomepageWorkshops, getUpcomingWorkshops, workshopsHeading } from '../cms/queries';
 import { clipFor } from '../clips';
 import { formatTimeRange } from '../lib/formatDate';
 
 // Home teaser: image + name + date + CTA only, per the brief — no description,
 // no price. Full details live on /workshops/<slug>.
 export function WorkshopsTeaser({ limit }: { limit?: number }) {
-  const upcoming = getUpcomingWorkshops(limit);
+  const upcoming = getHomepageWorkshops(limit);
   const all = getUpcomingWorkshops();
   if (upcoming.length === 0) return null;
 
@@ -36,8 +36,9 @@ export function WorkshopsTeaser({ limit }: { limit?: number }) {
                   {w.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                 </div>
                 <h3 className="workshop-teaser-title">{w.title}</h3>
+                {w.subtitle && <p className="workshop-teaser-subtitle">{w.subtitle}</p>}
                 <p className="workshop-teaser-date">{w.dateLabel}{when && ` · ${when}`}</p>
-                <span className="workshop-teaser-cta">{workshopsHeading.cta}</span>
+                <span className="workshop-teaser-cta">{w.registration || workshopsHeading.cta}</span>
               </Link>
             </Reveal>
             );

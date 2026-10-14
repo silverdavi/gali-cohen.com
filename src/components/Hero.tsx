@@ -30,13 +30,12 @@ export function Hero() {
           <Reveal delay={0.12}>
             <p className="hero-tagline">{hero.tagline}</p>
           </Reveal>
-          <Reveal delay={0.18}>
-            <p className="hero-audience">{hero.audienceLine}</p>
-          </Reveal>
+          {hero.audienceLine && (
+            <Reveal delay={0.18}>
+              <p className="hero-audience">{hero.audienceLine}</p>
+            </Reveal>
+          )}
           <Reveal delay={0.24}>
-            <p className="hero-values">{hero.valuesLine}</p>
-          </Reveal>
-          <Reveal delay={0.3}>
             <div className="hero-ctas">
               {hero.ctaPrimary && (
                 <Link className="btn btn-primary" to={workshopTo}>{hero.ctaPrimary}</Link>

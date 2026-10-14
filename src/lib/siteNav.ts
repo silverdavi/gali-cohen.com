@@ -13,6 +13,7 @@ const ITEMS: NavItem[] = [
   { path: '/about', label: content.nav.about, visible: true },
   { path: '/services', label: content.nav.services, visible: true },
   { path: '/workshops', label: content.nav.events, visible: getAllWorkshops().length > 0 },
+  { path: '/lectures', label: content.nav.lectures, visible: true },
   { path: '/blog', label: content.nav.blog, visible: sectionEnabled('blog') && getAllArticles().length > 0 },
   { path: '/podcast', label: content.nav.podcast, visible: sectionEnabled('podcast') && getAllShows().length > 0 },
   { path: '/videos', label: 'סרטונים', visible: sectionEnabled('videos') && getAllVideos().length > 0 },

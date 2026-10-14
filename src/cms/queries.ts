@@ -25,6 +25,7 @@ export const servicesHeading = mapHeading(servicesRaw.heading);
 /** Opening paragraphs on the תהליכים אישיים page, above the category cards. */
 export const servicesIntro: string[] = servicesRaw.introHe ?? [];
 export const workshopsHeading = mapHeading(workshopsRaw.heading);
+export const upcomingWorkshopsTitle = (workshopsRaw.upcomingTitleHe ?? '').trim();
 export const podcastHeading = mapHeading(podcastRaw.heading);
 export const videosHeading = mapHeading(videosRaw.heading);
 export const blogHeading = mapHeading(blogRaw.heading);
@@ -70,22 +71,49 @@ function isOnOrAfterToday(iso: string): boolean {
   return iso >= todayInIsrael();
 }
 
+function sortUpcoming(list: Workshop[]): Workshop[] {
+  return list.sort((a, b) => {
+    const aDated = /^\d{4}-\d{2}-\d{2}$/.test(a.iso);
+    const bDated = /^\d{4}-\d{2}-\d{2}$/.test(b.iso);
+    if (aDated && bDated) return a.iso.localeCompare(b.iso);
+    if (aDated) return -1;
+    if (bDated) return 1;
+    return 0;
+  });
+}
+
+function listedUpcoming(include: (w: Workshop) => boolean): Workshop[] {
+  return sortUpcoming(
+    workshops.filter(
+      (w) => w.enabled && include(w) && PUBLIC_UPCOMING.includes(w.status) && (w.ongoing || isOnOrAfterToday(w.iso)),
+    ),
+  );
+}
+
 export const getUpcomingWorkshops = (limit?: number): Workshop[] => {
-  const list = workshops
-    .filter((w) => w.enabled && PUBLIC_UPCOMING.includes(w.status) && (w.ongoing || isOnOrAfterToday(w.iso)))
-    .sort((a, b) => {
-      const aDated = /^\d{4}-\d{2}-\d{2}$/.test(a.iso);
-      const bDated = /^\d{4}-\d{2}-\d{2}$/.test(b.iso);
-      if (aDated && bDated) return a.iso.localeCompare(b.iso);
-      if (aDated) return -1;
-      if (bDated) return 1;
-      return 0;
-    });
+  const list = listedUpcoming((w) => !w.inUpcomingSection);
   return typeof limit === 'number' ? list.slice(0, limit) : list;
 };
 
-/** Per-person price, plus the couple amount when the workshop has one. */
+/** One-time workshops shown under סדנאות קרובות. Kept out of the featured
+ *  next-workshop slot so that slot stays on the workshop it already shows. */
+export const getUpcomingSectionWorkshops = (): Workshop[] =>
+  listedUpcoming((w) => w.inUpcomingSection);
+
+/** Homepage cards keep the limited upcoming list, then append workshops that
+ *  asked to stay on the homepage. The dated "next" workshop stays first. */
+export function getHomepageWorkshops(limit?: number): Workshop[] {
+  const upcoming = getUpcomingWorkshops(limit);
+  const extras = getUpcomingWorkshops().filter(
+    (w) => w.showOnHome && !upcoming.some((u) => u.slug === w.slug),
+  );
+  return [...upcoming, ...extras];
+}
+
+/** Per-person price, plus the couple amount when the workshop has one.
+ *  A verbatim price label (a recommended range, for example) is shown as written. */
 export function formatWorkshopPrice(w: Workshop): string {
+  if (w.priceLabel) return w.priceLabel;
   const base = formatPrice(w.price);
   return w.priceNote ? `${base} (${w.priceNote})` : base;
 }

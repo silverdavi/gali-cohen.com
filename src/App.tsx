@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { ServicesHub } from './pages/ServicesHub';
 import { ServiceCategoryPage } from './pages/ServiceCategoryPage';
 import { WorkshopsList } from './pages/WorkshopsList';
+import { LecturesPage } from './pages/LecturesPage';
 import { WorkshopPage } from './pages/WorkshopPage';
 import { AboutPage } from './pages/AboutPage';
 import { BlogList } from './pages/BlogList';
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="services" element={<ServicesHub />} />
           <Route path="services/:categorySlug" element={<ServiceCategoryPage />} />
           <Route path="workshops" element={<WorkshopsList />} />
+          <Route path="lectures" element={<LecturesPage />} />
           <Route path="workshops/:slug" element={<WorkshopPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="blog" element={sectionEnabled('blog') ? <BlogList /> : <Navigate to="/" replace />} />

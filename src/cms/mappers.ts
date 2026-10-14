@@ -8,13 +8,14 @@
 // this redesign drops them from the content files entirely rather than
 // migrating copy that was already wrong.
 import { site } from '../content';
+import { workshopsRaw } from './repository';
 import type {
   RawHeading, RawPrice, RawServiceTrack, RawServiceCategory, RawProcessStep, RawWorkshop,
   RawFaqItem, RawPodcastShow, RawPodcastEpisode, RawVideo, RawArticle, RawProduct,
 } from './repository';
 import type {
   Heading, Price, ServiceTrack, ServiceCategory, ProcessStep, Workshop, FaqItem, PodcastShow,
-  PodcastEpisode, Video, Article, Product, PriceUnit,
+  PodcastEpisode, Video, Article, Product, PriceUnit, WorkshopFeedbackGroup,
 } from './types';
 
 // Empty links fall back to WhatsApp so every CTA always goes somewhere useful.
@@ -97,6 +98,16 @@ export function mapFaqItem(f: RawFaqItem): FaqItem {
   return { q: f.qHe, a: f.aHe };
 }
 
+function feedbackFor(slug: string): WorkshopFeedbackGroup[] {
+  const block = (workshopsRaw.participantFeedback ?? []).find((b) => (b.slugs ?? []).includes(slug));
+  return (block?.groups ?? [])
+    .map((g) => ({
+      title: g.titleHe,
+      quotes: (g.quotes ?? []).map((q) => q.trim()).filter(Boolean),
+    }))
+    .filter((g) => g.title && g.quotes.length > 0);
+}
+
 export function mapWorkshop(w: RawWorkshop): Workshop {
   const ongoing = Boolean(w.ongoing);
   const iso = ongoing ? '' : isoDate(w.date);
@@ -105,6 +116,7 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
   return {
     slug: w.slug,
     title: w.titleHe,
+    subtitle: w.subtitleHe ?? '',
     iso,
     time: w.time ?? '',
     endTime: w.endTime ?? '',
@@ -115,6 +127,7 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     image: w.image ?? '',
     imageFocalX: w.imageFocalX,
     imageFocalY: w.imageFocalY,
+    imageFull: Boolean(w.imageFull),
     gallery: w.gallery ?? [],
     categorySlug: w.categorySlug ?? '',
     signupHref: checkout(w.signupUrl),
@@ -126,6 +139,10 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     enabled: w.enabled !== false,
     ongoing,
     priceNote: w.priceNoteHe ?? '',
+    priceLabel: w.priceLabelHe ?? '',
+    registration: w.registrationHe ?? '',
+    showOnHome: Boolean(w.showOnHome),
+    inUpcomingSection: Boolean(w.inUpcomingSection),
     dateLabel: ongoing ? (w.scheduleHe || 'בתיאום אישי') : (valid ? dateFmt.format(d) : iso),
     day: valid ? String(d.getDate()) : '',
     month: valid ? monthFmt.format(d) : '',
@@ -133,6 +150,7 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     whatHappens: w.whatHappensHe ?? '',
     whoFor: w.whoForHe ?? '',
     faq: (w.faq ?? []).map(mapFaqItem),
+    feedback: feedbackFor(w.slug),
   };
 }
 

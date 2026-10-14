@@ -51,6 +51,8 @@ export type RawFaqItem = { qHe: string; aHe: string };
 export type RawWorkshop = RawPrice & {
   slug: string;
   titleHe: string;
+  /** Second line directly under the title. */
+  subtitleHe?: string;
   date: string | Date;
   time?: string;
   endTime?: string;
@@ -62,6 +64,8 @@ export type RawWorkshop = RawPrice & {
   /** 0–100. Where a wide photo should stay when a card crops it. 50 is center. */
   imageFocalX?: number;
   imageFocalY?: number;
+  /** Detail page shows the whole photo instead of the wide cover crop. */
+  imageFull?: boolean;
   gallery?: string[];
   categorySlug?: string;
   signupUrl?: string;
@@ -75,17 +79,36 @@ export type RawWorkshop = RawPrice & {
   scheduleHe?: string;
   /** Second price line, e.g. ₪1400 לזוג, shown next to the per-person price. */
   priceNoteHe?: string;
+  /** Exact price sentence, e.g. a recommended range. Replaces the calculated price. */
+  priceLabelHe?: string;
+  /** Shown instead of a signup button, e.g. walk-in arrival. */
+  registrationHe?: string;
+  /** Also show a homepage card when the teaser limit would otherwise skip it. */
+  showOnHome?: boolean;
+  /** Listed under סדנאות קרובות instead of the featured next-workshop slot. */
+  inUpcomingSection?: boolean;
   introHe?: string;
   whatHappensHe?: string;
   whoForHe?: string;
   faq?: RawFaqItem[];
 };
 
+export type RawFeedbackGroup = { titleHe: string; quotes?: string[] };
+
+export type RawParticipantFeedback = {
+  slugs?: string[];
+  groups?: RawFeedbackGroup[];
+};
+
 export type RawWorkshopsFile = {
   heading: RawHeading;
+  /** Heading for one-time workshops listed apart from the featured next workshop. */
+  upcomingTitleHe?: string;
   groupUrl?: string;
   groupLabelHe?: string;
   items: RawWorkshop[];
+  /** Anonymous quotes shown on the listed workshop pages. */
+  participantFeedback?: RawParticipantFeedback[];
 };
 
 export type RawPodcastEpisode = {

@@ -9,6 +9,7 @@ import { content } from '../content';
 import { clipFor } from '../clips';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { formatTimeRange } from '../lib/formatDate';
+import { photoSources } from '../lib/photo';
 import { NotFoundPage } from './NotFoundPage';
 
 const STATUS_NOTE: Record<string, string> = {
@@ -42,7 +43,7 @@ export function WorkshopPage() {
       <Breadcrumbs items={[{ label: content.nav.events, path: '/workshops' }, { label: w.title }]} />
       {w.image && (
         <Reveal>
-          <div className="workshop-page-media">
+          <div className={w.imageFull ? 'workshop-page-media is-full' : 'workshop-page-media'}>
             <Cinemagraph
               src={w.image}
               clip={clipFor(w.image)}
@@ -61,6 +62,7 @@ export function WorkshopPage() {
           {w.location && ` · ${w.location}`}
         </p>
         <h1 className="legal-title">{w.title}</h1>
+        {w.subtitle && <p className="workshop-page-subtitle">{w.subtitle}</p>}
         {note && <p className="workshop-status-note">{note}</p>}
         {w.intro && <p className="workshop-intro">{w.intro}</p>}
 
@@ -97,19 +99,27 @@ export function WorkshopPage() {
             {w.capacity && <p className="workshop-capacity">{w.capacity}</p>}
           </div>
           {canSignUp && (
-            w.hasSignupLink ? (
-              <a className="btn btn-primary workshop-cta" href={w.signupHref} target="_blank" rel="noopener noreferrer">
-                לפרטים והרשמה
-              </a>
-            ) : (
-              <button type="button" className="btn btn-primary workshop-cta" onClick={() => setSigningUp(true)}>
-                לפרטים והרשמה
-              </button>
-            )
+            <div className="workshop-signup">
+              {w.registration && <p className="workshop-registration">{w.registration}</p>}
+              {w.hasSignupLink ? (
+                <a
+                  className={/wa\.me|whatsapp/i.test(w.signupHref) ? 'btn btn-primary btn-whatsapp workshop-cta' : 'btn btn-primary workshop-cta'}
+                  href={w.signupHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  לפרטים והרשמה
+                </a>
+              ) : !w.registration ? (
+                <button type="button" className="btn btn-primary workshop-cta" onClick={() => setSigningUp(true)}>
+                  לפרטים והרשמה
+                </button>
+              ) : null}
+            </div>
           )}
         </div>
 
-        {signingUp && <WorkshopSignupModal workshop={w} onClose={() => setSigningUp(false)} />}
+        {signingUp && !w.registration && <WorkshopSignupModal workshop={w} onClose={() => setSigningUp(false)} />}
 
         {content.wordsSection.items
           .filter((item) => item.workshopSlug === w.slug)
@@ -119,6 +129,37 @@ export function WorkshopPage() {
               <figcaption>{item.name}</figcaption>
             </figure>
           ))}
+
+        {w.feedback.length > 0 && (
+          <div className="workshop-feedback" id="workshop-feedback">
+            {w.feedback.map((group, i) => (
+              <section className="workshop-feedback-group" key={group.title}>
+                {i === 0 ? (
+                  <h2 className="workshop-subhead">{group.title}</h2>
+                ) : (
+                  <h3 className="workshop-feedback-sub">{group.title}</h3>
+                )}
+                {group.quotes.map((quote) => (
+                  <blockquote className="workshop-feedback-quote" key={quote}>{quote}</blockquote>
+                ))}
+              </section>
+            ))}
+          </div>
+        )}
+
+        {w.gallery.length > 0 && (
+          <div className="workshop-gallery">
+            {w.gallery.map((src) => (
+              <figure key={src}>
+                <img
+                  {...photoSources(src)}
+                  alt={w.title}
+                  sizes="(max-width: 880px) 46vw, 360px"
+                />
+              </figure>
+            ))}
+          </div>
+        )}
 
         {w.faq.length > 0 && (
           <div className="workshop-faq">
@@ -150,6 +191,7 @@ export function WorkshopPage() {
                     {rw.status === 'sold-out' && <span className="workshop-badge">אזל</span>}
                   </div>
                   <h3 className="workshop-teaser-title">{rw.title}</h3>
+                  {rw.subtitle && <p className="workshop-teaser-subtitle">{rw.subtitle}</p>}
                   <p className="workshop-teaser-date">{rw.dateLabel}</p>
                 </Link>
               </Reveal>
