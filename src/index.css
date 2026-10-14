@@ -1117,6 +1117,13 @@ video.band-photo { display: block; }
   gap: var(--s-8);
 }
 .workshop-feedback-group { display: flex; flex-direction: column; gap: var(--s-4); }
+.workshop-feedback-sub {
+  margin: 0;
+  font-family: var(--display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--accent);
+}
 .workshop-feedback-quote {
   margin: 0;
   padding-top: var(--s-4);

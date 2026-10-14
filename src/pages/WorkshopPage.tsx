@@ -132,9 +132,13 @@ export function WorkshopPage() {
 
         {w.feedback.length > 0 && (
           <div className="workshop-feedback" id="workshop-feedback">
-            {w.feedback.map((group) => (
+            {w.feedback.map((group, i) => (
               <section className="workshop-feedback-group" key={group.title}>
-                <h2 className="workshop-subhead">{group.title}</h2>
+                {i === 0 ? (
+                  <h2 className="workshop-subhead">{group.title}</h2>
+                ) : (
+                  <h3 className="workshop-feedback-sub">{group.title}</h3>
+                )}
                 {group.quotes.map((quote) => (
                   <blockquote className="workshop-feedback-quote" key={quote}>{quote}</blockquote>
                 ))}
