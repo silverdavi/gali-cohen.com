@@ -22,7 +22,7 @@ export function ServicesTeaser() {
         <div className="practices-list">
           {categories.map((c, i) => (
             <Reveal key={c.slug} delay={i * 0.05}>
-              <Link className="practice" to={c.slug === 'workshops-format' ? '/workshops' : `/services/${c.slug}`}>
+              <Link className="practice" to={`/services/${c.slug}`}>
                 <div className="practice-main">
                   <h3 className="practice-title">{c.title}</h3>
                   <p className="practice-body">{c.shortDesc}</p>

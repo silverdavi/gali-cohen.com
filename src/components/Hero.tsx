@@ -47,6 +47,9 @@ export function Hero() {
                 <a className="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.freeCallCta}</a>
               )}
             </div>
+            {hero.ctaTantra && (
+              <Link className="btn btn-ghost hero-cta-tantra" to="/workshops/private-tantra-couples">{hero.ctaTantra}</Link>
+            )}
           </Reveal>
         </div>
         <Reveal delay={0.16} y={28} className="hero-portrait-col">

@@ -651,6 +651,16 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
    box-sizing) — trimmed 1px off each side so both CTAs render the same
    height, as asked. */
 .hero-ctas .btn-ghost { padding-block: 14px; }
+/* Sits on its own line under the hero pair, sized to its label like the other pills. */
+.hero-cta-tantra {
+  align-self: flex-start;
+  max-width: 100%;
+  margin-top: var(--s-4);
+  padding: 14px 28px;
+  white-space: normal;
+  text-align: center;
+  height: auto;
+}
 
 /* --- Hero photo: Gali's portrait in a rounded frame. The zoom stays centered
    so the top of her head is not pushed out of the frame. ------------------- */

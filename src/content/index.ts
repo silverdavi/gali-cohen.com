@@ -75,6 +75,8 @@ export type Content = {
     valuesLine?: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    /** Outline button under the hero pair. Links to the private tantra workshop. */
+    ctaTantra?: string;
     /** WhatsApp intro-call button. Rendered only while homepage.contact.enabled. */
     freeCallCta?: string;
     scroll: string;
