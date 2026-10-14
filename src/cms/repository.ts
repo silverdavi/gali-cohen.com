@@ -93,6 +93,13 @@ export type RawWorkshop = RawPrice & {
   faq?: RawFaqItem[];
 };
 
+export type RawFeedbackGroup = { titleHe: string; quotes?: string[] };
+
+export type RawParticipantFeedback = {
+  slugs?: string[];
+  groups?: RawFeedbackGroup[];
+};
+
 export type RawWorkshopsFile = {
   heading: RawHeading;
   /** Heading for one-time workshops listed apart from the featured next workshop. */
@@ -100,6 +107,8 @@ export type RawWorkshopsFile = {
   groupUrl?: string;
   groupLabelHe?: string;
   items: RawWorkshop[];
+  /** Anonymous quotes shown on the listed workshop pages. */
+  participantFeedback?: RawParticipantFeedback[];
 };
 
 export type RawPodcastEpisode = {

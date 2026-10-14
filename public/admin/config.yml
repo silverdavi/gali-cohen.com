@@ -187,6 +187,24 @@ singletons:
             fields:
               - { label: "שאלה", name: qHe, widget: string }
               - { label: "תשובה", name: aHe, widget: text }
+      - label: "משוב משתתפים (אופציונלי, בלי שמות)"
+        name: participantFeedback
+        widget: list
+        required: false
+        fields:
+          - label: "מזהי סדנאות"
+            name: slugs
+            widget: list
+            field: { label: "slug", name: slug, widget: string }
+          - label: "קבוצות"
+            name: groups
+            widget: list
+            fields:
+              - { label: "כותרת", name: titleHe, widget: string }
+              - label: "ציטוטים"
+                name: quotes
+                widget: list
+                field: { label: "ציטוט", name: quote, widget: text }
 
   - name: podcast
     label: "פודקאסט"

@@ -37,6 +37,8 @@ export type WorkshopStatus = 'draft' | 'upcoming' | 'sold-out' | 'completed' | '
 
 export type FaqItem = { q: string; a: string };
 
+export type WorkshopFeedbackGroup = { title: string; quotes: string[] };
+
 export type Workshop = {
   slug: string;
   title: string;
@@ -88,6 +90,8 @@ export type Workshop = {
   whoFor: string;
   /** optional, empty until Gali supplies real Q&A */
   faq: FaqItem[];
+  /** Anonymous participant quotes, grouped. Empty for workshops that have none. */
+  feedback: WorkshopFeedbackGroup[];
 };
 
 export type PodcastPlatformLink = { label: string; url: string };

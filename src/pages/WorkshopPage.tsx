@@ -129,6 +129,19 @@ export function WorkshopPage() {
             </figure>
           ))}
 
+        {w.feedback.length > 0 && (
+          <div className="workshop-feedback" id="workshop-feedback">
+            {w.feedback.map((group) => (
+              <section className="workshop-feedback-group" key={group.title}>
+                <h2 className="workshop-subhead">{group.title}</h2>
+                {group.quotes.map((quote) => (
+                  <blockquote className="workshop-feedback-quote" key={quote}>{quote}</blockquote>
+                ))}
+              </section>
+            ))}
+          </div>
+        )}
+
         {w.faq.length > 0 && (
           <div className="workshop-faq">
             <h2 className="workshop-subhead">שאלות נפוצות</h2>

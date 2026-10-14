@@ -1110,6 +1110,22 @@ video.band-photo { display: block; }
   color: var(--mute);
   font-size: var(--fs-meta);
 }
+.workshop-feedback {
+  margin-top: var(--s-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+.workshop-feedback-group { display: flex; flex-direction: column; gap: var(--s-4); }
+.workshop-feedback-quote {
+  margin: 0;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+  font-family: var(--display);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--ink);
+}
 .practice-body {
   margin: 0;
   max-width: var(--measure-body);
