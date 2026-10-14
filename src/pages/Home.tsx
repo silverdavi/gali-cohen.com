@@ -2,6 +2,7 @@ import { Hero } from '../components/Hero';
 import { About } from '../components/About';
 import { ServicesTeaser } from '../components/ServicesTeaser';
 import { WorkshopsTeaser } from '../components/WorkshopsTeaser';
+import { UpcomingWorkshops } from '../components/UpcomingWorkshops';
 import { Words } from '../components/Words';
 import { SectionHead } from '../components/SectionHead';
 import { BlogTeaser } from '../components/BlogTeaser';
@@ -38,6 +39,7 @@ export function Home() {
       <Hero />
       {cfg.services.enabled && <ServicesTeaser />}
       {cfg.workshops.enabled && <WorkshopsTeaser limit={cfg.workshops.limit} />}
+      {cfg.workshops.enabled && <UpcomingWorkshops home />}
       {cfg.testimonials.enabled && <Words />}
       {showWriting && (
         <section className="section" id="content">

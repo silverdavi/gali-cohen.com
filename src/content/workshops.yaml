@@ -7,6 +7,7 @@ heading:
   titleHe: הסדנה הקרובה
   subHe: ''
   ctaHe: לפרטים והרשמה
+upcomingTitleHe: סדנאות קרובות
 groupUrl: ''
 groupLabelHe: לקבוצת הווטסאפ השקטה — עדכונים בלבד
 items:
@@ -151,6 +152,39 @@ items:
     priceLabelHe: מחיר מומלץ 70-100 ₪
     registrationHe: בלי הרשמה מראש, פשוט מגיעים
     showOnHome: true
+    status: upcoming
+    featured: false
+    enabled: true
+  - slug: kundalini-meditation-2026-11-01
+    titleHe: מדיטציית קונדליני
+    subtitleHe: לעורר את אנרגיית החיים
+    inUpcomingSection: true
+    date: 2026-11-01
+    time: '19:00'
+    endTime: '20:30'
+    locationHe: גג קסום בפלורנטין
+    locationUrl: ''
+    descHe: |-
+      שקשוק ← תנועה אינטואיטיבית ← ישיבה מדיטטיבית ← הרפיה
+
+      יום ראשון, 1.11.2026, 19:00-20:30
+      גג קסום בפלורנטין
+
+      בהנחיית גלי גאולה כהן
+    metaDescriptionHe: "מדיטציית קונדליני. לעורר את אנרגיית החיים. יום ראשון 1.11.2026, 19:00-20:30, גג קסום בפלורנטין."
+    image: /photos/kundalini.webp
+    imageFull: true
+    imageFocalX: 50
+    imageFocalY: 8
+    gallery: []
+    categorySlug: ''
+    signupUrl: https://wa.me/972549431396
+    priceType: contact
+    price: null
+    currency: ILS
+    priceLabelHe: "תמורה: 100 ₪ | לנרשמים בזוג: 90 ₪ לאדם | מחיר הכרות: 50 ₪"
+    registrationHe: "לפרטים והרשמה: 054-9431396 (ווצאפ)"
+    capacity: אינטימי (עד 10 איש)
     status: upcoming
     featured: false
     enabled: true

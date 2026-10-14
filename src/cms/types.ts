@@ -71,10 +71,12 @@ export type Workshop = {
   priceNote: string;
   /** Verbatim price line. When set, it replaces the calculated price string. */
   priceLabel: string;
-  /** Walk-in (or other) registration sentence. When set, there is no signup button. */
+  /** Registration sentence. Replaces the signup button unless a real signup link is set too. */
   registration: string;
   /** Keep a card on the homepage even when the teaser limit would leave it out. */
   showOnHome: boolean;
+  /** Listed in סדנאות קרובות, not in the featured next-workshop slot. */
+  inUpcomingSection: boolean;
   dateLabel: string;
   day: string;
   month: string;

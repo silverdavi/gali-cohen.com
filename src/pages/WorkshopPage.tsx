@@ -98,17 +98,23 @@ export function WorkshopPage() {
             {w.capacity && <p className="workshop-capacity">{w.capacity}</p>}
           </div>
           {canSignUp && (
-            w.registration ? (
-              <p className="workshop-registration">{w.registration}</p>
-            ) : w.hasSignupLink ? (
-              <a className="btn btn-primary workshop-cta" href={w.signupHref} target="_blank" rel="noopener noreferrer">
-                לפרטים והרשמה
-              </a>
-            ) : (
-              <button type="button" className="btn btn-primary workshop-cta" onClick={() => setSigningUp(true)}>
-                לפרטים והרשמה
-              </button>
-            )
+            <div className="workshop-signup">
+              {w.registration && <p className="workshop-registration">{w.registration}</p>}
+              {w.hasSignupLink ? (
+                <a
+                  className={/wa\.me|whatsapp/i.test(w.signupHref) ? 'btn btn-primary btn-whatsapp workshop-cta' : 'btn btn-primary workshop-cta'}
+                  href={w.signupHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  לפרטים והרשמה
+                </a>
+              ) : !w.registration ? (
+                <button type="button" className="btn btn-primary workshop-cta" onClick={() => setSigningUp(true)}>
+                  לפרטים והרשמה
+                </button>
+              ) : null}
+            </div>
           )}
         </div>
 

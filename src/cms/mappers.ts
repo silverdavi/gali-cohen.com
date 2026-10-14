@@ -131,6 +131,7 @@ export function mapWorkshop(w: RawWorkshop): Workshop {
     priceLabel: w.priceLabelHe ?? '',
     registration: w.registrationHe ?? '',
     showOnHome: Boolean(w.showOnHome),
+    inUpcomingSection: Boolean(w.inUpcomingSection),
     dateLabel: ongoing ? (w.scheduleHe || 'בתיאום אישי') : (valid ? dateFmt.format(d) : iso),
     day: valid ? String(d.getDate()) : '',
     month: valid ? monthFmt.format(d) : '',

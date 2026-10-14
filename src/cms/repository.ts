@@ -85,6 +85,8 @@ export type RawWorkshop = RawPrice & {
   registrationHe?: string;
   /** Also show a homepage card when the teaser limit would otherwise skip it. */
   showOnHome?: boolean;
+  /** Listed under סדנאות קרובות instead of the featured next-workshop slot. */
+  inUpcomingSection?: boolean;
   introHe?: string;
   whatHappensHe?: string;
   whoForHe?: string;
@@ -93,6 +95,8 @@ export type RawWorkshop = RawPrice & {
 
 export type RawWorkshopsFile = {
   heading: RawHeading;
+  /** Heading for one-time workshops listed apart from the featured next workshop. */
+  upcomingTitleHe?: string;
   groupUrl?: string;
   groupLabelHe?: string;
   items: RawWorkshop[];

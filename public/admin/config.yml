@@ -105,6 +105,7 @@ singletons:
           - { label: "כותרת", name: titleHe, widget: string }
           - { label: "כותרת משנה", name: subHe, widget: string, required: false }
           - { label: "תווית כפתור", name: ctaHe, widget: string }
+      - { label: "כותרת סדנאות קרובות", name: upcomingTitleHe, widget: string, required: false, hint: "הכותרת של סדנאות חד-פעמיות שסומנו להופיע שם." }
       - { label: "קישור לקבוצת ווטסאפ לעדכונים", name: groupUrl, widget: string, required: false, hint: "אם ריק — הכפתור לא יוצג." }
       - { label: "טקסט כפתור קבוצת הווטסאפ", name: groupLabelHe, widget: string, required: false }
       - label: "סדנאות"
@@ -176,6 +177,7 @@ singletons:
               - { label: "בוטלה", value: cancelled }
           - { label: "מומלצת (מוצגת ראשונה בדף הבית)", name: featured, widget: boolean, default: false }
           - { label: "כרטיס גם בדף הבית", name: showOnHome, widget: boolean, default: false, required: false, hint: "נשארת בכרטיסי דף הבית גם כשמגבלת הסדנאות הקרובות לא כוללת אותה." }
+          - { label: "בסדנאות הקרובות", name: inUpcomingSection, widget: boolean, default: false, required: false, hint: "סדנה חד-פעמית. מופיעה תחת סדנאות קרובות, לא בכרטיס הסדנה הקרובה." }
           - { label: "פעילה (מוצגת באתר)", name: enabled, widget: boolean, default: true }
           - label: "שאלות נפוצות (אופציונלי)"
             name: faq

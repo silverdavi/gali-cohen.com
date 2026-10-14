@@ -5,6 +5,7 @@ export const photoWidths: Record<string, number[]> = {
   "/photos/dance-circle.webp": [480, 960, 1600],
   "/photos/gali-hero.webp": [480, 960],
   "/photos/hands.webp": [480, 960, 1400],
+  "/photos/kundalini.webp": [480, 960, 1024],
   "/photos/lecture-1.webp": [480, 960, 1600],
   "/photos/lecture-2.webp": [480, 960, 1329],
   "/photos/lecture-3.webp": [480, 640],

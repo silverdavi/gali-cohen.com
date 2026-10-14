@@ -3,6 +3,7 @@ import { Reveal } from '../components/Reveal';
 import { SectionHead } from '../components/SectionHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Cinemagraph } from '../components/Cinemagraph';
+import { UpcomingWorkshops } from '../components/UpcomingWorkshops';
 import { getUpcomingWorkshops, workshopsHeading, workshopsGroup, formatWorkshopPrice } from '../cms/queries';
 import { formatTimeRange } from '../lib/formatDate';
 import { content } from '../content';
@@ -57,6 +58,8 @@ export function WorkshopsList() {
       ) : (
         <p className="section-sub">כרגע אין אירועים מתוכננים.</p>
       )}
+
+      <UpcomingWorkshops />
 
       {workshopsGroup && (
         <Reveal delay={0.1}>
