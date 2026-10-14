@@ -5,6 +5,7 @@ import { Cinemagraph } from './Cinemagraph';
 import { getHomepageWorkshops, getListedUpcomingWorkshops, workshopsHeading } from '../cms/queries';
 import { clipFor } from '../clips';
 import { formatTimeRange } from '../lib/formatDate';
+import { workshopWhatsappHref } from '../lib/workshopWhatsapp';
 
 // Home teaser: image + name + date + CTA only, per the brief — no description,
 // no price. Full details live on /workshops/<slug>.
@@ -20,9 +21,9 @@ export function WorkshopsTeaser({ limit }: { limit?: number }) {
         <div className="workshop-teaser-grid">
           {upcoming.map((w, i) => {
             const when = formatTimeRange(w.time, w.endTime);
-            return (
-            <Reveal key={w.slug} delay={i * 0.06} className="col-third">
-              <Link className="workshop-teaser-card" to={`/workshops/${w.slug}`}>
+            const whatsappCta = w.hasSignupLink && w.status !== 'sold-out';
+            const body = (
+              <>
                 <div className="workshop-teaser-media">
                   {w.image && (
                     <Cinemagraph
@@ -38,8 +39,24 @@ export function WorkshopsTeaser({ limit }: { limit?: number }) {
                 <h3 className="workshop-teaser-title">{w.title}</h3>
                 {w.subtitle && <p className="workshop-teaser-subtitle">{w.subtitle}</p>}
                 <p className="workshop-teaser-date">{w.dateLabel}{when && ` · ${when}`}</p>
-                <span className="workshop-teaser-cta">{w.registration || workshopsHeading.cta}</span>
-              </Link>
+              </>
+            );
+            const ctaLabel = w.status === 'sold-out' ? 'אזל · לפרטים' : (w.registration || workshopsHeading.cta);
+            return (
+            <Reveal key={w.slug} delay={i * 0.06} className="col-third">
+              {whatsappCta ? (
+                <div className="workshop-teaser-card">
+                  <Link className="workshop-teaser-card-link" to={`/workshops/${w.slug}`}>{body}</Link>
+                  <a className="workshop-teaser-cta" href={workshopWhatsappHref(w)} target="_blank" rel="noopener noreferrer">
+                    {workshopsHeading.cta}
+                  </a>
+                </div>
+              ) : (
+                <Link className="workshop-teaser-card" to={`/workshops/${w.slug}`}>
+                  {body}
+                  <span className="workshop-teaser-cta">{ctaLabel}</span>
+                </Link>
+              )}
             </Reveal>
             );
           })}
