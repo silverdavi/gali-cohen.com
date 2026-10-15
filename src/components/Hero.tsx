@@ -40,16 +40,20 @@ export function Hero() {
               {hero.ctaPrimary && (
                 <Link className="btn btn-primary" to={workshopTo}>{hero.ctaPrimary}</Link>
               )}
-              {hero.ctaSecondary && (
-                <Link className="btn btn-ghost" to="/contact">{hero.ctaSecondary}</Link>
+              {(hero.ctaTantra || hero.ctaSecondary) && (
+                <div className="hero-cta-row">
+                  {hero.ctaTantra && (
+                    <Link className="btn btn-ghost hero-cta-tantra" to="/workshops/private-tantra-couples">{hero.ctaTantra}</Link>
+                  )}
+                  {hero.ctaSecondary && (
+                    <Link className="btn btn-ghost hero-cta-contact" to="/contact">{hero.ctaSecondary}</Link>
+                  )}
+                </div>
               )}
               {showFreeCall && hero.freeCallCta && (
                 <a className="btn btn-ghost" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{hero.freeCallCta}</a>
               )}
             </div>
-            {hero.ctaTantra && (
-              <Link className="btn btn-ghost hero-cta-tantra" to="/workshops/private-tantra-couples">{hero.ctaTantra}</Link>
-            )}
           </Reveal>
         </div>
         <Reveal delay={0.16} y={28} className="hero-portrait-col">

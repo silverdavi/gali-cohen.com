@@ -621,11 +621,23 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 .hero-ctas {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--s-4);
-  flex-wrap: wrap;
+  width: 100%;
   margin-top: var(--s-4); /* the one extra beat of space, before the CTAs —
                               margin-top, not -bottom */
+}
+/* Second row: tantra (reading-start / right) beside contact. The row stays
+   one line; the long tantra label wraps inside its pill. */
+.hero-cta-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: var(--s-3);
+  width: auto;
+  max-width: 100%;
 }
 .btn {
   display: inline-flex;
@@ -651,16 +663,17 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
    box-sizing) — trimmed 1px off each side so both CTAs render the same
    height, as asked. */
 .hero-ctas .btn-ghost { padding-block: 14px; }
-/* Sits on its own line under the hero pair, sized to its label like the other pills. */
-.hero-cta-tantra {
-  align-self: flex-start;
-  max-width: 100%;
-  margin-top: var(--s-4);
-  padding: 14px 28px;
+.hero-cta-row .btn {
+  justify-content: center;
   white-space: normal;
   text-align: center;
   height: auto;
 }
+.hero-cta-tantra {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hero-cta-contact { flex: 0 0 auto; white-space: nowrap; }
 
 /* --- Hero photo: Gali's portrait in a rounded frame. The zoom stays centered
    so the top of her head is not pushed out of the frame. ------------------- */
@@ -2940,6 +2953,14 @@ button.article {
   .hero-container { grid-template-columns: 1fr; row-gap: var(--s-6); }
   .hero-portrait-col { order: -1; }
   .hero-copy { max-width: none; }
+  /* The long tantra label shares one row with contact. Shrink the type and
+     let it wrap so both pills stay side by side inside the phone column. */
+  .hero-cta-row { width: 100%; gap: 8px; }
+  .hero-ctas .hero-cta-row .btn {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
   .hero-photo { max-width: 220px; margin-inline: auto; }
   .practice { gap: var(--s-3); padding: var(--s-6) 0; }
   .practice-photo { aspect-ratio: auto; height: 200px; border-radius: 16px; order: -1; }
