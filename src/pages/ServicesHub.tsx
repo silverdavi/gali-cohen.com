@@ -26,7 +26,7 @@ export function ServicesHub() {
       <div className="services-grid">
         {categories.map((c, i) => (
           <Reveal key={c.slug} delay={i * 0.06} className="col-third">
-            <Link className="service-card" to={c.slug === 'workshops-format' ? '/workshops' : `/services/${c.slug}`}>
+            <Link className="service-card" to={`/services/${c.slug}`}>
               <div className="service-card-media">
                 <Cinemagraph src={c.photo} clip={clipFor(c.photo)} alt={c.photoAlt} />
               </div>

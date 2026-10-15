@@ -621,11 +621,24 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
 }
 .hero-ctas {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--s-4);
-  flex-wrap: wrap;
+  width: 100%;
   margin-top: var(--s-4); /* the one extra beat of space, before the CTAs —
                               margin-top, not -bottom */
+}
+/* Top row, RTL: contact first (right), December signup to its left.
+   The tantra button is the single pill on the row below. */
+.hero-cta-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: var(--s-3);
+  width: auto;
+  max-width: 100%;
 }
 .btn {
   display: inline-flex;
@@ -651,6 +664,14 @@ main { position: relative; z-index: 1; } /* content rides above the light field 
    box-sizing) — trimmed 1px off each side so both CTAs render the same
    height, as asked. */
 .hero-ctas .btn-ghost { padding-block: 14px; }
+.hero-cta-row .btn { white-space: nowrap; }
+.hero-cta-tantra {
+  align-self: flex-start;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  height: auto;
+}
 
 /* --- Hero photo: Gali's portrait in a rounded frame. The zoom stays centered
    so the top of her head is not pushed out of the frame. ------------------- */
@@ -2930,6 +2951,18 @@ button.article {
   .hero-container { grid-template-columns: 1fr; row-gap: var(--s-6); }
   .hero-portrait-col { order: -1; }
   .hero-copy { max-width: none; }
+  /* Keep contact and the December signup on one row. Slightly smaller type
+     so both labels fit beside each other; the tantra pill can wrap. */
+  .hero-cta-row { gap: 8px; }
+  .hero-ctas .hero-cta-row .btn {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .hero-ctas .hero-cta-row .btn-ghost { padding-block: 11px; }
+  .hero-ctas .hero-cta-tantra {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
   .hero-photo { max-width: 220px; margin-inline: auto; }
   .practice { gap: var(--s-3); padding: var(--s-6) 0; }
   .practice-photo { aspect-ratio: auto; height: 200px; border-radius: 16px; order: -1; }

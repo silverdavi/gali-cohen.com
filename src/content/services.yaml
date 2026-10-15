@@ -1,6 +1,6 @@
-# שירותים — שלוש קטגוריות קבועות (individual-guidance-women / couples-guidance /
-# workshops-format), כל אחת עם רשימת "מסלולים" (tracks) משלה. אין להוסיף/להסיר
-# קטגוריות — רק לערוך את התוכן והמסלולים בתוכן.
+# שירותים — שתי קטגוריות (individual-guidance-women / couples-guidance),
+# כל אחת עם רשימת "מסלולים" (tracks) משלה. סדנאות אינן תהליך אישי;
+# הן חיות ב-/workshops.
 heading:
   labelHe: תהליכים אישיים
   titleHe: תהליכים אישיים
@@ -49,10 +49,3 @@ categories:
         priceUnit: session
         photo: /photos/סדנאותזוגות.webp
         photoAltHe: משתתפות בתנועה חופשית על דק עץ בחוץ, ראש נשען לאחור
-  - slug: workshops-format
-    titleHe: סדנאות
-    shortDescHe: מעגלי נשים, מיינדפול דאנס לזוגות, תנועה אקסטטית, מדיטציית קונדליני ונשימה מודעת. התאריכים בעמוד הסדנאות.
-    photo: /photos/meditation.webp
-    photoAltHe: מעגל מדיטציה באוהל, גלי יושבת במרכז בעיניים עצומות
-    metaDescriptionHe: סדנאות עם גלי גאולה כהן. מיינדפול דאנס לזוגות, תנועה אקסטטית, מדיטציית קונדליני ונשימה מודעת.
-    tracks: []
