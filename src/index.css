@@ -1131,29 +1131,41 @@ video.band-photo { display: block; }
   color: var(--mute);
   font-size: var(--fs-meta);
 }
-.workshop-feedback {
-  margin-top: var(--s-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-8);
+.workshop-feedback { margin-top: var(--s-8); }
+.workshop-feedback-photos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
 }
-.workshop-feedback-group { display: flex; flex-direction: column; gap: var(--s-4); }
-.workshop-feedback-sub {
+.workshop-feedback-photo {
+  display: block;
+  width: 100%;
   margin: 0;
-  font-family: var(--display);
-  font-size: var(--fs-h3);
-  font-weight: 700;
-  color: var(--accent);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  border-radius: 16px;
+  overflow: hidden;
 }
-.workshop-feedback-quote {
+.workshop-feedback-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.feedback-lightbox {
+  position: relative;
+  width: min(100%, 720px);
   margin: 0;
-  padding-top: var(--s-4);
-  border-top: 1px solid var(--rule);
-  font-family: var(--display);
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-  color: var(--ink);
 }
+.feedback-lightbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.feedback-lightbox .reader-close { background: var(--paper); }
 .practice-body {
   margin: 0;
   max-width: var(--measure-body);
@@ -2983,6 +2995,10 @@ button.article {
    same-page anchor (#contact is one of the anchors, but keeping it as an
    always-visible button matches the funnel's two primary CTAs). */
 @media (min-width: 881px) {
+  .workshop-feedback-photos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
   .nav-inner { position: relative; }
   .nav-index {
     position: absolute;

@@ -15,7 +15,7 @@ import type {
 } from './repository';
 import type {
   Heading, Price, ServiceTrack, ServiceCategory, ProcessStep, Workshop, FaqItem, PodcastShow,
-  PodcastEpisode, Video, Article, Product, PriceUnit, WorkshopFeedbackGroup,
+  PodcastEpisode, Video, Article, Product, PriceUnit, WorkshopFeedback,
 } from './types';
 
 // Empty links fall back to WhatsApp so every CTA always goes somewhere useful.
@@ -98,14 +98,15 @@ export function mapFaqItem(f: RawFaqItem): FaqItem {
   return { q: f.qHe, a: f.aHe };
 }
 
-function feedbackFor(slug: string): WorkshopFeedbackGroup[] {
+function feedbackFor(slug: string): WorkshopFeedback | null {
   const block = (workshopsRaw.participantFeedback ?? []).find((b) => (b.slugs ?? []).includes(slug));
-  return (block?.groups ?? [])
-    .map((g) => ({
-      title: g.titleHe,
-      quotes: (g.quotes ?? []).map((q) => q.trim()).filter(Boolean),
-    }))
-    .filter((g) => g.title && g.quotes.length > 0);
+  if (!block) return null;
+  const images = (block.images ?? [])
+    .map((image) => ({ src: image.src, alt: (image.altHe ?? '').trim() }))
+    .filter((image) => image.src && image.alt);
+  const title = (block.titleHe ?? '').trim();
+  if (!title || images.length === 0) return null;
+  return { title, images };
 }
 
 export function mapWorkshop(w: RawWorkshop): Workshop {

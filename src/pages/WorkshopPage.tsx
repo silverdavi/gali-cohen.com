@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Reveal } from '../components/Reveal';
 import { Cinemagraph } from '../components/Cinemagraph';
@@ -11,6 +11,7 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { formatTimeRange } from '../lib/formatDate';
 import { workshopWhatsappHref } from '../lib/workshopWhatsapp';
 import { photoSources } from '../lib/photo';
+import type { WorkshopFeedback } from '../cms/types';
 import { NotFoundPage } from './NotFoundPage';
 
 function withBreaks(lines: string[]) {
@@ -46,12 +47,53 @@ function WorkshopDescription({ text }: { text: string }) {
   );
 }
 
-// Hebrew opening quote sits at the right; the closing quote closes on the left.
-function hebrewQuote(quote: string): string {
-  const open = '”';
-  const close = '“';
-  if (quote.startsWith(open) && quote.endsWith(close)) return quote;
-  return `${open}${quote}${close}`;
+function FeedbackPhotos({ feedback }: { feedback: WorkshopFeedback }) {
+  const [open, setOpen] = useState<number | null>(null);
+  useEffect(() => {
+    if (open == null) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(null);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+  const current = open == null ? null : feedback.images[open];
+  return (
+    <section className="workshop-feedback" id="workshop-feedback">
+      <h2 className="workshop-subhead">{feedback.title}</h2>
+      <div className="workshop-feedback-photos">
+        {feedback.images.map((image, i) => (
+          <button
+            key={image.src}
+            type="button"
+            className="workshop-feedback-photo"
+            onClick={() => setOpen(i)}
+          >
+            <img src={image.src} alt={image.alt} />
+          </button>
+        ))}
+      </div>
+      {current && (
+        <div className="reader-scrim" onClick={() => setOpen(null)}>
+          <figure
+            className="feedback-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={current.alt}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="reader-close" type="button" aria-label="סגירה" onClick={() => setOpen(null)}>
+              <svg viewBox="0 0 24 24" aria-hidden focusable="false"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+            <img src={current.src} alt={current.alt} />
+          </figure>
+        </div>
+      )}
+    </section>
+  );
 }
 
 const STATUS_NOTE: Record<string, string> = {
@@ -161,22 +203,7 @@ export function WorkshopPage() {
             </figure>
           ))}
 
-        {w.feedback.length > 0 && (
-          <div className="workshop-feedback" id="workshop-feedback">
-            {w.feedback.map((group, i) => (
-              <section className="workshop-feedback-group" key={group.title}>
-                {i === 0 ? (
-                  <h2 className="workshop-subhead">{group.title}</h2>
-                ) : (
-                  <h3 className="workshop-feedback-sub">{group.title}</h3>
-                )}
-                {group.quotes.map((quote) => (
-                  <blockquote className="workshop-feedback-quote" key={quote}>{hebrewQuote(quote)}</blockquote>
-                ))}
-              </section>
-            ))}
-          </div>
-        )}
+        {w.feedback && <FeedbackPhotos feedback={w.feedback} />}
 
         {w.gallery.length > 0 && (
           <div className="workshop-gallery">
