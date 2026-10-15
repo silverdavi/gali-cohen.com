@@ -2132,6 +2132,13 @@ html.a11y-stop-motion *::after {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gutter);
 }
+/* /workshops: the private-tantra card sits under the page title. The dated
+   and weekly cards follow under a smaller subheading. */
+.workshops-upcoming { margin-top: clamp(56px, 8vw, 96px); }
+.workshops-upcoming .section-title {
+  font-size: calc(clamp(28px, 4vw, 44px) * var(--a11y-font-scale, 1));
+}
+.workshops-upcoming .workshop-teaser-grid { margin-top: var(--s-6); }
 .workshop-teaser-card {
   display: block;
   color: inherit;

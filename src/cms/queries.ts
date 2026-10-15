@@ -118,6 +118,26 @@ export function getListedUpcomingWorkshops(): Workshop[] {
   return sortUpcoming([...getUpcomingWorkshops(), ...getUpcomingSectionWorkshops()]);
 }
 
+/** /workshops only. The private tantra workshop sits under the page title;
+ *  the rest follow this order under הסדנאות הקרובות. Anything else still
+ *  listed is appended after that order. */
+const WORKSHOPS_PAGE_FEATURED = 'private-tantra-couples';
+const WORKSHOPS_PAGE_ORDER = [
+  'ecstatic-dance',
+  'kundalini-meditation-2026-11-01',
+  'mindful-dance-couples-2026-12-03',
+];
+
+export function getWorkshopsPageListing(): { featured?: Workshop; upcoming: Workshop[] } {
+  const all = getListedUpcomingWorkshops();
+  const featured = all.find((w) => w.slug === WORKSHOPS_PAGE_FEATURED);
+  const rank = new Map(WORKSHOPS_PAGE_ORDER.map((slug, i) => [slug, i]));
+  const upcoming = all
+    .filter((w) => w.slug !== WORKSHOPS_PAGE_FEATURED)
+    .sort((a, b) => (rank.get(a.slug) ?? WORKSHOPS_PAGE_ORDER.length) - (rank.get(b.slug) ?? WORKSHOPS_PAGE_ORDER.length));
+  return { featured, upcoming };
+}
+
 /** Per-person price, plus the couple amount when the workshop has one.
  *  A verbatim price label (a recommended range, for example) is shown as written. */
 export function formatWorkshopPrice(w: Workshop): string {
