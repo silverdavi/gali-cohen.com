@@ -196,15 +196,13 @@ singletons:
             name: slugs
             widget: list
             field: { label: "slug", name: slug, widget: string }
-          - label: "קבוצות"
-            name: groups
+          - { label: "כותרת", name: titleHe, widget: string }
+          - label: "תמונות"
+            name: images
             widget: list
             fields:
-              - { label: "כותרת", name: titleHe, widget: string }
-              - label: "ציטוטים"
-                name: quotes
-                widget: list
-                field: { label: "ציטוט", name: quote, widget: text }
+              - { label: "תמונה", name: src, widget: image }
+              - { label: "טקסט חלופי", name: altHe, widget: string }
 
   - name: podcast
     label: "פודקאסט"

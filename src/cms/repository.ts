@@ -93,11 +93,12 @@ export type RawWorkshop = RawPrice & {
   faq?: RawFaqItem[];
 };
 
-export type RawFeedbackGroup = { titleHe: string; quotes?: string[] };
+export type RawFeedbackImage = { src: string; altHe?: string };
 
 export type RawParticipantFeedback = {
   slugs?: string[];
-  groups?: RawFeedbackGroup[];
+  titleHe?: string;
+  images?: RawFeedbackImage[];
 };
 
 export type RawWorkshopsFile = {
