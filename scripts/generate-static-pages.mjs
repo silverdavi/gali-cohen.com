@@ -254,7 +254,7 @@ async function main() {
       },
       {
         path: '/workshops',
-        title: `${q.workshopsHeading.title} · גלי גאולה כהן`,
+        title: `${q.workshopsHeading.label} · גלי גאולה כהן`,
         description: inheritedHubDescription,
         sitemap: q.getAllWorkshops().length > 0,
       },
